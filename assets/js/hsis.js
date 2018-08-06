@@ -1201,7 +1201,7 @@ var Hsis = {
         getPersonInfoByPinCode: function (pinCode, callback) {
             var data;
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/getInfoByPinCode?token=' + Hsis.token + '&pinCode=2RV2LS4' + pinCode,
+                url: Hsis.urls.HSIS + 'students/getInfoByPinCode?token=' + Hsis.token + '&pinCode=' + pinCode,
                 type: 'POST',
                 success: function (result) {
                     if (result) {

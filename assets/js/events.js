@@ -10313,15 +10313,13 @@ $(function () {
                         var html = '';
 
                         $('body .input-file-con .new-img-con').fadeIn(1);
-                        if (data.image) {
-
+                        if (data.image.file) {
                             $('body .input-file-con .new-img-con img').attr('src', Hsis.urls.HSIS + 'students/image/' + (data.image.path ? data.image.path : '') + '?token=' + Hsis.token + '&size=200x200&' + Math.random());
-
-                            $('body .input-file-con .new-img-con img').on('error', function (e) {
+                            /*$('body .input-file-con .new-img-con img').on('error', function (e) {
                                 $('.edit-common-info-image').attr('src', 'assets/img/guest.png');
-                            });
+                            });*/
                         } else {
-                            let pinCode = '';
+                            let pinCode = $("#pincode").val();
                             Hsis.Proxy.getPersonInfoByPinCode(pinCode, function (data) {
                                 console.log(data);
                                 $('body .input-file-con .new-img-con img').attr('src', data.image.file);
