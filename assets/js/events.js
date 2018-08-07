@@ -3923,7 +3923,7 @@ $(function () {
 
     });
 
-    $('body').on('click', '.btn-load-more', function (e) {
+    $('body').on('click', '.page-item', function (e) {
         try {
             var typeTable = $(this).attr('data-table');
             var $btn = $(this);

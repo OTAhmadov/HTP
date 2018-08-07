@@ -745,11 +745,11 @@ td .dropdown-menu{
     right: 0;
     left: auto !important;
 }
-#load_more_div{
+/*#load_more_div{
     display: block;
     width: 100%;
     margin: -5px 0 0 0;
-}
+}*/
 .btn-load-more{
     display: block;
     width: 100%;
@@ -2541,4 +2541,11 @@ ul.nav-tabs{
 .remove-static-doc-file {
     cursor: pointer;
     z-index: 1000
+}
+.pagination-top{
+    width: 100%;
+    margin-top: 10px;
+}
+.pagination{
+    float: right;
 }
