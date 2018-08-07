@@ -10129,8 +10129,7 @@ $(function () {
                     eduLifeCycle: [],
                     achievement: [],
                     registrationDate: [],
-                    token: Hsis.token,
-                    operationId: Hsis.operationList[0].id
+                    token: Hsis.token
                 };
 
 
