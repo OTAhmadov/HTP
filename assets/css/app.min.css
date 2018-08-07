@@ -16392,8 +16392,8 @@ tr.shown td.details-control:before {
 .pagination>.active>span:hover,
 .pagination>.active>a:focus,
 .pagination>.active>span:focus {
-    background-color: #29c7ca;
-    border-color: #29c7ca;
+    /*background-color: #29c7ca;*/
+    /*border-color: #29c7ca;*/
     color: #fff
 }
 div.DTTT {
@@ -19878,13 +19878,13 @@ a.fc-more:hover {
 }
 
 
-.flex-input {
+/*.flex-input {
     display: flex;
     flex-direction: row;
     align-content: center;
     justify-content: center;
     text-align: center;
-}
+}*/
 
 .position-parent {
     position: relative;

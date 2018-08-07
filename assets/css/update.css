@@ -745,11 +745,11 @@ td .dropdown-menu{
     right: 0;
     left: auto !important;
 }
-#load_more_div{
+/*#load_more_div{
     display: block;
     width: 100%;
     margin: -5px 0 0 0;
-}
+}*/
 .btn-load-more{
     display: block;
     width: 100%;
@@ -932,7 +932,7 @@ i.jstree-icon.jstree-ocl {
     transition: all .4s ease-in-out;
 }
 .search-scroll{
-    width: 955px !important;
+    width: auto !important;
     background-color: #ffffff;
     box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.24);
     float: right;
@@ -1415,6 +1415,8 @@ div[class$="-info"]{
 }
 .add-new .search-scroll{
     padding-bottom: 120px;
+    padding-left: 320px;
+    padding-right: 320px;
 }
 .search-scroll .tree-modal .modal-content{
     max-height: 500px;
@@ -2539,4 +2541,11 @@ ul.nav-tabs{
 .remove-static-doc-file {
     cursor: pointer;
     z-index: 1000
+}
+.pagination-top{
+    width: 100%;
+    margin-top: 10px;
+}
+.pagination{
+    float: right;
 }

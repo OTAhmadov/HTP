@@ -19,7 +19,7 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
-     token: '813f93c9bb5c476db8883478e3d7e78025b0da3a5f2048b2b8b2b7217c3d3668',
+     token: '6e949298205f486186fb92a17b0e721ec61f236bd41f4d27a2efa7f771ebde72',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -1228,10 +1228,10 @@ var Hsis = {
             });
         },
 
-        loadAbroadStudents: function (page, queryParams, callback, before) {
+        loadAbroadStudents: function (page, queryParams, callback, before, order ) {
 
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/abroad?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : ''),
+                url: Hsis.urls.HSIS + 'students/abroad?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : '') + (order ? order: ''),
                 type: 'GET',
                 beforeSend: function () {
                     if (before) {
@@ -5286,7 +5286,7 @@ var Hsis = {
                             $.each(v.files, function (k, j) {
                                 html += '<div class="user-doc-file">' +
                                     '<img src="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
-                                    '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?fileType=1&token=' + Hsis.token + '" download = "' + j.originalName + '"><img src="assets/img/upload-img.png" width="20" height="20"></a></div>' +
+                                    '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?fileType=1&token=' + Hsis.token + '" target="_blank"><img src="assets/img/upload-img.png" width="20" height="20"></a></div>' +
                                     '</div>';
                             });
                             html += '</div>';
@@ -6094,9 +6094,8 @@ var Hsis = {
                 Hsis.Proxy.getAbroadStudentDetails(localStorage.personId, function (data) {
                     if (data) {
                         var html = '';
-                        console.log(data);
                         if (data.image && data.image.path) {
-                            $('body .input-file-con .new-img-con').fadeIn(1)
+                            $('body .input-file-con .new-img-con').fadeIn(1);
                             $('body .input-file-con .new-img-con img').attr('src', Hsis.urls.HSIS + 'students/image/' + data.image.path + '?token=' + Hsis.token + '&size=200x200&' + Math.random());
 
                             $('body .input-file-con .new-img-con img').on('error', function (e) {
