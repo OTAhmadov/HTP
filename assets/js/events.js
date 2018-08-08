@@ -3772,7 +3772,7 @@ $(function () {
             if (e.keyCode == 13) {
                 var keyword = $('#abroad_student_search').val();
 
-                if (keyword.trim().length > 2) {
+                if (keyword.trim().length > 0) { /*length en azi 2 simvol olmalidir. 0 test olaraqdan qoyulub*/
                     $('.btn-load-more').removeAttr('data-page');
                     $('.abroad_student-search-form input[name="keyword"]').val(keyword);
                     var queryparams = $('.main-content-upd .abroad_student-search-form').serialize();
@@ -3925,10 +3925,13 @@ $(function () {
 
     $('body').on('click', '.page-item', function (e) {
         try {
-            var typeTable = $(this).attr('data-table');
+            $(".custom-pagination").find("li").removeClass("active");
+            var pageNumber = $(this).index() + 1;
+            var typeTable = $(this).parents(".custom-pagination").attr('data-table');
             var $btn = $(this);
+            $btn.addClass('active');
             var type = $btn.attr('data-page');
-            var page = parseInt(type ? type : '2');
+            var page = parseInt(pageNumber);
             var studKeyword = $('#student_search').val();
             var groupKeyword = $('#group_search').val();
             var studQueryparams = $('.main-content-upd .student-search-form').serialize() + '&subModuleId=' + Hsis.subModuleId;
@@ -3966,7 +3969,7 @@ $(function () {
             } else if (typeTable == 'abroad_students') {
                 if (Hsis.tempData.form != "") {
                     var advancedSearchForm = Hsis.tempData.form;
-                    Hsis.Proxy.loadAbroadStudents(page, advancedSearchForm ? advancedSearchForm : studQueryparams, function (data) {
+                    Hsis.Proxy.loadAbroadStudents(page, advancedSearchForm ? advancedSearchForm : studQueryparams , function (data) {
                         $btn.attr('data-page', parseInt(page) + 1);
                         $btn.prop('disabled', false);
 
@@ -3976,7 +3979,8 @@ $(function () {
                         }
                     });
                 } else {
-                    Hsis.Proxy.loadAbroadStudents(page, studQueryparams, function (data) {
+                    var queryparams = $('.main-content-upd .abroad_student-search-form').serialize();
+                    Hsis.Proxy.loadAbroadStudents(page, studQueryparams + queryparams, function (data) {
                         $btn.attr('data-page', parseInt(page) + 1);
                         $btn.prop('disabled', false);
                         var ref = typeof data.studentList !== 'undefined' ? data.studentList : data;
