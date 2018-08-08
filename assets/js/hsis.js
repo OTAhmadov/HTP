@@ -19,7 +19,7 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
-     token: '15c121f119f34f73870d9d3a106229f5d006b3b928564f548346afa48f51f675',
+     token: 'aa7de732210347139865f8bfc2273c521ce4e5b941d54efe8cbc78c64ae556bf',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -1204,7 +1204,7 @@ var Hsis = {
             var data;
             $.ajax({
 //                url: Hsis.urls.HSIS + 'students/getInfoByPinCode?token=' + Hsis.token + '&pinCode=' + pinCode,
-                url: "http://atis.edu.az/IAMASRest/getInfoByPinCode?pinCode=" + pinCode,
+                url: "http://atis.edu.az/IAMASRest1/getInfoByPinCode?pinCode=" + pinCode,
                 type: 'POST',
                 success: function (result) {
                     if (result) {
