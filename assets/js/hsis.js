@@ -19,8 +19,7 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
-     token: 'aa7de732210347139865f8bfc2273c521ce4e5b941d54efe8cbc78c64ae556bf',
-
+     token: 'cbbd34fd8ff64a9f91064782906ee68e867359f37af049e3adb0bfcd5e3fe8a0',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -1273,6 +1272,8 @@ var Hsis = {
                 }
             })
         },
+
+
         getStructureListByParentId: function (id, callback) {
             $.ajax({
                 url: Hsis.urls.HSIS + 'structures/' + id + '/childs?token=' + Hsis.token,
@@ -1767,7 +1768,9 @@ var Hsis = {
                                 break;
 
                             case Hsis.statusCodes.OK:
+                                // Hsis.Service.parseQuestionnaireView(result.data);
                                 data = result.data;
+                                if(callback) callback(data);
                                 break;
 
                             case Hsis.statusCodes.UNAUTHORIZED:
@@ -5714,6 +5717,8 @@ var Hsis = {
 
         parseAbroadStudents: function (data, page) {
             if (data) {
+
+                console.log(data);
                 var html = '';
                 var count;
 
@@ -5776,14 +5781,19 @@ var Hsis = {
             }
 
         },
-        parseAbroadStudents: function(data){
 
+
+        parseQuestionnaireView: function(result){
+            console.log(result)
+            $('body [data-name="name"]').html(result.firstName);
+            /*
+            $('body label').find("[data-name='surname']").html(result.lastName);
+            $('body label').find("[data-name='surname']").html(result.lastName);
+            $('body label').find("[data-name='surname']").html(result.lastName);
+*/
         },
 
 
-
-
-        
         parseScholarshipPlan: function (plan) {
             if (plan) {
                 var html = '';

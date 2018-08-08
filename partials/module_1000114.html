@@ -157,6 +157,7 @@
         </div>-->
 </div>
 
+
 <div class="row">
     <div class="col-sm-12 data filtered">
         <div class="panel panel-white table-scroll">
@@ -337,9 +338,99 @@
 
     </div>
 </div>
+
 <div class="add-new">
     <div class="search-scroll"></div>
 </div>
+
+<div class="survey">
+    <div class="row print-preview">
+        <div class="col-sm-8 col-sm-offset-4">
+            <h1 class="text-center">"Hokumetlerarasi Teqaud Programlari" Melumat Sistemi </h1>
+            <h2 class="text-center">Anket</h2>
+            <span class="close-survey">Bağla</span>
+            <div class="col-sm-6 survey-content">
+                <p>Adi
+                    <label data-name="name"></label>
+                </p>
+                <p>Soyadi
+                    <label data-name="surname"></label>
+                    <img class="image" data-name="image">
+                </p>
+
+                <p>
+                    Ata adi<label data-name="father-name"></label>
+                </p>
+                <p>Finkod
+                    <label data-name="code"></label>
+                </p>
+                <p>Vetendasligi
+
+                    <label data-name="citizen"></label>
+                </p>
+                <p>Cinsi
+                    <label data-name="gender"></label>
+                </p>
+                <p>Aile veziyyeti
+                    <label data-name="status"></label>
+                </p>
+                <p>
+                    Dogum tarixi<label data-name="birthday"></label>
+                </p>
+
+                <p>
+                    Herbi mukellefiyyeti <label data-name="military"></label>
+                </p>
+                <hr>
+                <div class="about-family">
+                    <h6>Valideynler haqqında</h6>
+                    <p>Aile uzvu
+                        <label data-name="family-member"></label>
+                    </p>
+                    <p>
+                        <label data-name=""></label>
+                    </p>
+                </div>
+
+                <p>Doguldugu yer
+                    <label data-name="live"></label>
+                </p>
+                <p>
+                    Qeydiyyat unvani <label data-name="address"></label>
+                </p>
+
+                <p>Faktiki yasayis unvani
+                    <label data-name="currentAddress"></label>
+                </p>
+                <p>Senedin novu
+                    <label data-name="typeDocument"></label>
+                </p>
+                <p>Senedin seriyasi
+                    <label data-name="seriesDocument"></label>
+                </p>
+                <p>Senedin nomresi
+                    <label data-name="numberDocument"></label>
+                </p>
+                <p>Verilme tarixi
+                    <label data-name="givenTime"></label>
+                </p>
+                <p>
+                    Qohumluq elaqesi
+                    <label data-name="relationStatus"></label>
+                </p>
+                <p>
+                    Adi
+                    <label data-name=""></label>
+                </p>
+                <label></label>
+                <label>Elaqe</label>
+                <label></label>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <script src="assets/js/modal_drag.js"></script>
 <script src="assets/js/jquery-ui.js"></script>
@@ -356,7 +447,14 @@
         }
 
         Hsis.Proxy.loadAbroadStudents();
-
+/*// -------------------------
+        Hsis.Proxy.getAbroadStudentDetails(1047827, function (data) {
+            // $('body').find('.print-preview').html(
+            Hsis.Service.parseQuestionnaireView(data)
+            // );
+            $('.survey').removeClass('open');
+        });
+// ----------------------------*/
         $('#edu_levels').select2({
             placeholder: Hsis.dictionary[Hsis.lang]["edu_level"],
             language: {
