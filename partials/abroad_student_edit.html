@@ -315,6 +315,7 @@
 
 <div class="tab-content">
 
+<<<<<<< HEAD
 
     <!--<div id ="tab1" class="tab-pane fade in ">
         <div class="first-info">
@@ -449,6 +450,8 @@
     </div>-->
 
 
+=======
+>>>>>>> 880485baf3f803d285e880e5fd16e81d81ff18d2
     <div id="tab2" class="tab-pane fade in active">
         <div class="second-info">
             <div class="">
@@ -507,9 +510,14 @@
 
                         <div class="panel-title registration-date-div">
                             <div class="panel-heading aca_info">
+<<<<<<< HEAD
                                 <h3 class="panel-title">Qeydiyyat tarixi</h3>
                                 <div class="add-new add-new-registr-date add-registr"
                                      style="right: 0!important; top: 18px!important; z-index: 99;" data-type="edit">
+=======
+                                <h3 class="panel-title">İllik qeydiyyat</h3>
+                                <div class="add-new add-new-registr-date add-registr" style="right: 0!important; top: 18px!important; z-index: 99;" data-type="edit">
+>>>>>>> 880485baf3f803d285e880e5fd16e81d81ff18d2
                                     <img src="assets/img/AddNew.png" alt="" width="20" height="20">
                                 </div>
                             </div>
@@ -521,12 +529,20 @@
                             <div class="modal add-registration-date-modal" tabindex="-1" role="dialog">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
+<<<<<<< HEAD
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span></button>
                                             <h4 class="modal-title">Qeydiyyat tarixi</h4>
                                         </div>
                                         <div class="modal-body">
+=======
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title">İllik qeydiyyat</h4>
+                                            </div>
+                                            <div class="modal-body">
+>>>>>>> 880485baf3f803d285e880e5fd16e81d81ff18d2
 
                                             <div class="form-group">
                                                 <label for="registration_date">Tarix</label>
@@ -536,11 +552,32 @@
                                                            placeholder="Qeydiyyat tarixi"/>
                                                     <i class="glyphicon glyphicon-user"></i>
                                                 </div>
+<<<<<<< HEAD
                                             </div>
                                             <div class="form-group">
                                                 <label for="registration_date_note">Qeyd</label>
                                                 <div class="prepend-icon">
                                                         <textarea id="registration_date_note" class="form-control">
+=======
+                                                <div class="form-group">
+                                                    <label for="registration_date">Yaşayış xərci</label>
+                                                    <div class="prepend-icon">
+                                                        <input id="live_cost" class="form-control" placeholder="Yaşayış xərci" />
+                                                        <i class="glyphicon glyphicon-user"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="registration_date">Yol xərci</label>
+                                                    <div class="prepend-icon">
+                                                        <input id="road_cost" class="form-control" placeholder="Yol xərci" />
+                                                        <i class="glyphicon glyphicon-user"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="registration_date_note">Qeyd</label>
+                                                    <div class="prepend-icon">
+                                                        <textarea id="registration_date_note" class="form-control" >
+>>>>>>> 880485baf3f803d285e880e5fd16e81d81ff18d2
 
                                                         </textarea>
                                                 </div>
@@ -1471,11 +1508,16 @@
             var html = Hsis.Service.parseDictionaryForSelect(archivement);
             $('#main-div #status').html(html);
         });
+<<<<<<< HEAD
 
         Hsis.Proxy.loadDictionariesByTypeId('1000094', 0, function (eduLine) {
             var html = Hsis.Service.parseDictionaryForSelect(eduLine);
             $('#main-div #edu_line').html(html);
         });
+=======
+        
+        
+>>>>>>> 880485baf3f803d285e880e5fd16e81d81ff18d2
 
         Hsis.Proxy.loadDictionariesByTypeId('1000017', 0, function (eduType) {
             var html = Hsis.Service.parseDictionaryForSelect(eduType);
@@ -1487,7 +1529,7 @@
         Hsis.Proxy.loadDictionariesByTypeId('1000027', 0, function (eduLang) {
             var html = Hsis.Service.parseDictionaryForSelect(eduLang);
             $('#main-div #edit_uni_action_edu_lang').html(html);
-            $('#main-div #edu_lang').html(html);
+//            $('#main-div #edu_lang').html(html);
             $('#main-div #edit_school_lang').html(html);
             $('#main-div #past_edu_lang').html(html);
         });

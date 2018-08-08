@@ -19,7 +19,11 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
+<<<<<<< HEAD
      // token: '8ee91e13a16042de9f9d8a8f93d07a7f5dc563d22ea546e8ab4029a1c1a2d1cd',
+=======
+     token: '15c121f119f34f73870d9d3a106229f5d006b3b928564f548346afa48f51f675',
+>>>>>>> 880485baf3f803d285e880e5fd16e81d81ff18d2
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -49,6 +53,8 @@ var Hsis = {
 //         AdminRest: 'http://localhost:8080/AdministrationRest/',
         AdminRest: 'http://192.168.1.78:8082/AdministrationRest/',
        HSIS: "http://192.168.1.78:8082/UnibookHsisRest/",
+//       HTP: "http://192.168.1.78:8082/HTPRest/",
+       HTP: "http://localhost:8080/HTPRest/",
 //         HSIS: "http://localhost:8080/UnibookHsisRest/",
         REPORT: 'http://192.168.1.78:8082/ReportingRest/',
         EMS: 'http://192.168.1.78:8082/UnibookEMS/',
@@ -1201,7 +1207,8 @@ var Hsis = {
         getPersonInfoByPinCode: function (pinCode, callback) {
             var data;
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/getInfoByPinCode?token=' + Hsis.token + '&pinCode=' + pinCode,
+//                url: Hsis.urls.HSIS + 'students/getInfoByPinCode?token=' + Hsis.token + '&pinCode=' + pinCode,
+                url: "http://atis.edu.az/IAMASRest/getInfoByPinCode?pinCode=" + pinCode,
                 type: 'POST',
                 success: function (result) {
                     if (result) {
@@ -1229,7 +1236,7 @@ var Hsis = {
         loadAbroadStudents: function (page, queryParams, callback, before, order ) {
 
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/abroad?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : '') + (order ? order: ''),
+                url: Hsis.urls.HTP + 'students/abroad?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : '') + (order ? order: ''),
                 type: 'GET',
                 beforeSend: function () {
                     if (before) {
@@ -1618,7 +1625,7 @@ var Hsis = {
         addAbroadStudent: function (formData, callback) {
             var person = {};
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/abroad/add?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'students/abroad/add?token=' + Hsis.token,
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -1709,7 +1716,7 @@ var Hsis = {
         removeAbroadStudent: function (id, callback) {
 
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/' + id + '/remove?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'students/abroad/' + id + '/remove?token=' + Hsis.token,
                 type: 'POST',
                 success: function (result) {
                     if (result) {
@@ -1751,7 +1758,7 @@ var Hsis = {
         getAbroadStudentDetails: function (id, callback) {
             var data = {};
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/abroad/' + id + '?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'students/abroad/' + id + '?token=' + Hsis.token,
                 type: 'GET',
                 success: function (result) {
                     if (result) {
@@ -4446,7 +4453,7 @@ var Hsis = {
         addAbroadStudentRegistrationDate: function (form, id, callback) {
             var data;
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/' + id + '/registration/add?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'students/' + id + '/registration/add?token=' + Hsis.token,
                 type: 'POST',
                 data: form,
                 beforeSend: function (xhr) {
@@ -4483,7 +4490,7 @@ var Hsis = {
         addAbroadStudentAchievement: function (form, id, callback) {
             var data;
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/' + id + '/achievement/add?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'students/' + id + '/achievement/add?token=' + Hsis.token,
                 type: 'POST',
                 data: form,
                 beforeSend: function (xhr) {
@@ -4520,7 +4527,7 @@ var Hsis = {
         removeAbroadStudentRegistrationDate: function (id, regId, callback) {
             var data;
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/' + id + '/registration/' + regId + '/remove?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'students/' + id + '/registration/' + regId + '/remove?token=' + Hsis.token,
                 type: 'POST',
                 success: function (result) {
                     if (result) {
@@ -4550,7 +4557,7 @@ var Hsis = {
         removeAbroadStudentAchievement: function (id, achId, callback) {
             var data;
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/' + id + '/achievement/' + achId + '/remove?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'students/' + id + '/achievement/' + achId + '/remove?token=' + Hsis.token,
                 type: 'POST',
                 success: function (result) {
                     if (result) {
@@ -4580,7 +4587,7 @@ var Hsis = {
         editAbroadPelc: function (id, pelcId, form, callback) {
             var data;
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/abroad/' + id + '/pelc/' + pelcId + '/edit?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'students/abroad/' + id + '/pelc/' + pelcId + '/edit?token=' + Hsis.token,
                 type: 'POST',
                 data: form,
                 success: function (result) {
@@ -6644,12 +6651,16 @@ var Hsis = {
                         '<table class="table-block col-md-12">' +
                         '<thead>' +
                         '<tr><th>Tarix</th>' +
+                        '<th>Yaşayış xərci</th>' +
+                        '<th>Yol xərci</th>' +
                         '<th>Qeyd</th>' +
                         '</tr></thead>' +
                         '<tbody>' +
                         '<tr data-id="' + v.id + '">' +
                         '<td>' + v.date + '</td>' +
-                        '<td>' + v.note + ' </td>' +
+                        '<td>' + v.liveCost + ' </td>' +
+                        '<td>' + (v.roadCost ? v.roadCost : '') + ' </td>' +
+                        '<td>' + (v.note ? v.note : '') + ' </td>' +
                         '</tr>' +
                         '</tbody>' +
                         '</table>' +
