@@ -2549,3 +2549,46 @@ ul.nav-tabs{
 .pagination{
     float: right;
 }
+
+                                        /*
+                                        print page style
+                                        */
+
+.image{
+    width: 100px;
+    height: 100px;
+    float: right;
+}
+.print-preview{
+}
+.survey{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: -100%;
+    z-index: 999;
+    background: #fff;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+}
+.open{
+    right: 0;
+    display: block;
+}
+.survey-content p{
+    font-size: 14px;
+    margin: 0;
+}
+.survey-content p label{
+    height: 0;
+}
+.close-survey{
+    position: absolute;
+    right: 40px;
+    top: 20px;
+    padding: 10px 20px;
+    color: #fff;
+    background: #0072ff;
+}

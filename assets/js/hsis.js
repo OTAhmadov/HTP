@@ -19,11 +19,7 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
-<<<<<<< HEAD
-     // token: '8ee91e13a16042de9f9d8a8f93d07a7f5dc563d22ea546e8ab4029a1c1a2d1cd',
-=======
-     token: '15c121f119f34f73870d9d3a106229f5d006b3b928564f548346afa48f51f675',
->>>>>>> 880485baf3f803d285e880e5fd16e81d81ff18d2
+     token: 'cbbd34fd8ff64a9f91064782906ee68e867359f37af049e3adb0bfcd5e3fe8a0',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -53,8 +49,8 @@ var Hsis = {
 //         AdminRest: 'http://localhost:8080/AdministrationRest/',
         AdminRest: 'http://192.168.1.78:8082/AdministrationRest/',
        HSIS: "http://192.168.1.78:8082/UnibookHsisRest/",
-//       HTP: "http://192.168.1.78:8082/HTPRest/",
-       HTP: "http://localhost:8080/HTPRest/",
+      HTP: "http://192.168.1.78:8082/HTPRest/",
+//        HTP: "http://localhost:8080/HTPRest/",
 //         HSIS: "http://localhost:8080/UnibookHsisRest/",
         REPORT: 'http://192.168.1.78:8082/ReportingRest/',
         EMS: 'http://192.168.1.78:8082/UnibookEMS/',
@@ -1276,6 +1272,8 @@ var Hsis = {
                 }
             })
         },
+
+
         getStructureListByParentId: function (id, callback) {
             $.ajax({
                 url: Hsis.urls.HSIS + 'structures/' + id + '/childs?token=' + Hsis.token,
@@ -1770,7 +1768,9 @@ var Hsis = {
                                 break;
 
                             case Hsis.statusCodes.OK:
+                                // Hsis.Service.parseQuestionnaireView(result.data);
                                 data = result.data;
+                                if(callback) callback(data);
                                 break;
 
                             case Hsis.statusCodes.UNAUTHORIZED:
@@ -5717,6 +5717,8 @@ var Hsis = {
 
         parseAbroadStudents: function (data, page) {
             if (data) {
+
+                console.log(data);
                 var html = '';
                 var count;
 
@@ -5779,14 +5781,19 @@ var Hsis = {
             }
 
         },
-        parseAbroadStudents: function(data){
 
+
+        parseQuestionnaireView: function(result){
+            console.log(result)
+            $('body [data-name="name"]').html(result.firstName);
+            /*
+            $('body label').find("[data-name='surname']").html(result.lastName);
+            $('body label').find("[data-name='surname']").html(result.lastName);
+            $('body label').find("[data-name='surname']").html(result.lastName);
+*/
         },
 
 
-
-
-        
         parseScholarshipPlan: function (plan) {
             if (plan) {
                 var html = '';
