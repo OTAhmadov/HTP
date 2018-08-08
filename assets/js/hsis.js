@@ -20,6 +20,7 @@ $(".addonJs").append(s);*/
 var cropForm = new FormData();
 var Hsis = {
      token: 'aa7de732210347139865f8bfc2273c521ce4e5b941d54efe8cbc78c64ae556bf',
+
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -4842,9 +4843,6 @@ var Hsis = {
 
             $('#application-list .div-application').html(html);
         },
-
-
-
         // loadcity parse  to module_1000131
         loadAbroadStructures: function (data, page) {
             if (data) {
@@ -4874,7 +4872,6 @@ var Hsis = {
                 }
             }
         },
-
         //parse to module_1000132
         loadAbroadAddress: function (data, page) {
             if (data) {
@@ -4893,6 +4890,26 @@ var Hsis = {
                         '<td>'+ Hsis.Service.parseOperations(Hsis.operationList, 2) + '</td>'+
                         '</tr>';
                 });
+
+
+                if (data.head-total > 0) {
+                    $('span[data-student-count]').html(data.head-total);
+                    var paginationCount = Math.ceil(data.head-total/20);
+                    $(".custom-pagination").empty();
+                    for(var tt = 0; tt < paginationCount; tt++) {
+                        var nmm = tt + 1;
+                        if(!page) page = 1;
+                        if(page === nmm) {
+                            $(".custom-pagination").append('<li class="page-item active"><a class="page-link" href="#">'+nmm+'</a></li>');
+                        } else {
+                            $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">'+nmm+'</a></li>');
+                        }
+                    }
+                }
+
+
+
+
                 if ($('#main-div #load_more_div').children().length == 0) {
                     $('#main-div #load_more_div').html('<button  data-table="abroad-structure-address_module" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]["load.more"] + '</button>');
                 }
@@ -5074,9 +5091,7 @@ var Hsis = {
             }
             return html;
         },
-
         //for options
-
         commonParseTree: function (data, objectId, nodeTypeId) {
             try {
 //                alert();
@@ -5657,7 +5672,6 @@ var Hsis = {
             }
 
         },
-        
         parseDictype: function (data, page) {
             
             var html = '';
@@ -5696,13 +5710,15 @@ var Hsis = {
 
 
         },
+
+
         parseAbroadStudents: function (data, page) {
             if (data) {
                 var html = '';
                 var count;
 
                 if (page) {
-                    count = $('#abroad_student_list tbody tr').length;
+                    count = ($('#abroad_student_list tbody tr').length * page) - $('#abroad_student_list tbody tr').length;
                 } else {
                     count = 0;
                 }
@@ -5729,6 +5745,17 @@ var Hsis = {
 
                     if (data.studentCount > 0) {
                         $('span[data-student-count]').html(data.studentCount);
+                        var paginationCount = Math.ceil(data.studentCount/20);
+                        $(".custom-pagination").empty();
+                        for(var tt = 0; tt < paginationCount; tt++) {
+                            var nmm = tt + 1;
+                            if(!page) page = 1;
+                            if(page === nmm) {
+                                $(".custom-pagination").append('<li class="page-item active"><a class="page-link" href="#">'+nmm+'</a></li>');
+                            } else {
+                                $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">'+nmm+'</a></li>');
+                            }
+                        }
                     }
 
                     if ($('#main-div #load_more_div').children().length == 0) {
@@ -5740,7 +5767,7 @@ var Hsis = {
 
 
                 if (page) {
-                    $('body').find('#abroad_student_list tbody').append(html);
+                    $('body').find('#abroad_student_list tbody').html(html);
                 } else {
                     $('body').find('#abroad_student_list tbody').html(html);
                 }
@@ -5749,6 +5776,13 @@ var Hsis = {
             }
 
         },
+        parseAbroadStudents: function(data){
+
+        },
+
+
+
+
         
         parseScholarshipPlan: function (plan) {
             if (plan) {
