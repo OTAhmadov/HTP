@@ -1550,22 +1550,6 @@
                         $('#main-div #archievement_type').html(html);
                     });
 
-                    Hsis.Proxy.loadDictionariesByTypeId('1000091', 0, function (archivement) {
-                        var html = Hsis.Service.parseDictionaryForSelect(archivement);
-                        $('#main-div #spec_direction').html(html);
-                    });
-
-                    Hsis.Proxy.loadDictionariesByTypeId('1000092', 0, function (archivement) {
-                        var html = Hsis.Service.parseDictionaryForSelect(archivement);
-                        $('#main-div #speciality').html(html);
-                    });
-
-                    Hsis.Proxy.loadDictionariesByTypeId('1000093', 0, function (archivement) {
-                        var html = Hsis.Service.parseDictionaryForSelect(archivement);
-                        $('#main-div #status').html(html);
-                    });
-
-
                     Hsis.Proxy.loadDictionariesByTypeId('1000094', 0, function (eduLine) {
                         var html = Hsis.Service.parseDictionaryForSelect(eduLine);
                         $('#main-div #edu_line').html(html);

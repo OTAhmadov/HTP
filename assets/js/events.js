@@ -10049,7 +10049,7 @@ $(function () {
 
         try {
             var allValid = true;
-            var iamasCheck = $(this).attr('data-check');
+            var iamasCheck = $(this).attr('data-iamas');
             if(Hsis.Validation.validateRequiredFields('data-required')) {
                 var student = {
                     iamasCheck:iamasCheck,
@@ -10265,7 +10265,7 @@ $(function () {
                             });*/
                         } else {
                             var pinCode = $("#pincode").val();
-                            Hsis.Proxy.getPersonInfoByPinCode(pinCode, function (data) {
+                            Hsis.Proxy.getPersonInfoByPinCode(data.pinCode, function (data) {
                                 console.log(data);
                                 $('body .input-file-con .new-img-con img').attr('src', data.image.file);
                             });
@@ -11385,7 +11385,6 @@ $(function () {
                         eduLevelId: $('#abroad_edu_level').find('option:selected').val(),
                         eduBlock: 'academic',
                         status: $('#main-div #status').val(),
-                        abroadNumber: $('#main-div #private_work_number').val().trim(),
                         graduateDate: $('#main-div #graduate_date').val(),
                         eduPeriod: $('#main-div #edu-period').val(),
                         countryId: $('#main-div #foreign_country').val(),

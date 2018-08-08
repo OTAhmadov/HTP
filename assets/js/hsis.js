@@ -1204,7 +1204,7 @@ var Hsis = {
             var data;
             $.ajax({
 //                url: Hsis.urls.HSIS + 'students/getInfoByPinCode?token=' + Hsis.token + '&pinCode=' + pinCode,
-                url: "http://atis.edu.az/IAMASRest/getInfoByPinCode?pinCode=" + pinCode,
+                url: "http://atis.edu.az/IAMASRest1/getInfoByPinCode?pinCode=" + pinCode,
                 type: 'POST',
                 success: function (result) {
                     if (result) {
