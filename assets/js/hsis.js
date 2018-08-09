@@ -19,7 +19,7 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
-     token: 'cbbd34fd8ff64a9f91064782906ee68e867359f37af049e3adb0bfcd5e3fe8a0',
+     // token: 'a7cf674289c74414ae88c37a32e9886b90d71101e30e462987a9642180d3d5b1',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -2015,7 +2015,8 @@ var Hsis = {
         loadAddressTree: function (callback) {
             var tree = {};
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/addresses?token=' + Hsis.token,
+                // url: Hsis.urls.HSIS + 'students/addresses?token=' + Hsis.token,
+                url: 'http//wcu.unibook.az/UnibookHsisRest/' + 'students/addresses?token=' + 'fcb8e03d29654833a91aef5b967734e5aad10a9055da4fd6b14daf2b76dbb0f6',
                 type: 'GET',
                 success: function (result) {
                     if (result) {

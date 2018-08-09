@@ -411,10 +411,10 @@ main.main-upd{
 
 }
 .dropdown-func{
-    float: none;
+   /* float: none;
     position: relative;
     top: 0;
-    display: inline-block;
+    display: inline-block;*/
 
 }
 .reg.dropdown-toggle{
@@ -622,15 +622,15 @@ i.angle-foreign{
     letter-spacing: -0.1px;
     text-align: left;
     color: #6b7897 !important;
-    padding: 0 16px !important;
+    /*padding: 0 16px !important;*/
     color: #6b7897 !important;
     font-weight: 600;
 }
 .table-celled>tbody>tr>td{
-    font: 12px/24px 'HelveticaNeue',sans-serif;
+    font: 12px/14px 'HelveticaNeue',sans-serif;
     text-align: left;
     color: #6b7897;
-    padding: 0 16px !important;
+    /*padding: 0 16px !important;*/
 }
 .table-celled.mini>tbody>tr>td{
     font: 10px/15px 'HelveticaNeue',sans-serif;
@@ -651,7 +651,8 @@ td .dropdown-menu{
 }
 .dropdown-menu.calibrated{
     left: auto;
-    right: 0;
+    right: 43px;
+    top: 75px;
     background: #fff !important;
     border: none; 
 }
@@ -962,6 +963,7 @@ i.jstree-icon.jstree-ocl {
 }
 .foreign-advanced-search .slimScrollDiv, .search-scroll{
     height: 100vh !important;
+    width: 100% !important;
 }
 .search-scroll h2.panel-title{
     font: bold 20px/24px 'HelveticaNeue',sans-serif;
@@ -1128,7 +1130,7 @@ i.jstree-icon.jstree-ocl {
                     top: -56px;
             }*/
     .prepend-icon input{
-        width: 230px;
+        /*width: 230px;*/
     }
 }
 .basic-info{
@@ -1335,11 +1337,11 @@ h3 + .add-new{
     width: auto !important;
     height: auto !important;
     position: relative !important;
-    top: 4px !important;
+    /*top: 4px !important;*/
     right: 15px !important;
     cursor: pointer !important;
     float: right;
-    margin-top: -60px;
+    /*margin-top: -60px;*/
     /*margin-top: -40px;*/
     border: none !important
 }
@@ -1415,8 +1417,8 @@ div[class$="-info"]{
 }
 .add-new .search-scroll{
     padding-bottom: 120px;
-    padding-left: 320px;
-    padding-right: 320px;
+  /*  padding-left: 320px;
+    padding-right: 320px;*/
 }
 .search-scroll .tree-modal .modal-content{
     max-height: 500px;
@@ -1792,9 +1794,9 @@ div[class$="-info"] .panel-body .add-new[data-doc-type="academic"]{
     padding-top: 25px !important;
 }
 
-.add-new-registr-date, .add-new-achievement {
+/*.add-new-registr-date, .add-new-achievement {
     padding-top: 40px !important;
-}
+}*/
 
 .content-part + .slimScrollBar {
     background: rgb(128, 130, 134) !important;
@@ -2089,7 +2091,7 @@ input.new-search{
         height: auto;
     }
     .app-list{
-        display: block !important;
+        display: block;
     }
     /*.prepend-icon input {*/
 
@@ -2574,7 +2576,7 @@ ul.nav-tabs{
     display: none;
 }
 .open{
-    right: 0;
+    right: 32px;
     display: block;
 }
 .survey-content p{
@@ -2591,4 +2593,24 @@ ul.nav-tabs{
     padding: 10px 20px;
     color: #fff;
     background: #0072ff;
+}
+.table-responsive-sm{
+    overflow-x: auto;
+}
+
+.table-responsive-sm::-webkit-scrollbar{
+    width: 1px;
+    height: 5px;
+}
+
+.table-responsive-sm::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+}
+
+.table-responsive-sm::-webkit-scrollbar-thumb{
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}
+.aca_info{
+    padding: 0 !important;
 }
