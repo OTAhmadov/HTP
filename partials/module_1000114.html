@@ -1,4 +1,4 @@
-<div style="display: none; padding-right: 17px;" class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel"
+<div style="display: none; padding-right: 17px;" class="not-printed modal fade" role="dialog" aria-labelledby="gridSystemModalLabel"
      id="exportModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -25,12 +25,12 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<form class="sabah-form">
+<form class="sabah-form not-printed">
     <input name="educationPaymentTypeId" class="hidden"/>
     <input name="searchAttr" class="hidden"/>
 </form>
 
-<div class="content-header">
+<div class="not-printed content-header">
     <div class="con-head-left">
         <span data-i18n="students" placeholder="Tələbələr" class="hed-title"></span><span class="head-total"> <span
             data-student-count></span></span>
@@ -59,7 +59,7 @@
     </div>
 </div>
 
-<form class="abroad_student-search-form">
+<form class="not-printed abroad_student-search-form">
     <input type="hidden" name="genderId">
     <input type="hidden" name="orgId">
     <input type="hidden" name="uniName">
@@ -74,7 +74,7 @@
     <input type="hidden" name="keyword">
     <input type="hidden" name="yearId">
 </form>
-<div class="filters-block module_1000011 student-filter-group">
+<div class="not-printed filters-block module_1000011 student-filter-group">
     <!--    <div class="btn-group">
             <select class="form-control " id="org_uni_filter" >
 
@@ -158,7 +158,7 @@
 </div>
 
 
-<div class="row">
+<div class="row not-printed">
     <div class="col-sm-12 data filtered">
         <div class="panel panel-white table-scroll">
 
@@ -194,7 +194,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="space-for-footer">
+            <div class="not-printed space-for-footer">
                 <nav aria-label="..." class="pagination-top">
                     <ul class="pagination custom-pagination" data-table="abroad_students">
                         <li class="page-item active">
@@ -219,7 +219,7 @@
 
         </div>
     </div>
-    <div class="col-sm-3 info te">
+    <div class="col-sm-3 info te not-printed">
         <div class="panel panel-white">
             <div class="panel-heading">
                 <h3 data-i18n="info" class="panel-title">Info</h3>
@@ -251,7 +251,7 @@
 </div>
 
 <!--tree modal-->
-<div class="modal tree-modal">
+<div class="not-printed modal tree-modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header header-primary">
@@ -282,7 +282,7 @@
     </div>
 </div>
 
-<div class="new-upd">
+<div class="not-printed new-upd ">
     <div class="search-scroll">
         <div class="text-right">
             <button data-i18n="close" type="submit" class="btn btn-primary btn-block new-close ">CLose</button>
@@ -339,7 +339,7 @@
     </div>
 </div>
 
-<div class="add-new">
+<div class="not-printed add-new ">
     <div class="search-scroll"></div>
 </div>
 
@@ -348,7 +348,11 @@
         <div class="col-sm-8 col-sm-offset-4">
             <h1 class="">"Hokumetlerarasi Teqaud Programlari" Melumat Sistemi </h1>
             <h2 class="text-center">Anket</h2>
-            <span class="close-survey">Bağla</span>
+
+                <span class="close-survey">Bağla</span>
+                <button class="btn btn-primary " onclick="window.print()"></button>
+
+
             <div class="col-sm-6 survey-content">
                 <p class="row">
                     <span class="col-sm-6">Adı</span>

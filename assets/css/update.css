@@ -2618,6 +2618,20 @@ ul.nav-tabs{
 .aca_info{
     padding: 0 !important;
 }
+
+@media print {
+    body {
+        zoom: .8
+    }
+    .not-printed {
+        display: none;
+    }
+    @page {
+        size: auto;   /* auto is the initial value */
+        margin: 0;  /* this affects the margin in the printer settings */
+    }
+}
+
 /*.survey-content p label{*/
     /*margin-left: 50px;*/
 /*}*/
