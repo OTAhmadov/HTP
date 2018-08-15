@@ -184,7 +184,7 @@ $(function () {
             var div = $(this).parent().closest('div').attr('id');
             $('.main-content-upd #buttons_div').attr('data-id', $(this).parent().attr('id'));
             var node = $("#" + div).jstree('get_selected', true);
-            console.log(node);
+
             $('.main-content-upd #buttons_div').attr('parent-node', node[0].parent);
             var nodeId = node[0].id;
             Hsis.node = node;
@@ -199,7 +199,7 @@ $(function () {
 
             $.each(Hsis.array, function (i, v) {
                 if (Hsis.tempData.org == v.id) {
-                    console.log(v.type);
+
                     about = v.about;
                     dicType = v.dicType;
                     name = v.name;
@@ -1344,7 +1344,7 @@ $(function () {
         }
         
         
-        console.log(objectForm)
+        // console.log(objectForm)
     });
     //approve-address
     $('body').on('click', '.xtms-approve-address', function(){
@@ -1371,7 +1371,7 @@ $(function () {
         }
         
         
-        console.log(objectForm)
+        // console.log(objectForm)
     });
 
 
@@ -3371,7 +3371,7 @@ $(function () {
                         }, 400);
                         $('body').find('.add-new .search-scroll').load('partials/teacher_edit.html', function () {
                             if (result && result.code == Hsis.statusCodes.OK) {
-                                console.log(result.data);
+                                // console.log(result.data);
                                 if (result.data.image && result.data.image.path) {
                                     $('body .input-file-con .new-img-con').fadeIn(1);
                                     $('body .input-file-con .new-img-con img').attr('src', Hsis.urls.HSIS + 'students/image/' + (result.data.image.path ? result.data.image.path : '') + '?token=' + Hsis.token + '&size=200x200&' + Math.random());
@@ -3587,7 +3587,7 @@ $(function () {
             var id = $('.main-content-upd #buttons_div').attr('data-id');
             $('.add-new .search-scroll').load('partials/teacher_edit.html', function () {
                 Hsis.Proxy.getTeacherDetails(id, function (data) {
-                    console.log(data)
+                    // console.log(data)
                     var html = '';
 
                     if (data.image && data.image.path) {
@@ -10521,45 +10521,59 @@ $(function () {
             var id = $('.main-content-upd #buttons_div').attr('data-id');
             $('.add-new .search-scroll').load('partials/abroad_student_edit_personal_info.html', function () {
                 Hsis.Proxy.getAbroadStudentDetails(id, function (data) {
-                    var html = '';
 
-                    if (data.image && data.image.path) {
-                        $('body .input-file-con .new-img-con').fadeIn(1);
-                        $('body .input-file-con .new-img-con img').attr('src', Hsis.urls.HSIS + 'students/image/' + (data.image.path ? data.image.path : '') + '?token=' + Hsis.token + '&size=200x200&' + Math.random());
+
+                    if(data.iamasCheck == 0){
+                        var html = '';
+                        if (data.image && data.image.path) {
+                            $('body .input-file-con .new-img-con').fadeIn(1);
+                            $('body .input-file-con .new-img-con img').attr('src', Hsis.urls.HSIS + 'students/image/' + (data.image.path ? data.image.path : '') + '?token=' + Hsis.token + '&size=200x200&' + Math.random());
 //                        $('.edit-common-info-image').attr('src', Hsis.urls.HSIS + 'students/image/'+(data.image.path ? data.image.path : '')+'?token=' + Hsis.token + '&size=200x200&' + Math.random());
-                        $('body .input-file-con .new-img-con').attr('data-id', data.image.id);
-                        $('body .input-file-con .new-img-con img').on('error', function (e) {
-                            $('body .input-file-con .new-img-con img').attr('src', 'assets/img/guest.png');
-                        });
+                            $('body .input-file-con .new-img-con').attr('data-id', data.image.id);
+                            $('body .input-file-con .new-img-con img').on('error', function (e) {
+                                $('body .input-file-con .new-img-con img').attr('src', 'assets/img/guest.png');
+                            });
 
+                        }
+
+                        $('#firstname').val(data.firstName);
+                        $('#lastname').val(data.lastName);
+                        $('#middlename').val(data.middleName);
+                        $('#pincode').val(data.pinCode).attr('disabled', 'disabled');
+                        $('#gender').find('option[value="' + data.gender.id + '"]').attr('selected', 'selected');
+                        $('#marital_status').find('option[value="' + data.maritalStatus.id + '"]').attr('selected', 'selected');
+                        $('#military_status').find('option[value="' + data.militaryService.id + '"]').attr('selected', 'selected');
+                        $('.date-birthdate').val(data.birthDate);
+                        $('#main-div').attr('data-id', data.id);
+                        $('#main-div').attr('data-pelc-id', data.pelcId);
+
+                        Hsis.Service.parseEditStudentAddress(data);
+
+                        if (data.contacts.length > 0) {
+                            $('.contact-info .panel-body').html(Hsis.Service.parseEditStudentContact(data));
+                        }
+
+                        var personal = 'personal';
+                        var academic = 'academic';
+                        var school = 'school';
+                        if (data.documents.length > 0) {
+                            $('.add-doc-block .panel-body').html(Hsis.Service.parseEditStudentDocument(data.documents, personal));
+                        }
+                        $('.student-relationships-div .panel-body').html(Hsis.Service.parseStudentRelationShip(data.relations));
+
+                    }else if(data.iamasCheck == 1){
+                        console.log(data.iamasCheck);
+                        $('.edit-abroad-common-info').css('display', 'none');
+                        $('#firstname').attr('disabled', 'disabled');
+                        $('#lastname').attr('disabled', 'disabled');
+                        $('#middlename').attr('disabled', 'disabled');
+                        $('#pincode').attr('disabled', 'disabled');
+                        $('#gender').attr('disabled', 'disabled');
+                        $('#marital_status').attr('disabled', 'disabled');
+                        $('#military_status').attr('disabled', 'disabled');
+                        $('.date-birthdate').attr('disabled', 'disabled');
                     }
 
-                    $('#firstname').val(data.firstName);
-                    $('#lastname').val(data.lastName);
-                    $('#middlename').val(data.middleName);
-                    $('#pincode').val(data.pinCode).attr('disabled', 'disabled');
-                    $('#gender').find('option[value="' + data.gender.id + '"]').attr('selected', 'selected');
-                    $('#marital_status').find('option[value="' + data.maritalStatus.id + '"]').attr('selected', 'selected');
-                    $('#military_status').find('option[value="' + data.militaryService.id + '"]').attr('selected', 'selected');
-                    $('.date-birthdate').val(data.birthDate);
-                    $('#main-div').attr('data-id', data.id);
-                    $('#main-div').attr('data-pelc-id', data.pelcId);
-
-                    Hsis.Service.parseEditStudentAddress(data);
-
-                    if (data.contacts.length > 0) {
-                        $('.contact-info .panel-body').html(Hsis.Service.parseEditStudentContact(data));
-                    }
-
-                    var personal = 'personal';
-                    var academic = 'academic';
-                    var school = 'school';
-                    if (data.documents.length > 0) {
-                        $('.add-doc-block .panel-body').html(Hsis.Service.parseEditStudentDocument(data.documents, personal));
-                    }
-
-
-                    $('.student-relationships-div .panel-body').html(Hsis.Service.parseStudentRelationShip(data.relations));
 
                 });
             });

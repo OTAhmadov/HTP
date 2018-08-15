@@ -456,7 +456,7 @@
                         <div class="panel-title action-students">
                             <div class="panel-heading act_name">
                                 <h3 data-i18n="actions" class="panel-title">Actions</h3>
-                                <div class="add-new add-edulifecycle ">
+                                <div class="add-new add-edulifecycle" style="margin-top: -17px !important;">
                                     <img src="assets/img/AddNew.png" alt="" width="20" height="20">
                                 </div>
                             </div>
@@ -485,7 +485,7 @@
                                                 <h3 data-i18n="related_documents" class="panel-title">Related
                                                     documents</h3>
                                                 <div class="add-new add-new-past-edu-doc"
-                                                     style="top: 65px !important; z-index: 100; "><img
+                                                     style="top: -35px !important; z-index: 100; "><img
                                                         src="assets/img/AddNew.png" alt="" width="20" height="20">
                                                 </div>
                                             </div>
@@ -501,12 +501,13 @@
 
                         <div class="panel-title registration-date-div">
                             <div class="panel-heading aca_info">
-                                <h3 class="panel-title">Qeydiyyat tarixi</h3>
-                                <div class="add-new add-new-registr-date add-registr"
-                                     style="right: 0!important; top: 18px!important; z-index: 99;" data-type="edit">
-                                    <h3 class="panel-title">İllik qeydiyyat</h3>
+                                <h3 class="panel-title">İllik qeydiyyat</h3>
+                                <div style="margin-top: -24px !important; right: 20px;" class="add-new add-new-registr-date add-registr" data-type="edit">
+                                    <!--style="right: 0!important; top: 18px!important; z-index: 99;"-->
+                                    <!--<h3 class="panel-title">İllik qeydiyyat</h3>-->
                                     <div class="add-new add-new-registr-date add-registr"
-                                         style="right: 0!important; top: 18px!important; z-index: 99;" data-type="edit">
+                                          data-type="edit" style="right: 22px;">
+                                        <!--style="right: 0!important; top: 18px!important; z-index: 99;"-->
                                         <img src="assets/img/AddNew.png" alt="" width="20" height="20">
                                     </div>
                                 </div>
@@ -515,6 +516,7 @@
                                         information</h3></div>
                                 </div>
                                 <div class="modal add-registration-date-modal" tabindex="-1" role="dialog">
+
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -584,272 +586,268 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="panel-title achievement-div">
+                                    <div class="panel-heading aca_info">
+                                        <h3 class="panel-title">Nailiyyətlər</h3>
+                                        <div class="add-new add-new-achievement add-registr"
+                                             style="right: 16px !important; margin-top: -30px;"
+                                             data-type="edit">
+                                            <img src="assets/img/AddNew.png" alt="" width="20" height="20">
+                                        </div>
+                                    </div>
+                                    <div class="panel-body archievement-panel" style="padding: 0">
+                                        <div class="blank-panel"><h3 data-i18n="no_information">No available
+                                            information</h3>
+                                        </div>
 
                                     </div>
+                                    <div class="modal add-archievement-modal" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title">Nailiyyətlər</h4>
+                                                </div>
+                                                <div class="modal-body">
 
-                                    <div class="panel-title achievement-div">
-                                        <div class="panel-heading aca_info">
-                                            <h3 class="panel-title">Nailiyyətlər</h3>
-                                            <div class="add-new add-new-achievement add-registr"
-                                                 style="right: 0!important;"
-                                                 data-type="edit">
-                                                <img src="assets/img/AddNew.png" alt="" width="20" height="20">
-                                            </div>
-                                        </div>
-                                        <div class="panel-body archievement-panel" style="padding: 0">
-                                            <div class="blank-panel"><h3 data-i18n="no_information">No available
-                                                information</h3>
-                                            </div>
+                                                    <div class="form-group">
+                                                        <label for="archievement_type">Tipi</label>
+                                                        <div class="prepend-icon">
+                                                            <select archievement-required id="archievement_type"
+                                                                    class="form-control no-padding">
 
-                                        </div>
-                                        <div class="modal add-archievement-modal" tabindex="-1" role="dialog">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span></button>
-                                                        <h4 class="modal-title">Nailiyyətlər</h4>
-                                                    </div>
-                                                    <div class="modal-body">
-
-                                                        <div class="form-group">
-                                                            <label for="archievement_type">Tipi</label>
-                                                            <div class="prepend-icon">
-                                                                <select archievement-required id="archievement_type"
-                                                                        class="form-control no-padding">
-
-                                                                </select>
-                                                            </div>
+                                                            </select>
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label for="archievement_note">Qeyd</label>
-                                                            <div class="prepend-icon">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="archievement_note">Qeyd</label>
+                                                        <div class="prepend-icon">
                                                         <textarea id="archievement_note" class="form-control">
 
                                                         </textarea>
-                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="modal-footer flex-img">
-                                                        <button data-i18n="ok" type="button"
-                                                                class="btn btn-primary add-archievement-submit">OK
-                                                        </button>
-                                                        <button data-i18n="cancel" type="button"
-                                                                class="btn btn-danger"
-                                                                data-dismiss="modal" aria-label="Close">Cancel
-                                                        </button>
-                                                    </div>
+                                                </div>
+                                                <div class="modal-footer flex-img">
+                                                    <button data-i18n="ok" type="button"
+                                                            class="btn btn-primary add-archievement-submit">OK
+                                                    </button>
+                                                    <button data-i18n="cancel" type="button"
+                                                            class="btn btn-danger"
+                                                            data-dismiss="modal" aria-label="Close">Cancel
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
 
+                                </div>
+                                <div class="panel-title activity_name">
+                                    <div class="panel-heading aca_info">
+                                        <h3 data-i18n="entered_university" class="panel-title">Entered
+                                            University</h3>
+                                        <a class="save-button edit-abroad-academic-info" href="#">
+                                            <img src="assets/img/save-icon.png" alt="Save" width="20"
+                                                 height="20">
+                                        </a>
+                                    </div>
+                                    <div class="panel-body equal-height-cols">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Ölkə</label>
+                                                    <div class="prepend-icon">
+                                                        <select academic-required id="foreign_country"
+                                                                class="form-control "
+                                                                data-required>
 
-                                    <div class="panel-title activity_name">
-                                        <div class="panel-heading aca_info">
-                                            <h3 data-i18n="entered_university" class="panel-title">Entered
-                                                University</h3>
-                                            <a class="save-button edit-abroad-academic-info" href="#">
-                                                <img src="assets/img/save-icon.png" alt="Save" width="20"
-                                                     height="20">
-                                            </a>
-                                        </div>
-                                        <div class="panel-body equal-height-cols">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="">Ölkə</label>
-                                                        <div class="prepend-icon">
-                                                            <select academic-required id="foreign_country"
-                                                                    class="form-control "
-                                                                    data-required>
-
-                                                            </select>
-                                                            <i class="fa fa-institution"></i>
-                                                        </div>
+                                                        </select>
+                                                        <i class="fa fa-institution"></i>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="">Şəhər</label>
-                                                        <div class="prepend-icon">
-                                                            <select id="foreign_city" class="form-control "
-                                                                    data-required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Şəhər</label>
+                                                    <div class="prepend-icon">
+                                                        <select id="foreign_city" class="form-control "
+                                                                data-required>
 
-                                                            </select>
-                                                            <i class="fa fa-institution"></i>
-                                                        </div>
+                                                        </select>
+                                                        <i class="fa fa-institution"></i>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="">Universitet</label>
-                                                        <div class="prepend-icon">
-                                                            <select academic-required id="foreign_university"
-                                                                    class="form-control "
-                                                                    data-required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Universitet</label>
+                                                    <div class="prepend-icon">
+                                                        <select academic-required id="foreign_university"
+                                                                class="form-control "
+                                                                data-required>
 
-                                                            </select>
-                                                            <i class="fa fa-institution"></i>
-                                                        </div>
+                                                        </select>
+                                                        <i class="fa fa-institution"></i>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label data-i18n="education_line" for="">Edu line</label>
-                                                        <div class="prepend-icon">
-                                                            <select academic-required id="edu_line"
-                                                                    class="form-control ">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label data-i18n="education_line" for="">Edu line</label>
+                                                    <div class="prepend-icon">
+                                                        <select academic-required id="edu_line"
+                                                                class="form-control ">
 
-                                                            </select>
-                                                            <i class="fa fa-institution"></i>
-                                                        </div>
+                                                        </select>
+                                                        <i class="fa fa-institution"></i>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <!-- <div class="form-group" style="display: none">
-                                                         <label for="">Şəxsi iş nömrəsi</label>
-                                                         <div class="prepend-icon">
-                                                             <input academic-required id="private_work_number" type="text" class="form-control">
-                                                             <i class="fa fa-institution"></i>
-                                                         </div>
-                                                     </div>-->
-                                                    <div class="form-group">
-                                                        <label for="">Status</label>
-                                                        <div class="prepend-icon">
-                                                            <select academic-required id="status"
-                                                                    class="form-control ">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <!-- <div class="form-group" style="display: none">
+                                                     <label for="">Şəxsi iş nömrəsi</label>
+                                                     <div class="prepend-icon">
+                                                         <input academic-required id="private_work_number" type="text" class="form-control">
+                                                         <i class="fa fa-institution"></i>
+                                                     </div>
+                                                 </div>-->
+                                                <div class="form-group">
+                                                    <label for="">Status</label>
+                                                    <div class="prepend-icon">
+                                                        <select academic-required id="status"
+                                                                class="form-control ">
 
-                                                            </select>
-                                                            <i class="fa fa-institution"></i>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="action_date">Dərslərin başlama tarixi</label>
-                                                        <div class="prepend-icon">
-                                                            <input academic-required data-i18n="date"
-                                                                   id="action_date" type="text"
-                                                                   class="form-control second-info-date datepicker"
-                                                                   data-date-format="dd/mm/yyyy" placeholder="Date"
-                                                                   data-required>
-                                                            <i class="fa fa-calendar"></i>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="action_date">Gözlənilən məzun olma
-                                                            tarixi</label>
-                                                        <div class="prepend-icon">
-                                                            <input academic-required data-i18n="date"
-                                                                   id="graduate_date" type="text"
-                                                                   class="form-control second-info-date datepicker"
-                                                                   data-date-format="dd/mm/yyyy" placeholder="Date"
-                                                                   data-required>
-                                                            <i class="fa fa-calendar"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="action_date">Təhsil müddəti</label>
-                                                        <div class="prepend-icon">
-                                                            <input academic-required id="edu-period" type="number"
-                                                                   class="form-control" data-required>
-                                                            <i class="fa fa-institution"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label data-i18n="edu_lang" for="">Edu lang</label>
-                                                        <div class="prepend-icon">
-                                                            <select academic-required id="edu_lang"
-                                                                    class="form-control "
-                                                                    data-required>
-
-                                                            </select>
-                                                            <i class="fa fa-institution"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label data-i18n="edu_level" for="edu_level">Education
-                                                            level</label>
-                                                        <div class="prepend-icon">
-                                                            <select academic-required id="abroad_edu_level" name=""
-                                                                    class="form-control" data-required>
-
-                                                            </select>
-                                                            <i class="fa fa-institution"></i>
-                                                        </div>
+                                                        </select>
+                                                        <i class="fa fa-institution"></i>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6">
-                                                    <div org-id class="form-group">
-                                                        <label for="orgId">İxtisas istiqaməti</label>
-                                                        <div class="prepend-icon">
-                                                            <select academic-required id="spec_direction"
-                                                                    class="form-control"
-                                                                    data-required></select>
-                                                            <i class="fa fa-university"></i>
-                                                        </div>
-
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="action_date">Dərslərin başlama tarixi</label>
+                                                    <div class="prepend-icon">
+                                                        <input academic-required data-i18n="date"
+                                                               id="action_date" type="text"
+                                                               class="form-control second-info-date datepicker"
+                                                               data-date-format="dd/mm/yyyy" placeholder="Date"
+                                                               data-required>
+                                                        <i class="fa fa-calendar"></i>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="orgId">İxtisas</label>
-                                                        <div class="prepend-icon data-progress-org-id"
-                                                             data-progress-org-id>
-                                                            <select academic-required id="speciality"
-                                                                    class="form-control"
-                                                                    data-required></select>
-                                                            <i class="fa fa-university"></i>
-                                                        </div>
-
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="action_date">Gözlənilən məzun olma
+                                                        tarixi</label>
+                                                    <div class="prepend-icon">
+                                                        <input academic-required data-i18n="date"
+                                                               id="graduate_date" type="text"
+                                                               class="form-control second-info-date datepicker"
+                                                               data-date-format="dd/mm/yyyy" placeholder="Date"
+                                                               data-required>
+                                                        <i class="fa fa-calendar"></i>
                                                     </div>
                                                 </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label data-i18n="note" for="action_date">Note</label>
-                                                        <textarea id="note" class="form-control"></textarea>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="action_date">Təhsil müddəti</label>
+                                                    <div class="prepend-icon">
+                                                        <input academic-required id="edu-period" type="number"
+                                                               class="form-control" data-required>
+                                                        <i class="fa fa-institution"></i>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label data-i18n="edu_lang" for="">Edu lang</label>
+                                                    <div class="prepend-icon">
+                                                        <select academic-required id="edu_lang"
+                                                                class="form-control "
+                                                                data-required>
 
-                                                <!--<div class="col-md-6">
+                                                        </select>
+                                                        <i class="fa fa-institution"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label data-i18n="edu_level" for="edu_level">Education
+                                                        level</label>
+                                                    <div class="prepend-icon">
+                                                        <select academic-required id="abroad_edu_level" name=""
+                                                                class="form-control" data-required>
 
-                                                </div>-->
+                                                        </select>
+                                                        <i class="fa fa-institution"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                                <div class="docs-row2">
+                                            <div class="col-md-6">
+                                                <div org-id class="form-group">
+                                                    <label for="orgId">İxtisas istiqaməti</label>
+                                                    <div class="prepend-icon">
+                                                        <select academic-required id="spec_direction"
+                                                                class="form-control"
+                                                                data-required></select>
+                                                        <i class="fa fa-university"></i>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="orgId">İxtisas</label>
+                                                    <div class="prepend-icon data-progress-org-id"
+                                                         data-progress-org-id>
+                                                        <select academic-required id="speciality"
+                                                                class="form-control"
+                                                                data-required></select>
+                                                        <i class="fa fa-university"></i>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label data-i18n="note" for="action_date">Note</label>
+                                                    <textarea id="note" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <!--<div class="col-md-6">
+
+                                            </div>-->
+
+                                            <div class="docs-row2">
+                                                <div class="panel-title">
                                                     <div class="panel-title">
-                                                        <div class="panel-title">
-                                                            <div class="panel-heading">
-                                                                <h3 data-i18n="related_documents"
-                                                                    class="panel-title">Related
-                                                                    documents</h3>
-                                                                <div class="add-new add-pelc-document"
-                                                                     style="margin-top:0!important;"><img
-                                                                        src="assets/img/AddNew.png" alt=""
-                                                                        width="20" height="20">
-                                                                </div>
+                                                        <div class="panel-heading">
+                                                            <h3 data-i18n="related_documents"
+                                                                class="panel-title">Related
+                                                                documents</h3>
+                                                            <div class="add-new add-pelc-document"
+                                                                 style="margin-top: -30px !important;"><img
+                                                                    src="assets/img/AddNew.png" alt=""
+                                                                    width="20" height="20">
                                                             </div>
-                                                            <div id="acad_doc_add" class="panel-body"
-                                                                 style="padding: 0">
-                                                                <div class="blank-panel">
-                                                                    <h3 data-i18n="no_information">No available
-                                                                        information</h3>
-                                                                </div>
+                                                        </div>
+                                                        <div id="acad_doc_add" class="panel-body"
+                                                             style="padding: 0">
+                                                            <div class="blank-panel">
+                                                                <h3 data-i18n="no_information">No available
+                                                                    information</h3>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -4605,7 +4605,7 @@ hr {
 }
 .panel-heading .panel-title {
     color: #6a7079;
-    display: inline-block;
+    /*display: inline-block;*/
     font-size: 14px;
     font-weight: 500;
     text-transform: uppercase
@@ -19966,10 +19966,10 @@ tfoot {
 }
 
 .dropdown-func {
-    position: absolute;
+   /* position: absolute;
     top: -5px;
     right: 0;
-    float: right;
+    float: right;*/
 }
 
 .loading-margins {
@@ -19991,7 +19991,7 @@ input[type="search"].table-search {
 
 td {
     position: relative;
-    padding: 13px !important;
+    /*padding: 13px !important;*/
 }
 
 td .operations {
@@ -21302,4 +21302,7 @@ th.for-upload {
 }
 div.add-pwlc-document.panel-add-teacher{
     top: 25px !important;
+}
+.dropdown-func{
+    float: right;
 }

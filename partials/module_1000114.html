@@ -1,4 +1,4 @@
-<div style="display: none; padding-right: 17px;" class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel"
+<div style="display: none; padding-right: 17px;" class="not-printed modal fade" role="dialog" aria-labelledby="gridSystemModalLabel"
      id="exportModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -25,12 +25,12 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<form class="sabah-form">
+<form class="sabah-form not-printed">
     <input name="educationPaymentTypeId" class="hidden"/>
     <input name="searchAttr" class="hidden"/>
 </form>
 
-<div class="content-header">
+<div class="not-printed content-header">
     <div class="con-head-left">
         <span data-i18n="students" placeholder="Tələbələr" class="hed-title"></span><span class="head-total"> <span
             data-student-count></span></span>
@@ -59,7 +59,7 @@
     </div>
 </div>
 
-<form class="abroad_student-search-form">
+<form class="not-printed abroad_student-search-form">
     <input type="hidden" name="genderId">
     <input type="hidden" name="orgId">
     <input type="hidden" name="uniName">
@@ -74,7 +74,7 @@
     <input type="hidden" name="keyword">
     <input type="hidden" name="yearId">
 </form>
-<div class="filters-block module_1000011 student-filter-group">
+<div class="not-printed filters-block module_1000011 student-filter-group">
     <!--    <div class="btn-group">
             <select class="form-control " id="org_uni_filter" >
 
@@ -158,11 +158,11 @@
 </div>
 
 
-<div class="row">
+<div class="row not-printed">
     <div class="col-sm-12 data filtered">
         <div class="panel panel-white table-scroll">
 
-            <div class="table-responsive">
+            <div class="table-responsive-sm">
 
                 <table id="abroad_student_list" class="table table-celled table-hover">
                     <thead>
@@ -194,7 +194,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="space-for-footer">
+            <div class="not-printed space-for-footer">
                 <nav aria-label="..." class="pagination-top">
                     <ul class="pagination custom-pagination" data-table="abroad_students">
                         <li class="page-item active">
@@ -219,7 +219,7 @@
 
         </div>
     </div>
-    <div class="col-sm-3 info te">
+    <div class="col-sm-3 info te not-printed">
         <div class="panel panel-white">
             <div class="panel-heading">
                 <h3 data-i18n="info" class="panel-title">Info</h3>
@@ -251,7 +251,7 @@
 </div>
 
 <!--tree modal-->
-<div class="modal tree-modal">
+<div class="not-printed modal tree-modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header header-primary">
@@ -282,7 +282,7 @@
     </div>
 </div>
 
-<div class="new-upd">
+<div class="not-printed new-upd ">
     <div class="search-scroll">
         <div class="text-right">
             <button data-i18n="close" type="submit" class="btn btn-primary btn-block new-close ">CLose</button>
@@ -339,92 +339,127 @@
     </div>
 </div>
 
-<div class="add-new">
+<div class="not-printed add-new ">
     <div class="search-scroll"></div>
 </div>
 
 <div class="survey">
     <div class="row print-preview">
         <div class="col-sm-8 col-sm-offset-4">
-            <h1 class="text-center">"Hokumetlerarasi Teqaud Programlari" Melumat Sistemi </h1>
+            <h1 class="">"Hokumetlerarasi Teqaud Programlari" Melumat Sistemi </h1>
             <h2 class="text-center">Anket</h2>
-            <span class="close-survey">Bağla</span>
+
+                <span class="close-survey">Bağla</span>
+                <button class="btn btn-primary " onclick="window.print()"></button>
+
+
             <div class="col-sm-6 survey-content">
-                <p>Adi
-                    <label data-name="name"></label>
+                <p class="row">
+                    <span class="col-sm-6">Adı</span>
+                    <label class="col-sm-6" data-name="name"></label>
                 </p>
-                <p>Soyadi
-                    <label data-name="surname"></label>
-                    <img class="image" data-name="image">
-                </p>
-
-                <p>
-                    Ata adi<label data-name="father-name"></label>
-                </p>
-                <p>Finkod
-                    <label data-name="code"></label>
-                </p>
-                <p>Vetendasligi
-
-                    <label data-name="citizen"></label>
-                </p>
-                <p>Cinsi
-                    <label data-name="gender"></label>
-                </p>
-                <p>Aile veziyyeti
-                    <label data-name="status"></label>
-                </p>
-                <p>
-                    Dogum tarixi<label data-name="birthday"></label>
+                <p class="row">
+                    <span class="col-sm-6">Soyadi</span>
+                    <label class="col-sm-3" data-name="surname"></label>
+                    <img class="image col-sm-3" data-name="image">
                 </p>
 
-                <p>
-                    Herbi mukellefiyyeti <label data-name="military"></label>
+                <p class="row">
+                    <span class="col-sm-6">
+                    Ata adi
+                    </span>
+                    <label class="col-sm-6" data-name="father-name"></label>
+                </p >
+                <p class="row">
+                    <span class="col-sm-6">Finkod</span>
+                    <label class="col-sm-6" data-name="pinCode"></label>
+                </p>
+                <p class="row">
+                    <span class="col-sm-6">Vetendasligi</span>
+                    <label class="col-sm-6" data-name="citizen"></label>
+                </p>
+                <p class="row">
+                    <span class="col-sm-6">Cinsi</span>
+                    <label class="col-sm-6" data-name="gender"></label>
+                </p>
+                <p class="row">
+                    <span class="col-sm-6">Aile veziyyeti</span>
+                    <label class="col-sm-6" data-name="family-status"></label>
+                </p>
+                <p class="row">
+                    <span class="col-sm-6">Dogum tarixi</span>
+                    <label class="col-sm-6" data-name="birthday"></label>
+                </p>
+
+                <p class="row">
+                    <span class="col-sm-6">
+                        Herbi mukellefiyyeti
+                    </span>
+                    <label class="col-sm-6" data-name="military"></label>
                 </p>
                 <hr>
                 <div class="about-family">
                     <h6>Valideynler haqqında</h6>
-                    <p>Aile uzvu
-                        <label data-name="family-member"></label>
+                    <p class="row">
+                        <span class="col-sm-6">Aile uzvu</span>
+                        <label class="col-sm-6" data-name="family-member"></label>
                     </p>
-                    <p>
-                        <label data-name=""></label>
+                    <p class="row">
+                        <span class="col-sm-6"></span>
+                        <label class="col-sm-6" data-name=""></label>
                     </p>
                 </div>
 
-                <p>Doguldugu yer
-                    <label data-name="live"></label>
+                <p class="row">
+                   <span class="col-sm-6"> Doguldugu yer </span>
+                    <label class="col-sm-6" data-name="live"></label>
                 </p>
-                <p>
-                    Qeydiyyat unvani <label data-name="address"></label>
+                <p class="row">
+                    <span class="col-sm-6">Qeydiyyat unvani</span>
+                     <label class="col-sm-6" data-name="address"></label>
                 </p>
 
-                <p>Faktiki yasayis unvani
-                    <label data-name="currentAddress"></label>
+                <p class="row">
+                    <span class="col-sm-6">Faktiki yasayis unvani</span>
+                    <label class="col-sm-6" data-name="currentAddress"></label>
                 </p>
-                <p>Senedin novu
-                    <label data-name="typeDocument"></label>
+                <p class="row">
+                    <span class="col-sm-6">Senedin novu</span>
+                    <label class="col-sm-6" data-name="typeDocument"></label>
                 </p>
-                <p>Senedin seriyasi
-                    <label data-name="seriesDocument"></label>
+                <p class="row">
+                    <span class="col-sm-6">Senedin seriyasi</span>
+                    <label class="col-sm-6" data-name="seriesDocument"></label>
                 </p>
-                <p>Senedin nomresi
-                    <label data-name="numberDocument"></label>
+                <p class="row">
+                    <span class="col-sm-6">Senedin nomresi</span>
+                    <label class="col-sm-6" data-name="numberDocument"></label>
                 </p>
-                <p>Verilme tarixi
-                    <label data-name="givenTime"></label>
+                <p class="row">
+                    <span class="col-sm-6">Verilme tarixi</span>
+                    <label class="col-sm-6" data-name="givenTime"></label>
                 </p>
-                <p>
-                    Qohumluq elaqesi
-                    <label data-name="relationStatus"></label>
+                <p class="row">
+                    <span class="col-sm-6">Qohumluq elaqesi </span>
+                    <label class="col-sm-6" data-name="relationStatus"></label>
                 </p>
-                <p>
-                    Adi
-                    <label data-name=""></label>
+                <p class="row">
+                    <span class="col-sm-6">
+                    Adi</span>
+                    <label class="col-sm-6" data-name=""></label>
                 </p>
-                <label></label>
-                <label>Elaqe</label>
-                <label></label>
+                <div class="row">
+                    <span class="col-sm-6"></span>
+                    <label class="col-sm-6"></label>
+                </div>
+                <div class="row">
+                    <span class="col-sm-6"></span>
+                    <label class="col-sm-6"></label>
+                </div>
+                <div class="row">
+                    <span class="col-sm-6"></span>
+                    <label class="col-sm-6"></label>
+                </div>
             </div>
         </div>
     </div>
@@ -818,5 +853,13 @@
             }
         });
     });
+
+
+
+
+
+
+
+
 
 </script>
