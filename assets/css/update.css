@@ -2594,6 +2594,10 @@ ul.nav-tabs{
     color: #fff;
     background: #0072ff;
 }
+.close-survey:hover{
+    cursor: pointer;
+    opacity: .5;
+}
 .table-responsive-sm{
     overflow-x: auto;
 }
@@ -2614,3 +2618,6 @@ ul.nav-tabs{
 .aca_info{
     padding: 0 !important;
 }
+/*.survey-content p label{*/
+    /*margin-left: 50px;*/
+/*}*/

@@ -19,7 +19,7 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
-     // token: 'a7cf674289c74414ae88c37a32e9886b90d71101e30e462987a9642180d3d5b1',
+     // token: '82a48b924250400b8f82de0128bb8ea4c2abb5203a294acbac0148b647349f58',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -1204,7 +1204,7 @@ var Hsis = {
             var data;
             $.ajax({
 //                url: Hsis.urls.HSIS + 'students/getInfoByPinCode?token=' + Hsis.token + '&pinCode=' + pinCode,
-                url: "http://atis.edu.az/IAMASRest1/getInfoByPinCode?pinCode=" + pinCode,
+                url: "http://atis.edu.az/IAMASRest/getInfoByPinCode?pinCode=" + pinCode,
                 type: 'POST',
                 success: function (result) {
                     if (result) {
@@ -5785,13 +5785,42 @@ var Hsis = {
 
 
         parseQuestionnaireView: function(result){
-            console.log(result)
+            console.log(result);
             $('body [data-name="name"]').html(result.firstName);
-            /*
-            $('body label').find("[data-name='surname']").html(result.lastName);
-            $('body label').find("[data-name='surname']").html(result.lastName);
-            $('body label').find("[data-name='surname']").html(result.lastName);
-*/
+            $('body [data-name="surname"]').html(result.lastName);
+            $('body [data-name="father-name"]').html(result.middleName);
+            $('body [data-name="pinCode"]').html(result.pinCode);
+
+            Hsis.Proxy.getPersonInfoByPinCode(result.pinCode, function (iamasdata) {
+                if (iamasdata && iamasdata.image.file !== null) {
+                    $('body [data-name = "image"]').attr('src', "data:image/png;base64," + iamasdata.image.file);
+                    $('body [data-name = "image"]').on('error', function (e) {
+                        $(this).attr('src', 'assets/img/guest.png');
+                    });
+                } else {
+                    $('body [data-name = "image"]').attr('src', 'assets/img/guest.png');
+                }
+
+
+            });
+
+            $('').attr({
+               src: result.image.fullPath
+            });
+
+            $('body [data-name="citizen"]').html(result.citizenship.value[Hsis.lang]);
+            $('body [data-name="status"]').html(result.pinCode);
+            $('body [data-name="gender"]').html(result.gender.value[Hsis.lang]);
+            $('body [data-name="family-status"]').html(result.maritalStatus.value[Hsis.lang]);
+
+            $('body [data-name="birthday"]').html(result.birthDate);
+            $('body [data-name="military"]').html(result.militaryService.value[Hsis.lang]);
+            $('body [data-name="family-member"]').html(result.relations);
+            $('body [data-name="pinCode"]').html(result.pinCode);
+            $('body [data-name="pinCode"]').html(result.pinCode);
+            $('body [data-name="pinCode"]').html(result.pinCode);
+
+
         },
 
 
