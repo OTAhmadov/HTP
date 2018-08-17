@@ -1,4 +1,5 @@
-<div style="display: none; padding-right: 17px;" class="not-printed modal fade" role="dialog" aria-labelledby="gridSystemModalLabel"
+<div style="display: none; padding-right: 17px;" class="not-printed modal fade" role="dialog"
+     aria-labelledby="gridSystemModalLabel"
      id="exportModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -339,132 +340,148 @@
     </div>
 </div>
 
-<div class="not-printed add-new ">
+<div class="not-printed add-new">
     <div class="search-scroll"></div>
+    s
 </div>
+
 
 <div class="survey">
     <div class="row print-preview">
-        <div class="col-sm-8 col-sm-offset-4">
-            <h1 class="">"Hokumetlerarasi Teqaud Programlari" Melumat Sistemi </h1>
-            <h2 class="text-center">Anket</h2>
-
-                <span class="close-survey">Bağla</span>
-                <button class="btn btn-primary " onclick="window.print()"></button>
-
-
-            <div class="col-sm-6 survey-content">
-                <p class="row">
-                    <span class="col-sm-6">Adı</span>
-                    <label class="col-sm-6" data-name="name"></label>
-                </p>
-                <p class="row">
-                    <span class="col-sm-6">Soyadi</span>
-                    <label class="col-sm-3" data-name="surname"></label>
-                    <img class="image col-sm-3" data-name="image">
-                </p>
-
-                <p class="row">
-                    <span class="col-sm-6">
-                    Ata adi
-                    </span>
-                    <label class="col-sm-6" data-name="father-name"></label>
-                </p >
-                <p class="row">
-                    <span class="col-sm-6">Finkod</span>
-                    <label class="col-sm-6" data-name="pinCode"></label>
-                </p>
-                <p class="row">
-                    <span class="col-sm-6">Vetendasligi</span>
-                    <label class="col-sm-6" data-name="citizen"></label>
-                </p>
-                <p class="row">
-                    <span class="col-sm-6">Cinsi</span>
-                    <label class="col-sm-6" data-name="gender"></label>
-                </p>
-                <p class="row">
-                    <span class="col-sm-6">Aile veziyyeti</span>
-                    <label class="col-sm-6" data-name="family-status"></label>
-                </p>
-                <p class="row">
-                    <span class="col-sm-6">Dogum tarixi</span>
-                    <label class="col-sm-6" data-name="birthday"></label>
-                </p>
-
-                <p class="row">
-                    <span class="col-sm-6">
-                        Herbi mukellefiyyeti
-                    </span>
-                    <label class="col-sm-6" data-name="military"></label>
-                </p>
-                <hr>
-                <div class="about-family">
-                    <h6>Valideynler haqqında</h6>
+        <div class="col-sm-12" style="padding-left: 10%; padding-right: 10%;">
+            <!--col-sm-offset-3-->
+            <div>
+                <h1 style="text-align: center" class="">"Hokumetlerarasi Teqaud Programlari" Melumat Sistemi </h1>
+                <h2 style="text-align: center" class="text-center">Anket</h2>
+                <!-- <span class="close-survey not-printed">Bağla</span>
+                 <span class="btn btn-primary print-info" onclick="openWin()">Çap et</span>-->
+                <!--window.print()-->
+                <div style="position: relative;" class="col-sm-offset-3 col-sm-6 survey-content">
                     <p class="row">
-                        <span class="col-sm-6">Aile uzvu</span>
-                        <label class="col-sm-6" data-name="family-member"></label>
+                        <span style="width: 50%; float: left;" class="col-sm-6">Adı</span>
+                        <label style="width: 50%; float: left;" class="col-sm-6" data-name="name"></label>
                     </p>
                     <p class="row">
-                        <span class="col-sm-6"></span>
-                        <label class="col-sm-6" data-name=""></label>
+                        <span style="width: 50%; float: left;" class="col-sm-6">Soyadi</span>
+                        <label style="width: 50%; float: left;" class="col-sm-3" data-name="surname"></label>
+                        <img style="position: absolute; width: 150px; height: 150px; right: 10%; top: 0;"
+                             class="image col-sm-3" data-name="image">
                     </p>
-                </div>
 
-                <p class="row">
-                   <span class="col-sm-6"> Doguldugu yer </span>
-                    <label class="col-sm-6" data-name="live"></label>
-                </p>
-                <p class="row">
-                    <span class="col-sm-6">Qeydiyyat unvani</span>
-                     <label class="col-sm-6" data-name="address"></label>
-                </p>
+                    <p class="row">
+                        <span style="width: 50%; float: left;" class="col-sm-6"> Ata adi</span>
+                        <label style="width: 50%; float: left;" class="col-sm-6" data-name="father-name"></label>
+                    </p>
+                    <p class="row">
+                        <span style="width: 50%; float: left;" class="col-sm-6">Finkod</span>
+                        <label style="width: 50%; float: left;" class="col-sm-6" data-name="pinCode"></label>
+                    </p>
+                    <p class="row">
+                        <span style="width: 50%; float: left;" class="col-sm-6">Vetendasligi</span>
+                        <label style="width: 50%; float: left;" class="col-sm-6" data-name="citizen"></label>
+                    </p>
+                    <p class="row">
+                        <span style="width: 50%; float: left;" class="col-sm-6">Cinsi</span>
+                        <label style="width: 50%; float: left;" class="col-sm-6" data-name="gender"></label>
+                    </p>
+                    <p class="row">
+                        <span style="width: 50%; float: left;" class="col-sm-6">Aile veziyyeti</span>
+                        <label style="width: 50%; float: left;" class="col-sm-6" data-name="family-status"></label>
+                    </p>
+                    <p class="row">
+                        <span style="width: 50%; float: left;" class="col-sm-6">Dogum tarixi</span>
+                        <label style="width: 50%; float: left;" class="col-sm-6" data-name="birthday"></label>
+                    </p>
 
-                <p class="row">
-                    <span class="col-sm-6">Faktiki yasayis unvani</span>
-                    <label class="col-sm-6" data-name="currentAddress"></label>
-                </p>
-                <p class="row">
-                    <span class="col-sm-6">Senedin novu</span>
-                    <label class="col-sm-6" data-name="typeDocument"></label>
-                </p>
-                <p class="row">
-                    <span class="col-sm-6">Senedin seriyasi</span>
-                    <label class="col-sm-6" data-name="seriesDocument"></label>
-                </p>
-                <p class="row">
-                    <span class="col-sm-6">Senedin nomresi</span>
-                    <label class="col-sm-6" data-name="numberDocument"></label>
-                </p>
-                <p class="row">
-                    <span class="col-sm-6">Verilme tarixi</span>
-                    <label class="col-sm-6" data-name="givenTime"></label>
-                </p>
-                <p class="row">
-                    <span class="col-sm-6">Qohumluq elaqesi </span>
-                    <label class="col-sm-6" data-name="relationStatus"></label>
-                </p>
-                <p class="row">
+                    <p class="row">
+                        <span style="width: 50%; float: left;" class="col-sm-6">Herbi mukellefiyyeti</span>
+                        <label style="width: 50%; float: left;" class="col-sm-6" data-name="military"></label>
+                    </p>
+
+                    <div class="about-family">
+                        <h6>Valideynler haqqında</h6>
+                        <p class="row">
+                            <span class="col-sm-6">Aile uzvu</span>
+                            <label class="col-sm-6" data-name="family-member"></label>
+                        </p>
+                        <p class="row">
+                            <span class="col-sm-6"></span>
+                            <label class="col-sm-6" data-name=""></label>
+                        </p>
+                    </div>
+
+                    <p class="row">
+                        <span class="col-sm-6"> Doguldugu yer</span>
+                        <label class="col-sm-6" data-name="birth-place"></label>
+                    </p>
+                    <p class="row">
+                        <span class="col-sm-6">Qeydiyyat unvani</span>
+                        <label class="col-sm-6" data-name="permanent_address"></label>
+                    </p>
+
+                    <p class="row">
+                        <span class="col-sm-6">Faktiki yasayis unvani</span>
+                        <label class="col-sm-6" data-name="currentAddress"></label>
+                    </p>
+                    <p class="row">
+                        <span style="width: 50%; float: left;" class="col-sm-2">Sənədin növu</span>
+                        <label style="width: 50%; float: left;" class="col-sm-2" data-name="typeDocument">dfsf</label>
+                    </p>
+                    <p>
+                        <span style="width: 50%; float: left;" class="col-sm-2">Sənədin seriyasi</span>
+                        <label style="width: 50%; float: left;" class="col-sm-2" data-name="seriesDocument">sfsfs</label>
+                    </p>
+                    <p>
+                        <span style="width: 50%; float: left;" class="col-sm-2">Sənədin nömresi</span>
+                        <label style="width: 50%; float: left;" class="col-sm-2" data-name="numberDocument">dasda</label>
+                    </p>
+                    <p>
+                        <span style="width: 50%; float: left;" class="col-sm-2">Verilmə tarixi</span>
+                        <label style="width: 50%; float: left;" class="col-sm-2" data-name="issueData">asdasd</label>
+                    </p>
+                    <p>
+                        <span style="width: 50%; float: left;" class="col-sm-2">Bitmə tarixi</span>
+                        <label style="width: 50%; float: left;" class="col-sm-2" data-name="endData">adadada</label>
+                    </p>
+
+                    <label style="clear: both"></label>
+                    </p>
+                    <p class="row">
+
+                    </p>
+                    <p class="row">
+
+                    </p>
+                    <p class="row">
+
+                    </p>
+                    <p class="row">
+                        <span class="col-sm-6">Qohumluq elaqesi </span>
+                        <label class="col-sm-6" data-name="relationStatus"></label>
+                    </p>
+                    <p class="row">
                     <span class="col-sm-6">
                     Adi</span>
-                    <label class="col-sm-6" data-name=""></label>
-                </p>
-                <div class="row">
-                    <span class="col-sm-6"></span>
-                    <label class="col-sm-6"></label>
-                </div>
-                <div class="row">
-                    <span class="col-sm-6"></span>
-                    <label class="col-sm-6"></label>
-                </div>
-                <div class="row">
-                    <span class="col-sm-6"></span>
-                    <label class="col-sm-6"></label>
+                        <label class="col-sm-6" data-name=""></label>
+                    </p>
+                    <div class="row">
+                        <span class="col-sm-6"></span>
+                        <label class="col-sm-6"></label>
+                    </div>
+                    <div class="row">
+                        <span class="col-sm-6"></span>
+                        <label class="col-sm-6"></label>
+                    </div>
+                    <div class="row">
+                        <span class="col-sm-6"></span>
+                        <label class="col-sm-6"></label>
+                    </div>
+                    <div style="clear: both"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 
 <script src="assets/js/modal_drag.js"></script>
@@ -482,14 +499,14 @@
         }
 
         Hsis.Proxy.loadAbroadStudents();
-/*// -------------------------
-        Hsis.Proxy.getAbroadStudentDetails(1047827, function (data) {
-            // $('body').find('.print-preview').html(
-            Hsis.Service.parseQuestionnaireView(data)
-            // );
-            $('.survey').removeClass('open');
-        });
-// ----------------------------*/
+        /*// -------------------------
+                Hsis.Proxy.getAbroadStudentDetails(1047827, function (data) {
+                    // $('body').find('.print-preview').html(
+                    Hsis.Service.parseQuestionnaireView(data)
+                    // );
+                    $('.survey').removeClass('open');
+                });
+        // ----------------------------*/
         $('#edu_levels').select2({
             placeholder: Hsis.dictionary[Hsis.lang]["edu_level"],
             language: {
@@ -853,13 +870,6 @@
             }
         });
     });
-
-
-
-
-
-
-
 
 
 </script>

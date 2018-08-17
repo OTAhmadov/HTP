@@ -10573,18 +10573,36 @@ $(function () {
     });
 
     //print
+
+
+
    $('body').on('click', '#operation_1001434', function () {
        var id = $('#buttons_div').attr('data-id');
-       Hsis.Proxy.getAbroadStudentDetails(id, function (data) {
+       Hsis.Proxy.getAbroadStudentDetails(id, function (data){
            Hsis.Service.parseQuestionnaireView(data);
-           $('.survey').addClass('open');
+           var html = $('.survey').html();
+           openWin(html);
+           // $('.survey').addClass('open');
 
+           // window.open('partial/module_1000114/div.survey', '_blank');
        });
    });
 
-   $('body').on('click', '.close-survey', function(){
-       $('.survey').removeClass('open');
-   });
+    function openWin(html){
+        var myWindow = window.open();
+        $(myWindow.document.body).html(html);
+        // myWindow.document.write(html);
+        // myWindow.document.close();
+        // myWindow.focus();
+        // myWindow.print();
+        // myWindow.close();
+    }
+
+
+   // $('body').on('click', '.close-survey', function(){
+   //     $('.survey').removeClass('open');
+   // });
+
 
 
 
