@@ -45,11 +45,11 @@
                                     <option value="0">Ixtisaslar</option>
                                 </select>
                             </div>
-                            <div class="btn-group" style="width: 120px">
+<!--                            <div class="btn-group" style="width: 120px">
                                 <select class="form-control " id="aca_group" >
                                     <option value="0">Qruplar</option>
                                 </select>
-                            </div>
+                            </div>-->
                             <div class="btn-group " style="width: 120px">
                                 <input type="text" class="form-control new-search" id="search_without_order" >
                                 <img style='position: absolute; top:9px; left:9px'  src="/AdministrationSystem/assets/img/upd/grey-search.svg" alt="">
@@ -167,7 +167,7 @@
 
         $('body').find('.search-scroll').slimScroll();
 
-        Hsis.Proxy.loadDictionariesByTypeId('1000002', 1000700, function (eduLevel) {
+        Hsis.Proxy.loadDictionariesByTypeId('1000016', 1000398, function (eduLevel) {
             if (eduLevel) {
                 var html = '<option value="0">İxtisas səviyyəsi</option>';
                 $.each(eduLevel, function (i, v) {
@@ -178,16 +178,27 @@
             }
         });
         
-        Hsis.Proxy.getAcademicGroupForSelect('', function(data) {
-            if (data) {
-                var html = '';
-                $.each(data, function (i, v) {
-                    html += '<option value="' + v.id + '">' + v.name[Hsis.lang] + '';
+        Hsis.Proxy.loadDictionariesByTypeId('1000092', 0, function (eduLevel) {
+            if (eduLevel) {
+                var html = '<option value="0">İxtisas səviyyəsi</option>';
+                $.each(eduLevel, function (i, v) {
+                    html += '<option value="' + v.id + '">' + v.value[Hsis.lang] + '';
                 });
-                $('#main-div #aca_group').append(html);
+                $('#main-div #org_spec_level_filter-2, #main-div #org_spec_level_filter-2-with').html(html);
 
             }
-        })
+        });
+        
+//        Hsis.Proxy.getAcademicGroupForSelect('', function(data) {
+//            if (data) {
+//                var html = '';
+//                $.each(data, function (i, v) {
+//                    html += '<option value="' + v.id + '">' + v.name[Hsis.lang] + '';
+//                });
+//                $('#main-div #aca_group').append(html);
+//
+//            }
+//        })
 
         $('body').on('change', '#org_spec_level_filter', function () {
             var id = $(this).val();
@@ -198,20 +209,20 @@
             var keyword = $('#search_without_order').val();
             var groupId = $('#aca_group').val();
             
-            Hsis.Proxy.getStructureListByFilter(orgId, id, function (specLevel) {
-                if (specLevel) {
-                    var html = '<option value="0">İxtisaslar</option>';
-                    $.each(specLevel.specialityList, function (i, v) {
-                        if(v.name[Hsis.lang].length > 40){
-                            html += '<option value="' + v.id + '">' + v.name[Hsis.lang].substring(0, 40)+'...' + '</option>';
-                        }else {
-                            html += '<option value="' + v.id + '">' + v.name[Hsis.lang] + '</option>';
-                        }
-                        
-                    });
-                    $('#main-div #org_spec_level_filter-2').html(html);
-
-                }
+//            Hsis.Proxy.getStructureListByFilter(orgId, id, function (specLevel) {
+//                if (specLevel) {
+//                    var html = '<option value="0">İxtisaslar</option>';
+//                    $.each(specLevel.specialityList, function (i, v) {
+//                        if(v.name[Hsis.lang].length > 40){
+//                            html += '<option value="' + v.id + '">' + v.name[Hsis.lang].substring(0, 40)+'...' + '</option>';
+//                        }else {
+//                            html += '<option value="' + v.id + '">' + v.name[Hsis.lang] + '</option>';
+//                        }
+//                        
+//                    });
+//                    $('#main-div #org_spec_level_filter-2').html(html);
+//
+//                }
                  var specId = $('body').find('#org_spec_level_filter-2').val();
                 $('.btn-load-more').removeAttr('data-page');
                 var form = {
@@ -228,7 +239,7 @@
                     Hsis.Service.parseStudentsWithoutOrder(students);
                     $('body #checkAll').prop('checked', false);
                 });
-            });
+//            });
 
         });
 
@@ -261,35 +272,6 @@
             });
         });
 
-        $('body').on('change', '#aca_group', function () {
-            var id = $('body').find('#org_spec_level_filter').val();
-            var orgId = $('body').find('#student_list_without').attr('org-id');
-            var parentId = $('body').find('#student_list_without').attr('type-parent-id');
-            var orderTypeId = $('body').find('#student_list_without').attr('type-id');
-            var orderId = $('body').find('#student_list_without').attr('order-id');
-            var specId = $('#org_spec_level_filter-2').val();
-            var groupId = $(this).val();
-            var keyword = $('#search_without_order').val();
-            
-            var form = {
-                orderTypeId: orderTypeId,
-                orderTypeParentId: parentId,
-                orgId: orgId,
-                orderId: orderId,
-                specId: specId,
-                specTypeId: id,
-                keyword: keyword,
-                groupId: groupId
-            };
-            
-            Hsis.Proxy.getStudentsWithoutOrder(form, function (students) {
-                Hsis.Service.parseStudentsWithoutOrder(students);
-                $('body #checkAll').prop('checked', false);
-                $('.btn-load-more').removeAttr('data-page');
-
-            });
-        });
-
         $('body').on('change', '#org_spec_level_filter-with', function () {
             var id = $(this).val();
             var orgId = $('body').find('#student_list-with').attr('org-id');
@@ -297,16 +279,17 @@
             var orderTypeId = $('body').find('#student_list-with').attr('type-id');
             var orderId = $('body').find('#student_list-with').attr('order-id');
             
-            Hsis.Proxy.getStructureListByFilter(orgId, id, function (specLevel) {
-                if (specLevel) {
-                    var html = '<option value="0">İxtisaslar</option>';
-                    $.each(specLevel.specialityList, function (i, v) {
-                        html += '<option value="' + v.id + '">' + v.name[Hsis.lang] + '';
-                    });
-                    $('#main-div #org_spec_level_filter-2-with').html(html);
-
-                }
-                var specId = $('body').find('#org_spec_level_filter-2-with').val();
+//            Hsis.Proxy.getStructureListByFilter(orgId, id, function (specLevel) {
+//                if (specLevel) {
+//                    var html = '<option value="0">İxtisaslar</option>';
+//                    $.each(specLevel.specialityList, function (i, v) {
+//                        html += '<option value="' + v.id + '">' + v.name[Hsis.lang] + '';
+//                    });
+//                    $('#main-div #org_spec_level_filter-2-with').html(html);
+//
+//                }
+//                var specId = $('body').find('#org_spec_level_filter-2-with').val();
+                var specId = $('#main-div #org_spec_level_filter-2-with').val();
                 var form = {
                     orderTypeId: orderTypeId,
                     orderTypeParentId: parentId,
@@ -321,7 +304,7 @@
 
                 });
 
-            });
+//            });
 
         });
 

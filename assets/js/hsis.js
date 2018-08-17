@@ -19,7 +19,7 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
-     token: '87c800b8baf14bc59cdda7561bea485e5be45280ebc84a1487c47b532ca3a477',
+     token: 'ca5ea5e11f1f4399a833ca7260fac5a1f726ac3a81064a3b8e187f0cb7a73bf6',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -3443,7 +3443,7 @@ var Hsis = {
         addOrderDocument: function (formData, callback) {
 
             $.ajax({
-                url: Hsis.urls.HSIS + 'order/add?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'order/add?token=' + Hsis.token,
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -3489,11 +3489,11 @@ var Hsis = {
         },
         getOrderList: function (page, form, callback) {
             $.ajax({
-                url: Hsis.urls.HSIS + 'order?token=' + Hsis.token + (page ? '&page=' + page : ''),
+                url: Hsis.urls.HTP + 'order?token=' + Hsis.token + (page ? '&page=' + page : ''),
                 type: 'GET',
                 data: form,
                 beforeSend: function (xhr) {
-                    $('.module-block[data-id="1000093"]').attr('data-check', 1);
+                    $('.module-block[data-id="1000142"]').attr('data-check', 1);
                 },
                 success: function (result) {
                     if (result) {
@@ -3518,13 +3518,13 @@ var Hsis = {
                     }
                 },
                 complete: function (jqXHR, textStatus) {
-                    $('.module-block[data-id="1000093"]').removeAttr('data-check');
+                    $('.module-block[data-id="1000142"]').removeAttr('data-check');
                 }
             })
         },
         getOrderDetails: function (id, callback) {
             $.ajax({
-                url: Hsis.urls.HSIS + 'order/' + id + '?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'order/' + id + '?token=' + Hsis.token,
                 type: 'GET',
                 success: function (result) {
                     if (result) {
@@ -3590,7 +3590,7 @@ var Hsis = {
         removeOrderFiles: function (fileId, filePath, callback) {
 
             $.ajax({
-                url: Hsis.urls.HSIS + 'order/file/' + fileId + '/remove?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'order/file/' + fileId + '/remove?token=' + Hsis.token,
                 type: 'POST',
                 data: {
                     filePath: filePath
@@ -3628,7 +3628,7 @@ var Hsis = {
         editOrderDocument: function (form, callback) {
 
             $.ajax({
-                url: Hsis.urls.HSIS + 'order/' + form.id + '/edit?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'order/' + form.id + '/edit?token=' + Hsis.token,
                 type: 'POST',
                 data: form,
                 success: function (result) {
@@ -3664,7 +3664,7 @@ var Hsis = {
         removeOrderDocument: function (id, callback) {
 
             $.ajax({
-                url: Hsis.urls.HSIS + 'order/' + id + '/remove?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'order/' + id + '/remove?token=' + Hsis.token,
                 type: 'POST',
                 success: function (result) {
                     if (result) {
@@ -4066,7 +4066,7 @@ var Hsis = {
         },
         getStudentsWithoutOrder: function (form, callback, page) {
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/withoutOrder?token=' + Hsis.token + (page ? '&page=' + page : ''),
+                url: Hsis.urls.HTP + 'students/withoutOrder?token=' + Hsis.token + (page ? '&page=' + page : ''),
                 type: 'GET',
                 data: form,
                 success: function (result) {
@@ -4092,7 +4092,7 @@ var Hsis = {
         },
         getStudentsWithOrder: function (form, callback, page) {
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/withOrder?token=' + Hsis.token + (page ? '&page=' + page : ''),
+                url: Hsis.urls.HTP + 'students/withOrder?token=' + Hsis.token + (page ? '&page=' + page : ''),
                 type: 'GET',
                 data: form,
                 success: function (result) {
@@ -4119,7 +4119,7 @@ var Hsis = {
         },
         addOrderToStudents: function (form, callback) {
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/order/add?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'students/order/add?token=' + Hsis.token,
                 type: 'POST',
                 dataType: 'json',
                 data: form,
@@ -4255,7 +4255,7 @@ var Hsis = {
         removeStudentFromOrder: function (pelcId, orderId, callback) {
             var data;
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/' + pelcId + '/order/' + orderId + '/remove?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'students/' + pelcId + '/order/' + orderId + '/remove?token=' + Hsis.token,
                 type: 'POST',
                 success: function (result) {
                     if (result) {
@@ -4285,7 +4285,7 @@ var Hsis = {
         submitmOrder: function (orderId, callback) {
             var data;
             $.ajax({
-                url: Hsis.urls.HSIS + 'order/' + orderId + '/confirm?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'order/' + orderId + '/confirm?token=' + Hsis.token,
                 type: 'POST',
                 success: function (result) {
                     if (result) {
@@ -6142,9 +6142,8 @@ var Hsis = {
                     count = 0;
                 }
                 $.each(data, function (i, v) {
-                    html += '<tr data-id="' + v.id + '" data-org-id="' + v.org.id + '" data-type-parent-id="' + v.type.parentId + '" data-type-id="' + v.type.id + '" data-status-id="' + v.status.id + '">' +
+                    html += '<tr data-id="' + v.id + '" data-type-id="' + v.type.id + '" data-status-id="' + v.status.id + '">' +
                         '<td>' + (++count) + '</td>' +
-                        '<td>' + v.org.value[Hsis.lang] + '</td>' +
                         '<td style="white-space:pre-line;">' + v.type.value[Hsis.lang] + '</td>' +
                         '<td>' + v.serial + '</td>' +
                         '<td>' + v.number + '</td>' +

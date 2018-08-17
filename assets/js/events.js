@@ -8010,8 +8010,7 @@ $(function () {
     });
 
 
-    $('#main-div').on('click', '#operation_1000170', function () {
-        $('#main-div .structure-id').val('');
+    $('#main-div').on('click', '#operation_1001416', function () {
         $('#main-div #add-order-serial').val('');
         $('#main-div #add-order-number').val('');
         $('#main-div #order-start-date').val('');
@@ -8029,7 +8028,6 @@ $(function () {
         try {
 
             var formData = new FormData();
-            var orgId = $('#main-div .structure-id').val();
             var seriya = $('#main-div #add-order-serial').val();
             var number = $('#main-div #add-order-number').val();
             var startDate = $('#main-div #order-start-date').val();
@@ -8037,52 +8035,52 @@ $(function () {
             var type = $('#main-div .order-type').find('option:selected').val();
             var document = {
                 type: type,
-                orgId: orgId,
+                orgId: 1000001,
                 serial: seriya,
                 number: number,
                 startDate: startDate,
                 endDate: ''
 
             }
+            if (Hsis.Validation.validateRequiredFields('order-required')) {
+                formData.append('document', new Blob([JSON.stringify(document)], {
+                    type: "application/json"
+                }))
 
-            formData.append('document', new Blob([JSON.stringify(document)], {
-                type: "application/json"
-            }))
+                if ($('#main-div .new-order-doc-file')[0].files) {
+                    var wrongFiles = '';
+                    var length = $('#main-div .new-order-doc-file')[0].files.length;
+                    if (length <= 5) {
+                        for (var i = 0; i < length; i++) {
+                            var files = $('#main-div .new-order-doc-file')[0].files;
+                            if (Hsis.Validation.checkFile(files[i].type, fileTypes.FILE_CONTENT_TYPE)) {
+                                if (files[i].size > 5 * 1024 * 1024) {
 
-            if ($('#main-div .new-order-doc-file')[0].files) {
-                var wrongFiles = '';
-                var length = $('#main-div .new-order-doc-file')[0].files.length;
-                if (length <= 5) {
-                    for (var i = 0; i < length; i++) {
-                        var files = $('#main-div .new-order-doc-file')[0].files;
-                        if (Hsis.Validation.checkFile(files[i].type, fileTypes.FILE_CONTENT_TYPE)) {
-                            if (files[i].size > 5 * 1024 * 1024) {
-
-                                $.notify(files[i].name + Hsis.dictionary[Hsis.lang]['exceed_volume'], {
-                                    type: 'warning'
-                                });
+                                    $.notify(files[i].name + Hsis.dictionary[Hsis.lang]['exceed_volume'], {
+                                        type: 'warning'
+                                    });
+                                } else {
+                                    formData.append('doc_order', $('#main-div .new-order-doc-file')[0].files[i]);
+                                }
                             } else {
-                                formData.append('doc_order', $('#main-div .new-order-doc-file')[0].files[i]);
+                                wrongFiles += wrongFiles != '' ? ', ' + files[i].name : files[i].name;
+
                             }
-                        } else {
-                            wrongFiles += wrongFiles != '' ? ', ' + files[i].name : files[i].name;
+                        }
+                        if (wrongFiles != '') {
+                            $.notify(Hsis.dictionary[Hsis.lang]['wrong_format'] + wrongFiles, {
+                                type: 'warning'
+                            });
 
                         }
-                    }
-                    if (wrongFiles != '') {
-                        $.notify(Hsis.dictionary[Hsis.lang]['wrong_format'] + wrongFiles, {
+                    } else {
+                        $.notify(Hsis.dictionary[Hsis.lang]['file_limit'], {
                             type: 'warning'
                         });
-
                     }
-                } else {
-                    $.notify(Hsis.dictionary[Hsis.lang]['file_limit'], {
-                        type: 'warning'
-                    });
+
                 }
 
-            }
-            if (Hsis.Validation.validateRequiredFields('order-required')) {
                 Hsis.Proxy.addOrderDocument(formData, function (data) {
                     var params = $('.main-content-upd .order-search-form').serialize();
                     if (data) {
@@ -8108,7 +8106,7 @@ $(function () {
 
     });
 
-    $('#main-div').on('click', '#operation_1000171', function () {
+    $('#main-div').on('click', '#operation_1001420', function () {
         var id = $(this).parents('.info').attr('data-id');
 
         Hsis.Proxy.getOrderDetails(id, function (data) {
@@ -8119,9 +8117,6 @@ $(function () {
                 $('#main-div #edit-order-serial').val(data.serial);
                 $('#main-div #edit-order-number').val(data.number);
                 $('#main-div #edit-order-start-date').val(data.startDate);
-//                $('#main-div #edit-order-end-date').val(data.data.endDate);
-                $('#main-div #university-list-h6').text(data.org.value[Hsis.lang]);
-                $('#main-div .edit-structure-id').val(data.org.id);
                 var html = '';
                 if (data.orderFile.path != null) {
 
@@ -8138,8 +8133,8 @@ $(function () {
                             '</div>' +
                             '<div class="user-doc-file" data-file-id = "' + id + '" data-file-path = "' + v.path + '">' +
                             '<div class="doc-order-delete">✖</div>' +
-                            '<img src="' + Hsis.urls.HSIS + 'order/file/' + id + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
-                            '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'order/file/' + id + '?token=' + Hsis.token + '" download = "' + v.originalName + '"><img src="assets/img/upload-img.png" width="20" height="20"></a></div>' +
+                            '<img src="' + Hsis.urls.HTP + 'order/file/' + id + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
+                            '<div class="upload-img"><a href="' + Hsis.urls.HTP + 'order/file/' + id + '?token=' + Hsis.token + '" download = "' + v.originalName + '"><img src="assets/img/upload-img.png" width="20" height="20"></a></div>' +
                             '</div>' +
                             '</div>';
                 } else {
@@ -8268,8 +8263,6 @@ $(function () {
         try {
             var id = $(this).attr('data-id');
             var tr = $(this);
-            var orgId = tr.attr('data-org-id');
-            var parentId = tr.attr('data-type-parent-id');
             var orderTypeId = tr.attr('data-type-id');
             var orderId = tr.attr('data-id');
             Hsis.Proxy.getOrderDetails(id, function (data) {
@@ -8278,7 +8271,6 @@ $(function () {
                     $('#main-div .label-order-number').text(data.number);
                     $('#main-div .label-order-date').text(data.startDate);
                     $('#main-div .label-order-type').text(data.type.value[Hsis.lang]);
-                    $('#main-div .label-atm-name').text(data.org.value[Hsis.lang]);
                     var html = '';
                     if (data.orderFile.path != null) {
                         var v = data.orderFile;
@@ -8291,14 +8283,12 @@ $(function () {
                                 '</div>' +
                                 '</div>' +
                                 '<div class="user-doc-file" data-file-id = "' + id + '" data-file-path = "' + v.path + '">' +
-                                '<img src="' + Hsis.urls.HSIS + 'order/file/' + id + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
-                                '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'order/file/' + id + '?fileType=1&token=' + Hsis.token + '" download = "' + v.originalName + '"><img src="assets/img/upload-img.png" width="20" height="20"></a></div>' +
+                                '<img src="' + Hsis.urls.HTP + 'order/file/' + id + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
+                                '<div class="upload-img"><a href="' + Hsis.urls.HTP + 'order/file/' + id + '?fileType=1&token=' + Hsis.token + '" download = "' + v.originalName + '"><img src="assets/img/upload-img.png" width="20" height="20"></a></div>' +
                                 '</div>' +
                                 '</div>';
                     }
                     $('body').find('.info').attr('data-id', id);
-                    $('body').find('.info').attr('data-tr-orgId', orgId);
-                    $('body').find('.info').attr('data-tr-parentId', parentId);
                     $('body').find('.info').attr('data-tr-orderTypeId', orderTypeId);
                     $('body').find('.info').attr('data-tr-orderId', orderId);
                     $('#main-div .view-file-list-div').html(html);
@@ -8325,7 +8315,7 @@ $(function () {
         }
     });
 
-    $('#main-div').on('click', '#operation_1000172', function () {
+    $('#main-div').on('click', '#operation_1001424', function () {
         var obj = $(this);
         var id = obj.parents('.info').attr('data-id');
 
@@ -8339,7 +8329,6 @@ $(function () {
                         $('#main-div .label-order-number').text("");
                         $('#main-div .label-order-date').text("");
                         $('#main-div .label-order-type').text("");
-                        $('#main-div .label-atm-name').text("");
                         $('#main-div .view-file-list-div').html("");
                         Hsis.Proxy.getOrderList();
 

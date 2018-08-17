@@ -80,13 +80,24 @@
         
         $('body').find('.search-scroll').slimScroll();
 
-        Hsis.Proxy.loadDictionariesByTypeId('1000002', 1000700, function (eduLevel) {
+        Hsis.Proxy.loadDictionariesByTypeId('1000016', 1000398, function (eduLevel) {
             if(eduLevel) {
              var html = '<option value="0">Filter ixtisas səviyyəsi</option>'; 
                 $.each(eduLevel, function (i, v) {
                      html += '<option value="'+ v.id +'">' + v.value[Hsis.lang] + '';
                 });
-                $('#main-div #org_spec_level_filter, #main-div #org_spec_level_filter-with').html(html);
+                $('#main-div #org_spec_level_filter, #main-div #org_spec_level_filter-2-with').html(html);
+
+            }
+        });
+        
+        Hsis.Proxy.loadDictionariesByTypeId('1000092', 0, function (eduLevel) {
+            if (eduLevel) {
+                var html = '<option value="0">İxtisas səviyyəsi</option>';
+                $.each(eduLevel, function (i, v) {
+                    html += '<option value="' + v.id + '">' + v.value[Hsis.lang] + '';
+                });
+                $('#main-div #org_spec_level_filter-with, #main-div #org_spec_level_filter-with-2-').html(html);
 
             }
         });
@@ -99,20 +110,20 @@
             var orderTypeId = $('body').find('#student_list-with').attr('type-id');
             var orderId = $('body').find('#student_list-with').attr('order-id');
             var keyword = $('#search_with_order').val();
-            Hsis.Proxy.getStructureListByFilter(orgId, id, function (specLevel) {
-                if(specLevel) {
-                     var html = '<option value="0">İxtisaslar</option>'; 
-                        $.each(specLevel.specialityList, function (i, v) {
-                            if(v.name[Hsis.lang].length > 40){
-                                html += '<option value="'+ v.id +'" title="'+ v.name[Hsis.lang] +'">' + v.name[Hsis.lang].substring(0, 40) + '...';
-                            }else {
-                                html += '<option value="' + v.id + '" title="' + v.name[Hsis.lang] + '">' + v.name[Hsis.lang] + '';
-                            }
-
-                        });
-                        $('#main-div #org_spec_level_filter-2-with').html(html);
-
-                }
+//            Hsis.Proxy.getStructureListByFilter(orgId, id, function (specLevel) {
+//                if(specLevel) {
+//                     var html = '<option value="0">İxtisaslar</option>'; 
+//                        $.each(specLevel.specialityList, function (i, v) {
+//                            if(v.name[Hsis.lang].length > 40){
+//                                html += '<option value="'+ v.id +'" title="'+ v.name[Hsis.lang] +'">' + v.name[Hsis.lang].substring(0, 40) + '...';
+//                            }else {
+//                                html += '<option value="' + v.id + '" title="' + v.name[Hsis.lang] + '">' + v.name[Hsis.lang] + '';
+//                            }
+//
+//                        });
+//                        $('#main-div #org_spec_level_filter-2-with').html(html);
+//
+//                }
                 var specId = $('body').find('#org_spec_level_filter-2-with').val();
                 var form = {
                     orderTypeId:orderTypeId,
@@ -130,7 +141,7 @@
                 });
 
 
-            });
+//            });
          });
 
 
