@@ -19,7 +19,7 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
-     // token: '75611cfa80564628b0c25e0dd6799497083f33574be1464c8c585193264f7941',
+     token: '87c800b8baf14bc59cdda7561bea485e5be45280ebc84a1487c47b532ca3a477',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -49,8 +49,8 @@ var Hsis = {
 //         AdminRest: 'http://localhost:8080/AdministrationRest/',
         AdminRest: 'http://192.168.1.78:8082/AdministrationRest/',
        HSIS: "http://192.168.1.78:8082/UnibookHsisRest/",
-       HTP: "http://192.168.1.78:8082/HTPRest/",
-//       HTP: "http://localhost:8080/HTPRest/",
+//       HTP: "http://192.168.1.78:8082/HTPRest/",
+       HTP: "http://localhost:8080/HTPRest/",
 //         HSIS: "http://localhost:8080/UnibookHsisRest/",
         REPORT: 'http://192.168.1.78:8082/ReportingRest/',
         EMS: 'http://192.168.1.78:8082/UnibookEMS/',
@@ -379,7 +379,7 @@ var Hsis = {
         // new ajax request
         getAbroadStructure: function (page, form, callback) {
             $.ajax({
-                url: Hsis.urls.HSIS + 'structures/abroad?token=' + Hsis.token + '&page=' + (page ? page : 1),
+                url: Hsis.urls.HTP + 'structures/abroad?token=' + Hsis.token + '&page=' + (page ? page : 1),
                 type: 'GET',
                 data: form,
                 success: function (result) {
@@ -558,7 +558,7 @@ var Hsis = {
         // get request for abroadaddress
         getAbroadAddress: function (page, form, callback) {
             $.ajax({
-                url: Hsis.urls.HSIS + 'structures/abroad/address?token=' + Hsis.token + '&page=' + (page ? page : 1),
+                url: Hsis.urls.HTP + 'structures/abroad/address?token=' + Hsis.token + '&page=' + (page ? page : 1),
                 type: 'GET',
                 data: form,
                 success: function (result) {
@@ -589,7 +589,7 @@ var Hsis = {
         //AJAX Request
         addAbroadStructure: function (form, callback) {
             $.ajax({
-                url: Hsis.urls.HSIS + 'structures/abroad/add?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'structures/abroad/add?token=' + Hsis.token,
                 type: 'POST',
                 data: form,
                 beforeSend: function() {
@@ -629,7 +629,7 @@ var Hsis = {
         //add
         addAbroadAddress: function (form, callback) {
             $.ajax({
-                url: Hsis.urls.HSIS + 'structures/abroad/address/add?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'structures/abroad/address/add?token=' + Hsis.token,
                 type: 'POST',
                 data: form,
                 beforeSend: function() {
@@ -669,7 +669,7 @@ var Hsis = {
         //remove ADDRESS
         removeAbroadAddress: function (id, callback) {
             $.ajax({
-                url: Hsis.urls.HSIS + 'structures/abroad/address/' + id + '/remove?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'structures/abroad/address/' + id + '/remove?token=' + Hsis.token,
                 type: 'POST',
                 success: function (data) {
                     if (data) {
@@ -702,7 +702,7 @@ var Hsis = {
         //remove abroad structure
         removeAbroadStructure: function (id, callback) {
             $.ajax({
-                url: Hsis.urls.HSIS + 'structures/abroad/' + id + '/remove?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'structures/abroad/' + id + '/remove?token=' + Hsis.token,
                 type: 'POST',
                 success: function (data) {
                     if (data) {
@@ -735,7 +735,7 @@ var Hsis = {
         //edit2 ADDRESS
         editAbroadAddress: function (id, formData, callback) {
             $.ajax({
-                url: Hsis.urls.HSIS + 'structures/abroad/address/' + id + '/edit?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'structures/abroad/address/' + id + '/edit?token=' + Hsis.token,
                 type: 'POST',
                 data: formData,
                 success: function (data) {
@@ -769,7 +769,7 @@ var Hsis = {
         //edit Structure
         editAbroadStructure: function (id, formData, callback) {
             $.ajax({
-                url: Hsis.urls.HSIS + 'structures/abroad/' + id + '/edit?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'structures/abroad/' + id + '/edit?token=' + Hsis.token,
                 type: 'POST',
                 data: formData,
                 success: function (data) {
@@ -849,145 +849,6 @@ var Hsis = {
                     }
                 }
             })
-        },
-        addOrgTree: function (orgTree, callback) {
-
-            $.ajax({
-                url: Hsis.urls.HSIS + 'structures/add?token=' + Hsis.token,
-                type: 'POST',
-                data: orgTree,
-                contentType: false,
-                processData: false,
-                beforeSend: function () {
-                    $('#main-div #confirmOrgTree').attr('disabled', 'disabled');
-                },
-                success: function (data) {
-                    if (data) {
-                        switch (data.code) {
-                            case Hsis.statusCodes.ERROR:
-                                if (data.message) {
-                                    $.notify(data.message[Hsis.lang], {
-                                        type: 'danger'
-                                    });
-                                } else {
-                                    $.notify(Hsis.dictionary[Hsis.lang]['error'], {
-                                        type: 'danger'
-                                    });
-                                }
-                                break;
-
-                            case Hsis.statusCodes.OK:
-
-                                $.notify(Hsis.dictionary[Hsis.lang]['success'], {
-                                    type: 'success'
-                                });
-                                break;
-
-                            case Hsis.statusCodes.UNAUTHORIZED:
-                                window.location = Hsis.urls.ROS + 'login?app=' + Hsis.token;
-                                break;
-                        }
-                    }
-                },
-                complete: function (data) {
-                    $('#main-div #confirmOrgTree').removeAttr('disabled');
-
-                    if (callback) {
-                        callback(data.responseJSON);
-
-                    }
-
-                }
-            })
-        },
-        removeOrgTree: function (id, callback) {
-            $.ajax({
-                url: Hsis.urls.HSIS + 'structures/' + id + '/remove?token=' + Hsis.token,
-                type: 'POST',
-                success: function (data) {
-                    if (data) {
-                        switch (data.code) {
-                            case Hsis.statusCodes.ERROR:
-                                if (data.message) {
-                                    $.notify(data.message[Hsis.lang], {
-                                        type: 'danger'
-                                    });
-                                } else {
-                                    $.notify(Hsis.dictionary[Hsis.lang]['error'], {
-                                        type: 'danger'
-                                    });
-                                }
-                                break;
-
-                            case Hsis.statusCodes.OK:
-
-                                $.notify(Hsis.dictionary[Hsis.lang]['success'], {
-                                    type: 'success'
-                                });
-                                callback(data);
-                                break;
-
-                            case Hsis.statusCodes.UNAUTHORIZED:
-                                window.location = Hsis.urls.ROS + 'login?app=' + Hsis.token;
-                                break;
-
-                        }
-                    }
-                }
-            })
-        },
-        editOrgTree: function (orgTree, id) {
-            $.ajax({
-                url: Hsis.urls.HSIS + 'structures/' + id + '/edit?token=' + Hsis.token,
-                type: 'POST',
-                data: orgTree,
-                contentType: false,
-                processData: false,
-                beforeSend: function () {
-                    $('#main-div #confirmOrgTree').attr('disabled', 'disabled')
-                },
-                success: function (data) {
-                    if (data) {
-                        switch (data.code) {
-                            case Hsis.statusCodes.ERROR:
-                                if (data.message) {
-                                    $.notify(data.message[Hsis.lang], {
-                                        type: 'danger'
-                                    });
-                                } else {
-                                    $.notify(Hsis.dictionary[Hsis.lang]['error'], {
-                                        type: 'danger'
-                                    });
-                                }
-                                break;
-
-                            case Hsis.statusCodes.OK:
-                                $('ul.module-list').find('.module-block[data-id="' + Hsis.currModule + '"] a').click();
-
-                                $.notify(Hsis.dictionary[Hsis.lang]['success'], {
-                                    type: 'success'
-                                });
-                                // var tree = $('#jstree');
-                                // Hsis.Proxy.loadOrgTree(function (tree) {
-                                //     Hsis.Service.parseOrgTree(tree);
-
-                                // }, tree);
-
-                                break;
-
-                            case Hsis.statusCodes.UNAUTHORIZED:
-                                window.location = Hsis.urls.ROS + 'login?app=' + Hsis.token;
-                                break;
-
-                        }
-
-                    }
-                },
-                complete: function () {
-                    $('#main-div #confirmOrgTree').removeAttr('disabled');
-                }
-
-            });
         },
         loadOperations: function (moduleId, callback) {
             var operations = {};
@@ -2334,7 +2195,7 @@ var Hsis = {
 
         loadStructure: function (page, queryParams, callback, before) {
             $.ajax({
-                url: Hsis.urls.HSIS + 'structures/abroad?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : ''),
+                url: Hsis.urls.HTP + 'structures/abroad?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : ''),
                 type: 'GET',
                 beforeSend: function () {
                     if (before) {
@@ -2375,7 +2236,7 @@ var Hsis = {
         //xtms-structure-address
         loadAddress: function (page, queryParams, callback, before) {
             $.ajax({
-                url: Hsis.urls.HSIS + 'structures/abroad/address?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : ''),
+                url: Hsis.urls.HTP + 'structures/abroad/address?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : ''),
                 type: 'GET',
                 beforeSend: function () {
                     if (before) {
@@ -2656,7 +2517,7 @@ var Hsis = {
         //xtms-structure-search
         searchStructure: function (page, query, callback) {
             $.ajax({
-                url: Hsis.urls.HSIS + 'structures/abroad?token=' + Hsis.token + (query ? '&' + query : '') + (page ? '&page=' + page : ''),
+                url: Hsis.urls.HTP + 'structures/abroad?token=' + Hsis.token + (query ? '&' + query : '') + (page ? '&page=' + page : ''),
                 type: 'GET',
                 success: function (result) {
                     if (result) {
@@ -2692,7 +2553,7 @@ var Hsis = {
         //xtms-structure-address
         searchAddress: function (page, query, callback) {
             $.ajax({
-                url: Hsis.urls.HSIS + 'structures/abroad/address?token=' + Hsis.token + (query ? '&' + query : '') + (page ? '&page=' + page : ''),
+                url: Hsis.urls.HTP + 'structures/abroad/address?token=' + Hsis.token + (query ? '&' + query : '') + (page ? '&page=' + page : ''),
                 type: 'GET',
                 success: function (result) {
                     if (result) {
