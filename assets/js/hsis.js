@@ -19,7 +19,7 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
-     // token: '82a48b924250400b8f82de0128bb8ea4c2abb5203a294acbac0148b647349f58',
+     // token: '75611cfa80564628b0c25e0dd6799497083f33574be1464c8c585193264f7941',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -57,7 +57,7 @@ var Hsis = {
         COMMUNICATION: 'http://192.168.1.78:8082/CommunicationRest/',
         NOTIFICATION: 'http://192.168.1.78:8082/NotificationSystem/greeting.html?token=',
         SOCKET: 'http://192.168.1.78:8082/SocketRest'
-        
+
 //        EMS: 'http://localhost:8080/UnibookEMS/',
         // REPORT: 'http://localhost:8080/ReportingRest/'
     },
@@ -235,7 +235,7 @@ var Hsis = {
                 },
             })
         },
-        
+
         loadSubApplications: function (callback) {
             $.ajax({
                 url: Hsis.urls.ROS + 'applications/1000014/subApplications?token=' + Hsis.token,
@@ -407,7 +407,7 @@ var Hsis = {
                 }
             })
         },
-        
+
         getDictionariesTypeListByType: function (typeId, callback) {
             var result = {};
             $.ajax({
@@ -449,7 +449,7 @@ var Hsis = {
 
             });
         },
-        
+
         getDictionaryDetails: function (dicId, callback) {
             $.ajax({
                 url: Hsis.urls.AdminRest + 'settings/dictionaries/' + dicId + '?token=' + Hsis.token,
@@ -478,7 +478,7 @@ var Hsis = {
                 }
             });
         },
-        
+
         loadDictionariTypes: function (callback) {
             var result = {};
             $.ajax({
@@ -523,7 +523,7 @@ var Hsis = {
 
             });
         },
-        
+
         loadDictionarySearch: function (page, queryParams, callback) {
             $.ajax({
                 url: Hsis.urls.AdminRest + 'settings/dictionaries/search?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : ''),
@@ -1333,7 +1333,7 @@ var Hsis = {
 
             });
         },
-        
+
         editDictionary: function (dic, callback) {
             var code = {};
             $.ajax({
@@ -1418,7 +1418,7 @@ var Hsis = {
                 }
             });
         },
-        
+
         addDictionary: function (dic, callback) {
             var code = {};
             $.ajax({
@@ -1470,7 +1470,7 @@ var Hsis = {
             });
             return code;
         },
-        
+
         checkDictionaryCode: function (code, callback) {
             var result = {};
             $.ajax({
@@ -1619,7 +1619,7 @@ var Hsis = {
                 }
             });
         },
-       
+
         addAbroadStudent: function (formData, callback) {
             var person = {};
             $.ajax({
@@ -1780,9 +1780,6 @@ var Hsis = {
 
 
                     }
-                },
-                complete: function () {
-                    callback(data);
                 }
             })
         },
@@ -2334,7 +2331,7 @@ var Hsis = {
             })
 
         },
-        
+
         loadStructure: function (page, queryParams, callback, before) {
             $.ajax({
                 url: Hsis.urls.HSIS + 'structures/abroad?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : ''),
@@ -3059,11 +3056,11 @@ var Hsis = {
                                 $.notify(Hsis.dictionary[Hsis.lang]['success'], {
                                     type: 'success'
                                 });
-                                
+
                                 cropForm = new FormData();
                                 $('#main-div #confirmAcceptedAbroadStudent').remove();
                                 Hsis.Proxy.loadAbroadStudents();
-                                
+
                                 break;
 
                             case Hsis.statusCodes.ERROR:
@@ -4390,7 +4387,7 @@ var Hsis = {
                 }
             })
         },
-       
+
         removeStudentFromOrder: function (pelcId, orderId, callback) {
             var data;
             $.ajax({
@@ -4797,7 +4794,7 @@ var Hsis = {
                 }
             })
         },
-        
+
         getUnreadNotification: function (callback) {
             $.ajax({
                 url: Hsis.urls.COMMUNICATION + 'notification/unread/count?token=' + Hsis.token,
@@ -4806,7 +4803,7 @@ var Hsis = {
                     if (result) {
                         switch (result.code) {
                             case Hsis.statusCodes.OK:
-                                
+
                                 callback(result);
                                 break;
 
@@ -5111,7 +5108,7 @@ var Hsis = {
                         array.push(obj);
                         Hsis.array.push(obj);
                     });
-                    
+
                     console.log(Hsis.array);
                     $('#main-div').find('#' + objectId).on('loaded.jstree', function (e, data) {
                         $('.tree-preloader').remove();
@@ -5677,7 +5674,7 @@ var Hsis = {
 
         },
         parseDictype: function (data, page) {
-            
+
             var html = '';
             var count;
 
@@ -5690,7 +5687,7 @@ var Hsis = {
                 $.each(data, function (i, v) {
                     html += '<tr data-id="' + v.id + '">' +
                             '<td>' + (++count) + '</td>' +
-                            
+
                             '<td class="hidden">' + (v.parentId != 0 ? v.parentId : 'No parent') + '</td>' +
                             '<td>' + v.value[Hsis.lang] + '</td>' +
                             '<td>' + v.code + '</td>' +
@@ -5698,7 +5695,7 @@ var Hsis = {
                             '<td>' + Hsis.Service.parseOperations(Hsis.operationList, '2') + '</td>' +
                             '</tr>';
                 });
-                
+
                 if ($('#main-div #load_more_div').children().length == 0) {
                         $('#main-div #load_more_div').html('<button  data-table="dictionary" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]["load.more"] + '</button>');
                     }
@@ -5808,19 +5805,59 @@ var Hsis = {
                src: result.image.fullPath
             });
 
-            $('body [data-name="citizen"]').html(result.citizenship.value[Hsis.lang]);
-            $('body [data-name="status"]').html(result.pinCode);
-            $('body [data-name="gender"]').html(result.gender.value[Hsis.lang]);
-            $('body [data-name="family-status"]').html(result.maritalStatus.value[Hsis.lang]);
+            if(result.addresses[0].fullAddress[Hsis.lang].length > 0){
+                $('body [data-name="birth-place"]').html(result.addresses[0].fullAddress[Hsis.lang]);
+            }else{
+                $('body [data-name="birth-place"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
 
-            $('body [data-name="birthday"]').html(result.birthDate);
-            $('body [data-name="military"]').html(result.militaryService.value[Hsis.lang]);
-            $('body [data-name="family-member"]').html(result.relations);
-            $('body [data-name="pinCode"]').html(result.pinCode);
-            $('body [data-name="pinCode"]').html(result.pinCode);
-            $('body [data-name="pinCode"]').html(result.pinCode);
+            if(result.addresses[0].type.value[Hsis.lang].length > 0){
+                $('body [data-name="permanent_address"]').html(result.addresses[0].type.value[Hsis.lang]);
+            }else{
+                $('body [data-name="permanent_address"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.documents[0].type.value[Hsis.lang].length>0){
+                $('body [data-name="typeDocument"]').html(result.documents[0].type.value[Hsis.lang]);
+            }else{
+                $('body [data-name="typeDocument"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
 
 
+            if(result.documents[0].serial.length>0){
+                $('body [data-name="seriesDocument"]').html(result.documents[0].serial);
+            }else{
+                $('body [data-name="seriesDocument"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.documents[0].startDate.length>0){
+                $('body [data-name="numberDocument"]').html(result.documents[0].startDate);
+            }else{
+                $('body [data-name="numberDocument"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+
+            if(result.documents[0].number.length > 0){
+                $('body [data-name="issueData"]').html(result.documents[0].number);
+            }else{
+                $('body [data-name="issueData"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+
+            if(result.documents[0].endDate.length > 0){
+                $('body [data-name="endData"]').html(result.documents[0].endDate);
+            }else{
+                $('body [data-name="issueData"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            $('[data-name="citizen"]').html(result.citizenship.value[Hsis.lang]);
+            $('[data-name="status"]').html(result.pinCode);
+            $('[data-name="gender"]').html(result.gender.value[Hsis.lang]);
+            $('[data-name="family-status"]').html(result.maritalStatus.value[Hsis.lang]);
+
+            $('[data-name="birthday"]').html(result.birthDate);
+            $('[data-name="military"]').html(result.militaryService.value[Hsis.lang]);
+            $('[data-name="family-member"]').html(result.relations);
         },
 
 
@@ -6189,7 +6226,7 @@ var Hsis = {
                                 $('.contact-info .panel-body').html(Hsis.Service.parseViewStudentContact(data));
                             }, 1000);
                         }
-                        
+
                         // $('#gender').find('option[value="' + data.gender.id + '"]').attr('selected', 'selected');
                         // $('#gender').attr('disabled', 'disabled');
                         // $('#marital_status').find('option[value="' + data.maritalStatus.id + '"]').attr('selected', 'selected');
@@ -6203,21 +6240,21 @@ var Hsis = {
 //                        alert('ss');
                         $('body #citizenship').text(data.citizenship.value[Hsis.lang])
                         $('#gender').text(data.gender.value[Hsis.lang]);
-                        
+
                         $('#marital_status').text(data.maritalStatus.value[Hsis.lang]);
-                        
+
                         $('#social_status').text(data.socialStatus && data.socialStatus.id ? data.socialStatus.value[Hsis.lang] : '-');
-                        
+
                         $('#orphan_degree').text(data.orphanDegree && data.orphanDegree.id ? data.orphanDegree.value[Hsis.lang] : '-');
-                        
+
                         $('#military_status').text(data.militaryService && data.militaryService.id ? data.militaryService.value[Hsis.lang] : '-');
-                        
+
                         $('#disability_degree').text(data.disabilityDegree && data.disabilityDegree.id ? data.disabilityDegree.value[Hsis.lang] : '-');
-                        
+
                         $('#nationality').text(data.nationality && data.nationality.id ? data.nationality.value[Hsis.lang] : '-');
-                        
+
                         $('#main-div').attr('data-id', data.id);
-                        $('#main-div').attr('data-pelc-id', data.pelcId);   
+                        $('#main-div').attr('data-pelc-id', data.pelcId);
 
 
                         var personal = 'personal';
@@ -6254,7 +6291,7 @@ var Hsis = {
                         $('#main-div #spec_direction').text(data.specDicrection.value[Hsis.lang]);
                         $('#main-div #note').text(data.note);
 
-                       
+
                             $('#main-div #foreign_country').text(data.countryName)
                             $('#main-div #foreign_city').text(data.cityName)
                             $('#main-div #foreign_university').text(data.atmName)
@@ -6921,9 +6958,9 @@ var Hsis = {
             }
         }
     },
-     
+
     WebSocket: {
-            
+
            connect: function () {
                 var name = $('.namename').val();
                 var socket = new SockJS(Hsis.urls.SOCKET + '/chat');
@@ -6933,7 +6970,7 @@ var Hsis = {
 //                    console.log("connected, session id: " + sessionId);
                     Hsis.stompClient.subscribe('/topic/messages/' + sessionId, function (messageOutput) {
                             $('body .notification').removeClass('hidden');
-                            
+
                     });
                 });
             },

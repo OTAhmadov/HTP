@@ -2621,7 +2621,7 @@ ul.nav-tabs{
 
 @media print {
     body {
-        zoom: .8
+        overflow: hidden;
     }
     .not-printed {
         display: none;
@@ -2632,6 +2632,11 @@ ul.nav-tabs{
     }
 }
 
-/*.survey-content p label{*/
-    /*margin-left: 50px;*/
-/*}*/
+.print-info{
+    position: absolute;
+    right: 120px;
+    top: 20px;
+    padding: 8px 17px;
+    color: #fff;
+    background: #0072ff;
+}
