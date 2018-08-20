@@ -19,7 +19,7 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
-     // token: 'c75c3651bde44b3f9a596369bd9f615b209bb0efb4684cd59d6b94087eeb2b1b',
+     token: 'c79313b730a646cf91bdef4cc31c3dc64dea0c519ea14ef3bbdeca8630128739',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -1130,6 +1130,82 @@ var Hsis = {
                 complete: function () {
                     $('.module-list .chekbox-con input').removeAttr('disabled');
                     $('.module-block[data-id="1000114"]').removeAttr('data-check');
+                }
+            })
+        },
+        loadArchiveAbroadStudents: function (page, queryParams, callback, before, order ) {
+
+            $.ajax({
+                url: Hsis.urls.HTP + 'students/abroad/archive?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : '') + (order ? order: ''),
+                type: 'GET',
+                beforeSend: function () {
+                    if (before) {
+                        $('.module-list .chekbox-con input').attr('disabled', 'disabled');
+                    }
+
+                },
+                success: function (result) {
+                    if (result) {
+                        switch (result.code) {
+                            case Hsis.statusCodes.ERROR:
+                                $.notify(Hsis.dictionary[Hsis.lang]['error'], {
+                                    type: 'danger'
+                                });
+                                break;
+
+                            case Hsis.statusCodes.OK:
+                                Hsis.Service.parseAbroadStudents(result.data, page);
+                                $('body').find('.col-sm-8.data').removeClass('col-sm-8').addClass('col-sm-12');
+                                $('body').find('.col-sm-4.info').fadeOut(1).css('right', '-100%');
+                                if (callback)
+                                    callback(result.data);
+                                break;
+
+                            case Hsis.statusCodes.UNAUTHORIZED:
+                                window.location = Hsis.urls.ROS + 'unauthorized';
+                                break;
+
+                        }
+
+
+                    }
+                },
+                complete: function () {
+                    $('.module-list .chekbox-con input').removeAttr('disabled');
+                    $('.module-block[data-id="1000146"]').removeAttr('data-check');
+                }
+            })
+        },
+        
+        restoreAbroadStudents: function (studentId, callback) {
+
+            $.ajax({
+                url: Hsis.urls.HTP + 'students/abroad/' + studentId + '/restore?token=' + Hsis.token,
+                type: 'POST',
+                success: function (result) {
+                    if (result) {
+                        switch (result.code) {
+                            case Hsis.statusCodes.ERROR:
+                                $.notify(Hsis.dictionary[Hsis.lang]['error'], {
+                                    type: 'danger'
+                                });
+                                break;
+
+                            case Hsis.statusCodes.OK:
+                                $('body').find('.col-sm-8.data').removeClass('col-sm-8').addClass('col-sm-12');
+                                $('body').find('.col-sm-4.info').fadeOut(1).css('right', '-100%');
+                                if (callback)
+                                    callback(result);
+                                break;
+
+                            case Hsis.statusCodes.UNAUTHORIZED:
+                                window.location = Hsis.urls.ROS + 'unauthorized';
+                                break;
+
+                        }
+
+
+                    }
                 }
             })
         },
