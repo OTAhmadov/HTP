@@ -49,8 +49,8 @@ var Hsis = {
 //         AdminRest: 'http://localhost:8080/AdministrationRest/',
         AdminRest: 'http://192.168.1.78:8082/AdministrationRest/',
        HSIS: "http://192.168.1.78:8082/UnibookHsisRest/",
-//       HTP: "http://192.168.1.78:8082/HTPRest/",
-       HTP: "http://localhost:8080/HTPRest/",
+      HTP: "http://192.168.1.78:8082/HTPRest/",
+//        HTP: "http://localhost:8080/HTPRest/",
 //         HSIS: "http://localhost:8080/UnibookHsisRest/",
         REPORT: 'http://192.168.1.78:8082/ReportingRest/',
         EMS: 'http://192.168.1.78:8082/UnibookEMS/',
@@ -379,7 +379,7 @@ var Hsis = {
         // new ajax request
         getAbroadStructure: function (page, form, callback) {
             $.ajax({
-                url: Hsis.urls.HTP + 'structures/abroad?token=' + Hsis.token + '&page=' + (page ? page : 1),
+                url: Hsis.urls.HTP + 'structures/abroad?token=' + Hsis.token + '&page=' + (page ? page : 1) + '&pageSize=20',
                 type: 'GET',
                 data: form,
                 success: function (result) {
@@ -389,6 +389,7 @@ var Hsis = {
                                 case Hsis.statusCodes.OK:
                                     if(callback)
                                         callback(result);
+
                                     Hsis.Service.loadAbroadStructures(result.data);
                                     break;
                                 case Hsis.statusCodes.ERROR:
@@ -549,7 +550,6 @@ var Hsis = {
                         }
 
                     }
-                    ;
                 }
 
             });
@@ -558,7 +558,7 @@ var Hsis = {
         // get request for abroadaddress
         getAbroadAddress: function (page, form, callback) {
             $.ajax({
-                url: Hsis.urls.HTP + 'structures/abroad/address?token=' + Hsis.token + '&page=' + (page ? page : 1),
+                url: Hsis.urls.HTP + 'structures/abroad/address?token=' + Hsis.token + '&page=' + (page ? page : 1) + '&pageSize=20',
                 type: 'GET',
                 data: form,
                 success: function (result) {
@@ -4783,15 +4783,15 @@ var Hsis = {
         },
         // loadcity parse  to module_1000131
         loadAbroadStructures: function (data, page) {
-            if (data) {
+            if (data && data.list) {
                 var html = '';
                 var count;
                 if (page) {
-                    count = $('#abroad_structure_table tbody tr').length;
+                    count = $('#abroad_structure_table tbody tr').length*page - $('#abroad_structure_table tbody tr').length;
                 } else {
                     count = 0;
                 }
-                    $.each(data, function (i, v) {
+                    $.each(data.list, function (i, v) {
                         html += '<tr data-id ="' + v.id +'" data-country-id ="' + v.abroadCountry.id +'" data-city-id ="' + v.abroadCity.id +'" data-uni-name="'+v.name[Hsis.lang]+'">'+
                             '<td>' + ++i + '</td>'+
                             '<td>' + v.abroadCountry.value[Hsis.lang] + '</td>'+
@@ -4808,19 +4808,35 @@ var Hsis = {
                 } else {
                     $('body').find('#abroad_structure_table tbody').html(html);
                 }
+                if (data.count > 0) {
+                    $('span.head-total').html(data.count);
+                    var paginationCount = Math.ceil(data.count/20);
+                    $(".custom-pagination").empty();
+                    for(var tt = 0; tt < paginationCount; tt++) {
+                        var nmm = tt + 1;
+                        if(!page) page = 1;
+                        if(page === nmm) {
+                            $(".custom-pagination").append('<li class="page-item active"><a class="page-link" href="#">'+nmm+'</a></li>');
+                        } else {
+                            $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">'+nmm+'</a></li>');
+                        }
+                    }
+                }
             }
         },
         //parse to module_1000132
+
         loadAbroadAddress: function (data, page) {
-            if (data) {
+
+            if (data && data.list) {
                 var html = '';
                 var count;
                 if (page) {
-                    count = $('#abroad-structure-address tbody tr').length;
+                    count = ($('#abroad-structure-address tbody tr').length * page) - $('#abroad-structure-address tbody tr').length;
                 } else {
                     count = 0;
                 }
-                $.each(data, function (i, v) {
+                $.each(data.list, function (i, v) {
                     html += '<tr data-id ="' + v.id +'" data-country-id ="' + v.country.id +'" data-city-id ="' + v.cityName +'" >'+
                         '<td>' + ++i + '</td>'+
                         '<td>' + v.country.value[Hsis.lang] + '</td>'+
@@ -4830,9 +4846,10 @@ var Hsis = {
                 });
 
 
-                if (data.head-total > 0) {
-                    $('span[data-student-count]').html(data.head-total);
-                    var paginationCount = Math.ceil(data.head-total/20);
+                if (data.count > 0) {
+
+                    $('span.head-total').html(data.count);
+                    var paginationCount = Math.ceil(data.count/20);
                     $(".custom-pagination").empty();
                     for(var tt = 0; tt < paginationCount; tt++) {
                         var nmm = tt + 1;
@@ -5683,9 +5700,10 @@ var Hsis = {
                             '</tr>';
                     });
 
+
                     if (data.studentCount > 0) {
                         $('span[data-student-count]').html(data.studentCount);
-                        var paginationCount = Math.ceil(data.studentCount/20);
+                        var paginationCount = Math.ceil(data.studentCount / 20);
                         $(".custom-pagination").empty();
                         for(var tt = 0; tt < paginationCount; tt++) {
                             var nmm = tt + 1;
@@ -5696,7 +5714,19 @@ var Hsis = {
                                 $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">'+nmm+'</a></li>');
                             }
                         }
+                        example(paginationCount,page);
                     }
+
+                    function  example(count, page) {
+                        if(count >  10) {
+                            $(".custom-pagination").find("li").hide();
+                            $(".custom-pagination").find("li:first").show();
+                            $(".custom-pagination").find("li:last").show();
+                            $("ul.custom-pagination li.active")
+                        }
+                    }
+
+
 
                     if ($('#main-div #load_more_div').children().length == 0) {
                         $('#main-div #load_more_div').html('<button  data-table="abroad_students" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]["load.more"] + '</button>');
