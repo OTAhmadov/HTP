@@ -188,17 +188,6 @@
 
             }
         });
-        
-//        Hsis.Proxy.getAcademicGroupForSelect('', function(data) {
-//            if (data) {
-//                var html = '';
-//                $.each(data, function (i, v) {
-//                    html += '<option value="' + v.id + '">' + v.name[Hsis.lang] + '';
-//                });
-//                $('#main-div #aca_group').append(html);
-//
-//            }
-//        })
 
         $('body').on('change', '#org_spec_level_filter', function () {
             var id = $(this).val();
@@ -208,21 +197,6 @@
             var orderId = $('body').find('#student_list_without').attr('order-id');
             var keyword = $('#search_without_order').val();
             var groupId = $('#aca_group').val();
-            
-//            Hsis.Proxy.getStructureListByFilter(orgId, id, function (specLevel) {
-//                if (specLevel) {
-//                    var html = '<option value="0">İxtisaslar</option>';
-//                    $.each(specLevel.specialityList, function (i, v) {
-//                        if(v.name[Hsis.lang].length > 40){
-//                            html += '<option value="' + v.id + '">' + v.name[Hsis.lang].substring(0, 40)+'...' + '</option>';
-//                        }else {
-//                            html += '<option value="' + v.id + '">' + v.name[Hsis.lang] + '</option>';
-//                        }
-//                        
-//                    });
-//                    $('#main-div #org_spec_level_filter-2').html(html);
-//
-//                }
                  var specId = $('body').find('#org_spec_level_filter-2').val();
                 $('.btn-load-more').removeAttr('data-page');
                 var form = {
@@ -278,17 +252,6 @@
             var parentId = $('body').find('#student_list-with').attr('type-parent-id');
             var orderTypeId = $('body').find('#student_list-with').attr('type-id');
             var orderId = $('body').find('#student_list-with').attr('order-id');
-            
-//            Hsis.Proxy.getStructureListByFilter(orgId, id, function (specLevel) {
-//                if (specLevel) {
-//                    var html = '<option value="0">İxtisaslar</option>';
-//                    $.each(specLevel.specialityList, function (i, v) {
-//                        html += '<option value="' + v.id + '">' + v.name[Hsis.lang] + '';
-//                    });
-//                    $('#main-div #org_spec_level_filter-2-with').html(html);
-//
-//                }
-//                var specId = $('body').find('#org_spec_level_filter-2-with').val();
                 var specId = $('#main-div #org_spec_level_filter-2-with').val();
                 var form = {
                     orderTypeId: orderTypeId,

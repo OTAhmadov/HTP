@@ -3789,6 +3789,30 @@ $(function () {
             console.error(err);
         }
     });
+    
+    $('.main-content-upd').on('keypress', '#abroad_archive_student_search', function (e) {
+        try {
+
+            if (e.keyCode == 13) {
+                var keyword = $('#abroad_archive_student_search').val();
+
+                if (keyword.trim().length > 0) { /*length en azi 2 simvol olmalidir. 0 test olaraqdan qoyulub*/
+                    $('.btn-load-more').removeAttr('data-page');
+                    $('.abroad_student-search-form input[name="keyword"]').val(keyword);
+                    var queryparams = $('.main-content-upd .abroad_student-search-form').serialize();
+                    Hsis.Proxy.loadArchiveAbroadStudents('', queryparams);
+                } else if (keyword.trim().length == 0) {
+                    $('.btn-load-more').removeAttr('data-page');
+                    $('.abroad_student-search-form input[name="keyword"]').val('');
+                    var params = $('.main-content-upd .abroad_student-search-form').serialize();
+                    Hsis.Proxy.loadArchiveAbroadStudents('', params);
+                }
+            }
+
+        } catch (err) {
+            console.error(err);
+        }
+    });
     $('.main-content-upd').on('keypress', '#technical_search', function (e) {
         try {
 
@@ -11475,6 +11499,18 @@ $(function () {
             page = button.attr('data-page');
         }
         Hsis.Proxy.loadAbroadStudents(page, '&orderColumn=' + dataSort + '&orderType=asc');
+    });
+
+    $('body').on('click', '#operation_1001447', function () {
+//       var id = $('#buttons_div').attr('data-id');
+       var id = $('body').attr('data-pelc-id');
+       
+       Hsis.Proxy.restoreAbroadStudents(id, function(data) {
+           if(data) {
+               Hsis.Proxy.loadArchiveAbroadStudents();
+           }
+       })
+       
     });
 
     
