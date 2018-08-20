@@ -1093,7 +1093,7 @@ var Hsis = {
         loadAbroadStudents: function (page, queryParams, callback, before, order ) {
 
             $.ajax({
-                url: Hsis.urls.HTP + 'students/abroad?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : '') + (order ? order: ''),
+                url: Hsis.urls.HTP + 'students/abroad?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : '') + (order ? order: '')+'&pageSize=20',
                 type: 'GET',
                 beforeSend: function () {
                     if (before) {
@@ -2195,7 +2195,7 @@ var Hsis = {
 
         loadStructure: function (page, queryParams, callback, before) {
             $.ajax({
-                url: Hsis.urls.HTP + 'structures/abroad?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : ''),
+                url: Hsis.urls.HTP + 'structures/abroad?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : '')+"&pageSize=20",
                 type: 'GET',
                 beforeSend: function () {
                     if (before) {
@@ -4711,24 +4711,22 @@ var Hsis = {
                 var html = '';
                 var count;
                 if (page) {
-                    count = $('#abroad_structure_table tbody tr').length*page - $('#abroad_structure_table tbody tr').length;
+                    count = ($('#abroad_structure_table tbody tr').length * page) - $('#abroad_structure_table tbody tr').length;
                 } else {
                     count = 0;
                 }
-                    $.each(data.list, function (i, v) {
-                        html += '<tr data-id ="' + v.id +'" data-country-id ="' + v.abroadCountry.id +'" data-city-id ="' + v.abroadCity.id +'" data-uni-name="'+v.name[Hsis.lang]+'">'+
-                            '<td>' + ++i + '</td>'+
-                            '<td>' + v.abroadCountry.value[Hsis.lang] + '</td>'+
-                            '<td>' + v.abroadCity.value[Hsis.lang] + '</td>'+
-                            '<td>' + v.name[Hsis.lang] + '</td>'+
-                            '<td>'+ Hsis.Service.parseOperations(Hsis.operationList, 2) + '</td>'+
-                            '</tr>';
-                    });
-                    if ($('#main-div #load_more_div').children().length == 0) {
-                        $('#main-div #load_more_div').html('<button  data-table="abroad_structure_module" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]["load.more"] + '</button>');
-                    }
+                $.each(data.list, function (i, v) {
+                    html += '<tr data-id ="' + v.id +'" data-country-id ="' + v.abroadCountry.id +'" data-city-id ="' + v.abroadCity.id +'" data-uni-name="'+v.name[Hsis.lang]+'">'+
+                        '<td>' + ++count + '</td>'+
+                        '<td>' + v.abroadCountry.value[Hsis.lang] + '</td>'+
+                        '<td>' + v.abroadCity.value[Hsis.lang] + '</td>'+
+                        '<td>' + v.name[Hsis.lang] + '</td>'+
+                        '<td>'+ Hsis.Service.parseOperations(Hsis.operationList, 2) + '</td>'+
+                        '</tr>';
+                });
+
                 if (page) {
-                    $('body').find('#abroad_structure_table tbody').append(html);
+                    $('body').find('#abroad_structure_table tbody').html(html);
                 } else {
                     $('body').find('#abroad_structure_table tbody').html(html);
                 }
@@ -4745,9 +4743,13 @@ var Hsis = {
                             $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">'+nmm+'</a></li>');
                         }
                     }
+                    pagination(paginationCount, page-1);
                 }
             }
         },
+
+
+
         //parse to module_1000132
 
         loadAbroadAddress: function (data, page) {
@@ -4762,7 +4764,7 @@ var Hsis = {
                 }
                 $.each(data.list, function (i, v) {
                     html += '<tr data-id ="' + v.id +'" data-country-id ="' + v.country.id +'" data-city-id ="' + v.cityName +'" >'+
-                        '<td>' + ++i + '</td>'+
+                        '<td>' + ++count + '</td>'+
                         '<td>' + v.country.value[Hsis.lang] + '</td>'+
                         '<td>' + v.cityName + '</td>'+
                         '<td>'+ Hsis.Service.parseOperations(Hsis.operationList, 2) + '</td>'+
@@ -4784,16 +4786,15 @@ var Hsis = {
                             $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">'+nmm+'</a></li>');
                         }
                     }
+                    pagination(paginationCount, page-1);
                 }
 
 
-
-
-                if ($('#main-div #load_more_div').children().length == 0) {
+               /* if ($('#main-div #load_more_div').children().length == 0) {
                     $('#main-div #load_more_div').html('<button  data-table="abroad-structure-address_module" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]["load.more"] + '</button>');
-                }
+                }*/
                 if (page) {
-                    $('body').find('#abroad-structure-address tbody').append(html);
+                    $('body').find('#abroad-structure-address tbody').html(html);
                 } else {
                     $('body').find('#abroad-structure-address tbody').html(html);
                 }
@@ -5593,8 +5594,6 @@ var Hsis = {
 
         parseAbroadStudents: function (data, page) {
             if (data) {
-
-                console.log(data);
                 var html = '';
                 var count;
 
@@ -5638,17 +5637,9 @@ var Hsis = {
                                 $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">'+nmm+'</a></li>');
                             }
                         }
-                        example(paginationCount,page);
+                        pagination(paginationCount, page - 1);
                     }
 
-                    function  example(count, page) {
-                        if(count >  10) {
-                            $(".custom-pagination").find("li").hide();
-                            $(".custom-pagination").find("li:first").show();
-                            $(".custom-pagination").find("li:last").show();
-                            $("ul.custom-pagination li.active")
-                        }
-                    }
 
 
 

@@ -3924,6 +3924,7 @@ $(function () {
     });
 
     $('body').on('click', '.page-item', function (e) {
+
         try {
             $(".custom-pagination").find("li").removeClass("active");
             var pageNumber = $(this).index() + 1;
@@ -4080,6 +4081,25 @@ $(function () {
                         $btn.remove();
                     }
                 });
+            //loadStructure
+            }else if (typeTable == 'abroad_structure_table') {
+                var params = $('.main-content-upd .xtms-structure-form').serialize();
+                Hsis.Proxy.loadStructure(page, params, function (data) {
+                    $btn.attr('data-page', parseInt(page) + 1);
+                    $btn.prop('disabled', false);
+                    if (!data || data.length == 0) {
+                        $btn.remove();
+                    }
+                });
+            }else if (typeTable == 'abroad-structure-address') {
+                    var params = $('.main-content-upd .xtms-address-form').serialize();
+                    Hsis.Proxy.getAbroadAddress(page, params, function (data) {
+                        $btn.attr('data-page', parseInt(page) + 1);
+                        $btn.prop('disabled', false);
+                        if (!data || data.length == 0) {
+                            $btn.remove();
+                        }
+                    });
             } else if (typeTable == 'technical_module') {
                 var params = $('.main-content-upd .technical-search-form').serialize();
                 Hsis.Proxy.getTechnicalBaseList(page, params, function (data) {
