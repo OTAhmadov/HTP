@@ -398,7 +398,7 @@
                                     <button data-i18n="birth_place" id="birth_place_edit" type="button" class="btn btn-default tree-modal btn-block" data-address-type-id = "1000199" data-id="0">Birth place</button>
                                     <div class="modal-content specialities hidden">
                                         <div class="modal-header header-primary">
-                                            <button type="button" class="close" data-dismiss="modal" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
                                             <h4 data-i18n="address" class="modal-title" id="gridSystemModalLabel">Address</h4>
                                         </div>
                                         <div class="modal-body scrollable">
@@ -756,10 +756,10 @@
 //            });
 
             Hsis.Proxy.loadAddressTree(function (addressTree) {
-                Hsis.Service.commonParseTree(addressTree, 'permanent_address_tree_edit');
-                Hsis.Service.commonParseTree(addressTree, 'temporary_address_tree_edit');
+                //Hsis.Service.commonParseTree(addressTree, 'permanent_address_tree_edit');
+                //Hsis.Service.commonParseTree(addressTree, 'temporary_address_tree_edit');
                 Hsis.Service.commonParseTree(addressTree, 'birth_place_tree_edit');
-                Hsis.Service.commonParseTree(addressTree, 'address_tree_id');
+                //Hsis.Service.commonParseTree(addressTree, 'address_tree_id');
             });
 
 

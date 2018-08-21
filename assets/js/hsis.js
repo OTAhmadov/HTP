@@ -19,7 +19,7 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
-     token: 'c79313b730a646cf91bdef4cc31c3dc64dea0c519ea14ef3bbdeca8630128739',
+    // token: '23c961b0d9f0485fa24e28cbbd2322eb41b53528a8f64f548d1d714d976c9cc9',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -35,7 +35,7 @@ var Hsis = {
     universities: [],
     begin: true,
     personId: '',
-    stompClient:0,
+    stompClient: 0,
     tempData: {
         form: ''
     },
@@ -48,8 +48,8 @@ var Hsis = {
 //         AdminRest: 'http://localhost:8080/AdministrationRest/',
 //         AdminRest: 'http://localhost:8080/AdministrationRest/',
         AdminRest: 'http://192.168.1.78:8082/AdministrationRest/',
-       HSIS: "http://192.168.1.78:8082/UnibookHsisRest/",
-      HTP: "http://192.168.1.78:8082/HTPRest/",
+        HSIS: "http://192.168.1.78:8082/UnibookHsisRest/",
+        HTP: "http://192.168.1.78:8082/HTPRest/",
 //        HTP: "http://localhost:8080/HTPRest/",
 //         HSIS: "http://localhost:8080/UnibookHsisRest/",
         REPORT: 'http://192.168.1.78:8082/ReportingRest/',
@@ -387,7 +387,7 @@ var Hsis = {
                         if (result) {
                             switch (result.code) {
                                 case Hsis.statusCodes.OK:
-                                    if(callback)
+                                    if (callback)
                                         callback(result);
 
                                     Hsis.Service.loadAbroadStructures(result.data);
@@ -566,7 +566,7 @@ var Hsis = {
                         if (result) {
                             switch (result.code) {
                                 case Hsis.statusCodes.OK:
-                                    if(callback)
+                                    if (callback)
                                         callback(result);
                                     Hsis.Service.loadAbroadAddress(result.data);
                                     break;
@@ -592,7 +592,7 @@ var Hsis = {
                 url: Hsis.urls.HTP + 'structures/abroad/add?token=' + Hsis.token,
                 type: 'POST',
                 data: form,
-                beforeSend: function() {
+                beforeSend: function () {
                     $('.xtms-approve').attr('disabled', 'disabled');
                 },
                 success: function (data) {
@@ -613,7 +613,7 @@ var Hsis = {
                                 $.notify(Hsis.dictionary[Hsis.lang]['success'], {
                                     type: 'success'
                                 });
-                                if(callback) callback(data);
+                                if (callback) callback(data);
                                 break;
                             case Hsis.statusCodes.UNAUTHORIZED:
                                 window.location = Hsis.urls.ROS + 'login?app=' + Hsis.token;
@@ -621,7 +621,7 @@ var Hsis = {
                         }
                     }
                 },
-                complete: function() {
+                complete: function () {
                     $('.xtms-approve').removeAttr('disabled');
                 }
             })
@@ -632,7 +632,7 @@ var Hsis = {
                 url: Hsis.urls.HTP + 'structures/abroad/address/add?token=' + Hsis.token,
                 type: 'POST',
                 data: form,
-                beforeSend: function() {
+                beforeSend: function () {
                     $('.xtms-approve-address').attr('disabled', 'disabled');
                 },
                 success: function (data) {
@@ -653,7 +653,7 @@ var Hsis = {
                                 $.notify(Hsis.dictionary[Hsis.lang]['success'], {
                                     type: 'success'
                                 });
-                                if(callback) callback(data);
+                                if (callback) callback(data);
                                 break;
                             case Hsis.statusCodes.UNAUTHORIZED:
                                 window.location = Hsis.urls.ROS + 'login?app=' + Hsis.token;
@@ -661,7 +661,7 @@ var Hsis = {
                         }
                     }
                 },
-                complete: function() {
+                complete: function () {
                     $('.xtms-approve-address').removeAttr('disabled');
                 }
             })
@@ -689,7 +689,7 @@ var Hsis = {
                                 $.notify(Hsis.dictionary[Hsis.lang]['success'], {
                                     type: 'success'
                                 });
-                                if(callback) callback(data);
+                                if (callback) callback(data);
                                 break;
                             case Hsis.statusCodes.UNAUTHORIZED:
                                 window.location = Hsis.urls.ROS + 'login?app=' + Hsis.token;
@@ -722,7 +722,7 @@ var Hsis = {
                                 $.notify(Hsis.dictionary[Hsis.lang]['success'], {
                                     type: 'success'
                                 });
-                                if(callback) callback(data);
+                                if (callback) callback(data);
                                 break;
                             case Hsis.statusCodes.UNAUTHORIZED:
                                 window.location = Hsis.urls.ROS + 'login?app=' + Hsis.token;
@@ -756,7 +756,7 @@ var Hsis = {
                                 $.notify(Hsis.dictionary[Hsis.lang]['success'], {
                                     type: 'success'
                                 });
-                                if(callback) callback(data);
+                                if (callback) callback(data);
                                 break;
                             case Hsis.statusCodes.UNAUTHORIZED:
                                 window.location = Hsis.urls.ROS + 'login?app=' + Hsis.token;
@@ -790,7 +790,7 @@ var Hsis = {
                                 $.notify(Hsis.dictionary[Hsis.lang]['success'], {
                                     type: 'success'
                                 });
-                                if(callback) callback(data);
+                                if (callback) callback(data);
                                 break;
                             case Hsis.statusCodes.UNAUTHORIZED:
                                 window.location = Hsis.urls.ROS + 'login?app=' + Hsis.token;
@@ -800,7 +800,6 @@ var Hsis = {
                 }
             })
         },
-
 
 
         getProfile: function () {
@@ -1090,10 +1089,10 @@ var Hsis = {
             });
         },
 
-        loadAbroadStudents: function (page, queryParams, callback, before, order ) {
+        loadAbroadStudents: function (page, queryParams, callback, before, order) {
 
             $.ajax({
-                url: Hsis.urls.HTP + 'students/abroad?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : '') + (order ? order: '')+'&pageSize=20',
+                url: Hsis.urls.HTP + 'students/abroad?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : '') + (order ? order : '') + '&pageSize=20',
                 type: 'GET',
                 beforeSend: function () {
                     if (before) {
@@ -1133,10 +1132,10 @@ var Hsis = {
                 }
             })
         },
-        loadArchiveAbroadStudents: function (page, queryParams, callback, before, order ) {
+        loadArchiveAbroadStudents: function (page, queryParams, callback, before, order) {
 
             $.ajax({
-                url: Hsis.urls.HTP + 'students/abroad/archive?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : '') + (order ? order: ''),
+                url: Hsis.urls.HTP + 'students/abroad/archive?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : '') + (order ? order : ''),
                 type: 'GET',
                 beforeSend: function () {
                     if (before) {
@@ -1176,7 +1175,7 @@ var Hsis = {
                 }
             })
         },
-        
+
         restoreAbroadStudents: function (studentId, callback) {
 
             $.ajax({
@@ -1239,7 +1238,7 @@ var Hsis = {
         loadDictionariesByTypeId: function (typeId, parentId, callback) {
             var result = {};
             $.ajax({
-                url: Hsis.urls.AdminRest + 'settings/dictionaries?typeId=' + typeId + '&parentId=' + parentId + '&token=' +  Hsis.token,
+                url: Hsis.urls.AdminRest + 'settings/dictionaries?typeId=' + typeId + '&parentId=' + parentId + '&token=' + Hsis.token,
                 type: 'GET',
                 global: false,
                 success: function (data) {
@@ -1707,7 +1706,7 @@ var Hsis = {
                             case Hsis.statusCodes.OK:
                                 // Hsis.Service.parseQuestionnaireView(result.data);
                                 data = result.data;
-                                if(callback) callback(data);
+                                if (callback) callback(data);
                                 break;
 
                             case Hsis.statusCodes.UNAUTHORIZED:
@@ -1949,8 +1948,7 @@ var Hsis = {
         loadAddressTree: function (callback) {
             var tree = {};
             $.ajax({
-                // url: Hsis.urls.HSIS + 'students/addresses?token=' + Hsis.token,
-                url: 'http//wcu.unibook.az/UnibookHsisRest/' + 'students/addresses?token=' + 'fcb8e03d29654833a91aef5b967734e5aad10a9055da4fd6b14daf2b76dbb0f6',
+                url: Hsis.urls.HSIS + 'students/addresses?token=' + Hsis.token,
                 type: 'GET',
                 success: function (result) {
                     if (result) {
@@ -2271,7 +2269,7 @@ var Hsis = {
 
         loadStructure: function (page, queryParams, callback, before) {
             $.ajax({
-                url: Hsis.urls.HTP + 'structures/abroad?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : '')+"&pageSize=20",
+                url: Hsis.urls.HTP + 'structures/abroad?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : '') + "&pageSize=20",
                 type: 'GET',
                 beforeSend: function () {
                     if (before) {
@@ -2554,7 +2552,7 @@ var Hsis = {
 
             })
         },
-        searchTeacher: function (page, query, callback){
+        searchTeacher: function (page, query, callback) {
             $.ajax({
                 url: Hsis.urls.HSIS + 'teachers?token=' + Hsis.token + (query ? '&' + query : '') + (page ? '&page=' + page : ''),
                 type: 'GET',
@@ -4021,7 +4019,7 @@ var Hsis = {
         getStructureListByAdress: function (id, callback) {
 
             $.ajax({
-                url: Hsis.urls.HSIS + 'structures/address/' + id + '?token='  + Hsis.token,
+                url: Hsis.urls.HSIS + 'structures/address/' + id + '?token=' + Hsis.token,
                 type: 'GET',
                 success: function (result) {
                     if (result) {
@@ -4792,12 +4790,12 @@ var Hsis = {
                     count = 0;
                 }
                 $.each(data.list, function (i, v) {
-                    html += '<tr data-id ="' + v.id +'" data-country-id ="' + v.abroadCountry.id +'" data-city-id ="' + v.abroadCity.id +'" data-uni-name="'+v.name[Hsis.lang]+'">'+
-                        '<td>' + ++count + '</td>'+
-                        '<td>' + v.abroadCountry.value[Hsis.lang] + '</td>'+
-                        '<td>' + v.abroadCity.value[Hsis.lang] + '</td>'+
-                        '<td>' + v.name[Hsis.lang] + '</td>'+
-                        '<td>'+ Hsis.Service.parseOperations(Hsis.operationList, 2) + '</td>'+
+                    html += '<tr data-id ="' + v.id + '" data-country-id ="' + v.abroadCountry.id + '" data-city-id ="' + v.abroadCity.id + '" data-uni-name="' + v.name[Hsis.lang] + '">' +
+                        '<td>' + ++count + '</td>' +
+                        '<td>' + v.abroadCountry.value[Hsis.lang] + '</td>' +
+                        '<td>' + v.abroadCity.value[Hsis.lang] + '</td>' +
+                        '<td>' + v.name[Hsis.lang] + '</td>' +
+                        '<td>' + Hsis.Service.parseOperations(Hsis.operationList, 2) + '</td>' +
                         '</tr>';
                 });
 
@@ -4808,26 +4806,22 @@ var Hsis = {
                 }
                 if (data.count > 0) {
                     $('span.head-total').html(data.count);
-                    var paginationCount = Math.ceil(data.count/20);
+                    var paginationCount = Math.ceil(data.count / 20);
                     $(".custom-pagination").empty();
-                    for(var tt = 0; tt < paginationCount; tt++) {
+                    for (var tt = 0; tt < paginationCount; tt++) {
                         var nmm = tt + 1;
-                        if(!page) page = 1;
-                        if(page === nmm) {
-                            $(".custom-pagination").append('<li class="page-item active"><a class="page-link" href="#">'+nmm+'</a></li>');
+                        if (!page) page = 1;
+                        if (page === nmm) {
+                            $(".custom-pagination").append('<li class="page-item active"><a class="page-link" href="#">' + nmm + '</a></li>');
                         } else {
-                            $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">'+nmm+'</a></li>');
+                            $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">' + nmm + '</a></li>');
                         }
                     }
-                    pagination(paginationCount, page-1);
+                    pagination(paginationCount, page - 1);
                 }
             }
         },
-
-
-
         //parse to module_1000132
-
         loadAbroadAddress: function (data, page) {
 
             if (data && data.list) {
@@ -4839,11 +4833,11 @@ var Hsis = {
                     count = 0;
                 }
                 $.each(data.list, function (i, v) {
-                    html += '<tr data-id ="' + v.id +'" data-country-id ="' + v.country.id +'" data-city-id ="' + v.cityName +'" >'+
-                        '<td>' + ++count + '</td>'+
-                        '<td>' + v.country.value[Hsis.lang] + '</td>'+
-                        '<td>' + v.cityName + '</td>'+
-                        '<td>'+ Hsis.Service.parseOperations(Hsis.operationList, 2) + '</td>'+
+                    html += '<tr data-id ="' + v.id + '" data-country-id ="' + v.country.id + '" data-city-id ="' + v.cityName + '" >' +
+                        '<td>' + ++count + '</td>' +
+                        '<td>' + v.country.value[Hsis.lang] + '</td>' +
+                        '<td>' + v.cityName + '</td>' +
+                        '<td>' + Hsis.Service.parseOperations(Hsis.operationList, 2) + '</td>' +
                         '</tr>';
                 });
 
@@ -4851,24 +4845,24 @@ var Hsis = {
                 if (data.count > 0) {
 
                     $('span.head-total').html(data.count);
-                    var paginationCount = Math.ceil(data.count/20);
+                    var paginationCount = Math.ceil(data.count / 20);
                     $(".custom-pagination").empty();
-                    for(var tt = 0; tt < paginationCount; tt++) {
+                    for (var tt = 0; tt < paginationCount; tt++) {
                         var nmm = tt + 1;
-                        if(!page) page = 1;
-                        if(page === nmm) {
-                            $(".custom-pagination").append('<li class="page-item active"><a class="page-link" href="#">'+nmm+'</a></li>');
+                        if (!page) page = 1;
+                        if (page === nmm) {
+                            $(".custom-pagination").append('<li class="page-item active"><a class="page-link" href="#">' + nmm + '</a></li>');
                         } else {
-                            $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">'+nmm+'</a></li>');
+                            $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">' + nmm + '</a></li>');
                         }
                     }
-                    pagination(paginationCount, page-1);
+                    pagination(paginationCount, page - 1);
                 }
 
 
-               /* if ($('#main-div #load_more_div').children().length == 0) {
-                    $('#main-div #load_more_div').html('<button  data-table="abroad-structure-address_module" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]["load.more"] + '</button>');
-                }*/
+                /* if ($('#main-div #load_more_div').children().length == 0) {
+                     $('#main-div #load_more_div').html('<button  data-table="abroad-structure-address_module" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]["load.more"] + '</button>');
+                 }*/
                 if (page) {
                     $('body').find('#abroad-structure-address tbody').html(html);
                 } else {
@@ -4876,7 +4870,6 @@ var Hsis = {
                 }
             }
         },
-
         parseApplicationsList: function (data) {
             var html = '';
             if (data) {
@@ -5049,54 +5042,55 @@ var Hsis = {
         },
         //for options
         commonParseTree: function (data, objectId, nodeTypeId) {
+
             try {
 //                alert();
-                var array = [];
-                if (data.length > 0) {
 
+                if (data.length > 0) {
+                    var arrayData = [];
                     $.each(data, function (i, v) {
                         var obj = {
                             id: v.id.toString(),
-                            parent: (v.parent.id == 0) ? "#" : v.parent.id.toString(), text: v.name[Hsis.lang],
+                            parent: (v.parent.id === 0) ? "#" : v.parent.id.toString(),  /* || v.parent.id.toString().length < 5 */
+                            text: v.name[Hsis.lang],
                             typeId: v.type.id
                         };
-                        array.push(obj);
+                        arrayData.push(obj);
                         Hsis.array.push(obj);
                     });
 
-                    console.log(Hsis.array);
+
                     $('#main-div').find('#' + objectId).on('loaded.jstree', function (e, data) {
                         $('.tree-preloader').remove();
                         $('#' + objectId).removeAttr('data-id');
                         $('#' + objectId).removeAttr('data-check');
 
-                    })
-                        .jstree({
-//                                "conditionalselect" : function(node) {
-//                                    if(nodeTypeId) {
-//                                        return node.original.typeId == nodeTypeId ? true : false;
-//                                    }
-//                                    else {
-//                                        return true;
-//                                    }
-//
-//                                },
-                            "core": {
-                                "data": array,
-                                "check_callback": true,
-                                "themes": {
-                                    "variant": "large",
-                                    "dots": false,
-                                    "icons": true
-                                },
+                    }).jstree({
+                        "conditionalselect": function (node) {
+                            if (nodeTypeId) {
+                                return node.original.typeId == nodeTypeId ? true : false;
+                            }
+                            else {
+                                return true;
+                            }
+
+                        },
+                        "core": {
+                            "data": arrayData,
+                            "check_callback": true,
+                            "themes": {
+                                "variant": "large",
+                                "dots": false,
+                                "icons": true
                             },
-                            "search": {
-                                "case_insensitive": true,
-                                "show_only_matches": true
-                            },
-                            "plugins": ["conditionalselect", "wholerow", "search"],
-                            "themes": {"stripes": true}
-                        });
+                        },
+                        "search": {
+                            "case_insensitive": true,
+                            "show_only_matches": true
+                        },
+                        "plugins": ["conditionalselect", "wholerow", "search"],
+                        "themes": {"stripes": true}
+                    });
                 } else {
                     $('#main-div').find('#' + objectId).jstree("destroy");
                 }
@@ -5467,10 +5461,10 @@ var Hsis = {
                         //                                ' ' + v.org.id +
                         //                                ' ' + v.org.typeId
                         //                                );
-                        html += '<div data-org-type = "'+dataOrgType+'" class="col-md-12 for-align student-action" data-status-id="' + v.status.id + '" data-id ="' + v.id + '" data-action-type = "' + v.actionType.id + ' " data-action-date = "' + v.actionDate + '">' +
+                        html += '<div data-org-type = "' + dataOrgType + '" class="col-md-12 for-align student-action" data-status-id="' + v.status.id + '" data-id ="' + v.id + '" data-action-type = "' + v.actionType.id + ' " data-action-date = "' + v.actionDate + '">' +
                             '<table class="table-block col-md-12">' +
                             '<thead>' +
-                            '<tr data-pelc-id = "' + v.id + '" data-type-id="'+v.org.typeId+'">' +
+                            '<tr data-pelc-id = "' + v.id + '" data-type-id="' + v.org.typeId + '">' +
                             '<th style="width:145px;">' + studyPlace + '</th>' +
                             '<th>' + Hsis.dictionary[Hsis.lang]["start_action_type"] + '</th>' +
                             '<th>' + Hsis.dictionary[Hsis.lang]["start_date"] + '</th>' +
@@ -5540,7 +5534,7 @@ var Hsis = {
                     html += '<div class="col-md-12 for-align student-action past_edu" data-status-id="' + data.status.id + '" data-org-type="' + data.org.typeId + '" data-id ="' + data.id + '" data-action-type = "' + data.actionType.id + ' " data-action-date = "' + data.actionDate + ' ">' +
                         '<table class="table-block col-md-12">' +
                         '<thead>' +
-                        '<tr data-pelc-id = "' + data.id + '" data-org-type = "' + data.org.typeId + '" data-type-id="'+data.typeId+'">' + '<th style="width:145px;">' + studyPlace + '</th>' +
+                        '<tr data-pelc-id = "' + data.id + '" data-org-type = "' + data.org.typeId + '" data-type-id="' + data.typeId + '">' + '<th style="width:145px;">' + studyPlace + '</th>' +
                         '<th>' + Hsis.dictionary[Hsis.lang]["start_action_type"] + '</th>' +
                         '<th>' + Hsis.dictionary[Hsis.lang]["start_date"] + '</th>' +
                         '<th>' + Hsis.dictionary[Hsis.lang]["end_action_type"] + '</th>' +
@@ -5633,27 +5627,27 @@ var Hsis = {
             var html = '';
             var count;
 
-                if (page) {
-                    count = $('#users-table tbody tr').length;
-                } else {
-                    count = 0;
-                }
+            if (page) {
+                count = $('#users-table tbody tr').length;
+            } else {
+                count = 0;
+            }
             if (data) {
                 $.each(data, function (i, v) {
                     html += '<tr data-id="' + v.id + '">' +
-                            '<td>' + (++count) + '</td>' +
+                        '<td>' + (++count) + '</td>' +
 
-                            '<td class="hidden">' + (v.parentId != 0 ? v.parentId : 'No parent') + '</td>' +
-                            '<td>' + v.value[Hsis.lang] + '</td>' +
-                            '<td>' + v.code + '</td>' +
-                            // '<td>' + v.updateDate + '</td>' +
-                            '<td>' + Hsis.Service.parseOperations(Hsis.operationList, '2') + '</td>' +
-                            '</tr>';
+                        '<td class="hidden">' + (v.parentId != 0 ? v.parentId : 'No parent') + '</td>' +
+                        '<td>' + v.value[Hsis.lang] + '</td>' +
+                        '<td>' + v.code + '</td>' +
+                        // '<td>' + v.updateDate + '</td>' +
+                        '<td>' + Hsis.Service.parseOperations(Hsis.operationList, '2') + '</td>' +
+                        '</tr>';
                 });
 
                 if ($('#main-div #load_more_div').children().length == 0) {
-                        $('#main-div #load_more_div').html('<button  data-table="dictionary" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]["load.more"] + '</button>');
-                    }
+                    $('#main-div #load_more_div').html('<button  data-table="dictionary" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]["load.more"] + '</button>');
+                }
 
                 if (page) {
                     $('#users-table tbody').append(html);
@@ -5664,10 +5658,7 @@ var Hsis = {
             }
 
 
-
         },
-
-
         parseAbroadStudents: function (data, page) {
             if (data) {
                 var html = '';
@@ -5704,19 +5695,17 @@ var Hsis = {
                         $('span[data-student-count]').html(data.studentCount);
                         var paginationCount = Math.ceil(data.studentCount / 20);
                         $(".custom-pagination").empty();
-                        for(var tt = 0; tt < paginationCount; tt++) {
+                        for (var tt = 0; tt < paginationCount; tt++) {
                             var nmm = tt + 1;
-                            if(!page) page = 1;
-                            if(page === nmm) {
-                                $(".custom-pagination").append('<li class="page-item active"><a class="page-link" href="#">'+nmm+'</a></li>');
+                            if (!page) page = 1;
+                            if (page === nmm) {
+                                $(".custom-pagination").append('<li class="page-item active"><a class="page-link" href="#">' + nmm + '</a></li>');
                             } else {
-                                $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">'+nmm+'</a></li>');
+                                $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">' + nmm + '</a></li>');
                             }
                         }
                         pagination(paginationCount, page - 1);
                     }
-
-
 
 
                     if ($('#main-div #load_more_div').children().length == 0) {
@@ -5737,9 +5726,7 @@ var Hsis = {
             }
 
         },
-
-
-        parseQuestionnaireView: function(result){
+        parseQuestionnaireView: function (result) {
             console.log(result);
             $('body [data-name="name"]').html(result.firstName);
             $('body [data-name="surname"]').html(result.lastName);
@@ -5760,51 +5747,51 @@ var Hsis = {
             });
 
             $('').attr({
-               src: result.image.fullPath
+                src: result.image.fullPath
             });
 
-            if(result.addresses[0].fullAddress[Hsis.lang].length > 0){
+            if (result.addresses[0].fullAddress[Hsis.lang].length > 0) {
                 $('body [data-name="birth-place"]').html(result.addresses[0].fullAddress[Hsis.lang]);
-            }else{
+            } else {
                 $('body [data-name="birth-place"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
-            if(result.addresses[0].type.value[Hsis.lang].length > 0){
+            if (result.addresses[0].type.value[Hsis.lang].length > 0) {
                 $('body [data-name="permanent_address"]').html(result.addresses[0].type.value[Hsis.lang]);
-            }else{
+            } else {
                 $('body [data-name="permanent_address"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
-            if(result.documents[0].type.value[Hsis.lang].length>0){
+            if (result.documents[0].type.value[Hsis.lang].length > 0) {
                 $('body [data-name="typeDocument"]').html(result.documents[0].type.value[Hsis.lang]);
-            }else{
+            } else {
                 $('body [data-name="typeDocument"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
 
-            if(result.documents[0].serial.length>0){
+            if (result.documents[0].serial.length > 0) {
                 $('body [data-name="seriesDocument"]').html(result.documents[0].serial);
-            }else{
+            } else {
                 $('body [data-name="seriesDocument"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
-            if(result.documents[0].startDate.length>0){
+            if (result.documents[0].startDate.length > 0) {
                 $('body [data-name="numberDocument"]').html(result.documents[0].startDate);
-            }else{
+            } else {
                 $('body [data-name="numberDocument"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
 
-            if(result.documents[0].number.length > 0){
+            if (result.documents[0].number.length > 0) {
                 $('body [data-name="issueData"]').html(result.documents[0].number);
-            }else{
+            } else {
                 $('body [data-name="issueData"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
 
-            if(result.documents[0].endDate.length > 0){
+            if (result.documents[0].endDate.length > 0) {
                 $('body [data-name="endData"]').html(result.documents[0].endDate);
-            }else{
+            } else {
                 $('body [data-name="issueData"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
@@ -5817,8 +5804,6 @@ var Hsis = {
             $('[data-name="military"]').html(result.militaryService.value[Hsis.lang]);
             $('[data-name="family-member"]').html(result.relations);
         },
-
-
         parseScholarshipPlan: function (plan) {
             if (plan) {
                 var html = '';
@@ -6155,8 +6140,6 @@ var Hsis = {
                 });
             });
         },
-
-
         operation_1001362: function () {
             // student view
             $('#main-div').load('partials/abroad_student_view.html', function () {
@@ -6250,9 +6233,9 @@ var Hsis = {
                         $('#main-div #note').text(data.note);
 
 
-                            $('#main-div #foreign_country').text(data.countryName)
-                            $('#main-div #foreign_city').text(data.cityName)
-                            $('#main-div #foreign_university').text(data.atmName)
+                        $('#main-div #foreign_country').text(data.countryName)
+                        $('#main-div #foreign_city').text(data.cityName)
+                        $('#main-div #foreign_university').text(data.atmName)
 
                         if (data.achievements) {
                             Hsis.Service.parseViewAbroadStudentAchievement(data.achievements)
@@ -6608,7 +6591,6 @@ var Hsis = {
 
 
         },
-
         parseForeignRelation: function (data, page) {
             if (data) {
                 var html = '';
@@ -6639,7 +6621,6 @@ var Hsis = {
                 }
             }
         },
-
         parseAbroadStudentAchievement: function (data) {
             if (data) {
                 var html = '';
@@ -6673,7 +6654,6 @@ var Hsis = {
 
             }
         },
-
         parseAbroadStudentRegistrationDate: function (data) {
             if (data) {
                 var html = '';
@@ -6711,7 +6691,6 @@ var Hsis = {
 
             }
         },
-
         parseViewAbroadStudentAchievement: function (data) {
             if (data) {
                 var html = '';
@@ -6736,7 +6715,6 @@ var Hsis = {
 
             }
         },
-
         parseViewAbroadStudentRegistrationDate: function (data) {
             if (data) {
                 var html = '';
@@ -6858,7 +6836,6 @@ var Hsis = {
             }
 
         }
-
     },
     Validation: {
         validateEmail: function (email) {
@@ -6915,31 +6892,30 @@ var Hsis = {
             }
         }
     },
-
     WebSocket: {
 
-           connect: function () {
-                var name = $('.namename').val();
-                var socket = new SockJS(Hsis.urls.SOCKET + '/chat');
-                Hsis.stompClient = Stomp.over(socket);
-                Hsis.stompClient.connect({'Login':Hsis.token}, function (frame) {
-                    var sessionId = /\/([^\/]+)\/websocket/.exec(socket._transport.url)[1];
+        connect: function () {
+            var name = $('.namename').val();
+            var socket = new SockJS(Hsis.urls.SOCKET + '/chat');
+            Hsis.stompClient = Stomp.over(socket);
+            Hsis.stompClient.connect({'Login': Hsis.token}, function (frame) {
+                var sessionId = /\/([^\/]+)\/websocket/.exec(socket._transport.url)[1];
 //                    console.log("connected, session id: " + sessionId);
-                    Hsis.stompClient.subscribe('/topic/messages/' + sessionId, function (messageOutput) {
-                            $('body .notification').removeClass('hidden');
+                Hsis.stompClient.subscribe('/topic/messages/' + sessionId, function (messageOutput) {
+                    $('body .notification').removeClass('hidden');
 
-                    });
                 });
-            },
+            });
+        },
 
-            disconnect: function (a) {
-                if (Hsis.stompClient != 0) {
-                    Hsis.stompClient.disconnect();
-                }
-                if(a==1) {
-                    Hsis.WebSocket.connect();
-                }
-            },
+        disconnect: function (a) {
+            if (Hsis.stompClient != 0) {
+                Hsis.stompClient.disconnect();
+            }
+            if (a == 1) {
+                Hsis.WebSocket.connect();
+            }
+        },
     },
 
 };

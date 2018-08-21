@@ -2692,6 +2692,7 @@ $(function () {
     })
 
     $('body').on('click', '#get_birth_place_edit', function () {
+        alert('1');
         try {
             var addrTreeId = $('#birth_place_tree_edit').find('li[aria-selected="true"]').attr('id') ? $('#birth_place_tree_edit').find('li[aria-selected="true"]').attr('id') : $('#birth_place_edit').attr('data-addresstree-id');
             var addrTypeId = $('#birth_place_edit').attr('data-address-type-id');
@@ -2704,7 +2705,8 @@ $(function () {
             address.treeId = addrTreeId;
 
             if (moduleType === 'E') {
-                Hsis.Proxy.editTeacherAddress(address, function (code) {
+                /*Hsis.Proxy.editTeacherAddress(address, function (code) {
+                    alert('3');
                     if (code == Hsis.statusCodes.OK) {
                         var text = $('#main-div #birth_place_edit').attr('data-node-text');
                         var id = $('#main-div').attr('data-id');
@@ -2714,9 +2716,10 @@ $(function () {
                         });
                     }
 
-                });
+                });*/
             } else {
                 Hsis.Proxy.editStudentAddress(address, function (code) {
+                    alert('4');
                     if (code == Hsis.statusCodes.OK) {
                         var text = $('#main-div #birth_place_edit').attr('data-node-text');
                         var id = $('#main-div').attr('data-id');
@@ -2960,10 +2963,6 @@ $(function () {
                                 if (data.schoolDocuments.length > 0) {
                                     $('#past_edu_doc').html(Hsis.Service.parseEditStudentDocument(data.schoolDocuments, school));
                                 }
-
-
-
-
 
                             })
                         }
