@@ -6275,7 +6275,7 @@ var Hsis = {
                 } else {
                     count = 0;
                 }
-                $.each(data, function (i, v) {
+                $.each(data.list, function (i, v) {
                     html += '<tr data-id="' + v.id + '" data-type-id="' + v.type.id + '" data-status-id="' + v.status.id + '">' +
                         '<td>' + (++count) + '</td>' +
                         '<td style="white-space:pre-line;">' + v.type.value[Hsis.lang] + '</td>' +
