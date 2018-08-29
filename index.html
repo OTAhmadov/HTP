@@ -407,28 +407,23 @@
             var plus5 = page + 5;
             var minus5 = page - 5;
             if (plus5 <= count) {
-                var last_i = 0;
+                let last_i = 0;
                 for (let i = page; i <= plus5; i++) {
                     $(".custom-pagination").find("li:eq(" + i + ")").show();
                     last_i = i;
                 }
                 if (last_i !== count) {
-                    $(".custom-pagination").find("li:eq(" + last_i + ") a").html("...").show();
+                    $(".custom-pagination").find("li:eq(' + last_i + ') a").html("...").show();
                 }
             }
-
-
-                var last_f = 0;
-                for (let f = page; f > minus5; f--) {
-                    $(".custom-pagination").find("li:eq(" + f + ")").show();
-                    last_f = f;
-                }
-
-                if (last_f !== count) {
-                    $(".custom-pagination").find("li:eq(" + last_f + ") a").html("...").show();
-                }
-
-            
+            let last_f = 0;
+            for (let f = page; f > minus5; f--) {
+                $(".custom-pagination").find("li:eq(' + f + ')").show();
+                last_f = f;
+            }
+            if (last_f !== count) {
+                $(".custom-pagination").find("li:eq(" + last_f + ") a").html("...").show();
+            }
         }
     }
 

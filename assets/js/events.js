@@ -3949,13 +3949,15 @@ $(function () {
     $('body').on('click', '.page-item', function (e) {
 
         try {
-            $(".custom-pagination").find("li").removeClass("active");
+            $(".custom-pagination").find("li").removeClass("current");
+            // $(".custom-pagination").find("li").addClass("current");
             var pageNumber = $(this).index() + 1;
             var typeTable = $(this).parents(".custom-pagination").attr('data-table');
             var $btn = $(this);
-            $btn.addClass('active');
+            // $btn.addClass('active');
             var type = $btn.attr('data-page');
             var page = parseInt(pageNumber);
+
             var studKeyword = $('#student_search').val();
             var groupKeyword = $('#group_search').val();
             var studQueryparams = $('.main-content-upd .student-search-form').serialize() + '&subModuleId=' + Hsis.subModuleId;
@@ -4065,9 +4067,7 @@ $(function () {
                             $btn.remove();
                         }
                     });
-
                 }
-
             } else if (typeTable == 'academic_groups') {
                 Hsis.Proxy.loadAcademicGroups(page, groupParams + '&keyword=' + groupKeyword, function (data) {
                     $btn.attr('data-page', parseInt(page) + 1);
@@ -4106,6 +4106,7 @@ $(function () {
                 });
             //loadStructure
             }else if (typeTable == 'abroad_structure_table') {
+
                 var params = $('.main-content-upd .xtms-structure-form').serialize();
                 Hsis.Proxy.loadStructure(page, params, function (data) {
                     $btn.attr('data-page', parseInt(page) + 1);
@@ -4115,6 +4116,7 @@ $(function () {
                     }
                 });
             }else if (typeTable == 'abroad-structure-address') {
+
                     var params = $('.main-content-upd .xtms-address-form').serialize();
                     Hsis.Proxy.getAbroadAddress(page, params, function (data) {
                         $btn.attr('data-page', parseInt(page) + 1);
@@ -9903,7 +9905,7 @@ $(function () {
         $('#main-div #registration_date').val('');
         $('#main-div #registration_date_note').val('');
         $('#main-div .add-registration-date-modal').modal("show");
-    })
+    });
 
     $('body').on('click', '.add-new-achievement', function () {
         var type = $(this).attr('data-type');
@@ -10605,7 +10607,6 @@ $(function () {
                         $('#military_status').attr('disabled', 'disabled');
                         $('.date-birthdate').attr('disabled', 'disabled');
                     }
-
 
                 });
             });

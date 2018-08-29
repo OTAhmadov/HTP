@@ -660,7 +660,7 @@ td .dropdown-menu{
     overflow: hidden; 
 }
 .slimScrollDiv, .mod-con {
-    height: calc(100vh - 70px) !important;
+    height: calc(100vh - 55px) !important;
 }
 .info .panel-heading{
     height: 41px;
@@ -2579,9 +2579,17 @@ ul.nav-tabs{
     right: 32px;
     display: block;
 }
-.survey-content p{
+.survey-content{
     font-size: 14px;
+    font-weight: 600;
+}
+.survey-content p{
     margin: 0;
+}
+.survey-content p span{
+    font-size: 16px;
+    margin: 0;
+    color: #000;
 }
 .survey-content p label{
     height: 0;
@@ -2639,4 +2647,18 @@ ul.nav-tabs{
     padding: 8px 17px;
     color: #fff;
     background: #0072ff;
+}
+/*.custom-pagination li.current a,
+.custom-pagination li.current a,*/
+/*.custom-pagination li:active a.page-link{
+    background: #0072ff !important;
+}*/
+
+.about-family h6{
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+}
+.current > a {
+    background: #0072ff !important;
 }

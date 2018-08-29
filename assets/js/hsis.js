@@ -19,7 +19,7 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
-    // token: '23c961b0d9f0485fa24e28cbbd2322eb41b53528a8f64f548d1d714d976c9cc9',
+    // token: '9002e39ce06f406f8cee225eb375fd612221e9062edb43228bcf2a04b4e910ae',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -568,7 +568,7 @@ var Hsis = {
                                 case Hsis.statusCodes.OK:
                                     if (callback)
                                         callback(result);
-                                    Hsis.Service.loadAbroadAddress(result.data);
+                                    Hsis.Service.loadAbroadAddress(result.data, page);
                                     break;
                                 case Hsis.statusCodes.ERROR:
                                     $.notify(Hsis.dictionary[Hsis.lang]['error'], {
@@ -1063,8 +1063,8 @@ var Hsis = {
         getPersonInfoByPinCode: function (pinCode, callback) {
             var data;
             $.ajax({
-//                url: Hsis.urls.HSIS + 'students/getInfoByPinCode?token=' + Hsis.token + '&pinCode=' + pinCode,
-                url: "http://atis.edu.az/IAMASRest/getInfoByPinCode?pinCode=" + pinCode,
+               url: Hsis.urls.HSIS + 'students/getInfoByPinCode?token=' + Hsis.token + '&pinCode=' + pinCode,
+                // url: "http://atis.edu.az/IAMASRest/getInfoByPinCode?pinCode=" + pinCode,
                 type: 'POST',
                 success: function (result) {
                     if (result) {
@@ -1098,7 +1098,6 @@ var Hsis = {
                     if (before) {
                         $('.module-list .chekbox-con input').attr('disabled', 'disabled');
                     }
-
                 },
                 success: function (result) {
                     if (result) {
@@ -1165,8 +1164,6 @@ var Hsis = {
                                 break;
 
                         }
-
-
                     }
                 },
                 complete: function () {
@@ -4832,9 +4829,11 @@ var Hsis = {
                 } else {
                     count = 0;
                 }
+              /*  alert( page);*/
+
                 $.each(data.list, function (i, v) {
                     html += '<tr data-id ="' + v.id + '" data-country-id ="' + v.country.id + '" data-city-id ="' + v.cityName + '" >' +
-                        '<td>' + ++count + '</td>' +
+                        '<td>' + (++count) + '</td>' +
                         '<td>' + v.country.value[Hsis.lang] + '</td>' +
                         '<td>' + v.cityName + '</td>' +
                         '<td>' + Hsis.Service.parseOperations(Hsis.operationList, 2) + '</td>' +
@@ -4842,8 +4841,13 @@ var Hsis = {
                 });
 
 
-                if (data.count > 0) {
+                if (page) {
+                    $('body').find('#abroad-structure-address tbody').html(html);
+                } else {
+                    $('body').find('#abroad-structure-address tbody').html(html);
+                }
 
+                if (data.count > 0) {
                     $('span.head-total').html(data.count);
                     var paginationCount = Math.ceil(data.count / 20);
                     $(".custom-pagination").empty();
@@ -4851,7 +4855,7 @@ var Hsis = {
                         var nmm = tt + 1;
                         if (!page) page = 1;
                         if (page === nmm) {
-                            $(".custom-pagination").append('<li class="page-item active"><a class="page-link" href="#">' + nmm + '</a></li>');
+                            $(".custom-pagination").append('<li class="page-item current"><a class="page-link" href="#">' + nmm + '</a></li>');
                         } else {
                             $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">' + nmm + '</a></li>');
                         }
@@ -4863,11 +4867,7 @@ var Hsis = {
                 /* if ($('#main-div #load_more_div').children().length == 0) {
                      $('#main-div #load_more_div').html('<button  data-table="abroad-structure-address_module" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]["load.more"] + '</button>');
                  }*/
-                if (page) {
-                    $('body').find('#abroad-structure-address tbody').html(html);
-                } else {
-                    $('body').find('#abroad-structure-address tbody').html(html);
-                }
+
             }
         },
         parseApplicationsList: function (data) {
@@ -5051,7 +5051,7 @@ var Hsis = {
                     $.each(data, function (i, v) {
                         var obj = {
                             id: v.id.toString(),
-                            parent: (v.parent.id === 0) ? "#" : v.parent.id.toString(),  /* || v.parent.id.toString().length < 5 */
+                            parent: (v.parent.id === 0 || v.parent.id.toString().length < 5) ? "#" : v.parent.id.toString(),  /* || v.parent.id.toString().length < 5 */
                             text: v.name[Hsis.lang],
                             typeId: v.type.id
                         };
@@ -5659,6 +5659,7 @@ var Hsis = {
 
 
         },
+
         parseAbroadStudents: function (data, page) {
             if (data) {
                 var html = '';
@@ -5686,11 +5687,8 @@ var Hsis = {
                             '<td style="white-space: pre-line;">' + v.abroadStatus.value[Hsis.lang] + '</td>' +
                             //                                '<td>' + v.birthDate + '</td>' +
                             //                                '<td>' + v.gender.value[Hsis.lang] + '</td>' +
-
                             '</tr>';
                     });
-
-
                     if (data.studentCount > 0) {
                         $('span[data-student-count]').html(data.studentCount);
                         var paginationCount = Math.ceil(data.studentCount / 20);
@@ -5714,20 +5712,15 @@ var Hsis = {
                 } else {
                     $('span[data-student-count]').html(0);
                 }
-
-
                 if (page) {
                     $('body').find('#abroad_student_list tbody').html(html);
                 } else {
                     $('body').find('#abroad_student_list tbody').html(html);
                 }
-
-
             }
 
         },
         parseQuestionnaireView: function (result) {
-            console.log(result);
             $('body [data-name="name"]').html(result.firstName);
             $('body [data-name="surname"]').html(result.lastName);
             $('body [data-name="father-name"]').html(result.middleName);
@@ -5746,63 +5739,203 @@ var Hsis = {
 
             });
 
-            $('').attr({
+           /* $('').attr({
                 src: result.image.fullPath
-            });
+            });*/
 
-            if (result.addresses[0].fullAddress[Hsis.lang].length > 0) {
+            if (result.addresses.length > 0) {
                 $('body [data-name="birth-place"]').html(result.addresses[0].fullAddress[Hsis.lang]);
-            } else {
-                $('body [data-name="birth-place"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-            }
-
-            if (result.addresses[0].type.value[Hsis.lang].length > 0) {
                 $('body [data-name="permanent_address"]').html(result.addresses[0].type.value[Hsis.lang]);
             } else {
-                $('body [data-name="permanent_address"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+                $('body [data-name="birth-place"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+                $('body [data-name="permanent_address"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
-            if (result.documents[0].type.value[Hsis.lang].length > 0) {
+            if (result.documents.length > 0) {
                 $('body [data-name="typeDocument"]').html(result.documents[0].type.value[Hsis.lang]);
-            } else {
-                $('body [data-name="typeDocument"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-            }
-
-
-            if (result.documents[0].serial.length > 0) {
                 $('body [data-name="seriesDocument"]').html(result.documents[0].serial);
-            } else {
-                $('body [data-name="seriesDocument"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-            }
-
-            if (result.documents[0].startDate.length > 0) {
                 $('body [data-name="numberDocument"]').html(result.documents[0].startDate);
-            } else {
-                $('body [data-name="numberDocument"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-            }
-
-
-            if (result.documents[0].number.length > 0) {
                 $('body [data-name="issueData"]').html(result.documents[0].number);
-            } else {
-                $('body [data-name="issueData"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-            }
-
-
-            if (result.documents[0].endDate.length > 0) {
                 $('body [data-name="endData"]').html(result.documents[0].endDate);
             } else {
-                $('body [data-name="issueData"]').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+                $('body [data-name="typeDocument"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+                $('body [data-name="seriesDocument"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+                $('body [data-name="numberDocument"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+                $('body [data-name="issueData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+                $('body [data-name="endData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
-            $('[data-name="citizen"]').html(result.citizenship.value[Hsis.lang]);
-            $('[data-name="status"]').html(result.pinCode);
-            $('[data-name="gender"]').html(result.gender.value[Hsis.lang]);
-            $('[data-name="family-status"]').html(result.maritalStatus.value[Hsis.lang]);
+            if(result.citizenship.length > 0){
+                $('body [data-name="citizen"]').html(result.citizenship.value[Hsis.lang]);
+            }else{
+                $('body [data-name="citizen"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
 
-            $('[data-name="birthday"]').html(result.birthDate);
-            $('[data-name="military"]').html(result.militaryService.value[Hsis.lang]);
-            $('[data-name="family-member"]').html(result.relations);
+            if(result.pinCode.length > 0){
+                $('body [data-name="status"]').html(result.pinCode);
+            }else{
+                $('body [data-name="status"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.gender.length > 0){
+                $('body [data-name="gender"]').html(result.gender.value[Hsis.lang]);
+            }else{
+                $('body [data-name="gender"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.maritalStatus.length > 0){
+                $('body [data-name="family-status"]').html(result.maritalStatus.value[Hsis.lang]);
+            }else{
+                $('body [data-name="family-status"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.birthDate.length > 0){
+                $('body [data-name="birthday"]').html(result.birthDate);
+            }else{
+                $('body [data-name="birthday"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.militaryService.length > 0){
+                $('body [data-name="military"]').html(result.militaryService.value[Hsis.lang]);
+            }else{
+                $('body [data-name="military"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+
+            if(result.relations.length > 0){
+                $('body [data-name="family-member"]').html(result.relations[0].type.value[Hsis.lang]);
+                $('body [data-name="family-member-name"]').html(result.relations[0].fullName);
+                $('body [data-name="family-member-number"]').html(result.relations[0].contactNumber);
+            }else{
+                $('body [data-name="family-member"]').html('<div style="display: inline-table; width: 33%" class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+                $('body [data-name="family-member-name"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+                $('body [data-name="family-member-number"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.registrationDates.length > 0){
+                $('body [data-name="RegistrationDate"]').html(result.registrationDates[0].date);
+                $('body [data-name="RegistrationNote"]').html(result.registrationDates[0].note);
+            }else{
+                $('body [data-name="RegistrationDate"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+                $('body [data-name="RegistrationNote"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.achievements.length > 0){
+                $('body [data-name="accomplishmentType"]').html(result.achievements[0].type.value[Hsis.lang]);
+                $('body [data-name="accomplishmentNote"]').html(result.achievements[0].note);
+            }else{
+                $('body [data-name="accomplishmentType"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+                $('body [data-name="accomplishmentNote"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.countryName.length > 0){
+                $('body [data-name="countryName"]').html(result.countryName);
+            }else{
+                $('body [data-name="countryName"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.cityName.length > 0){
+                $('body [data-name="cityName"]').html(result.cityName);
+            }else{
+                $('body [data-name="cityName"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.atmName.length > 0){
+                $('body [data-name="atmName"]').html(result.atmName);
+            }else{
+                $('body [data-name="atmName"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.eduLineId.length > 0){
+                $('body [data-name="eduLineId"]').html(result.eduLineId.value[Hsis.lang]);
+            }else{
+                $('body [data-name="eduLineId"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.abroadNumber.length > 0){
+                $('body [data-name="abroadNumber"]').html(result.abroadNumber);
+            }else{
+                $('body [data-name="abroadNumber"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.abroadStatus.length){
+                $('body [data-name="abroadStatus"]').html(result.abroadStatus.value[Hsis.lang]);
+            }else{
+                $('body [data-name="abroadStatus"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.actionDate.length > 0){
+                $('body [data-name="actionDate"]').html(result.actionDate);
+            }else{
+                $('body [data-name="actionDate"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.graduateDate.length > 0){
+                $('body [data-name="graduateDate"]').html(result.graduateDate);
+            }else{
+                $('body [data-name="graduateDate"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.eduPeriod.length > 0){
+                $('body [data-name="eduPeriod"]').html(result.eduPeriod);
+            }else{
+                $('body [data-name="eduPeriod"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.eduLangId.length > 0){
+                $('body [data-name="eduLangId"]').html(result.eduLangId.value[Hsis.lang]);
+            }else{
+                $('body [data-name="eduLangId"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.eduLevel.length > 0){
+                $('body [data-name="eduLevel"]').html(result.eduLevel.value[Hsis.lang]);
+            }else{
+                $('body [data-name="eduLevel"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.specDicrection.length > 0){
+                $('body [data-name="specDirection"]').html(result.specDicrection.value[Hsis.lang]);
+            }else{
+                $('body [data-name="specDirection"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+            if(result.spec.length > 0){
+                $('body [data-name="spec"]').html(result.spec.value[Hsis.lang]);
+            }else{
+                $('body [data-name="spec"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+
+            if(result.eduLifeCycleByOrgs.length > 0){
+                $('body [data-name="eduLifeCycleByOrg"]').html(result.eduLifeCycleByOrgs[0].name[Hsis.lang]);
+            }else{
+                $('body [data-name="eduLifeCycleByOrg"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+
+            if(result.pelcAction.length > 0){
+                $('body [data-name="eduLifeCycleByOrg"]').html(result.eduLifeCycleByOrgs[0].name[Hsis.lang]);
+                $('body [data-name="pelcActionActionType"]').html(result.pelcAction[0].actionType.value[Hsis.lang]);
+                $('body [data-name="pelcActionActionDate"]').html(result.pelcAction[0].actionDate);
+                $('body [data-name="pelcActionEndActionType"]').html(result.pelcAction[0].endActionType.value[Hsis.lang]);
+                $('body [data-name="pelcActionEndActionDate"]').html(result.pelcAction[0].endActionDate);
+            }else{
+                $('body [data-name="eduLifeCycleByOrg"]').html('<div style="width: 15%; display: inline-table" class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+                $('body [data-name="pelcActionActionType"]').html('<div style="width: 15%; display: inline-table" class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+                $('body [data-name="pelcActionActionDate"]').html('<div style="width: 15%; display: inline-table class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+                $('body [data-name="pelcActionEndActionType"]').html('<div style="width: 15%; display: inline-table class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+                $('body [data-name="pelcActionEndActionDate"]').html('<div style="width: 15%; display: inline-table class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+
+            /*if(result.message.length > 0){
+                $('[data-name="message"]').html(result.message);
+            }else{
+                $('body [data-name="message"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }*/
+
+
         },
         parseScholarshipPlan: function (plan) {
             if (plan) {
@@ -6249,12 +6382,13 @@ var Hsis = {
                 });
             });
         },
+
         parseOrder: function (data, page) {
             if (data) {
                 var html = '';
                 var count;
                 if (page) {
-                    count = $('.main-content-upd #order-list tbody tr').length;
+                    count = ($('.main-content-upd #order-list tbody tr').length * page) - $('.main-content-upd #order-list tbody tr').length;
                 } else {
                     count = 0;
                 }
@@ -6270,8 +6404,24 @@ var Hsis = {
                         '</tr>';
                 });
 
+
+                if(data.list.length > 0){
+                    $('span[data-group-count]').html(data.count);
+                    var paginationCount = Math.ceil(data.count / 20);
+                    $(".custom-pagination").empty();
+                    for (var tt = 0; tt < paginationCount; tt++) {
+                        var nmm = tt + 1;
+                        if (!page) page = 1;
+                        if (page === nmm) {
+                            $(".custom-pagination").append('<li class="page-item active"><a class="page-link" href="#">' + nmm + '</a></li>');
+                        } else {
+                            $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">' + nmm + '</a></li>');
+                        }
+                    }
+                    pagination(paginationCount, page - 1);
+                }
                 if (page) {
-                    $('body').find('#order-list tbody').append(html);
+                    $('body').find('#order-list tbody').html(html);
                 } else {
                     $('body').find('#order-list tbody').html(html);
                 }
@@ -6281,6 +6431,7 @@ var Hsis = {
                 }
             }
         },
+
         operation_1000058: function () { // teacher view
             $('#main-div').load('partials/teacher_view.html', function () {
                 Hsis.Proxy.getTeacherDetails(localStorage.personId, function (data) {

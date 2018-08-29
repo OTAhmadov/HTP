@@ -756,10 +756,10 @@
 //            });
 
             Hsis.Proxy.loadAddressTree(function (addressTree) {
-                //Hsis.Service.commonParseTree(addressTree, 'permanent_address_tree_edit');
-                //Hsis.Service.commonParseTree(addressTree, 'temporary_address_tree_edit');
+                Hsis.Service.commonParseTree(addressTree, 'permanent_address_tree_edit');
+                Hsis.Service.commonParseTree(addressTree, 'temporary_address_tree_edit');
                 Hsis.Service.commonParseTree(addressTree, 'birth_place_tree_edit');
-                //Hsis.Service.commonParseTree(addressTree, 'address_tree_id');
+                Hsis.Service.commonParseTree(addressTree, 'address_tree_id');
             });
 
 
