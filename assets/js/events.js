@@ -10304,14 +10304,17 @@ $(function () {
 
                         $('body .input-file-con .new-img-con').fadeIn(1);
                         if (data.image.file) {
-                            $('body .input-file-con .new-img-con img').attr('src', Hsis.urls.HSIS + 'students/image/' + (data.image.path ? data.image.path : '') + '?token=' + Hsis.token + '&size=200x200&' + Math.random());
-                            /*$('body .input-file-con .new-img-con img').on('error', function (e) {
+                             $('body .input-file-con .new-img-con img').attr('src', Hsis.urls.HSIS + 'students/image/' + (data.image.path ? data.image.path : '') + '?token=' + Hsis.token + '&size=200x200&' + Math.random());
+                           //an old version was comment
+                           //          |
+                           //          |
+
+                            $('body .input-file-con .new-img-con img').on('error', function (e) {
                                 $('.edit-common-info-image').attr('src', 'assets/img/guest.png');
-                            });*/
+                            });
                         } else {
                             var pinCode = $("#pincode").val();
                             Hsis.Proxy.getPersonInfoByPinCode(data.pinCode, function (data) {
-                                console.log(data);
                                 $('body .input-file-con .new-img-con img').attr('src', data.image.file);
                             });
 
