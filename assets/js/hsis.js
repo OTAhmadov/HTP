@@ -19,7 +19,7 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
-    // token: '9002e39ce06f406f8cee225eb375fd612221e9062edb43228bcf2a04b4e910ae',
+    // token: 'c77d6ad131e34f6da927e3b93467d570192cae1a5f7947a0ad01258c9a3e6299',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -1134,7 +1134,7 @@ var Hsis = {
         loadArchiveAbroadStudents: function (page, queryParams, callback, before, order) {
 
             $.ajax({
-                url: Hsis.urls.HTP + 'students/abroad/archive?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : '') + (order ? order : ''),
+                url: Hsis.urls.HTP + 'students/abroad/archive?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : '') + (order ? order : '') + '&pageSize=20',
                 type: 'GET',
                 beforeSend: function () {
                     if (before) {
@@ -5645,12 +5645,12 @@ var Hsis = {
                         '</tr>';
                 });
 
-                if ($('#main-div #load_more_div').children().length == 0) {
-                    $('#main-div #load_more_div').html('<button  data-table="dictionary" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]["load.more"] + '</button>');
-                }
+                // if ($('#main-div #load_more_div').children().length == 0) {
+                //     $('#main-div #load_more_div').html('<button  data-table="dictionary" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]["load.more"] + '</button>');
+                // }
 
                 if (page) {
-                    $('#users-table tbody').append(html);
+                    $('#users-table tbody').html(html);
                 }
                 else {
                     $('#users-table tbody').html(html);

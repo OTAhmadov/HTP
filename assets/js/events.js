@@ -4117,14 +4117,25 @@ $(function () {
                 });
             }else if (typeTable == 'abroad-structure-address') {
 
-                    var params = $('.main-content-upd .xtms-address-form').serialize();
-                    Hsis.Proxy.getAbroadAddress(page, params, function (data) {
+                var params = $('.main-content-upd .xtms-address-form').serialize();
+                Hsis.Proxy.getAbroadAddress(page, params, function (data) {
+                    $btn.attr('data-page', parseInt(page) + 1);
+                    $btn.prop('disabled', false);
+                    if (!data || data.length == 0) {
+                        $btn.remove();
+                    }
+                });
+            }else if (typeTable == 'abroad_student_list') {
+
+                    var params = $('.main-content-upd .sabah-form').serialize();
+                    Hsis.Proxy.loadArchiveAbroadStudents(page, params, function (data) {
                         $btn.attr('data-page', parseInt(page) + 1);
                         $btn.prop('disabled', false);
                         if (!data || data.length == 0) {
                             $btn.remove();
                         }
                     });
+
             } else if (typeTable == 'technical_module') {
                 var params = $('.main-content-upd .technical-search-form').serialize();
                 Hsis.Proxy.getTechnicalBaseList(page, params, function (data) {
