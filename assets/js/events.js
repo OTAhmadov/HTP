@@ -11501,10 +11501,10 @@ $(function () {
         /*var params = $('.student-search-form').serialize();*/
         var page =1;
         var button = $('body').find('[data-table="abroad_students"]');
-        if(button && button.attr('data-page')){
-            page = button.attr('data-page');
-        }
-        Hsis.Proxy.loadAbroadStudents(page,'&orderColumn=' + dataSort + '&orderType=desc');
+//        if(button && button.attr('data-page')){
+            page = button.find('li.active a').text();
+//        }
+        Hsis.Proxy.loadAbroadStudents(page,'orderColumn=' + dataSort + '&orderType=desc');
     });
 
     $('body').on('click', '#abroad_student_list th.desc', function () {
@@ -11515,10 +11515,35 @@ $(function () {
      //   var params = $('.student-search-form').serialize();
         var button = $('body').find('[data-table="abroad_students"]');
         var page =1;
-        if(button && button.attr('data-page')){
-            page = button.attr('data-page');
-        }
-        Hsis.Proxy.loadAbroadStudents(page, '&orderColumn=' + dataSort + '&orderType=asc');
+        page = button.find('li.active a').text();
+        Hsis.Proxy.loadAbroadStudents(page, 'orderColumn=' + dataSort + '&orderType=asc');
+    });
+    $('body').on('click', '#abroad_structure_table th.asc', function () {
+        var dataSort = $(this).attr('data-sort');
+        $(this).removeClass('asc').addClass('desc');
+        $('body').find('.table th i').css('display', 'none');
+        $(this).find('i').css('display', 'inline-block');
+        /*var params = $('.student-search-form').serialize();*/
+        var page =1;
+        var button = $('body').find('[data-table="abroad_structure_table"]');
+//        if(button && button.attr('data-page')){
+            page = button.find('li.active a').text();
+//        }
+        Hsis.Proxy.getAbroadStructure(page, 'orderColumn=' + dataSort + '&orderType=desc');
+    });
+
+    $('body').on('click', '#abroad_structure_table th.desc', function () {
+        var dataSort = $(this).attr('data-sort');
+        $(this).removeClass('desc').addClass('asc');
+        $('body').find('.table th i').css('display', 'none');
+        $(this).find('i').css('display', 'inline-block');
+     //   var params = $('.student-search-form').serialize();
+        var page = 1;
+        var button = $('body').find('[data-table="abroad_structure_table"]');
+//        if(button && button.attr('data-page')){
+            page = button.find('li.active a').text();
+//        }
+        Hsis.Proxy.getAbroadStructure(page, 'orderColumn=' + dataSort + '&orderType=asc');
     });
 
     $('body').on('click', '#operation_1001447', function () {
