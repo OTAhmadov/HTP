@@ -21049,7 +21049,7 @@ th.for-upload {
     display: block;
     width: 30px;
     height: 30px;
-    background-image: url(../img/pdf-s.png);
+    background-image: url('../img/pdf-s.png');
 }
 
 .upload-img {
@@ -21071,7 +21071,7 @@ th.for-upload {
     color: black;
     width: 100%;
     height: 100%;
-    background-image: url(../img/guest.png);
+    background-image: url('../img/guest.png');
 }
 
 .for-align .table-block {

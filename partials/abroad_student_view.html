@@ -556,7 +556,7 @@
                                         <div class="col-md-6">
                                             <div org-id class="form-group">
                                                 <label for="orgId">İxtisas</label>
-                                                <div class="prepend-icon data-progress-org-id" data-progress-org-id>
+                                                <div class="prepend-icon data-progress-org-id" >
                                                     <!--<select id ="speciality" class="form-control" data-required></select> -->
                                                     <!--<i class="fa fa-university"></i>-->
                                                     <label class="left-padding" id="speciality" for="orgId"></label>
@@ -682,6 +682,42 @@
         </div>
     </div>
     </div>
+
+
+    <!--<button type="button" class="btn btn-primary open-file" data-toggle="modal" data-target="#exampleModal">-->
+        <!--Open file-->
+    <!--</button>-->
+
+    <!-- Modal -->
+    <div class="modal fade open-file-modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!--<object data="http://192.168.1.78:8082/UnibookHsisRest/students/file/1000896?fileType=1&token=de31591681f84891b3dbd90d468dbff780d6d2299b714c579333eb2e0a93a774" type="application/pdf">-->
+                        <!--<iframe frameborder="0" scrolling="no"></iframe>-->
+                    <!--</object>-->
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="loader"><img src="./assets/img/loading.gif" alt=""></div>
+
+
+
     <script>
 
         $(function () {

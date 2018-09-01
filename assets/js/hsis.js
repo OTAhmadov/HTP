@@ -19,7 +19,7 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
-    // token: 'c77d6ad131e34f6da927e3b93467d570192cae1a5f7947a0ad01258c9a3e6299',
+    // token: 'de31591681f84891b3dbd90d468dbff780d6d2299b714c579333eb2e0a93a774',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -5006,7 +5006,7 @@ var Hsis = {
                         } else if (type == '2') {
                             if ($obj) {
                                 var statusId = $obj.status ? $obj.status.id : 0;
-                                if ((v.id == 1000042 || v.id == 1000041) && statusId == 1000340) {
+                                if ((v.id == 1000042 || v.id == 1000041 || v.id == 1001420 || v.id == 1001440 || v.id == 1001441 || v.id == 1001424 ) && statusId == 1000340) {
                                     html += '';
                                 } else if ((v.id == 1000028
                                     // || v.id == 1000032
@@ -5195,13 +5195,13 @@ var Hsis = {
                             '</div>' +
                             '</div>';
 
-
                         if (v.files.length > 0) {
                             html += '<div class = "student-doc-file-div">';
                             $.each(v.files, function (k, j) {
+                                var type = j.path.split(".")[j.path.split(".").length - 1];
                                 html += '<div class="user-doc-file" data-file-id = "' + j.id + '" data-file-path = "' + j.path + '">' +
                                     '<div class="doc-delete">✖</div>' +
-                                    '<img src="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
+                                    '<img data-type = "'+getFileType(type)+'" src="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
                                     '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?fileType=1&token=' + Hsis.token + '" download = "' + j.originalName + '"><img src="assets/img/upload-img.png" width="20" height="20"></a></div>' +
                                     '</div>';
                             });
@@ -5250,8 +5250,10 @@ var Hsis = {
                         if (v.files.length > 0) {
                             html += '<div class = "student-doc-file-div">';
                             $.each(v.files, function (k, j) {
+                                var type = j.path.split(".")[j.path.split(".").length - 1];
+                                console.log(type);
                                 html += '<div class="user-doc-file">' +
-                                    '<img src="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
+                                    '<img  data-type = "'+getFileType(type)+'" src="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
                                     '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?fileType=1&token=' + Hsis.token + '" target="_blank"><img src="assets/img/upload-img.png" width="20" height="20"></a></div>' +
                                     '</div>';
                             });
@@ -6361,8 +6363,11 @@ var Hsis = {
                         $('#main-div #graduate_date').text(data.graduateDate);
                         $('#main-div #edu-period').text(data.eduPeriod);
                         $('#main-div #status').text(data.abroadStatus.value[Hsis.lang]);
+
                         $('#main-div #speciality').text(data.spec.value[Hsis.lang]);
+
                         $('#main-div #spec_direction').text(data.specDicrection.value[Hsis.lang]);
+
                         $('#main-div #note').text(data.note);
 
 
@@ -6377,8 +6382,6 @@ var Hsis = {
                             Hsis.Service.parseViewAbroadStudentRegistrationDate(data.registrationDates);
                         }
                     }
-
-
                 });
             });
         },

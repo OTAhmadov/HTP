@@ -10378,6 +10378,7 @@ $(function () {
                         Hsis.Proxy.loadDictionariesByTypeId('1000092', 0, function (archivement) {
                             var html = Hsis.Service.parseDictionaryForSelect(archivement);
                             $('#main-div #speciality').html(html);
+
                             $('#main-div #speciality').val(data.spec.id);
                         });
                         
@@ -11470,6 +11471,7 @@ $(function () {
                         cityId: $('#main-div #foreign_city').val(),
                         atmId: $('#main-div #foreign_university').val(),
                         specDirectionId: $('#main-div #spec_direction').val()
+
                     };
 
 
@@ -11547,11 +11549,60 @@ $(function () {
        
     });
 
-    
-    
+    $('body').on('click', '.user-doc-file img', function() {
+        $(".loader").fadeIn();
+        var type = $(this).attr('data-type');
+        var path = $(this).attr('src');
+        var html = '<embed src="'+path+'" type="'+type+'" class="centerloader"/>';
+        $('body .open-file-modal .modal-body').html(html);
+        $('body .open-file-modal').modal('show');
+    })
+
 });
 
+$(".centerloader").on("load",function() {
+        $(".loader").fadeOut();
+});
+
+// function openFile(){
+//     $('.open-file-modal').find('.modal-body iframe').attr('src','https://docs.google.com/viewer?url=http://192.168.1.78:8082/UnibookHsisRest/students/file/1000896?fileType=1&token=de31591681f84891b3dbd90d468dbff780d6d2299b714c579333eb2e0a93a774&embedded=true');
 //
+// }
+
+
+function getFileType(type) {
+    var fileType = '';
+    switch (type) {
+        case 'pdf':
+            fileType = 'application/pdf';
+            break;
+        case 'jpg':
+            fileType = 'image/png';
+            break;
+        case 'docx':
+            fileType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+            break;
+        case 'doc':
+            fileType = 'application/msword';
+            break;
+        case 'xls':
+            fileType = 'application/vnd.ms-excel';
+            break;
+        default:
+            fileType = 'image/png';
+            break;
+    }
+    return fileType;
+
+}
+
+
+/*$('body .open-file-modal').on("load",function () {
+
+    $(".open-file-modal").modal('show');
+});*/
+
+
 // $(window).resize(function () {
 //     var width = window.innerWidth;
 //     if(width > 1500) {
