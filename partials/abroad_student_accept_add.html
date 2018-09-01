@@ -465,7 +465,7 @@
                                 <div class="col-md-6">
                                     <div org-id class="form-group">
                                         <label for="orgId">İxtisas</label>
-                                        <div class="prepend-icon data-progress-org-id" data-progress-org-id>
+                                        <div class="prepend-icon data-progress-org-id" >
                                             <select id ="speciality" class="form-control" data-required></select>
                                             <i class="fa fa-university"></i>
                                         </div>
@@ -1173,8 +1173,7 @@
             $('.add-new').css('right', '-100%');
         });
 
-        $('body').find('#foreign_country, #foreign_city, #foreign_university').select2();
-
+        $('body').find('#foreign_country, #foreign_city, #foreign_university, #speciality, #spec_direction, #edu_line').select2();
 
 
         if (!$('#main-div').attr('data-check-work')) {

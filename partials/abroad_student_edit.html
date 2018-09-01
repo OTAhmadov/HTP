@@ -502,11 +502,12 @@
                         <div class="panel-title registration-date-div">
                             <div class="panel-heading aca_info">
                                 <h3 class="panel-title">İllik qeydiyyat</h3>
-                                <div style="margin-top: -24px !important; right: 20px;" class="add-new add-new-registr-date add-registr" data-type="edit">
+                                <div style="margin-top: -24px !important; right: 20px;"
+                                     class="add-new add-new-registr-date add-registr" data-type="edit">
                                     <!--style="right: 0!important; top: 18px!important; z-index: 99;"-->
                                     <!--<h3 class="panel-title">İllik qeydiyyat</h3>-->
                                     <div class="add-new add-new-registr-date add-registr"
-                                          data-type="edit" style="right: 22px;">
+                                         data-type="edit" style="right: 22px;">
                                         <!--style="right: 0!important; top: 18px!important; z-index: 99;"-->
                                         <img src="assets/img/AddNew.png" alt="" width="20" height="20">
                                     </div>
@@ -525,64 +526,53 @@
                                                     <span aria-hidden="true">&times;</span></button>
                                                 <h4 class="modal-title">Qeydiyyat tarixi</h4>
                                             </div>
+                                            <!--<div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <h4 class="modal-title">İllik qeydiyyat</h4>
+                                            </div>-->
                                             <div class="modal-body">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close"><span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                    <h4 class="modal-title">İllik qeydiyyat</h4>
+                                                <div class="form-group">
+                                                    <label for="registration_date">Tarix</label>
+                                                    <div class="prepend-icon">
+                                                        <input registration-date-required id="registration_date"
+                                                               class="form-control datepicker"
+                                                               data-date-format="dd/mm/yyyy"
+                                                               placeholder="Qeydiyyat tarixi"/>
+                                                        <i class="glyphicon glyphicon-user"></i>
+                                                    </div>
                                                 </div>
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <label for="registration_date">Tarix</label>
-                                                        <div class="prepend-icon">
-                                                            <input registration-date-required id="registration_date"
-                                                                   class="form-control datepicker"
-                                                                   data-date-format="dd/mm/yyyy"
-                                                                   placeholder="Qeydiyyat tarixi"/>
-                                                            <i class="glyphicon glyphicon-user"></i>
-                                                        </div>
-
+                                                <!--<label for="registration_date_note">Qeyd</label>
+                                                <div class="prepend-icon">
+                                                    <textarea id="registration_date_note" class="form-control"></textarea>
+                                                </div>-->
+                                                <div class="form-group">
+                                                    <label for="registration_date">Yaşayış xərci</label>
+                                                    <div class="prepend-icon">
+                                                        <input id="live_cost" class="form-control"
+                                                               placeholder="Yaşayış xərci"/>
+                                                        <i class="glyphicon glyphicon-user"></i>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="registration_date_note">Qeyd</label>
-                                                        <div class="prepend-icon">
-                                                            <textarea id="registration_date_note" class="form-control"></textarea>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="registration_date">Yaşayış xərci</label>
-                                                            <div class="prepend-icon">
-                                                                <input id="live_cost" class="form-control"
-                                                                       placeholder="Yaşayış xərci"/>
-                                                                <i class="glyphicon glyphicon-user"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="registration_date">Yol xərci</label>
-                                                            <div class="prepend-icon">
-                                                                <input id="road_cost" class="form-control"
-                                                                       placeholder="Yol xərci"/>
-                                                                <i class="glyphicon glyphicon-user"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="registration_date_note">Qeyd</label>
-                                                            <div class="prepend-icon">
-                                                                <textarea id="registration_date_note" class="form-control"> </textarea>
-                                                            </div>
-                                                        </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="registration_date">Yol xərci</label>
+                                                    <div class="prepend-icon">
+                                                        <input id="road_cost" class="form-control"
+                                                               placeholder="Yol xərci"/>
+                                                        <i class="glyphicon glyphicon-user"></i>
                                                     </div>
-                                                    <div class="modal-footer flex-img">
-                                                        <button data-i18n="ok" type="button"
-                                                                class="btn btn-primary add-registration-date-submit">
-                                                            OK
-                                                        </button>
-                                                        <button data-i18n="cancel" type="button"
-                                                                class="btn btn-danger"
-                                                                data-dismiss="modal" aria-label="Close">Cancel
-                                                        </button>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="registration_date_note">Qeyd</label>
+                                                    <div class="prepend-icon">
+                                                        <textarea id="registration_date_note"
+                                                                  class="form-control"> </textarea>
                                                     </div>
+                                                </div>
+                                                <div class="modal-footer flex-img">
+                                                    <button data-i18n="ok" type="button" class="btn btn-primary add-registration-date-submit">OK</button>
+                                                    <button data-i18n="cancel" type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -808,8 +798,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="orgId">İxtisas</label>
-                                                    <div class="prepend-icon data-progress-org-id"
-                                                         data-progress-org-id>
+                                                    <div class="prepend-icon data-progress-org-id" >
                                                         <select academic-required id="speciality"
                                                                 class="form-control"
                                                                 data-required></select>

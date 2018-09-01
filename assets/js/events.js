@@ -2692,6 +2692,7 @@ $(function () {
     })
 
     $('body').on('click', '#get_birth_place_edit', function () {
+        alert('1');
         try {
             var addrTreeId = $('#birth_place_tree_edit').find('li[aria-selected="true"]').attr('id') ? $('#birth_place_tree_edit').find('li[aria-selected="true"]').attr('id') : $('#birth_place_edit').attr('data-addresstree-id');
             var addrTypeId = $('#birth_place_edit').attr('data-address-type-id');
@@ -2704,7 +2705,8 @@ $(function () {
             address.treeId = addrTreeId;
 
             if (moduleType === 'E') {
-                Hsis.Proxy.editTeacherAddress(address, function (code) {
+                /*Hsis.Proxy.editTeacherAddress(address, function (code) {
+                    alert('3');
                     if (code == Hsis.statusCodes.OK) {
                         var text = $('#main-div #birth_place_edit').attr('data-node-text');
                         var id = $('#main-div').attr('data-id');
@@ -2714,9 +2716,10 @@ $(function () {
                         });
                     }
 
-                });
+                });*/
             } else {
                 Hsis.Proxy.editStudentAddress(address, function (code) {
+                    alert('4');
                     if (code == Hsis.statusCodes.OK) {
                         var text = $('#main-div #birth_place_edit').attr('data-node-text');
                         var id = $('#main-div').attr('data-id');
@@ -2960,10 +2963,6 @@ $(function () {
                                 if (data.schoolDocuments.length > 0) {
                                     $('#past_edu_doc').html(Hsis.Service.parseEditStudentDocument(data.schoolDocuments, school));
                                 }
-
-
-
-
 
                             })
                         }
@@ -3950,13 +3949,15 @@ $(function () {
     $('body').on('click', '.page-item', function (e) {
 
         try {
-            $(".custom-pagination").find("li").removeClass("active");
+            $(".custom-pagination").find("li").removeClass("current");
+            // $(".custom-pagination").find("li").addClass("current");
             var pageNumber = $(this).index() + 1;
             var typeTable = $(this).parents(".custom-pagination").attr('data-table');
             var $btn = $(this);
-            $btn.addClass('active');
+            // $btn.addClass('active');
             var type = $btn.attr('data-page');
             var page = parseInt(pageNumber);
+
             var studKeyword = $('#student_search').val();
             var groupKeyword = $('#group_search').val();
             var studQueryparams = $('.main-content-upd .student-search-form').serialize() + '&subModuleId=' + Hsis.subModuleId;
@@ -4066,9 +4067,7 @@ $(function () {
                             $btn.remove();
                         }
                     });
-
                 }
-
             } else if (typeTable == 'academic_groups') {
                 Hsis.Proxy.loadAcademicGroups(page, groupParams + '&keyword=' + groupKeyword, function (data) {
                     $btn.attr('data-page', parseInt(page) + 1);
@@ -4107,6 +4106,7 @@ $(function () {
                 });
             //loadStructure
             }else if (typeTable == 'abroad_structure_table') {
+
                 var params = $('.main-content-upd .xtms-structure-form').serialize();
                 Hsis.Proxy.loadStructure(page, params, function (data) {
                     $btn.attr('data-page', parseInt(page) + 1);
@@ -4116,14 +4116,26 @@ $(function () {
                     }
                 });
             }else if (typeTable == 'abroad-structure-address') {
-                    var params = $('.main-content-upd .xtms-address-form').serialize();
-                    Hsis.Proxy.getAbroadAddress(page, params, function (data) {
+
+                var params = $('.main-content-upd .xtms-address-form').serialize();
+                Hsis.Proxy.getAbroadAddress(page, params, function (data) {
+                    $btn.attr('data-page', parseInt(page) + 1);
+                    $btn.prop('disabled', false);
+                    if (!data || data.length == 0) {
+                        $btn.remove();
+                    }
+                });
+            }else if (typeTable == 'abroad_student_list') {
+
+                    var params = $('.main-content-upd .sabah-form').serialize();
+                    Hsis.Proxy.loadArchiveAbroadStudents(page, params, function (data) {
                         $btn.attr('data-page', parseInt(page) + 1);
                         $btn.prop('disabled', false);
                         if (!data || data.length == 0) {
                             $btn.remove();
                         }
                     });
+
             } else if (typeTable == 'technical_module') {
                 var params = $('.main-content-upd .technical-search-form').serialize();
                 Hsis.Proxy.getTechnicalBaseList(page, params, function (data) {
@@ -9904,7 +9916,7 @@ $(function () {
         $('#main-div #registration_date').val('');
         $('#main-div #registration_date_note').val('');
         $('#main-div .add-registration-date-modal').modal("show");
-    })
+    });
 
     $('body').on('click', '.add-new-achievement', function () {
         var type = $(this).attr('data-type');
@@ -10292,14 +10304,17 @@ $(function () {
 
                         $('body .input-file-con .new-img-con').fadeIn(1);
                         if (data.image.file) {
-                            $('body .input-file-con .new-img-con img').attr('src', Hsis.urls.HSIS + 'students/image/' + (data.image.path ? data.image.path : '') + '?token=' + Hsis.token + '&size=200x200&' + Math.random());
-                            /*$('body .input-file-con .new-img-con img').on('error', function (e) {
+                             $('body .input-file-con .new-img-con img').attr('src', Hsis.urls.HSIS + 'students/image/' + (data.image.path ? data.image.path : '') + '?token=' + Hsis.token + '&size=200x200&' + Math.random());
+                           //an old version was comment
+                           //          |
+                           //          |
+
+                            $('body .input-file-con .new-img-con img').on('error', function (e) {
                                 $('.edit-common-info-image').attr('src', 'assets/img/guest.png');
-                            });*/
+                            });
                         } else {
                             var pinCode = $("#pincode").val();
                             Hsis.Proxy.getPersonInfoByPinCode(data.pinCode, function (data) {
-                                console.log(data);
                                 $('body .input-file-con .new-img-con img').attr('src', data.image.file);
                             });
 
@@ -10363,6 +10378,7 @@ $(function () {
                         Hsis.Proxy.loadDictionariesByTypeId('1000092', 0, function (archivement) {
                             var html = Hsis.Service.parseDictionaryForSelect(archivement);
                             $('#main-div #speciality').html(html);
+
                             $('#main-div #speciality').val(data.spec.id);
                         });
                         
@@ -10606,7 +10622,6 @@ $(function () {
                         $('#military_status').attr('disabled', 'disabled');
                         $('.date-birthdate').attr('disabled', 'disabled');
                     }
-
 
                 });
             });
@@ -11456,6 +11471,7 @@ $(function () {
                         cityId: $('#main-div #foreign_city').val(),
                         atmId: $('#main-div #foreign_university').val(),
                         specDirectionId: $('#main-div #spec_direction').val()
+
                     };
 
 
@@ -11558,11 +11574,60 @@ $(function () {
        
     });
 
-    
-    
+    $('body').on('click', '.user-doc-file img', function() {
+        $(".loader").fadeIn();
+        var type = $(this).attr('data-type');
+        var path = $(this).attr('src');
+        var html = '<embed src="'+path+'" type="'+type+'" class="centerloader"/>';
+        $('body .open-file-modal .modal-body').html(html);
+        $('body .open-file-modal').modal('show');
+    })
+
 });
 
+$(".centerloader").on("load",function() {
+        $(".loader").fadeOut();
+});
+
+// function openFile(){
+//     $('.open-file-modal').find('.modal-body iframe').attr('src','https://docs.google.com/viewer?url=http://192.168.1.78:8082/UnibookHsisRest/students/file/1000896?fileType=1&token=de31591681f84891b3dbd90d468dbff780d6d2299b714c579333eb2e0a93a774&embedded=true');
 //
+// }
+
+
+function getFileType(type) {
+    var fileType = '';
+    switch (type) {
+        case 'pdf':
+            fileType = 'application/pdf';
+            break;
+        case 'jpg':
+            fileType = 'image/png';
+            break;
+        case 'docx':
+            fileType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+            break;
+        case 'doc':
+            fileType = 'application/msword';
+            break;
+        case 'xls':
+            fileType = 'application/vnd.ms-excel';
+            break;
+        default:
+            fileType = 'image/png';
+            break;
+    }
+    return fileType;
+
+}
+
+
+/*$('body .open-file-modal').on("load",function () {
+
+    $(".open-file-modal").modal('show');
+});*/
+
+
 // $(window).resize(function () {
 //     var width = window.innerWidth;
 //     if(width > 1500) {
