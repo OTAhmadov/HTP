@@ -19,7 +19,7 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
-    // token: 'de31591681f84891b3dbd90d468dbff780d6d2299b714c579333eb2e0a93a774',
+    // token: '8d10e2e6b8b44b4086d06d7661e07ebf739148750bd943b5976255111f941abe',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -2595,11 +2595,11 @@ var Hsis = {
                         switch (result.code) {
                             case Hsis.statusCodes.OK:
                                 if (result.data) {
-                                    var div = $('.space-for-footer .flex-input');
+
+                                    /*var div = $('.space-for-footer .flex-input');
                                     if (div.html().trim().length == 0) {
-                                        var html = '<button  data-i18n="load.more" data-table="abroad_structure_module" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]['load.more'] + '</button>';
-                                        div.html(html);
-                                    }
+
+                                    }*/
                                 }
                                 Hsis.Service.loadAbroadStructures(result.data, page);
                                 if (callback)
@@ -2631,11 +2631,11 @@ var Hsis = {
                         switch (result.code) {
                             case Hsis.statusCodes.OK:
                                 if (result.data) {
-                                    var div = $('.space-for-footer .flex-input');
+                                    /*var div = $('.space-for-footer .flex-input');
                                     if (div.html().trim().length == 0) {
                                         var html = '<button  data-i18n="load.more" data-table="abroad-structure-address_module" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]['load.more'] + '</button>';
                                         div.html(html);
-                                    }
+                                    }*/
                                 }
                                 Hsis.Service.loadAbroadAddress(result.data, page);
                                 if (callback)
@@ -4778,7 +4778,8 @@ var Hsis = {
         },
         // loadcity parse  to module_1000131
         loadAbroadStructures: function (data, page) {
-            if (data && data.list) {
+
+            if (data && data.list ) {
                 var html = '';
                 var count;
                 if (page) {
@@ -4786,36 +4787,40 @@ var Hsis = {
                 } else {
                     count = 0;
                 }
-                $.each(data.list, function (i, v) {
-                    html += '<tr data-id ="' + v.id + '" data-country-id ="' + v.abroadCountry.id + '" data-city-id ="' + v.abroadCity.id + '" data-uni-name="' + v.name[Hsis.lang] + '">' +
-                        '<td>' + ++count + '</td>' +
-                        '<td>' + v.abroadCountry.value[Hsis.lang] + '</td>' +
-                        '<td>' + v.abroadCity.value[Hsis.lang] + '</td>' +
-                        '<td>' + v.name[Hsis.lang] + '</td>' +
-                        '<td>' + Hsis.Service.parseOperations(Hsis.operationList, 2) + '</td>' +
-                        '</tr>';
-                });
+                if(data.list.length > 0) {
+                    $.each(data.list, function (i, v) {
+                        html += '<tr data-id ="' + v.id + '" data-country-id ="' + v.abroadCountry.id + '" data-city-id ="' + v.abroadCity.id + '" data-uni-name="' + v.name[Hsis.lang] + '">' +
+                            '<td>' + ++count + '</td>' +
+                            '<td>' + v.abroadCountry.value[Hsis.lang] + '</td>' +
+                            '<td>' + v.abroadCity.value[Hsis.lang] + '</td>' +
+                            '<td>' + v.name[Hsis.lang] + '</td>' +
+                            '<td>' + Hsis.Service.parseOperations(Hsis.operationList, 2) + '</td>' +
+                            '</tr>';
+                    });
+                }
+
 
                 if (page) {
                     $('body').find('#abroad_structure_table tbody').html(html);
                 } else {
                     $('body').find('#abroad_structure_table tbody').html(html);
                 }
-                if (data.count > 0) {
-                    $('span.head-total').html(data.count);
-                    var paginationCount = Math.ceil(data.count / 20);
-                    $(".custom-pagination").empty();
-                    for (var tt = 0; tt < paginationCount; tt++) {
-                        var nmm = tt + 1;
-                        if (!page) page = 1;
-                        if (page === nmm) {
-                            $(".custom-pagination").append('<li class="page-item active"><a class="page-link" href="#">' + nmm + '</a></li>');
-                        } else {
-                            $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">' + nmm + '</a></li>');
-                        }
+
+              //  if (data.count) {
+                $('span.head-total').html(data.count);
+                var paginationCount = Math.ceil(data.count / 20);
+                $(".custom-pagination").empty();
+                for (var tt = 0; tt < paginationCount; tt++) {
+                    var nmm = tt + 1;
+                    if (!page) page = 1;
+                    if (page === nmm) {
+                        $(".custom-pagination").append('<li class="page-item active"><a class="page-link" href="#">' + nmm + '</a></li>');
+                    } else {
+                        $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">' + nmm + '</a></li>');
                     }
-                    pagination(paginationCount, page - 1);
                 }
+                pagination(paginationCount, page - 1);
+               // }
             }
         },
         //parse to module_1000132
@@ -4847,7 +4852,7 @@ var Hsis = {
                     $('body').find('#abroad-structure-address tbody').html(html);
                 }
 
-                if (data.count > 0) {
+                // if (data.count > 0) {
                     $('span.head-total').html(data.count);
                     var paginationCount = Math.ceil(data.count / 20);
                     $(".custom-pagination").empty();
@@ -4861,7 +4866,7 @@ var Hsis = {
                         }
                     }
                     pagination(paginationCount, page - 1);
-                }
+                // }
 
 
                 /* if ($('#main-div #load_more_div').children().length == 0) {
@@ -5663,7 +5668,7 @@ var Hsis = {
         },
 
         parseAbroadStudents: function (data, page) {
-            if (data) {
+            if (data && data.studentList) {
                 var html = '';
                 var count;
 
@@ -5673,9 +5678,9 @@ var Hsis = {
                     count = 0;
                 }
 
-                var ref = data.studentList ? data.studentList : data;
-                if (ref.length > 0) {
-                    $.each(ref, function (i, v) {
+                // var ref = data.studentList ? data.studentList : data;
+                if (data.studentList.length) {
+                    $.each(data.studentList, function (i, v) {
                         html += '<tr data-image = "' + (v.imagePath ? v.imagePath : '') + '" data-note = "' + v.note + '" data-abroad-number="' + v.abroadNumber + '" data-pelc-id="' + v.pelcId + '" data-id="' + v.id + '" data-firstname ="' + v.firstName + '" data-lastname ="' + v.lastName + '" data-university="' + (v.eduLifeCycleByOrgs ? v.eduLifeCycleByOrgs[0].name[Hsis.lang] : "") + '">' +
                             '<td>' + (++count) + '</td>' +
                             '<td style="white-space: pre-line;">' + v.abroadNumber + '</td>' +
@@ -5691,7 +5696,7 @@ var Hsis = {
                             //                                '<td>' + v.gender.value[Hsis.lang] + '</td>' +
                             '</tr>';
                     });
-                    if (data.studentCount > 0) {
+                    // if (data.studentCount > 0) {
                         $('span[data-student-count]').html(data.studentCount);
                         var paginationCount = Math.ceil(data.studentCount / 20);
                         $(".custom-pagination").empty();
@@ -5705,12 +5710,12 @@ var Hsis = {
                             }
                         }
                         pagination(paginationCount, page - 1);
-                    }
+                    // }
 
 
-                    if ($('#main-div #load_more_div').children().length == 0) {
-                        $('#main-div #load_more_div').html('<button  data-table="abroad_students" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]["load.more"] + '</button>');
-                    }
+                    // if ($('#main-div #load_more_div').children().length == 0) {
+                    //     $('#main-div #load_more_div').html('<button  data-table="abroad_students" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]["load.more"] + '</button>');
+                    // }
                 } else {
                     $('span[data-student-count]').html(0);
                 }
@@ -6364,16 +6369,18 @@ var Hsis = {
                         $('#main-div #edu-period').text(data.eduPeriod);
                         $('#main-div #status').text(data.abroadStatus.value[Hsis.lang]);
 
-                        $('#main-div #speciality').text(data.spec.value[Hsis.lang]);
 
-                        $('#main-div #spec_direction').text(data.specDicrection.value[Hsis.lang]);
+                        $('#main-div #speciality').text(data.specDicrection.value[Hsis.lang]);
+                        // console.log(data.spec.value[Hsis.lang]);
+                        $('#main-div #spec_direction').text(data.spec.value[Hsis.lang]);
+                        // console.log(data.specDicrection.value[Hsis.lang]);
 
                         $('#main-div #note').text(data.note);
 
 
-                        $('#main-div #foreign_country').text(data.countryName)
-                        $('#main-div #foreign_city').text(data.cityName)
-                        $('#main-div #foreign_university').text(data.atmName)
+                        $('#main-div #foreign_country').text(data.countryName);
+                        $('#main-div #foreign_city').text(data.cityName);
+                        $('#main-div #foreign_university').text(data.atmName);
 
                         if (data.achievements) {
                             Hsis.Service.parseViewAbroadStudentAchievement(data.achievements)
@@ -6408,21 +6415,21 @@ var Hsis = {
                 });
 
 
-                if(data.list.length > 0){
-                    $('span[data-group-count]').html(data.count);
-                    var paginationCount = Math.ceil(data.count / 20);
-                    $(".custom-pagination").empty();
-                    for (var tt = 0; tt < paginationCount; tt++) {
-                        var nmm = tt + 1;
-                        if (!page) page = 1;
-                        if (page === nmm) {
-                            $(".custom-pagination").append('<li class="page-item active"><a class="page-link" href="#">' + nmm + '</a></li>');
-                        } else {
-                            $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">' + nmm + '</a></li>');
-                        }
+                // if(data.list.length > 0){
+                $('span[data-group-count]').html(data.count);
+                var paginationCount = Math.ceil(data.count / 20);
+                $(".custom-pagination").empty();
+                for (var tt = 0; tt < paginationCount; tt++) {
+                    var nmm = tt + 1;
+                    if (!page) page = 1;
+                    if (page === nmm) {
+                        $(".custom-pagination").append('<li class="page-item active"><a class="page-link" href="#">' + nmm + '</a></li>');
+                    } else {
+                        $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">' + nmm + '</a></li>');
                     }
-                    pagination(paginationCount, page - 1);
                 }
+                pagination(paginationCount, page - 1);
+                // }
                 if (page) {
                     $('body').find('#order-list tbody').html(html);
                 } else {

@@ -3873,6 +3873,9 @@ $(function () {
                     $('.xtms-structure-form input[name="keyWord"]').val('');
                     var params = $('.main-content-upd .xtms-structure-form').serialize();
                     Hsis.Proxy.loadStructure('', params);
+
+                    // let pagination = $('.custom-pagination');
+                    // pagination.css("display", "none");
                 }
             }
         } catch (err) {
