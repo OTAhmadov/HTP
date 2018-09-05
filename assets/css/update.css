@@ -1426,7 +1426,7 @@ div[class$="-info"]{
     overflow-y: visible;
 }
 #tab1 .add-new {
-    top: 62px !important;
+    /*top: 62px;*/
     right: 0 !important;  
 }
 
@@ -1466,7 +1466,7 @@ div.add-document-new {
     margin-bottom: 20px !important;
 }
 div[class$="-info"] .panel-body .add-New {
-    top: 40px !important;
+    /*top: 40px !important;*/
 }
 
 .tab-content .tree-modal-container .modal-content {
