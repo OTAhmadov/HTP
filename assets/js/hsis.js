@@ -19,7 +19,7 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
-    // token: '8d10e2e6b8b44b4086d06d7661e07ebf739148750bd943b5976255111f941abe',
+    // token: '53e8defae4a644f1943ca705c1c1ca4fe16b6ca5a6df4b7ea6363a4880288648',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -5751,7 +5751,7 @@ var Hsis = {
             });*/
 
             if (result.addresses.length > 0) {
-                $('body [data-name="birth-place"]').html(result.addresses[0].fullAddress[Hsis.lang]);
+                $('body [data-name="birth-place"]').html(result.addresses.fullAddress[Hsis.lang]);
                 $('body [data-name="permanent_address"]').html(result.addresses[0].type.value[Hsis.lang]);
             } else {
                 $('body [data-name="birth-place"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
@@ -7055,28 +7055,28 @@ var Hsis = {
     },
     WebSocket: {
 
-        connect: function () {
-            var name = $('.namename').val();
-            var socket = new SockJS(Hsis.urls.SOCKET + '/chat');
-            Hsis.stompClient = Stomp.over(socket);
-            Hsis.stompClient.connect({'Login': Hsis.token}, function (frame) {
-                var sessionId = /\/([^\/]+)\/websocket/.exec(socket._transport.url)[1];
-//                    console.log("connected, session id: " + sessionId);
-                Hsis.stompClient.subscribe('/topic/messages/' + sessionId, function (messageOutput) {
-                    $('body .notification').removeClass('hidden');
 
-                });
-            });
-        },
+        /*        connect: function () {
+                    var name = $('.namename').val();
+                    // var socket = new SockJS(Hsis.urls.SOCKET + '/chat');
+                    Hsis.stompClient = Stomp.over(socket);
+                    Hsis.stompClient.connect({'Login': Hsis.token}, function (frame) {
+                        var sessionId = /\/([^\/]+)\/websocket/.exec(socket._transport.url)[1];
+        //                    console.log("connected, session id: " + sessionId);
+                        Hsis.stompClient.subscribe('/topic/messages/' + sessionId, function (messageOutput) {
+                            $('body .notification').removeClass('hidden');
 
-        disconnect: function (a) {
+                        });
+                    });
+                },*/
+        /*disconnect: function (a) {
             if (Hsis.stompClient != 0) {
                 Hsis.stompClient.disconnect();
             }
             if (a == 1) {
                 Hsis.WebSocket.connect();
             }
-        },
+        },*/
     },
 
 };
