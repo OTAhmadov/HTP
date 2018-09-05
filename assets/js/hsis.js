@@ -5207,7 +5207,7 @@ var Hsis = {
                                 html += '<div class="user-doc-file" data-file-id = "' + j.id + '" data-file-path = "' + j.path + '">' +
                                     '<div class="doc-delete">✖</div>' +
                                     '<img data-type = "'+getFileType(type)+'" src="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
-                                    '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?fileType=1&token=' + Hsis.token + '" download = "' + j.originalName + '"><img src="assets/img/upload-img.png" width="20" height="20"></a></div>' +
+                                    '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?fileType=1&token=' + Hsis.token + '" download = "' + j.originalName + '"><img src="assets/img/download.svg" width="20" height="20"></a></div>' +
                                     '</div>';
                             });
                             html += '</div>';
@@ -5259,7 +5259,7 @@ var Hsis = {
                                 console.log(type);
                                 html += '<div class="user-doc-file">' +
                                     '<img  data-type = "'+getFileType(type)+'" src="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
-                                    '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?fileType=1&token=' + Hsis.token + '" target="_blank"><img src="assets/img/upload-img.png" width="20" height="20"></a></div>' +
+                                    '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?fileType=1&token=' + Hsis.token + '" target="_blank"><img src="assets/img/download.svg" width="20" height="20"></a></div>' +
                                     '</div>';
                             });
                             html += '</div>';
@@ -6052,15 +6052,15 @@ var Hsis = {
                         $('#citizenship').find('option[value="' + data.citizenship.id + '"]').attr('selected', 'selected');
                         $('#citizenship').attr('disabled', 'disabled');
                         $('#gender').find('option[value="' + data.gender.id + '"]').attr('selected', 'selected');
-                        $('#gender').attr('disabled', 'disabled')
+                        $('#gender').attr('disabled', 'disabled');
                         $('#marital_status').find('option[value="' + data.maritalStatus.id + '"]').attr('selected', 'selected');
-                        $('#marital_status').attr('disabled', 'disabled')
+                        $('#marital_status').attr('disabled', 'disabled');
                         $('#social_status').find('option[value="' + data.socialStatus.id + '"]').attr('selected', 'selected');
-                        $('#social_status').attr('disabled', 'disabled')
+                        $('#social_status').attr('disabled', 'disabled');
                         $('#orphan_degree').find('option[value="' + data.orphanDegree.id + '"]').attr('selected', 'selected');
-                        $('#orphan_degree').attr('disabled', 'disabled')
+                        $('#orphan_degree').attr('disabled', 'disabled');
                         $('#military_status').find('option[value="' + data.militaryService.id + '"]').attr('selected', 'selected');
-                        $('#military_status').attr('disabled', 'disabled')
+                        $('#military_status').attr('disabled', 'disabled');
                         $('#nationality').find('option[value="' + data.nationality.id + '"]').attr('selected', 'selected');
                         $('#nationality').attr('disabled', 'disabled');
                         $('.date-birthdate').val(data.birthDate).attr('disabled', 'disabled');
@@ -6308,17 +6308,9 @@ var Hsis = {
                             }, 1000);
                         }
 
-                        // $('#gender').find('option[value="' + data.gender.id + '"]').attr('selected', 'selected');
-                        // $('#gender').attr('disabled', 'disabled');
-                        // $('#marital_status').find('option[value="' + data.maritalStatus.id + '"]').attr('selected', 'selected');
-                        // $('#marital_status').attr('disabled', 'disabled');
-                        // $('#military_status').find('option[value="' + data.militaryService.id + '"]').attr('selected', 'selected');
-                        // $('#military_status').attr('disabled', 'disabled');
-                        $('#birthdate').text(data.birthDate);
-                        // $('#main-div').attr('data-id', data.id);
-                        // $('#main-div').attr('data-pelc-id', data.pelcId);
 
-//                        alert('ss');
+                        $('#birthdate').text(data.birthDate);
+
                         $('body #citizenship').text(data.citizenship.value[Hsis.lang])
                         $('#gender').text(data.gender.value[Hsis.lang]);
 
