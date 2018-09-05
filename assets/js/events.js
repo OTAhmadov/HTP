@@ -6,7 +6,7 @@
 
 $(function () {
 
-    $(".iframeUpdate").attr("src","http://192.168.1.78:8082/UnibookShared/#/profile-edit?token=" + Hsis.token);
+//    $(".iframeUpdate").attr("src","http://192.168.1.78:8082/UnibookShared/#/profile-edit?token=" + Hsis.token);
 
     var chosenLang;
 
@@ -8087,6 +8087,10 @@ $(function () {
             var seriya = $('#main-div #add-order-serial').val();
             var number = $('#main-div #add-order-number').val();
             var startDate = $('#main-div #order-start-date').val();
+            var dataCheck = $(this).attr('data-check');
+            if(dataCheck == '1') {
+                return false;
+            }
 //            var endDate = $('#main-div #order-end-date').val();
             var type = $('#main-div .order-type').find('option:selected').val();
             var document = {
@@ -8242,8 +8246,8 @@ $(function () {
                                     '</div>' +
                                     '<div class="user-doc-file" data-file-id = "' + docId + '" data-file-path = "' + v.path + '">' +
                                     '<div class="doc-order-delete">✖</div>' +
-                                    '<img src="' + Hsis.urls.HSIS + 'order/file/' + docId + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
-                                    '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'order/file/' + docId + '?token=' + Hsis.token + '" download = "' + v.originalName + '"><img src="assets/img/upload-img.png" width="20" height="20"></a></div>' +
+                                    '<img src="' + Hsis.urls.HTP + 'order/file/' + docId + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
+                                    '<div class="upload-img"><a href="' + Hsis.urls.HTP + 'order/file/' + docId + '?token=' + Hsis.token + '" download = "' + v.originalName + '"><img src="assets/img/upload-img.png" width="20" height="20"></a></div>' +
                                     '</div>' +
                                     '</div>';
                         }
@@ -8288,6 +8292,10 @@ $(function () {
             var seriya = $('#main-div #edit-order-serial').val();
             var number = $('#main-div #edit-order-number').val();
             var startDate = $('#main-div #edit-order-start-date').val();
+            var dataCheck = $(this).attr('data-check');
+            if(dataCheck == '1') {
+                return false;
+            }
 //            var endDate = $('#main-div #edit-order-end-date').val();
             var type = $('#main-div .edit-order-type').find('option:selected').val();
             var document = {

@@ -19,7 +19,7 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
-    // token: 'de31591681f84891b3dbd90d468dbff780d6d2299b714c579333eb2e0a93a774',
+     token: '0',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -43,23 +43,24 @@ var Hsis = {
         FOREIGN_UNIVERSITY: 86
     },
     urls: {
-        // ROS: "http://localhost:8080/ROS/",
-        ROS: "http://192.168.1.78:8082/ROS/",
-//         AdminRest: 'http://localhost:8080/AdministrationRest/',
-//         AdminRest: 'http://localhost:8080/AdministrationRest/',
-        AdminRest: 'http://192.168.1.78:8082/AdministrationRest/',
-        HSIS: "http://192.168.1.78:8082/UnibookHsisRest/",
-        HTP: "http://192.168.1.78:8082/HTPRest/",
-//        HTP: "http://localhost:8080/HTPRest/",
-//         HSIS: "http://localhost:8080/UnibookHsisRest/",
-        REPORT: 'http://192.168.1.78:8082/ReportingRest/',
-        EMS: 'http://192.168.1.78:8082/UnibookEMS/',
-        COMMUNICATION: 'http://192.168.1.78:8082/CommunicationRest/',
-        NOTIFICATION: 'http://192.168.1.78:8082/NotificationSystem/greeting.html?token=',
-        SOCKET: 'http://192.168.1.78:8082/SocketRest'
+//        ROS: "http://192.168.1.78:8082/ROS/",
+//        AdminRest: 'http://192.168.1.78:8082/AdministrationRest/',
+//        HSIS: "http://192.168.1.78:8082/UnibookHsisRest/",
+//        HTP: "http://192.168.1.78:8082/HTPRest/",
+//        REPORT: 'http://192.168.1.78:8082/ReportingRest/',
+//        EMS: 'http://192.168.1.78:8082/UnibookEMS/',
+//        COMMUNICATION: 'http://192.168.1.78:8082/CommunicationRest/',
+//        NOTIFICATION: 'http://192.168.1.78:8082/NotificationSystem/greeting.html?token=',
+//        SOCKET: 'http://192.168.1.78:8082/SocketRest'
 
-//        EMS: 'http://localhost:8080/UnibookEMS/',
-        // REPORT: 'http://localhost:8080/ReportingRest/'
+        ROS: "http://192.168.100.78:8080/ROS/",
+        AdminRest: 'http://atis.edu.az/AdministrationRest/',
+        HSIS: "http://atis.edu.az/UnibookHsisRest/",
+        HTP: "http://192.168.100.78:8080/HTPRest/",
+        REPORT: 'http://atis.edu.az/ReportingRest/',
+        EMS: 'http://atis.edu.az/UnibookEMS/',
+        COMMUNICATION: 'http://atis.edu.az/CommunicationRest/',
+        SOCKET: 'http://atis.edu.az/SocketRest'
     },
     statusCodes: {
         OK: 'OK',
@@ -2595,11 +2596,11 @@ var Hsis = {
                         switch (result.code) {
                             case Hsis.statusCodes.OK:
                                 if (result.data) {
-                                    var div = $('.space-for-footer .flex-input');
-                                    if (div.html().trim().length == 0) {
-                                        var html = '<button  data-i18n="load.more" data-table="abroad_structure_module" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]['load.more'] + '</button>';
-                                        div.html(html);
-                                    }
+//                                    var div = $('.space-for-footer .flex-input');
+//                                    if (div.html().trim().length == 0) {
+//                                        var html = '<button  data-i18n="load.more" data-table="abroad_structure_module" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]['load.more'] + '</button>';
+//                                        div.html(html);
+//                                    }
                                 }
                                 Hsis.Service.loadAbroadStructures(result.data, page);
                                 if (callback)
@@ -2631,11 +2632,11 @@ var Hsis = {
                         switch (result.code) {
                             case Hsis.statusCodes.OK:
                                 if (result.data) {
-                                    var div = $('.space-for-footer .flex-input');
-                                    if (div.html().trim().length == 0) {
-                                        var html = '<button  data-i18n="load.more" data-table="abroad-structure-address_module" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]['load.more'] + '</button>';
-                                        div.html(html);
-                                    }
+//                                    var div = $('.space-for-footer .flex-input');
+//                                    if (div.html().trim().length == 0) {
+//                                        var html = '<button  data-i18n="load.more" data-table="abroad-structure-address_module" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]['load.more'] + '</button>';
+//                                        div.html(html);
+//                                    }
                                 }
                                 Hsis.Service.loadAbroadAddress(result.data, page);
                                 if (callback)
@@ -3517,7 +3518,7 @@ var Hsis = {
                 contentType: false,
                 processData: false,
                 beforeSend: function (xhr) {
-//                    $('#main-div #confirmStudent').attr('disabled', 'disabled');
+                    $('body .add-order-document-submit').attr('data-check', '1');
                 },
                 success: function (result) {
                     if (result) {
@@ -3551,7 +3552,7 @@ var Hsis = {
                     }
                 },
                 complete: function () {
-//                    $('#main-div #confirmStudent').removeAttr('disabled');
+                    $('body .add-order-document-submit').removeAttr('data-check');
                 }
             });
         },
@@ -3620,7 +3621,7 @@ var Hsis = {
         addOrderFiles: function (docId, formData, callback) {
             var id = $('#main-div').attr('data-id');
             $.ajax({
-                url: Hsis.urls.HSIS + 'order/' + docId + '/file/add?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'order/' + docId + '/file/add?token=' + Hsis.token,
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -3699,6 +3700,9 @@ var Hsis = {
                 url: Hsis.urls.HTP + 'order/' + form.id + '/edit?token=' + Hsis.token,
                 type: 'POST',
                 data: form,
+                beforeSend: function (xhr) {
+                    $('body .edit-order-document-submit').attr('data-check', '1');
+                },
                 success: function (result) {
                     if (result) {
                         switch (result.code) {
@@ -3726,6 +3730,9 @@ var Hsis = {
 
                         }
                     }
+                },
+                complete: function (jqXHR, textStatus) {
+                    $('body .edit-order-document-submit').removeAttr('data-check');
                 }
             })
         },
