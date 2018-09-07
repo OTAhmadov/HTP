@@ -1,6 +1,8 @@
 <style>
     .pelc-with-without-order .search-scroll{
         padding-bottom: 100px;
+        position: relative;
+        z-index: 9;
     }
 </style>
 
@@ -62,8 +64,8 @@
                                 <thead>
                                     <tr>
                                         <th>№</th>
-                                        <th data-i18n="table.orgName" placeholder="Strukturun adı">Strukturun adı</th>
                                         <th data-i18n="fullname" placeholder="S.A.A">S.A.A</th>
+                                        <th data-i18n="table.orgName" placeholder="Strukturun adı">Strukturun adı</th>
                                         <th>
                                 <div class="checkbox">
                                     <input type="checkbox" value="" id="checkAll"> <label data-i18n="" for="checkAll"></label>
@@ -74,9 +76,9 @@
                                 <tbody></tbody>
                             </table>
                             <div class="space-for-footer">
-                                <div id="load_more_div" class=" flex-input" style="margin-top: 8px;">
+                                <!--<div id="load_more_div" class=" flex-input" style="margin-top: 8px;">
                                     <button data-i18n="load.more" data-table="students-without-order" class="btn loading-margins btn-load-more" placeholder="Daha çox">Daha çox</button>
-                                </div>
+                                </div>-->
                             </div>
                         </form>
                     </div>
