@@ -1003,11 +1003,18 @@ $(function () {
             var id = $(this).attr('data-id');
             var pelcId = $(this).attr('data-pelc-id');
             var imagePath = $(this).attr('data-image');
+
+            var country = $(this).attr('data-country');
+            var fatherName = $(this).attr('data-father-name');
+
             $('body').attr('data-pelc-id', pelcId);
             $('body').find('dd[data-firstname]').html(firstName);
             $('body').find('dd[data-lastname]').html(lastName);
             $('body').find('dd[data-speciality]').html(university);
             $('body').find('dd[data-abroad-number]').html(abroadNumber);
+            $('body').find('dd[data-country]').html(country);
+            $('body').find('dd[data-father-name]').html(fatherName);
+
             $('body').find('dd[data-note]').html(note);
             if (imagePath && imagePath.trim().length > 0) {
                 $('.main-content-upd #studentphoto').attr('src', Hsis.urls.HSIS + 'students/image/' + imagePath + '?token=' + Hsis.token + '&size=50x50&' + Math.random());
@@ -2713,8 +2720,8 @@ $(function () {
 
     $('#main-div ').on('click', '.doc-delete', function () {
         try {
-            var docFileId = $(this).parent('.user-doc-file').attr('data-file-id')
-            var docFilePath = $(this).parent('.user-doc-file').attr('data-file-path')
+            var docFileId = $(this).parent('.user-doc-file').attr('data-file-id');
+            var docFilePath = $(this).parent('.user-doc-file').attr('data-file-path');
             var $obj = $(this);
             $.confirm({
                 content: Hsis.dictionary[Hsis.lang]['remove_file'],
@@ -2724,7 +2731,6 @@ $(function () {
                             $obj.parent('.user-doc-file').remove();
                         }
                     })
-
                 },
                 theme: 'black'
             });
@@ -5534,44 +5540,6 @@ $(function () {
 
     });
 
-    $('#main-div').on('click', '#operation_1000073', function () {
-        $('#main-div #exportModal').modal();
-        $('#main-div #exportModal').attr('data-module', 'students')
-
-    })
-    $('#main-div').on('click', '#operation_1000072', function () {
-        $('#main-div #exportModal').modal();
-        $('#main-div #exportModal').attr('data-module', 'teachers')
-
-    })
-    $('#main-div').on('click', '.a-export', function () {
-        try {
-            var type = $(this).attr('alt');
-
-            var searchform = '';
-            var advancedSearchform = '';
-            var filterNameSearchForm = '';
-            var module = $('#main-div #exportModal').attr('data-module');
-            advancedSearchform = Hsis.tempData.form;
-            if (module === 'students') {
-                if (advancedSearchform.length <= 0) {
-                    searchform = $('#main-div .student-search-form').serialize();
-                }
-
-            } else if (module === 'teachers') {
-                if (advancedSearchform.length <= 0) {
-                    searchform = $('#main-div .teacher-search-form').serialize();
-                }
-
-            }
-
-            window.open(Hsis.urls.REPORT + 'reports/' + module + '/' + type + '?token=' + Hsis.token + (searchform ? '&' + searchform : '') + (advancedSearchform ? '&' + advancedSearchform : ''), '_blank');
-            $('#exportModal').modal('hide');
-        } catch (err) {
-            console.error(err);
-        }
-    });
-
     $('body').on('change', '.sub-module-con .chekbox-con input', function () {
 
         $('body').find('dd[data-firstname]').html('');
@@ -7322,7 +7290,7 @@ $(function () {
                             '<div class="user-doc-file" data-file-id = "' + id + '" data-file-path = "' + v.path + '">' +
                             '<div class="doc-order-delete">✖</div>' +
                             '<img src="' + Hsis.urls.HTP + 'order/file/' + id + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
-                            '<div class="upload-img"><a href="' + Hsis.urls.HTP + 'order/file/' + id + '?token=' + Hsis.token + '" download = "' + v.originalName + '"><img src="assets/img/upload-img.png" width="20" height="20"></a></div>' +
+                            '<div class="upload-img"><a href="' + Hsis.urls.HTP + 'order/file/' + id + '?token=' + Hsis.token + '" download = "' + v.originalName + '"><img src="assets/img/download.svg" width="20" height="20"></a></div>' +
                             '</div>' +
                             '</div>';
                 } else {
@@ -7472,7 +7440,7 @@ $(function () {
                                 '</div>' +
                                 '<div class="user-doc-file" data-file-id = "' + id + '" data-file-path = "' + v.path + '">' +
                                 '<img src="' + Hsis.urls.HTP + 'order/file/' + id + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
-                                '<div class="upload-img"><a href="' + Hsis.urls.HTP + 'order/file/' + id + '?fileType=1&token=' + Hsis.token + '" download = "' + v.originalName + '"><img src="assets/img/upload-img.png" width="20" height="20"></a></div>' +
+                                '<div class="upload-img"><a href="' + Hsis.urls.HTP + 'order/file/' + id + '?fileType=1&token=' + Hsis.token + '" download = "' + v.originalName + '"><img src="assets/img/download.svg" width="20" height="20"></a></div>' +
                                 '</div>' +
                                 '</div>';
                     }
@@ -8538,7 +8506,7 @@ $(function () {
                         $.each(data.data, function (i, v) {
                             html += '<option value = "' + v.id + '">' + v.value[Hsis.lang] + '</option>'
                         })
-                        $('#atm_id').html(html)
+                        $('#atm_id').html(html);
                         $('#advanced_faculty, #org_name_select_advanced').html('')
 
                     }
@@ -9671,6 +9639,7 @@ $(function () {
                         $('#main-div').attr('data-pelc-id', data.pelcId);
 
                         Hsis.Service.parseEditStudentAddress(data);
+                        console.log()
 
                         if (data.contacts.length > 0) {
                             $('.contact-info .panel-body').html(Hsis.Service.parseEditStudentContact(data));
@@ -9679,22 +9648,43 @@ $(function () {
                         var personal = 'personal';
                         var academic = 'academic';
                         var school = 'school';
+
                         if (data.documents.length > 0) {
                             $('.add-doc-block .panel-body').html(Hsis.Service.parseEditStudentDocument(data.documents, personal));
                         }
                         $('.student-relationships-div .panel-body').html(Hsis.Service.parseStudentRelationShip(data.relations));
 
                     }else if(data.iamasCheck == 1){
-                        console.log(data.iamasCheck);
+
+                        $('#firstname').val(data.firstName).attr('disabled', 'disabled');
+                        $('#lastname').val(data.lastName).attr('disabled', 'disabled');
+                        $('#middlename').val(data.middleName).attr('disabled', 'disabled');
+                        $('#pincode').val(data.pinCode).attr('disabled', 'disabled').attr('disabled', 'disabled');
+                        $('#gender').find('option[value="' + data.gender.id + '"]').attr('selected', 'selected').attr('disabled', 'disabled');
+                        $('#marital_status').find('option[value="' + data.maritalStatus.id + '"]').attr('selected', 'selected').attr('disabled', 'disabled');
+                        $('#military_status').find('option[value="' + data.militaryService.id + '"]').attr('selected', 'selected').attr('disabled', 'disabled');
+                        $('.date-birthdate').val(data.birthDate).attr('disabled', 'disabled');
+                        $('#main-div').attr('data-id', data.id).attr('disabled', 'disabled');
+                        $('#main-div').attr('data-pelc-id', data.pelcId).attr('disabled', 'disabled');
                         $('.edit-abroad-common-info').css('display', 'none');
-                        $('#firstname').attr('disabled', 'disabled');
-                        $('#lastname').attr('disabled', 'disabled');
-                        $('#middlename').attr('disabled', 'disabled');
-                        $('#pincode').attr('disabled', 'disabled');
-                        $('#gender').attr('disabled', 'disabled');
-                        $('#marital_status').attr('disabled', 'disabled');
-                        $('#military_status').attr('disabled', 'disabled');
-                        $('.date-birthdate').attr('disabled', 'disabled');
+
+
+
+
+
+                        /* $('#firstname').attr('disabled', 'disabled');
+                         $('#lastname').attr('disabled', 'disabled');
+                         $('#middlename').attr('disabled', 'disabled');
+                         $('#pincode').attr('disabled', 'disabled');
+                         $('#gender').attr('disabled', 'disabled');
+                         $('#marital_status').attr('disabled', 'disabled');
+                         $('#military_status').attr('disabled', 'disabled');
+                         $('.date-birthdate').attr('disabled', 'disabled');*/
+
+                        // if (data.documents.length > 0) {
+                        //     $('.add-doc-block .panel-body').html(Hsis.Service.parseEditStudentDocument(data.documents, personal));
+                        // }
+                        // $('.student-relationships-div .panel-body').html(Hsis.Service.parseStudentRelationShip(data.relations));
                     }
 
                 });
@@ -10656,6 +10646,45 @@ $(function () {
         $('body .open-file-modal .modal-body').html(html);
         $('body .open-file-modal').modal('show');
     })
+
+
+
+    $('#main-div').on('click', '#operation_1001448', function () {
+        $('#main-div #exportModal').modal();
+
+    })
+
+    $('#main-div').on('click', '.a-export', function () {
+        try {
+            var type = $(this).attr('alt');
+
+            var keyword = $('#abroad_student_search').val();
+
+
+            window.open(Hsis.urls.REPORT + 'reports/abroad/'+ type + '?token=' + Hsis.token + '&keyword=' + keyword, '_blank');
+            $('#exportModal').modal('hide');
+        } catch (err) {
+            console.error(err);
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 });
 

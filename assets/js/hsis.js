@@ -2,7 +2,7 @@
 
 var cropForm = new FormData();
 var Hsis = {
-     token: '0',
+    // token: '2cde0868bb6548969d6004a9f7ff91e2817e17d95d4146d6b08fe5b8e530d98d',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -26,24 +26,24 @@ var Hsis = {
         FOREIGN_UNIVERSITY: 86
     },
     urls: {
-//        ROS: "http://192.168.1.78:8082/ROS/",
-//        AdminRest: 'http://192.168.1.78:8082/AdministrationRest/',
-//        HSIS: "http://192.168.1.78:8082/UnibookHsisRest/",
-//        HTP: "http://192.168.1.78:8082/HTPRest/",
-//        REPORT: 'http://192.168.1.78:8082/ReportingRest/',
-//        EMS: 'http://192.168.1.78:8082/UnibookEMS/',
-//        COMMUNICATION: 'http://192.168.1.78:8082/CommunicationRest/',
-//        NOTIFICATION: 'http://192.168.1.78:8082/NotificationSystem/greeting.html?token=',
-//        SOCKET: 'http://192.168.1.78:8082/SocketRest'
+       ROS: "http://192.168.1.78:8082/ROS/",
+       AdminRest: 'http://192.168.1.78:8082/AdministrationRest/',
+       HSIS: "http://192.168.1.78:8082/UnibookHsisRest/",
+       HTP: "http://192.168.1.78:8082/HTPRest/",
+       REPORT: 'http://192.168.1.78:8082/ReportingRest/',
+       EMS: 'http://192.168.1.78:8082/UnibookEMS/',
+       COMMUNICATION: 'http://192.168.1.78:8082/CommunicationRest/',
+       NOTIFICATION: 'http://192.168.1.78:8082/NotificationSystem/greeting.html?token=',
+       SOCKET: 'http://192.168.1.78:8082/SocketRest'
 
-        ROS: "http://192.168.100.78:8080/ROS/",
+      /*  ROS: "http://192.168.100.78:8080/ROS/",
         AdminRest: 'http://atis.edu.az/AdministrationRest/',
         HSIS: "http://atis.edu.az/UnibookHsisRest/",
         HTP: "http://192.168.100.78:8080/HTPRest/",
         REPORT: 'http://atis.edu.az/ReportingRest/',
         EMS: 'http://atis.edu.az/UnibookEMS/',
         COMMUNICATION: 'http://atis.edu.az/CommunicationRest/',
-        SOCKET: 'http://atis.edu.az/SocketRest'
+        SOCKET: 'http://atis.edu.az/SocketRest'*/
     },
     statusCodes: {
         OK: 'OK',
@@ -5147,7 +5147,7 @@ var Hsis = {
                                 html += '<div class="user-doc-file" data-file-id = "' + j.id + '" data-file-path = "' + j.path + '">' +
                                     '<div class="doc-delete">✖</div>' +
                                     '<img data-type = "'+getFileType(type)+'" src="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
-                                    '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?fileType=1&token=' + Hsis.token + '" download = "' + j.originalName + '"><img src="assets/img/upload-img.png" width="20" height="20"></a></div>' +
+                                    '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?fileType=1&token=' + Hsis.token + '" download = "' + j.originalName + '"><img src="assets/img/download.svg" width="20" height="20"></a></div>' +
                                     '</div>';
                             });
                             html += '</div>';
@@ -5199,7 +5199,7 @@ var Hsis = {
                                 console.log(type);
                                 html += '<div class="user-doc-file">' +
                                     '<img  data-type = "'+getFileType(type)+'" src="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
-                                    '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?fileType=1&token=' + Hsis.token + '" target="_blank"><img src="assets/img/upload-img.png" width="20" height="20"></a></div>' +
+                                    '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?fileType=1&token=' + Hsis.token + '" target="_blank"><img src="assets/img/download.svg" width="20" height="20"></a></div>' +
                                     '</div>';
                             });
                             html += '</div>';
@@ -5602,7 +5602,7 @@ var Hsis = {
 
                 if (data.studentList.length) {
                     $.each(data.studentList, function (i, v) {
-                        html += '<tr data-image = "' + (v.imagePath ? v.imagePath : '') + '" data-note = "' + v.note + '" data-abroad-number="' + v.abroadNumber + '" data-pelc-id="' + v.pelcId + '" data-id="' + v.id + '" data-firstname ="' + v.firstName + '" data-lastname ="' + v.lastName + '" data-university="' + (v.eduLifeCycleByOrgs ? v.eduLifeCycleByOrgs[0].name[Hsis.lang] : "") + '">' +
+                        html += '<tr data-image = "' + (v.imagePath ? v.imagePath : '') + '" data-note = "' + v.note + '" data-abroad-number="' + v.abroadNumber + '" data-country="' + v.countryName + '" data-pelc-id="' + v.pelcId + '" data-id="' + v.id + '" data-firstname ="' + v.firstName + '" data-father-name ="' + v.middleName + '" data-lastname ="' + v.lastName + '" data-university="' + (v.eduLifeCycleByOrgs ? v.eduLifeCycleByOrgs[0].name[Hsis.lang] : "") + '">' +
                             '<td>' + (++count) + '</td>' +
                             '<td style="white-space: pre-line;">' + v.abroadNumber + '</td>' +
                             '<td style="white-space: pre-line;">' + v.lastName + ' ' + v.firstName + ' ' + v.middleName + '</td>' +
@@ -5963,15 +5963,15 @@ var Hsis = {
                         $('#citizenship').find('option[value="' + data.citizenship.id + '"]').attr('selected', 'selected');
                         $('#citizenship').attr('disabled', 'disabled');
                         $('#gender').find('option[value="' + data.gender.id + '"]').attr('selected', 'selected');
-                        $('#gender').attr('disabled', 'disabled')
+                        $('#gender').attr('disabled', 'disabled');
                         $('#marital_status').find('option[value="' + data.maritalStatus.id + '"]').attr('selected', 'selected');
-                        $('#marital_status').attr('disabled', 'disabled')
+                        $('#marital_status').attr('disabled', 'disabled');
                         $('#social_status').find('option[value="' + data.socialStatus.id + '"]').attr('selected', 'selected');
-                        $('#social_status').attr('disabled', 'disabled')
+                        $('#social_status').attr('disabled', 'disabled');
                         $('#orphan_degree').find('option[value="' + data.orphanDegree.id + '"]').attr('selected', 'selected');
-                        $('#orphan_degree').attr('disabled', 'disabled')
+                        $('#orphan_degree').attr('disabled', 'disabled');
                         $('#military_status').find('option[value="' + data.militaryService.id + '"]').attr('selected', 'selected');
-                        $('#military_status').attr('disabled', 'disabled')
+                        $('#military_status').attr('disabled', 'disabled');
                         $('#nationality').find('option[value="' + data.nationality.id + '"]').attr('selected', 'selected');
                         $('#nationality').attr('disabled', 'disabled');
                         $('.date-birthdate').val(data.birthDate).attr('disabled', 'disabled');
