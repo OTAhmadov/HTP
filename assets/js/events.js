@@ -111,10 +111,7 @@ $(function () {
         var obj = $(this).parents('li');
         var title = obj.attr('title');
         var id = obj.attr('data-id');
-        // $('.module-list').find('.sub-module-con').fadeOut(1);
         $('ul.module-list').find('li').removeClass('active');
-        // $(this).parents('li').find('.sub-module-con').fadeIn();
-        // $('.module-list').find('.sub-module-con').remove();
         $(this).parents('li').addClass('active');
         try {
 
@@ -142,7 +139,6 @@ $(function () {
                     '<span style="color:white;">' + moduleName + '</span>' +
                     '</li>';
             $('ul.breadcrumb').html(html);
-            // $('ul .sub_modules').remove();
             Hsis.tempData.form = '';
             $('#main-div').removeAttr('data-citizenship');
 
@@ -150,35 +146,6 @@ $(function () {
             console.error(err);
         }
     });
-
-
-//    $('#main-div #org-list-tree').on("select_node.jstree", function (e) {
-//        try {
-//            $('.main-content-upd #buttons_div').attr('data-id', $(this).parent().attr('id'));
-//            var node = $("#jstree").jstree('get_selected', true);
-//            $('.main-content-upd #buttons_div').attr('parent-node', node[0].parent);
-//            alert(node[0].parent);
-//            Hsis.node = node;
-//            var about = '';
-//            var dicType;
-//            Hsis.tempData.org = $(this).parents('li').attr('id');
-//
-//            $.each(Hsis.array, function (i, v) {
-//                if (Hsis.tempData.org == v.id) {
-//                    about = v.about;
-//                    dicType = v.dicType;
-//                }
-//            });
-//
-//            $('.main-row').find('.div-info').html(about);
-//            $('.main-content-upd #buttons_div').attr('data-dicType-id', dicType);
-//        }
-//
-//        catch (err) {
-//            console.error(err);
-//        }
-//    });
-
     $('body').on('click', '#jstree .jstree-anchor', function (e) {
         try {
             var div = $(this).parent().closest('div').attr('id');
@@ -578,10 +545,6 @@ $(function () {
                     $('.scholarshipPlan').removeClass('hidden');
                     $('.orgcontact').removeClass('hidden');
                     $('.orgedulang').removeClass('hidden');
-//                    Hsis.Proxy.getOrgPlanByOrgId(id, function (plan) {
-//                        Hsis.Service.parseScholarshipPlan(plan);
-//
-//                    });
                 }
 
                 if (dicId == 1000057 || dicId == 1000604) {
@@ -702,7 +665,6 @@ $(function () {
                     content: Hsis.dictionary[Hsis.lang]['delete_info'],
                     confirm: function () {
                         var $li = $('.main-content-upd #jstree #' + Hsis.tempData.org);
-                        //console.log($li.parent());
                         Hsis.Proxy.removeOrgTree(Hsis.tempData.org, function (data) {
                             if (data) {
                                 if (data.code == Hsis.statusCodes.OK) {
@@ -773,7 +735,6 @@ $(function () {
             var dataOrgId = $('#confirmOrgTree').attr('data-org-id');
             switch (specialityLevels) {
                 case '1000046' :
-//                    orgTypeId = '1000057';
                     orgTypeId = (dataOrgId == '1008358') ? '1008358' : '1000057';
                     break;
                 case '1000047' :
@@ -889,22 +850,6 @@ $(function () {
                 orgTree.startDate = $('#created_date').val();
                 orgTree.endDate = $('#closed_date').val();
 
-//                if (orgTypeId == 1000057 || orgTypeId == 1000604) {
-//                    var year = $('.applyandgrad-item[data-id="0"]').attr('data-year');
-//                    var div = $('.applyandgrad-item[data-id="0"]');
-//                    var applyCount = div.attr('apply-count');
-//                    var graduateCount = div.attr('graduate-count');
-//                    if (year != undefined) {
-//                        orgTree.eduYearId = year;
-//                    }
-//                    if (applyCount != undefined) {
-//                        orgTree.applyPlan = applyCount;
-//                    }
-//                    if (graduateCount != undefined) {
-//                        orgTree.graduatePlan = graduateCount;
-//                    }
-//                }
-
                 if (orgTypeId != 1007366 && orgTypeId != 1000083 && orgTypeId != 1000057 && orgTypeId != 1000604 && orgTypeId != 1000074 && orgTypeId != 1000072 && orgTypeId != 1002306 && orgTypeId != 1008358) {
                     orgTree.structureInfoForm = {
                         orgId: orgId.length !== 0 ? orgId : 0,
@@ -968,16 +913,6 @@ $(function () {
 
 
                 } else {
-//                    if (orgTypeId == 1000073) {
-//                        var year = $('.scholarship-item[data-id="0"]').attr('data-year');
-//                        var count = $('.scholarship-item[data-id="0"]').attr('data-count');
-//                        if (year != undefined) {
-//                            orgTree.eduYearId = year;
-//                        }
-//                        if (count != undefined) {
-//                            orgTree.scholarshipPlan = count;
-//                        }
-//                    }
                     orgTree.parentId = $('#parentId').val().trim();
                     orgTree.operationId = Hsis.operationList[0].id;
 
@@ -1017,12 +952,6 @@ $(function () {
     $('body').on('click', '#student_list tbody tr', function (e) {
         try {
             var tr = $(this);
-//            var firstName = $(this).attr('data-firstname');
-//            var lastName = $(this).attr('data-lastname');
-//            var speciality = $(this).attr('data-speciality');
-//            var eduLevel = $(this).attr('data-edu-level');
-//            var eduType = $(this).attr('data-edu-type');
-//            var eduPayType = $(this).attr('data-edu-pay-type');
             var id = $(this).attr('data-id');
             var pelcId = $(this).attr('data-pelc-id');
             var imagePath = $(this).attr('data-image');
@@ -1087,7 +1016,6 @@ $(function () {
             $('body').find('dd[data-father-name]').html(fatherName);
 
             $('body').find('dd[data-note]').html(note);
-            //Hsis.Proxy.loadImage(Hsis.urls.HSIS + 'students/' + id + '/image?token=' + Hsis.token);
             if (imagePath && imagePath.trim().length > 0) {
                 $('.main-content-upd #studentphoto').attr('src', Hsis.urls.HSIS + 'students/image/' + imagePath + '?token=' + Hsis.token + '&size=50x50&' + Math.random());
                 $('.main-content-upd #studentphoto').on('error', function (e) {
@@ -1097,14 +1025,9 @@ $(function () {
                 $('.main-content-upd #studentphoto').attr('src', 'assets/img/guest.png');
             }
             $('#buttons_div').attr('data-id', id);
-//            var statusId = tr.attr('data-status-id');
             var obj = {
-//                status: {
-//                    id: statusId.length > 0 ? statusId : 0
-//                }
             };
             $('.type_2_btns').html(Hsis.Service.parseOperations(Hsis.operationList, '2', obj));
-            // console.log(Hsis.operationList)
             $('body').find('.col-sm-12.data').removeClass('col-sm-12').addClass('col-sm-9');
             $('body').find('.col-sm-3.info').fadeIn(1).css('right', '0');
         } catch (err) {
@@ -1114,12 +1037,6 @@ $(function () {
 
     $('body').on('dblclick', '#student_list tbody tr, #foreign_student_list tbody tr', function (e) {
         try {
-            // if (!$('#buttons_div').attr('data-id')) {
-            //     $.notify(Hsis.dictionary[Hsis.lang]['select_information'], {
-            //         type: 'warning'
-            //     });
-            //     return false;
-            // }
 
             var id = $(this).attr('data-id');
             var status = $(this).attr('data-status');
@@ -1235,25 +1152,15 @@ $(function () {
         try {
                 var countryId = $(this).parents('tr').attr('data-country-id');
                 var cityId = $(this).parents('tr').attr('data-city-id');
-                // var uniName = $(this).parents('tr').attr('data-uni-name');
                 var id = $(this).parents('tr').attr('data-id');
                 $('body .xtms-approve-address').attr('data-type', 'edit');
                 $('body .xtms-approve-address').attr('data-id', id);
             Hsis.Proxy.loadAbroadAddress('1000323', '', function (country) {
                 var html = Hsis.Service.parseDictionaryForSelect(country);
                 $('#foreign_country').html(html);
-//                setTimeout(function() {
                     $('#foreign_country').val(countryId)
-                            //.trigger('change');
                     $('#xtm-city').val(cityId);
-//                    Hsis.Proxy.loadAbroadAddress('1000324', countryId, function (city) {
-//                        var html = Hsis.Service.parseDictionaryForSelect(city);
-//                        $('#main-div #foreign_city').html(html);
-//                        $('#main-div #foreign_city').val(cityId).trigger('change');
-//                        // $('#xtm-university').val(uniName);
                         $('body').find('.new-upd').css('right', '0');
-//                    });
-//                },250);
 
             });
         } catch (err) {
@@ -1273,18 +1180,14 @@ $(function () {
             Hsis.Proxy.loadAbroadAddress('1000323', '', function (country) {
                 var html = Hsis.Service.parseDictionaryForSelect(country);
                 $('#foreign_country').html(html);
-//                setTimeout(function() {
                     $('#foreign_country').val(countryId)
-                            //.trigger('change');
                     Hsis.Proxy.loadAbroadAddress('1000324', countryId, function (city) {
                         var html = Hsis.Service.parseDictionaryForSelect(city);
                         $('#main-div #foreign_city').html(html);
                         $('#main-div #foreign_city').val(cityId)
-                                //trigger('change');
                         $('#xtm-university').val(uniName);
                         $('body').find('.new-upd').css('right', '0');
                     });
-//                },250);
 
             });
         } catch (err) {
@@ -1318,7 +1221,6 @@ $(function () {
                 var html = Hsis.Service.parseDictionaryForSelect(country);
                 $('#foreign_country').html(html);
                 $('#main-div #foreign_city').html('');
-                // $('#xtm-university').val('');
                 $('body').find('.new-upd').css('right', '0');
             });
         } catch (err) {
@@ -1349,9 +1251,6 @@ $(function () {
                 });
             } 
         }
-        
-        
-        // console.log(objectForm)
     });
     //approve-address
     $('body').on('click', '.xtms-approve-address', function(){
@@ -1378,7 +1277,6 @@ $(function () {
         }
         
         
-        // console.log(objectForm)
     });
 
 
@@ -1424,7 +1322,6 @@ $(function () {
                     $('.btn.tree-modal').text(data.speciality.value[Hsis.lang]);
                     $('.btn.tree-modal').attr('data-id', data.speciality.id);
                     var eduLevel;
-                    //console.log(data.educationLevel.id);
                     switch (data.educationLevel.id) {
                         case 1000057:
                             eduLevel = '1000184';
@@ -1486,7 +1383,6 @@ $(function () {
     $('body').on('click', '#group-list tbody tr', function (e) {
         try {
             var id = $(this).attr('data-id');
-            //parseStudList
             Hsis.Proxy.getAcademicGroupStudentList(id, function (data) {
                 if (data) {
                     var html = '';
@@ -1542,7 +1438,6 @@ $(function () {
                         $('#main-div #edu_type, #main-div #edu_type_2').html(html);
 
                         $('#edu_type_2').find('option[value="' + data.eduTypeId + '"]').attr('selected', 'selected');
-                        //$('#edu_type').attr('disabled', 'disabled');
                     });
 
                     Hsis.Proxy.loadDictionariesByTypeId('1000053', 0, function (groupTypes) {
@@ -1659,7 +1554,6 @@ $(function () {
     $('body').on('click', '#share-list tbody tr', function (e) {
         try {
             var id = $(this).attr('data-id');
-            //parse Share Details
             Hsis.Proxy.getShareDetails(id, function (data) {
                 $('.dl-horizontal').html('');
                 $('.col-sm-3.info').attr('data-id', id);
@@ -2463,17 +2357,12 @@ $(function () {
                 info.token = Hsis.token;
                 info.disabilityDegree = $('#disability_degree').find('option:selected').val();
 
-                //console.log(info);
 
                 cropForm.append('form', new Blob([JSON.stringify(info)], {
                     type: "application/json"
                 }));
 
                 var src = $('.thumbnail img').attr('src');
-
-//                if ($('.user-photo input[type="file"]')[0] !== undefined && $('.user-photo input[type="file"]')[0].files[0] && src != "assets/img/guest.png") {
-//                    formData.append('image', $('.user-photo input[type="file"]')[0].files[0]);
-//                }
 
 
                 if (modulType === 'E') {
@@ -2492,7 +2381,6 @@ $(function () {
                         }
                     });
                 } else {
-                    //                Hsis.Validation.validateRequiredFields(formData, Hsis.Proxy.editCommonInfoStudent, 'data-required');
                     Hsis.Proxy.editCommonInfoStudent(cropForm, function (data) {
                         if (data) {
                             Hsis.Proxy.getStudentDetails(id, function (result) {
@@ -2524,7 +2412,6 @@ $(function () {
             var modulType = $('#main-div').attr('data-type');
 
             $.confirm({
-                //title: 'Warning!',
                 content: Hsis.dictionary[Hsis.lang]['delete_info'],
                 confirm: function () {
 
@@ -2536,7 +2423,6 @@ $(function () {
                                         type: 'success'
                                     });
                                     Hsis.Proxy.getTeacherContactDetails(id, function (data) {
-                                        //console.log(data.contacts.length)
                                         if (data.contacts.length > 0) {
                                             $('.contact-info .panel-body').html(Hsis.Service.parseEditStudentContact(data));
                                         } else {
@@ -2788,9 +2674,6 @@ $(function () {
                 studentAcademicInfo.eduTypeId = eduTypeId;
                 studentAcademicInfo.edupayTypeId = edupayTypeId;
                 studentAcademicInfo.applyScore = applyScore;
-                // if ($('#order').attr('order-type').length > 0 && $('#order').attr('order-type') == "in") {
-                //     studentAcademicInfo.orderId = order;
-                // }
 
 
 
@@ -2841,7 +2724,6 @@ $(function () {
             var docFilePath = $(this).parent('.user-doc-file').attr('data-file-path');
             var $obj = $(this);
             $.confirm({
-                //title: 'Warning!',
                 content: Hsis.dictionary[Hsis.lang]['remove_file'],
                 confirm: function () {
                     Hsis.Proxy.removeDocFiles(docFileId, docFilePath, function (data) {
@@ -2988,7 +2870,6 @@ $(function () {
         try {
 
             $.confirm({
-                //title: 'Warning!',
                 content: Hsis.dictionary[Hsis.lang]['delete_info'],
                 confirm: function () {
                     if (moduleType === 'E') {
@@ -3131,195 +3012,10 @@ $(function () {
     });
 
     $('#main-div').on('click', '#operation_1000030', function (e) {
-
-        // $('#main-div .search-pincode-teacher-modal').modal({
-        //     backdrop: false
-        // });
+;
         $('body').find('.new-upd').css('right', '0');
     });
-
-//     $('#main-div').on('click', '.teacher-pincode-button-next', function () {
-//         var obj = $(this);
-//         var dataAttr = obj.attr('data-attr');
-//         var count = obj.attr('data-count');
-//         var pincode = $('#main-div .search-pincode').val();
-//         if (!pincode) {
-//             $.notify(Hsis.dictionary[Hsis.lang]['add_pincode'], {
-//
-//                 type: 'warning'
-//             });
-//             return false;
-//         }
-//
-//         if (dataAttr !== '2') {
-//             obj.attr('data-attr', '2');
-//             Hsis.Proxy.getTeacherByPincode(pincode, function (data) {
-//
-//                 if (data == 0) {
-//                     $('#main-div .teacher-pincode').text(pincode);
-//                     $('#main-div .teacher-pincode-label').text("Axtardığınız pinkoda uyğun istifadəçi tapılmadı!");
-//                     $('#main-div .teacher-pincode-div-first').addClass('hidden');
-//                     $('#main-div .teacher-pincode-button-back').removeClass('hidden');
-//                     $('#main-div .teacher-pincode-div-second').removeClass('hidden');
-//                 } else {
-//                     $('#main-div .teacher-pincode-button-next').removeAttr('data-attr');
-//                     $('#main-div .teacher-pincode-div-first').removeClass('hidden');
-//                     $('#main-div .teacher-pincode-button-back').addClass('hidden');
-//                     $('#main-div .teacher-pincode-div-second').addClass('hidden');
-//                     $('#main-div .teacher-pincode-label').text('');
-//                     $('#main-div .teacher-pincode').text('');
-//                     $('#main-div .search-pincode').val('');
-//                     obj.removeAttr('data-attr');
-//                     obj.removeAttr('data-count');
-// //                    Hsis.Proxy.getPersonInfoByPinCode(data.pinCode, function (iamasdata) {
-// //                        if (data && data.firstName && data.lastName && data.middleName && data.birthDate) {
-// //                            if (iamasdata.image.file !== null) {
-// //                                $('#main-div .edit-common-info-image').attr('src', "data:image/png;base64," + iamasdata.image.file);
-// //                                $('#main-div .edit-common-info-image').on('error', function (e) {
-// //                                    $(this).attr('src', 'assets/img/guest.png');
-// //                                });
-// //                            }
-// //                        } else {
-// //                            $('#main-div .edit-common-info-image').attr('src', 'assets/img/guest.png');
-// //                        }
-// //
-// //
-// //                    });
-//                     Hsis.Proxy.getTeacherDetailsByPincode(pincode, function (result) {
-//
-//                         $('#main-div .search-pincode-teacher-modal').modal("hide");
-//                         $('body').find('.new-upd').css('right', '-100%');
-//                         setTimeout(function () {
-//                             $('body').find('.add-new').css('right', '0');
-//                         }, 400);
-//                         $('body').find('.add-new .search-scroll').load('partials/teacher_edit.html', function () {
-//                             if (result && result.code == Hsis.statusCodes.OK) {
-//                                 console.log(result.data);
-//                                 if (result.data.image && result.data.image.path) {
-//                                     $('body .input-file-con .new-img-con').fadeIn(1);
-//                                     $('body .input-file-con .new-img-con img').attr('src', Hsis.urls.HSIS + 'students/image/' + (result.data.image.path ? result.data.image.path : '') + '?token=' + Hsis.token + '&size=200x200&' + Math.random());
-//
-//
-//                                     $('body .input-file-con .new-img-con img').on('error', function (e) {
-//                                         $('body .input-file-con .new-img-con img').attr('src', 'assets/img/guest.png');
-//                                     });
-//                                 } else {
-//                                     $('body .input-file-con .new-img-con img').attr('src', 'assets/img/guest.png');
-//                                 }
-//
-//                                 var data = result.data;
-//                                 $('#firstname').text(data.firstName);
-//                                 $('#lastname').text(data.lastName);
-//                                 $('#middlename').text(data.middleName);
-//                                 $('#pincode').text(pincode).attr('disabled', 'disabled');
-//                                 $('#citizenship').text(data.citizenship.value[Hsis.lang]);
-//                                 $('#gender').text(data.gender.value[Hsis.lang])
-//                                 $('#marital_status').text(data.maritalStatus.value[Hsis.lang] ? data.maritalStatus.value[Hsis.lang] : Hsis.dictionary[Hsis.lang]['no_information']);
-//                                 $('#social_status').text(data.socialStatus.value[Hsis.lang] ? data.socialStatus.value[Hsis.lang] : Hsis.dictionary[Hsis.lang]['no_information']);
-//                                 $('#orphan_degree').text(data.orphanDegree.value[Hsis.lang] ? data.orphanDegree.value[Hsis.lang] : Hsis.dictionary[Hsis.lang]['no_information']);
-//                                 $('#military_status').text(data.militaryService.value[Hsis.lang] ? data.militaryService.value[Hsis.lang] : Hsis.dictionary[Hsis.lang]['no_information']);
-//                                 $('#nationality').text(data.nationality.value[Hsis.lang] ? data.nationality.value[Hsis.lang] : Hsis.dictionary[Hsis.lang]['no_information'])
-//                                 $('#birthdate').text(data.birthDate);
-//                                 $('#main-div').attr('data-id', data.id);
-//                                 $('#main-div').attr('data-type', 'E');
-//                                 $('#main-div #confirmTeacher').attr('data-id', data.id);
-//
-//                                 Hsis.Service.parseEditStudentAddress(data);
-//                                 if (data && data.personEduLifeCycles) {
-//                                     $('#main-div .edu_info-block .panel-body').html(Hsis.Service.parseTeacherAction(data.personEduLifeCycles));
-//                                 }
-//
-//                                 $('.contact-info .panel-body').html(Hsis.Service.parseViewStudentContact(data));
-//                                 var personal = 'personal';
-//
-//                                 if (data.documents.length > 0) {
-//                                     $('.add-doc-block .panel-body[data-doc-type="personal"]').html(Hsis.Service.parseViewTeacherDocument(data.documents, personal));
-//                                 }
-//
-//                                 $('.edu_info .edu-info-block').html(Hsis.Service.parseViewTeacherEduLifeCycle(data));
-//
-//                                 if (data.pwlcDocuments.length > 0) {
-//                                     $('#work_doc_add').html(Hsis.Service.parseViewTeacherDocument(data.pwlcDocuments, 'academic'));
-//                                 }
-//
-//                                 if (data.subjects.length > 0) {
-//                                     $('#append_subjects').html(Hsis.Service.parseViewTeacherSubjects(data));
-//                                 }
-//                                 if (data.languages.length > 0) {
-//                                     $('#append_languages').html(Hsis.Service.parseViewTeacherLanguages(data));
-//                                 }
-//
-//                                 if (data.academicDegrees.length > 0) {
-//                                     $('.edit-academic-degree-info .panel-body').html(Hsis.Service.parseTeacherAcademicDegree(data.academicDegrees));
-//                                 }
-//                                 if (data.academicActivitys.length > 0) {
-//                                     $('.research-history-info .panel-body').html(Hsis.Service.parseTeacherAcademicActivity(data.academicActivitys));
-//                                 }
-//
-//                                 Hsis.Service.parseWorkLifeCycle(data.workActions);
-//                                 $('li .edit-work-action,li .erase-work-action').remove();
-//                             }
-//                         });
-//                     })
-//                 }
-//             })
-//
-//         } else {
-//             $('#main-div .teacher-pincode-button-next').removeAttr('data-attr');
-//             $('#main-div .teacher-pincode-div-first').removeClass('hidden');
-//             $('#main-div .teacher-pincode-button-back').addClass('hidden');
-//             $('#main-div .teacher-pincode-div-second').addClass('hidden');
-//             $('#main-div .teacher-pincode-label').text('');
-//             $('#main-div .teacher-pincode').text('');
-//             $('#main-div .search-pincode').val('');
-//             obj.removeAttr('data-attr');
-//             obj.removeAttr('data-count')
-//
-//             if ($("#main-div .check-iamas-input").is(':checked')) {
-//                 Hsis.Proxy.getPersonInfoByPinCode(pincode, function (data) {
-//                     if (data && data.firstName && data.lastName && data.middleName && data.birthDate) {
-//                         $('#main-div .search-pincode-modal').modal("hide")
-//                         $('#main-div').load('partials/teacher_add.html', function () {
-//                             $('body').removeClass('modal-open');
-//                             $('#pincode').val(pincode).attr('disabled', 'disabled')
-//                             $('#main-div #firstname').val(data.firstName);
-//                             $('#main-div #lastname').val(data.lastName);
-//                             $('#main-div #middlename').val(data.middleName.split(' ')[0]);
-//                             $('#main-div #birthdate').val(data.birthDate);
-//                             $('#main-div #citizenship').find('option[value="' + (data.citizenship.value[Hsis.lang] === "AZE" ? 1000118 : 0) + '"]').attr('selected', 'selected');
-//                             $('#main-div #gender').find('option[value="' + (data.gender.value[Hsis.lang] === "Kişi" ? 1000036 : (data.gender.value[Hsis.lang] === "Qadın" ? 1000035 : 0)) + '"]').attr('selected', 'selected');
-//                             $('#main-div #marital_status').find('option[value="' + (data.socialStatus.value[Hsis.lang] === "Evli" ? 1000379 : (data.socialStatus.value[Hsis.lang] === "Subay" ? 1000189 : 0)) + '"]').attr('selected', 'selected');
-//
-//                             $('#main-div #studentphoto').attr('src', data.image.file);
-//                             $('#main-div #studentphoto').on('error', function (e) {
-//                                 $(this).attr('src', 'assets/img/guest.png');
-//                             });
-//                         });
-//                     } else {
-//                         $.notify('Axtardığınız pinkod mövcud deyil!', {
-//                             type: 'warning'
-//                         });
-//                     }
-//                 });
-//             } else {
-//
-//                 $('#main-div .search-pincode-teacher-modal').modal("hide");
-//                 $('body').find('.new-upd').css('right', '-100%');
-//                 setTimeout(function () {
-//                     $('body').find('.add-new').css('right', '0');
-//                 }, 400);
-//                 $('body').find('.add-new .search-scroll').load('partials/teacher_add.html', function () {
-//                     $('body').removeClass('modal-open');
-//                     $('#pincode').val(pincode).attr('disabled', 'disabled')
-//
-//                 });
-//             }
-//
-//         }
-//
-//     });
-
-
+    
     $('#main-div').on('click', '.teacher-pincode-button-next', function () {
         var obj = $(this);
         var dataAttr = obj.attr('data-attr');
@@ -3353,20 +3049,6 @@ $(function () {
                     $('#main-div .search-pincode').val('');
                     obj.removeAttr('data-attr');
                     obj.removeAttr('data-count');
-//                    Hsis.Proxy.getPersonInfoByPinCode(data.pinCode, function (iamasdata) {
-//                        if (data && data.firstName && data.lastName && data.middleName && data.birthDate) {
-//                            if (iamasdata.image.file !== null) {
-//                                $('#main-div .edit-common-info-image').attr('src', "data:image/png;base64," + iamasdata.image.file);
-//                                $('#main-div .edit-common-info-image').on('error', function (e) {
-//                                    $(this).attr('src', 'assets/img/guest.png');
-//                                });
-//                            }
-//                        } else {
-//                            $('#main-div .edit-common-info-image').attr('src', 'assets/img/guest.png');
-//                        }
-//
-//
-//                    });
                     Hsis.Proxy.getTeacherDetailsByPincode(pincode, function (result) {
 
                         $('#main-div .search-pincode-teacher-modal').modal("hide");
@@ -3376,7 +3058,6 @@ $(function () {
                         }, 400);
                         $('body').find('.add-new .search-scroll').load('partials/teacher_edit.html', function () {
                             if (result && result.code == Hsis.statusCodes.OK) {
-                                // console.log(result.data);
                                 if (result.data.image && result.data.image.path) {
                                     $('body .input-file-con .new-img-con').fadeIn(1);
                                     $('body .input-file-con .new-img-con img').attr('src', Hsis.urls.HSIS + 'students/image/' + (result.data.image.path ? result.data.image.path : '') + '?token=' + Hsis.token + '&size=200x200&' + Math.random());
@@ -3528,7 +3209,6 @@ $(function () {
             $('body').find('dd[data-firstname]').html(firstName);
             $('body').find('dd[data-lastname]').html(lastName);
             $('body').find('dd[data-orgname]').html(orgName);
-            //Hsis.Proxy.loadImage(Hsis.urls.HSIS + 'students/' + id + '/image?token=' + Hsis.token);
             if (imagePath && imagePath.trim().length > 0) {
                 $('.main-content-upd #teacherphoto').attr('src', Hsis.urls.HSIS + 'teachers/image/' + imagePath + '?token=' + Hsis.token + '&size=50x50&' + Math.random());
                 $('.main-content-upd #teacherphoto').on('error', function (e) {
@@ -3566,7 +3246,6 @@ $(function () {
             }
 
             $.confirm({
-                //title: 'Warning!',
                 content: Hsis.dictionary[Hsis.lang]['delete_info'],
                 confirm: function () {
                     var id = $('.main-content-upd #buttons_div').attr('data-pwlc-id');
@@ -3592,7 +3271,6 @@ $(function () {
             var id = $('.main-content-upd #buttons_div').attr('data-id');
             $('.add-new .search-scroll').load('partials/teacher_edit.html', function () {
                 Hsis.Proxy.getTeacherDetails(id, function (data) {
-                    // console.log(data)
                     var html = '';
 
                     if (data.image && data.image.path) {
@@ -3879,9 +3557,6 @@ $(function () {
                     $('.xtms-structure-form input[name="keyWord"]').val('');
                     var params = $('.main-content-upd .xtms-structure-form').serialize();
                     Hsis.Proxy.loadStructure('', params);
-
-                    // let pagination = $('.custom-pagination');
-                    // pagination.css("display", "none");
                 }
             }
         } catch (err) {
@@ -3959,11 +3634,9 @@ $(function () {
 
         try {
             $(".custom-pagination").find("li").removeClass("current");
-            // $(".custom-pagination").find("li").addClass("current");
             var pageNumber = $(this).index() + 1;
             var typeTable = $(this).parents(".custom-pagination").attr('data-table');
             var $btn = $(this);
-            // $btn.addClass('active');
             var type = $btn.attr('data-page');
             var page = parseInt(pageNumber);
 
@@ -4437,7 +4110,6 @@ $(function () {
         try {
             var pelcId = $(this).attr('data-id');
             $.confirm({
-                //title: 'Warning!',
                 content: Hsis.dictionary[Hsis.lang]['delete_info'],
                 confirm: function () {
                     Hsis.Proxy.removeTeacherEduLifeCycle(pelcId, function (data) {
@@ -4470,7 +4142,6 @@ $(function () {
                 return false;
             }
             $.confirm({
-                // title: 'Warning!',
                 content: Hsis.dictionary[Hsis.lang]['confirm_student'],
                 confirm: function () {
                     Hsis.Proxy.confirmStudent(pelcId, function () {
@@ -4498,7 +4169,6 @@ $(function () {
             }
 
             $.confirm({
-                // title: 'Warning!',
                 content: Hsis.dictionary[Hsis.lang]['confirm_teacher'],
                 confirm: function () {
                     Hsis.Proxy.confirmTeacher(pwlcId, function () {
@@ -4517,43 +4187,10 @@ $(function () {
 
     $('#main-div').on('click', '.btn-student-advanced-search', function (e) {
         try {
-            //            $('#main-div .student-advanced-search-modal').modal('show');
-//
-            //            $('#main-div .btn-advanced-search-button').attr('data-type', 's');
 
             $('.advanced-upd .search-scroll').load('partials/student_advanced_search.html', function () {
                 $('#main-div .search-student').val("1");
                 $('#main-div .citizenship-id').val($('#main-div').attr('data-citizenship'));
-
-                // setTimeout(function(){
-                //     if (sessionStorage.studentSearch != undefined) {
-                //         var obj = JSON.parse(sessionStorage.studentSearch);
-                //         var sessionStudnt = sessionStorage.studentSearch;
-                //         var newObject = obj.split('&');
-
-                //         var formMap = [];
-                //         $.each(newObject, function(i, v){
-                //             var key = v.split('=')[0];
-                //             var value = v.split('=')[1]
-
-
-                //             $('body').find('.student-advanced-search-form [name="'+ key +'"]').val(value);
-
-                //             formMap[key] = value;
-                //         });
-
-
-
-                //     }
-                // }, 100)
-
-
-
-
-
-
-
-
                 $('.advanced-upd').css('right', '0')
 
             });
@@ -4565,9 +4202,6 @@ $(function () {
     });
     $('#main-div').on('click', '.clear_search_button_foreign_student', function (e) {
         try {
-            //            $('#main-div .student-advanced-search-modal').modal('show');
-//
-            //            $('#main-div .btn-advanced-search-button').attr('data-type', 's');
 
             $('.foreign-advanced-search .search-scroll').load('partials/student_advanced_search_foreign.html', function () {
                 $('#main-div .search-student').val("1");
@@ -4734,53 +4368,6 @@ $(function () {
 
     })
 
-//    $('body').on('click', '.add_relation_submit', function () {
-//        try {
-//            var dataType = $(this).attr('data-type');
-//            var id = $(this).attr('data-id');
-//            var relType = $('#main-div #relation_type_id').find('option:selected').val();
-//            var fullname = $('#main-div #relation_fullname').val();
-//            var contact = $('#main-div #relation_contact').val();
-//            var relation = {};
-//            relation.id = id;
-//            relation.typeId = relType;
-//            relation.fullName = fullname;
-//            relation.contactNumber = contact;
-//
-//            if (Hsis.Validation.validateRequiredFields('relation-required')) {
-//                if (dataType === 'add') {
-//                    Hsis.Proxy.addStudentRelationship(relation, function (data) {
-//                        if (data) {
-//                            if (data.code == Hsis.statusCodes.OK) {
-//                                var id = $('#main-div').attr('data-id');
-//                                Hsis.Proxy.getStudentDetails(id, function (result) {
-//                                    $('.student-relationships-div .panel-body').html(Hsis.Service.parseStudentRelationShip(result.relations));
-//                                    $('.student-relationship-modal').modal('hide');
-//                                })
-//                            }
-//                        }
-//                    });
-//                } else if (dataType === 'edit') {
-//                    Hsis.Proxy.editStudentRelationship(relation, function (data) {
-//                        if (data) {
-//                            if (data.code == Hsis.statusCodes.OK) {
-//                                var id = $('#main-div').attr('data-id');
-//                                Hsis.Proxy.getStudentDetails(id, function (result) {
-//                                    $('.student-relationships-div .panel-body').html(Hsis.Service.parseStudentRelationShip(result.relations));
-//                                    $('.student-relationship-modal').modal('hide');
-//                                })
-//                            }
-//                        }
-//                    })
-//                }
-//            }
-//        } catch (err) {
-//            console.error(err);
-//        }
-//
-//
-//    })
-
     $('body').on('click', '.edit-student-relationship', function () {
         try {
             var relationId = $(this).attr('data-id');
@@ -4810,7 +4397,6 @@ $(function () {
             var relation = {};
             relation.id = id
             $.confirm({
-                //title: 'Warning!',
                 content: Hsis.dictionary[Hsis.lang]['delete_info'],
                 confirm: function () {
                     Hsis.Proxy.removeStudentRelationship(relation, function (data) {
@@ -4836,8 +4422,6 @@ $(function () {
             $('#main-div .academic-degree-info-modal .academic').find('option:selected').removeAttr('selected');
             $('#main-div .academic-degree-info-modal .academic').find('option[value="0"]').attr('selected', 'selected');
             $('#main-div .academic-degree-info-modal .academic-degree-name').html('');
-            // $('#main-div .academic-degree-status').find('option:selected').removeAttr('selected');
-            //$('#main-div .academic-degree-status').find('option[value=""]').attr('selected', 'selected');
             $('#main-div .academic-degree-name-label').text('').removeAttr('data-i18n')
             $('#main-div .academic-degree-info-modal .blank-required-field').removeClass('blank-required-field');
             $('#main-div .academic-degree-info-modal').modal("show");
@@ -4853,7 +4437,6 @@ $(function () {
             var id = $(this).attr('data-id');
             var dicType = $(this).attr('data-dic-type-id');
             var startDate = $(this).attr('data-startdate');
-            // var status = $(this).attr('data-status');
             var typeId = $(this).attr('data-type-id');
 
             Hsis.Proxy.loadDictionariesByTypeId(dicType, 0, function (academicDegrees) {
@@ -4865,7 +4448,6 @@ $(function () {
                 $('#main-div .academic-degree-name-label').text(name)
 
             });
-            // $('#main-div .academic-degree-status').find('option[value="' + status + '"]').attr('selected', 'selected');
             $('#main-div .academic-degree-date').val(startDate);
             $('#main-div .academic-degree-info-modal .blank-required-field').removeClass('blank-required-field');
             $('#main-div .academic-degree-info-modal').modal("show");
@@ -4885,13 +4467,11 @@ $(function () {
                 var id = $(this).attr('data-id');
                 var acadInfoId = $('#main-div .academic-degree-name').find('option:selected').val();
                 var date = $('#main-div .academic-degree-date').val();
-                // var status = $('#main-div .academic-degree-status').find('option:selected').val();
 
                 var degree = {};
                 degree.id = id;
                 degree.acadInfoId = acadInfoId;
                 degree.startDate = date;
-                //degree.status = status;
 
                 if (dataType === 'add') {
                     Hsis.Proxy.addTeacherAcademicDegree(degree, function (data) {
@@ -4958,7 +4538,6 @@ $(function () {
             var degree = {};
             degree.id = id
             $.confirm({
-                //title: 'Warning!',
                 content: Hsis.dictionary[Hsis.lang]['delete_info'],
                 confirm: function () {
                     Hsis.Proxy.removeTeacherAcademicDegree(degree, function (data) {
@@ -5362,10 +4941,6 @@ $(function () {
 
     $('#main-div').on('click', '#operation_1001345', function () {
         try {
-
-            // $('#main-div .search-pincode-modal').modal({
-            //     backdrop: false
-            // });
             $('body').find('.new-upd').css('right', '0');
             $('#main-div .abroad-pincode-button-next').removeClass('hidden');
             $('#main-div .abroad-pincode-button-next').attr('data-step', '1');
@@ -5396,10 +4971,6 @@ $(function () {
     $('#main-div').on('click', '#operation_1000062', function () {
         
         try {
-
-            // $('#main-div .search-pincode-modal').modal({
-            //     backdrop: false
-            // });
             $('body').find('.new-upd').css('right', '0');
             $('#main-div .pincode-button-next').removeClass('hidden');
             $('#main-div .pincode-button-next').attr('data-step', '1');
@@ -5424,9 +4995,6 @@ $(function () {
 
        try {
 
-            // $('#main-div .search-pincode-modal').modal({
-            //     backdrop: false
-            // });
             $('body').find('.new-upd').css('right', '0');
             $('#main-div .pincode-button-next').removeClass('hidden');
             $('#main-div .pincode-button-next').attr('data-step', '1');
@@ -5449,10 +5017,6 @@ $(function () {
     $('#main-div').on('click', '#operation_1000064', function () {
 
         try {
-
-            // $('#main-div .search-pincode-modal').modal({
-            //     backdrop: false
-            // });
             $('body').find('.new-upd').css('right', '0');
             $('#main-div .pincode-button-next').removeClass('hidden');
             $('#main-div .pincode-button-next').attr('data-step', '1');
@@ -5475,10 +5039,6 @@ $(function () {
     $('#main-div').on('click', '#operation_1001408', function () {
 
         try {
-
-            // $('#main-div .search-pincode-modal').modal({
-            //     backdrop: false
-            // });
             $('body').find('.new-upd').css('right', '0');
             $('#main-div .pincode-button-next').removeClass('hidden');
             $('#main-div .pincode-button-next').attr('data-step', '1');
@@ -5603,7 +5163,7 @@ $(function () {
                                 $('body').find('.add-new').css('right', '0');
                             }, 400);
                             Hsis.Proxy.getStudentDetailsByPinCode(pincode, function (details) {
-                                if (details.data) {//
+                                if (details.data) {
                                     if (details.data.image && details.data.image.path) {
                                         $('body .input-file-con .new-img-con').fadeIn(1);
                                         $('body .input-file-con .new-img-con img').attr('src', Hsis.urls.HSIS + 'students/image/' + (details.data.image.path ? details.data.image.path : '') + '?token=' + Hsis.token + '&size=200x200&' + Math.random());
@@ -5643,51 +5203,17 @@ $(function () {
                                     $('.add-doc-block .panel-body').html(Hsis.Service.parseViewStudentDocument(details.data.documents, personal));
                                     $('.old_activity_name #acad_doc_add').html(Hsis.Service.parseViewStudentDocument(details.data.pelcDocuments, academic));
                                     $('.activity_name #school_doc_add').html(Hsis.Service.parseViewStudentDocument(details.data.schoolDocuments, school));
-                                    //
+                                    
                                     $('.student-relationships-div .panel-body').html(Hsis.Service.parseViewStudentRelationShip(details.data.relations));
-//                                    Hsis.Proxy.getOrderDocumentsByType(details.data.actionType.id, Hsis.structureId, function (order) {
-//                                        if (order) {
-//                                            var html = '<option value="0">' + Hsis.dictionary[Hsis.lang]["select"] + '</option>';
-//                                            var st = '';
-//                                            $.each(order, function (i, v) {
-//                                                st = v.startDate == null ? '' : '-' + (v.startDate).toString().slice(6, 10);
-//                                                html += '<option value="' + v.id + '">' + v.serial + v.number + st + '</option>';
-//                                            });
-//                                            $('#order').html(html);
-//                                            $('#main-div #order').find('option[value="' + details.data.orderId + '"]').attr('selected', 'selected').trigger('change');
-//                                        }
-//                                    });
                                     if (type == "furlough") {
                                         console.log(details.data.pelcAction);
                                         var pelcAction = $.grep(details.data.pelcAction, function (pelc) {
                                             return pelc.id == details.data.pelcId;
                                         });
                                         var lastPelcAction = pelcAction[0];
-
-//                                        $('#score').val(lastPelcAction.applyScore);
-//                                        $('#edu_line').find('option[value="' + lastPelcAction.eduLine.id + '"]').attr('selected', true);
-//                                        $('#edu_type').find('option[value="' + lastPelcAction.eduType.id + '"]').attr('selected', true);
-//                                        $('#edu_pay_type').find('option[value="' + lastPelcAction.edupayType.id + '"]').attr('selected', true);
-//                                        $('#edu_lang').find('option[value="' + lastPelcAction.eduLang.id + '"]').attr('selected', true);
                                         var eduLevel;
-//                                        switch (lastPelcAction.eduLevel.id) {
-//                                            case 1000184:
-//                                                eduLevel = '1000057';
-//                                                break;
-//                                            case 1000218:
-//                                                eduLevel = '1000604';
-//                                                break;
-//                                            default:
-//                                                eduLevel = lastPelcAction.eduLevel.id;
-//
-//                                        }
-
-
-//                                        $('#edu_level').find('option[value="' + eduLevel + '"]').attr('selected', true);
 
                                         if (eduLevel > 0) {
-                                            console.log(details.data.speciality);
-                                            console.log('----');
                                             $.each(details.data.speciality, function (i, v) {
                                                 Hsis.Proxy.getFilteredStructureList(Hsis.structureId, eduLevel, 0, function (specialities) {
                                                     if (specialities) {
@@ -5908,28 +5434,12 @@ $(function () {
                     if (data.image && data.image.path) {
                         $('body .input-file-con .new-img-con').fadeIn(1);
                         $('body .input-file-con .new-img-con img').attr('src', Hsis.urls.HSIS + 'students/image/' + (data.image.path ? data.image.path : '') + '?token=' + Hsis.token + '&size=200x200&' + Math.random());
-//                        $('.edit-common-info-image').attr('src', Hsis.urls.HSIS + 'students/image/'+(data.image.path ? data.image.path : '')+'?token=' + Hsis.token + '&size=200x200&' + Math.random());
-                        $('body .input-file-con .new-img-con').attr('data-id', data.image.id);
+                      $('body .input-file-con .new-img-con').attr('data-id', data.image.id);
                         $('body .input-file-con .new-img-con img').on('error', function (e) {
                             $('body .input-file-con .new-img-con img').attr('src', 'assets/img/guest.png');
                         });
 
                     }
-
-//                    Hsis.Proxy.getPersonInfoByPinCode(data.pinCode, function (iamasdata) {
-//                        if (data && data.firstName && data.lastName && data.middleName && data.birthDate) {
-//                            if (iamasdata.image.file !== null) {
-//                                $('#main-div .edit-common-info-image').attr('src', "data:image/png;base64," + iamasdata.image.file);
-//                                $('#main-div .edit-common-info-image').on('error', function (e) {
-//                                    $(this).attr('src', 'assets/img/guest.png');
-//                                });
-//                            }
-//                        } else {
-//                            $('#main-div .edit-common-info-image').attr('src', 'assets/img/guest.png');
-//                        }
-//
-//
-//                    });
 
                     $('#firstname').val(data.firstName);
                     $('#lastname').val(data.lastName);
@@ -5960,45 +5470,9 @@ $(function () {
                         $('.add-doc-block .panel-body').html(Hsis.Service.parseEditStudentDocument(data.documents, personal));
                     }
 
-//                    $('.activity_name #acad_doc_add').append(Hsis.Service.parseEditStudentDocument(data.pelcDocuments, academic));
-//  
-//                                      $('.activity_name #school_doc_add').append(Hsis.Service.parseEditStudentDocument(data.schoolDocuments, school));
-
 
                     $('.student-relationships-div .panel-body').html(Hsis.Service.parseStudentRelationShip(data.relations));
 
-
-
-
-//                    $('#action_type').find('option[value="' + data.actionType.id + '"]').attr('selected', 'selected');
-//                    $('#edu_line').find('option[value="' + data.eduLineId.id + '"]').attr('selected', 'selected');
-//                    $('#edu_lang').find('option[value="' + data.eduLangId.id + '"]').attr('selected', 'selected');
-//                    $('#edu_type').find('option[value="' + data.eduTypeId.id + '"]').attr('selected', 'selected');
-//                    $('#edu_pay_type').find('option[value="' + data.edupayTypeId.id + '"]').attr('selected', 'selected');
-
-//                    $('.second-info-date').val(data.actionDate);
-//                    $('.student-card-number').val(data.studentCardNo);
-//                    $('#edu_level').find('option[value="' + data.eduLevelId.id + '"]').attr('selected', 'selected');
-//                    $.each(data.speciality, function (i, v) {
-//                        if (v.type.id == 1000057) {
-                    //                            $('#orgId').find('option[value="' + v.id + '"]').attr('selected', 'selected');
-                    //                        }
-                    //                        else if (v.type.id == 1000056) { //                            $('.edit-graduated-school').attr('data-pelc-id', v.pelcId);
-                    //                            Hsis.Proxy.getFilteredStructureList('1000056', v.addressTreeId, function (schools) {
-                    //                                var html = '<option value="0">Select</option>';
-//                                if (schools) {
-                    //                                    $.each(schools, function (k, j) {
-                    //                                        html += '<option value="' + j.id + '">' + j.name[Hsis.lang] + '</option>';
-                    //                                    })
-                    //                                }
-                    //                                ;
-                    //                                $('#schoolId').html(html);
-                    //                                $('#schoolId').find('option[value = "' + v.id + '"]').attr("selected", "selected");
-                    //                                $('#graduatedDate').val(v.actionDate);
-                    //                            })
-                    //                        } //                    })
-
-//                    $('#score').val(data.score);
 
                 });
             });
@@ -6089,9 +5563,6 @@ $(function () {
             if (activeTypeCount > 0) {
 
                 obj.toggleClass("radio-check radio-uncheck");
-                // var value = obj.hasClass('radio-check') ? thisSubModule.attr('data-id') : "";
-                // var value = checkbox.is(':checked') ? thisSubModule.attr('data-id') : "";
-                // checkbox.val();
                 var subModuleId = [];
                 $.each($('.sub-module-con input'), function () {
                     if ($(this).is(':checked')) {
@@ -6381,58 +5852,11 @@ $(function () {
 
         sessionStorage.setItem('teacherSearch', JSON.stringify(form));
 
-        // var form = $('.teacher-advanced-search-form :input').not('#teacher_languages').serialize();
-
-
         Hsis.tempData.form = formSearch + '&subModuleId=' + Hsis.subModuleId;
 
         Hsis.Proxy.loadTeachers('', Hsis.tempData.form, function () {
             $('.advanced-upd').css('right', '-100%');
         });
-        // var valArray = [];
-        // var formMap = $.map($('.teacher-advanced-search-form :input'), function (el, idx) {
-        //     if (el.value.length > 0 && el.value != 0 && el.name != 'searchAttr') {
-        //         valArray.push(el.value);
-        //     }
-        //     return {
-        //         type: el.type,
-        //         value: el.value,
-        //         name: el.name
-        //     };
-        // });
-
-        // console.log();
-        // if (valArray.length > 0) {
-        //     sessionStorage.setItem('teacherSearch', JSON.stringify(formMap));
-        // }
-        // else {
-        //     $.notify(Hsis.dictionary[Hsis.lang]['advance_search_required'], {
-        //         type: 'danger'
-        //     });
-        //     return false;
-        // }
-
-
-        // $('.main-content-upd').load('partials/module_1000010.html', function () {
-        //     if (sessionStorage.teacherSubModules != undefined) {
-        //         var subArray = JSON.parse(sessionStorage.teacherSubModules);
-
-        //         setTimeout(function () {
-        //             $.each($('.sub_modules :checkbox'), function () {
-        //                 if ($.inArray($(this).val(), subArray) >= 0) {
-        //                   ;
-        //                 }
-        //                 else {
-        //                     $(this).val("");
-        //                     //console.log($(this).parent('.sub-module-item'));
-        //                     $(this).parents('.sub-module-item').find('.state-icon').toggleClass("radio-check radio-uncheck");
-        //                 }
-        //             });
-        //             Hsis.subModuleId = subArray;
-        //         }, 1000);
-
-        //     }
-        // });
         $('.advanced-upd').css('right', '-100%');
         return false
     })
@@ -6440,14 +5864,6 @@ $(function () {
     $('#main-div').on('click', '#operation_1000137', function () {
 
         try {
-//    $('#main-div').on('click', '.btn-sabah-student', function () {
-//        $('#main-div .sabah-form input[name="educationPaymentTypeId"]').val(1000239);
-//        $('#main-div .sabah-form input[name="searchAttr"]').val(1);
-//
-//        var params = $('#main-div .sabah-form').serialize();
-//        Hsis.Proxy.loadStudents('', params)
-//
-//    })
 
             var id = $(this).parents('#buttons_div').attr('data-id');
 
@@ -6463,7 +5879,6 @@ $(function () {
 
 
             if (uniDicId == parentId || id == 1000001) {
-                // alert('SUCCESS')
             } else {
                 $.notify("Secdiyiniz struktur export oluna bilmez", {
                     type: 'danger'
@@ -6508,7 +5923,6 @@ $(function () {
     // edit student modal
 
     $('body').on('click', '.edit-student-action', function () {
-        // var a = $('body').attr('data-org-type');
         try {
             var type = $(this).attr('data-type-id');
             var id = $(this).attr('data-id');
@@ -6581,20 +5995,14 @@ $(function () {
                     var html = Hsis.Service.parseDictionaryForSelect(startActionType);
                     $('#start_action_type').html(html);
                     $('#start_action_type').val(data.data.actionType.id);
-//                    startActiontype = startActiontype.trim();
-//                    $('.add-edulifecycle-modal').find("#start_action_type").val();
                 });
 
                 Hsis.Proxy.loadDictionariesByTypeId('1000025', '1000259', function (endActionType) {
                     var html = Hsis.Service.parseDictionaryForSelect(endActionType);
                     $('#end_action_type').html(html);
-                    $('#end_action_type').val(data.data.endActionType.id);;
-//                    dataEndActionType = dataEndActionType.trim();
-//                    $('.add-edulifecycle-modal').find("#end_action_type").val();
+                    $('#end_action_type').val(data.data.endActionType.id);
                 });
 
-
-//                $('#main-div #edit_uni_action_apply_score').val(data.data.applyScore);
                 $('#main-div .edit-uni-action').attr('data-id', id);
 
                 $('#main-div .add-edulifecycle-modal').modal();
@@ -6604,18 +6012,8 @@ $(function () {
 
                 $('.add-edulifecycle-modal').find('#edu_org_list').empty().append("<option>"+structureName+"</option>");
 
-                // setTimeout(function() {
-                //     startActiontype = startActiontype.trim();
-                //     $('.add-edulifecycle-modal').find("#start_action_type option:contains('"+startActiontype+"')").prop("selected",true);
-                //     dataEndActionType = dataEndActionType.trim();
-                //     $('.add-edulifecycle-modal').find("#end_action_type option:contains('"+dataEndActionType+"')").prop("selected",true);
-                // },500);
 
-                $('.add-edulifecycle-modal').find('#edu-start-date').val(dataActionDate);   /*date*/
-
-                // $('#main-div .student-edit-uni-action-modal').modal({
-                //     backdrop: false
-                // });
+                $('.add-edulifecycle-modal').find('#edu-start-date').val(dataActionDate); 
 
             });
         } catch (err) {
@@ -6640,7 +6038,6 @@ $(function () {
         var type = $(this).attr('data-type-id');
 
         if (type == '1000073' || type == '1000055') {
-            // bu hisse oxunmur
             var eduLifeCycle = {
                 id: id,
                 actionDate: actionDate,
@@ -6698,12 +6095,6 @@ $(function () {
         var orgId = (schoolId == undefined || schoolId == "0") ? $(this).attr('data-org-id') : schoolId;
         var endActionDate = $('#main-div #edit_school_end_action_date').val();
         var statusId = $(this).attr('data-status-id');
-
-        //
-        // var eduLine = $('#main-div #edit_uni_action_edu_line').find('option:selected').val();
-        // var eduType = $('#main-div #edit_uni_action_edu_type').find('option:selected').val();
-        // var edupayType = $('#main-div #edit_uni_action_edu_pay_type').find('option:selected').val();
-
         var eduLifeCycle = {
             id: id,
             actionDate: actionDate,
@@ -6809,7 +6200,6 @@ $(function () {
             });
 
 
-            //when i click add button
             $('.add-edulifecycle-modal').modal();
 
 
@@ -6834,62 +6224,6 @@ $(function () {
         });
         $('.main-content-upd #buttons_div').attr('data-dicType-id', dicType);
     })
-
-//    $('#main-div').on('change', '#edu_org_list', function () {
-//        var structureId = $(this).find('option:selected').val();
-//        var pastEduLevel = $('#past_edu_level').find('option:selected').val();
-//        if (pastEduLevel > 0 && structureId > 0) {
-//            Hsis.Proxy.getFilteredStructureList(structureId, pastEduLevel, 0, function (specialities) {
-//                if (specialities) {
-//                    var html = '<option value="0">' + Hsis.dictionary[Hsis.lang]['select'] + '</option>';
-//                    $.each(specialities, function (i, v) {
-//                        html += '<option value="' + v.id + '">' + v.name[Hsis.lang] + '</option>'
-//                    })
-//                }
-//                $('#past_orgId').html(html);
-//            });
-//        }
-//        else {
-//            $('#past_orgId').empty();
-//        }
-//
-//    });
-
-//    $('#main-div').on('change', '#past_edu_level', function () {
-//        try {
-//            var pastEduLevel = $(this).find('option:selected').val();
-//            var structureId = $('#edu_org_list').find('option:selected').val();
-//            if (structureId == undefined || structureId == "0") {
-//                $.alert({
-//                    title: Hsis.dictionary[Hsis.lang]['warning'],
-//                    content: Hsis.dictionary[Hsis.lang]['select_structure'],
-//                    theme: 'material'
-//                });
-//                $('#past_orgId').empty();
-//                return false;
-//            }
-//            if (pastEduLevel > 0) {
-//                Hsis.Proxy.getFilteredStructureList(structureId, pastEduLevel, 0, function (specialities) {
-//                    if (specialities) {
-//                        var html = '<option value="0">' + Hsis.dictionary[Hsis.lang]['select'] + '</option>';
-//                        $.each(specialities, function (i, v) {
-//                            html += '<option value="' + v.id + '">' + v.name[Hsis.lang] + '</option>'
-//                        })
-//                    }
-//                    $('#past_orgId').html(html);
-//                });
-//            } else if (pastEduLevel == 0) {
-//                $('#past_orgId').html('');
-//            }
-//        }
-//        catch (err) {
-//            console.error(err);
-//        }
-//    });
-
-
-
-
 
         $('body').on('click', '#edulifecycle_confirm', function () {
             var t = $(this);
@@ -7371,52 +6705,6 @@ $(function () {
         }
     });
 
-    // $(window).scroll(function () {
-    //     //console.log('scrolltop = '+$(window).scrollTop()+' ,window-height = '+$(window).height()+' ,doc-height = '+$(document).height());
-    //     if (Math.round($(window).scrollTop()) + $(window).height() == $(document).height()) {
-    //         // on bottom
-    //         $('.logo.flex-center').addClass('hidden');
-    //         $('ul.module').attr('style', 'top:0');
-    //     }
-    //     else if ($(window).scrollTop() == 0) {
-    //         // on top
-    //         $('.logo.flex-center').removeClass('hidden');
-    //         $('ul.module').removeAttr('style');
-    //     }
-
-
-    // });
-
-//    $(window).on('mousewheel', function () {
-//        if (Math.round($(window).scrollTop()) + $(window).height() == $(document).height()) {
-//            // on bottom
-//            if(Hsis.top > $(window).height()) {
-//              $('ul.module').attr('style', 'top:'+(-1)*(Hsis.top-$(window).height()-$('.org-logo').height())+'px;'); 
-//           }
-////           else {
-////                $('ul.module').attr('style', 'top:0');
-////           }
-//        }
-//        else if ($(window).scrollTop() == 0) {
-//            // on top
-//            $('.logo.flex-center').removeClass('hidden');
-//            $('ul.module').removeAttr('style');
-//        }
-//    });
-
-    // $(window).on('mousewheel', function () {
-    //     if (Math.round($(window).scrollTop()) + $(window).height() == $(document).height()) {
-    //         // on bottom
-    //         $('.logo.flex-center').addClass('hidden');
-    //         $('ul.module').attr('style', 'top:0');
-    //     }
-    //     else if ($(window).scrollTop() == 0) {
-    //         // on top
-    //         $('.logo.flex-center').removeClass('hidden');
-    //         $('ul.module').removeAttr('style');
-    //     }
-    // });
-
     $('#main-div').on('change', '#groups', function (e) {
         try {
             var groupId = $('#groups').find('option:selected').val();
@@ -7486,12 +6774,7 @@ $(function () {
     $('body').on('click', '.add-scholarship-plan', function (e) {
         try {
             $('#scholarshipModal').modal();
-//            if (Hsis.operationList == "edit") {
-//                $('#scholarshipModal .confirmScholarship').attr('edit-add', '0').removeAttr('edit-edit');
-//            }
-//            else {
             $('#scholarshipModal .confirmScholarship').attr('add', '0').removeAttr('edit');
-//            }
 
             Hsis.Proxy.getEduYears(function (years) {
                 if (years) {
@@ -7508,12 +6791,7 @@ $(function () {
     });
     $('body').on('click', '.add-org-contact', function (e) {
         try {
-//            if (Hsis.operationList == "edit") {
-//                $('#orgContactModal .confirmOrgContact').attr('edit-add', '0').removeAttr('edit-edit');
-//            }
-//            else {
             $('#orgContactModal .confirmOrgContact').attr('add', '0').removeAttr('edit');
-//            }
 
             Hsis.Proxy.loadDictionariesByTypeId('1000011', 0, function (contact) {
                 var html = Hsis.Service.parseDictionaryForSelect(contact);
@@ -7563,7 +6841,6 @@ $(function () {
                     '</div>' +
                     '</div>';
             $('#scholarplan_div').append(html);
-//            $('.add-scholarship-plan').addClass('hidden');
             $('#scholarshipModal').find('input').val('');
             $('#scholarshipModal select').find('option[value="0"]').prop('selected', true);
             $('#scholarshipModal').modal('hide');
@@ -7614,137 +6891,12 @@ $(function () {
         }
 
     });
-//
-//    $('#main-div').on('click', '[edit-scholarship]', function (e) {
-//        try {
-//            $('.scholarship-item').removeClass('active');
-//            var div = $(this).parents('.scholarship-item');
-//            div.addClass('active');
-//            var eduYear = $(this).attr('data-year');
-//            var placeCount = $(this).attr('data-count');
-//
-//            if (Hsis.operationList == "edit") {
-//                Hsis.Proxy.getEduYears(function (years) {
-//                    if (years) {
-//                        var html = '<option value="0">' + Hsis.dictionary[Hsis.lang]["select"] + '</option>';
-//                        $.each(years, function (i, v) {
-//                            html += '<option value="' + v.id + '">' + v.value[Hsis.lang] + '</option>';
-//                        });
-//                        $('#edu_year').html(html);
-//                        $('#edu_year').find('option[value="' + eduYear + '"]').prop('selected', true);
-//                    }
-//                });
-//                $('#scholarshipModal .confirmScholarship').attr('edit-edit', '0').removeAttr('add');
-//            }
-//            else {
-//                $('#scholarshipModal .confirmScholarship').attr('edit', '0').removeAttr('add');
-//                $('#edu_year').find('option[value="' + eduYear + '"]').prop('selected', true);
-//            }
-//            $('#placeCount').val(placeCount);
-//            $('#scholarshipModal').modal();
-//        }
-//        catch (err) {
-//            console.error(err);
-//        }
-//    });
 
-//    $('.confirmScholarship[edit]').on('click', function (e) {
-//        var eduYear = $('#edu_year').find('option:selected').val();
-//        var eduYearName = $('#edu_year').find('option:selected').html();
-//        var placeCount = $('#placeCount').val();
-//        var selected = $('.scholarship-item.active');
-//        selected.attr('data-count', placeCount);
-//        selected.attr('data-year', eduYear);
-//        selected.find('td[data-count]').html(placeCount);
-//        selected.find('td[data-year]').html(eduYearName);
-//        selected.find('[edit-scholarship]').attr('data-count', placeCount);
-//        selected.find('[edit-scholarship]').attr('data-year', eduYear);
-//        $('#scholarshipModal').modal('hide');
-//        $('#scholarshipModal input').val('');
-//        $('#scholarshipModal select').find('option[value="0"]').prop('selected', true);
-//
-//
-//    });
-//
-//    $('.confirmScholarship[edit-add]').on('click', function (e) {
-//        try {
-//            var eduYear = $('#edu_year').find('option:selected').val();
-//            var placeCount = $('#placeCount').val().trim();
-//            var orgId = $('#orgId').val();
-//            if (eduYear > 0 && placeCount.length > 0) {
-//                var plan = {
-//                    eduYearId: eduYear,
-//                    scholarshipPlan: placeCount,
-//                    id: orgId
-//                }
-//                $('#scholarshipModal').modal('hide');
-//                Hsis.Proxy.addOrgPlan(plan, function () {
-//                    Hsis.Proxy.getOrgPlanByOrgId(orgId, function (plan) {
-//                        Hsis.Service.parseScholarshipPlan(plan);
-//                    });
-//                });
-//            }
-//        }
-//        catch (err) {
-//            console.error(err);
-//        }
-//    });
-
-//    $('.confirmScholarship[edit-edit]').on('click', function () {
-//        try {
-//            var eduYear = $('#edu_year').find('option:selected').val();
-//            var placeCount = $('#placeCount').val().trim();
-//            var orgId = $('#orgId').val();
-//            var selected = $('.scholarship-item.active');
-//            var planId = selected.attr('data-id');
-//            if (eduYear > 0 && placeCount.length > 0) {
-//                var plan = {
-//                    eduYearId: eduYear,
-//                    scholarshipPlan: placeCount,
-//                    id: orgId
-//                }
-//                $('#scholarshipModal').modal('hide');
-//                Hsis.Proxy.editOrgPlan(planId, plan, function () {
-//                    Hsis.Proxy.getOrgPlanByOrgId(orgId, function (plan) {
-//                        Hsis.Service.parseScholarshipPlan(plan);
-//                    });
-//                });
-//            }
-//        }
-//        catch (err) {
-//            console.error(err);
-//        }
-//    });
 
     $('#main-div').on('click', '[remove-scholarship]', function (e) {
         try {
-//            if (Hsis.operationList == "edit") {
-//                var id = $(this).attr('data-id');
-//                var orgId = $('#orgId').val();
-//                $.confirm({
-//                    title: Hsis.dictionary[Hsis.lang]['warning'],
-//                    content: Hsis.dictionary[Hsis.lang]['delete_info'],
-//                    confirm: function () {
-//                        Hsis.Proxy.removeOrgPlan(id, function () {
-//                            Hsis.Proxy.getOrgPlanByOrgId(orgId, function (plan) {
-//                                Hsis.Service.parseScholarshipPlan(plan);
-//                            });
-//                        });
-//                    },
-//                    cancel: function () {
-//                        $.notify(Hsis.dictionary[Hsis.lang]['сancelled'], {
-//                            type: 'warning'
-//                        });
-//                    },
-//                    theme: 'material'
-//                });
-//            }
-//            else {
+
             $(this).parents('.scholarship-item').remove();
-//                if ($('.scholarship-item').length == 0) {
-//                    $('.add-scholarship-plan').removeClass('hidden');
-//                }
-//            }
         } catch (err) {
             console.error(err);
         }
@@ -7752,30 +6904,8 @@ $(function () {
 
     $('#main-div').on('click', '[remove-orgcontact]', function (e) {
         try {
-//            if (Hsis.operationList == "edit") {
-//                var id = $(this).attr('data-id');
-//                var orgId = $('#orgId').val();
-//                $.confirm({
-//                    title: Hsis.dictionary[Hsis.lang]['warning'],
-//                    content: Hsis.dictionary[Hsis.lang]['delete_info'],
-//                    confirm: function () {
-//                        Hsis.Proxy.removeOrgPlan(id, function () {
-//                            Hsis.Proxy.getOrgPlanByOrgId(orgId, function (plan) {
-//                                Hsis.Service.parseScholarshipPlan(plan);
-//                            });
-//                        });
-//                    },
-//                    cancel: function () {
-//                        $.notify(Hsis.dictionary[Hsis.lang]['сancelled'], {
-//                            type: 'warning'
-//                        });
-//                    },
-//                    theme: 'material'
-//                });
-//            }
-//            else {
+
             $(this).parents('.orgcontact-item').remove();
-//            }
         } catch (err) {
             console.error(err);
         }
@@ -8024,7 +7154,6 @@ $(function () {
             Hsis.Proxy.loadDictionariesByTypeId('1000002', 0, function (orgType) {
                 var html = Hsis.Service.parseDictionaryForSelect(orgType);
                 $('#main-div #teacherOrgTypeId').html(html);
-                // $('#main-div #teacherOrgTypeId').find('option[value="' + parentOrgType + '"]').prop('selected', true);
 
             });
 
@@ -8042,12 +7171,10 @@ $(function () {
         $('#main-div #add-order-number').val('');
         $('#main-div #order-start-date').val('');
         $('#main-div .order-type').val(0);
-//        $('#main-div #order-end-date').val('');
         $('#main-div #university-list-h6').text('');
         $('#collapseUniversity').removeClass('in');
         $('#main-div .new-order-doc-file').val("")
         $('#main-div .file-span').text("")
-        // $('#main-div .add-order-document-modal').modal("show");
         $('body').find('.add-new').css('right', '0');
     })
 
@@ -8062,7 +7189,6 @@ $(function () {
             if(dataCheck == '1') {
                 return false;
             }
-//            var endDate = $('#main-div #order-end-date').val();
             var type = $('#main-div .order-type').find('option:selected').val();
             var document = {
                 type: type,
@@ -8122,7 +7248,6 @@ $(function () {
                         $('#main-div #add-order-number').val('');
                         $('#main-div .order-type').val(0);
                         $('#main-div #order-start-date').val('');
-//                    $('#main-div #order-end-date').val('');
                         $('#main-div #university-list-h6').text('');
                         $('#collapseUniversity').removeClass('in');
                         $('#main-div .new-order-doc-file').val("")
@@ -8182,7 +7307,6 @@ $(function () {
                             '</div>';
                 }
                 $('#main-div .file-list-div').html(html);
-                // $('#main-div .edit-order-document-modal').modal("show");
                 $('body').find('.edit-new').css('right', '0')
             }
         })
@@ -8234,11 +7358,9 @@ $(function () {
     $('#main-div ').on('click', '.doc-order-delete', function () {
         try {
             var docFileId = $(this).parent('.user-doc-file').attr('data-file-id');
-            //  alert(docFileId);
             var docFilePath = $(this).parent('.user-doc-file').attr('data-file-path');
             var $obj = $(this);
             $.confirm({
-                //title: 'Warning!',
                 content: Hsis.dictionary[Hsis.lang]['remove_file'],
                 confirm: function () {
                     Hsis.Proxy.removeOrderFiles(docFileId, docFilePath, function (data) {
@@ -8267,7 +7389,6 @@ $(function () {
             if(dataCheck == '1') {
                 return false;
             }
-//            var endDate = $('#main-div #edit-order-end-date').val();
             var type = $('#main-div .edit-order-type').find('option:selected').val();
             var document = {
                 id: id,
@@ -8355,7 +7476,6 @@ $(function () {
         var id = obj.parents('.info').attr('data-id');
 
         $.confirm({
-            //title: 'Warning!',
             content: Hsis.dictionary[Hsis.lang]['remove_file'],
             confirm: function () {
                 Hsis.Proxy.removeOrderDocument(id, function (data) {
@@ -8478,7 +7598,6 @@ $(function () {
         $('#main-div #add-diplom-start-number').val('')
         $('#main-div #add-diplom-end-number').val('')
         $('#main-div .structure-id').val('')
-        // $('#main-div .add-diplom-document-modal').modal("show");
         $('.add-new').css('right', '0');
     });
 
@@ -8552,7 +7671,6 @@ $(function () {
                         $('#main-div #add-diplom-serial').val('')
                         $('#main-div #add-diplom-start-number').val('')
                         $('#main-div #add-diplom-end-number').val('')
-//                        $('#main-div .structure-id').val('')
                         var params = $('.main-content-upd .diplom-search-form').serialize()
                         Hsis.Proxy.getDiplomList('', params);
                     }
@@ -8563,14 +7681,6 @@ $(function () {
         }
 
     });
-
-//    $('body').on('focusout', '#add-diplom-serial', function () {
-//        if ($(this).val().length != 6) {
-//            $(this).addClass('blank-required-field');
-//        } else {
-//            $(this).removeClass('blank-required-field');
-//        }
-//    });
 
     $('#main-div').on('click', '#diplom-list tbody tr', function () {
         try {
@@ -8598,12 +7708,10 @@ $(function () {
             $('#main-div .add-student-diplom-form [name="serial"]').val(serial);
             Hsis.Proxy.getDiplomDetails(form, function (data) {
                 if (data) {
-//                    $('.info').attr('data-id', id)
                     $('#main-div .label-diplom-serial').text(data.serial);
                     $('#main-div .label-diplom-number').text(data.minNumber + ' - ' + data.maxNumber);
                     $('#main-div .label-diplom-date').text(data.graduateDate.value[Hsis.lang]);
-//                    $('#main-div .label-diplom-student').text((data.data.student.id > 0 ? (data.data.student.lastName + ' ' + data.data.firstName + ' ' + data.data.middleName) : '-'));
-                    $('#main-div .label-diplom-edu-level').text(data.eduLevel.value[Hsis.lang]);
+ $('#main-div .label-diplom-edu-level').text(data.eduLevel.value[Hsis.lang]);
                     $('#main-div .label-diplom-type').text(data.type.value[Hsis.lang]);
                     $('#main-div .label-atm-name').text(data.org.value[Hsis.lang]);
 
@@ -8611,51 +7719,6 @@ $(function () {
 
                     $('body').find('.col-sm-12.data').removeClass('col-sm-12').addClass('col-sm-9');
                     $('body').find('.col-sm-3.info').fadeIn(1).css('right', '0');
-
-//                    Hsis.Proxy.getLastOrderByActionId(orgId, 1009465, function (data) {
-//                        if (data && data.length > 0) {
-//                            var html = ''
-//
-//                            $.each(data, function (i, v) {
-//                                html += '<option value="' + v.id + '">' + v.serial + ' ' + v.number + '</option>'  // burada cari ilin mezun olma emrleri gelmelidir
-//                            })
-//
-//                            $('#main-div .order-no').html(html);
-//                            var orderId = $('#main-div .order-no').val();
-//                            var obj = {orderId:orderId,eduLevel: form.eduLevelId};
-//                            Hsis.Proxy.getStudentListByOrderId(obj, function (data) {
-//                                if (data) {
-//                                    var studentHtml = '';
-//                                    $.each(data, function (i, v) {
-//                                        studentHtml += '<tr>' +
-//                                                '<td>' + (++i) + '</td>' +
-//                                                '<td>' + v.groupName + '</td>' +
-//                                                '<td>' + v.lastName + ' ' + v.firstName + ' ' + v.middleName + '</td>' +
-//                                                '<td class="take-diplom"></td>' +
-//                                                '<td><label><input type="checkbox" class="check-student" name="pelcId" value="' + v.pelcId + '"></label></td>' +
-//                                                '<td class="remove-student-diplom"></td>' +
-//                                                '</tr>'
-//                                    })
-//
-//                                    $('#main-div #graduate-student-list tbody').html(studentHtml);
-//
-//                                    Hsis.Proxy.getStudentsDiplomListByDiplomParams(form, function (data) {
-//                                        if (data) {
-//                                            $.each(data, function (i, v) {
-//                                                $('#main-div #graduate-student-list tbody tr td input[value="' + v.student.pelcId + '"]').prop('checked', true).attr('disabled', 'disabled');
-//                                                $('#main-div #graduate-student-list tbody tr td input[value="' + v.student.pelcId + '"]').removeAttr('name');
-//                                                $('#main-div #graduate-student-list tbody tr td input[value="' + v.student.pelcId + '"]').parents('tr').find('td.take-diplom').html(v.diplom.serial + ' - ' + v.diplom.startNumber);
-//                                                $('#main-div #graduate-student-list tbody tr td input[value="' + v.student.pelcId + '"]').parents('tr').find('td.remove-student-diplom').html('<i class="fa fa-remove" data-id = "' + v.student.pelcId + '"></i>');
-//                                                $('#main-div #graduate-student-list tbody tr td input[value="' + v.student.pelcId + '"]').parents('tr').attr({'data-id': v.id, 'data-diplom-id': v.diplom.id, 'data-pelc-id': v.student.pelcId});
-//                                            })
-//                                        }
-//                                    });
-//                                }
-//
-//                            })
-//                        }
-//
-//                    });
 
                 }
             })

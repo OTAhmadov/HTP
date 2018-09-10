@@ -167,6 +167,7 @@
                 <table id="abroad_student_list" class="table table-celled table-hover">
                     <thead>
                     <tr>
+                        
                         <th>№</th>
                         <th data-sort="abroad_number" class="asc new-filter"><span>Şəxsi iş nömrəsi</span></th>
                         <th data-sort="lname" class="asc new-filter"><span data-i18n="fullname">Name </span><i
@@ -179,8 +180,6 @@
                         <th><span>Əlaqə</span></th>
                         <th><span>Gözlənilən məzuniyyət tarixi</span></th>
                         <th data-sort="abroad_status_az" class="asc new-filter"><span>Status</span></th>
-                        <!--<th ><span>Təvəllüd </span></th>-->
-                        <!--<th ><span>Cinsi</span></th>-->
 
                     </tr>
                     </thead>
@@ -196,24 +195,9 @@
             <div class="not-printed space-for-footer">
                 <nav aria-label="..." class="pagination-top">
                     <ul class="pagination custom-pagination" data-table="abroad_students">
-                        <!-- <li class="page-item active">
-                             <a class="page-link" href="#">1</a>
-                         </li>
-                         <li class="page-item">
-                             <a class="page-link" href="#">2</a>
-                         </li>
-                         <li class="page-item">
-                             <a class="page-link" href="#">3</a>
-                         </li>-->
 
                     </ul>
                 </nav>
-
-                <!-- <div id="load_more_div" class="flex-input" style="display:none;">
-                     <button data-i18n="load.more"
-                             class="btn loading-margins btn-load-more">Load more
-                     </button>
-                 </div>-->
             </div>
 
         </div>
@@ -354,9 +338,6 @@
         <div class="col-sm-12">
             <h1 style="text-align: center" class="">Tələbə Anketi</h1>
             <h2 style="text-align: center" class="text-center"></h2>
-            <!-- <span class="close-survey not-printed">Bağla</span>
-             <span class="btn btn-primary print-info" onclick="openWin()">Çap et</span>-->
-            <!--window.print()-->
 
             <div style="position: relative;" class="survey-content">
                 <img style="width: 150px; height: 150px;" class="image" data-name="image">
@@ -412,26 +393,6 @@
                     <span class="col-sm-6">Faktiki yaşayıs ünvanı</span>
                     <label class="col-sm-6" data-name="currentAddress"></label>
                 </p>
-                <!--<p class="row">
-                    <span style="width: 50%; float: left;" class="col-sm-2">Sənədin növü</span>
-                    <label style="width: 50%; float: left;" class="col-sm-2" data-name="typeDocument"></label>
-                </p>
-                <p>
-                    <span style="width: 50%; float: left;" class="col-sm-2">Sənədin seriyası</span>
-                    <label style="width: 50%; float: left;" class="col-sm-2" data-name="seriesDocument"></label>
-                </p>
-                <p>
-                    <span style="width: 50%; float: left;" class="col-sm-2">Sənədin nömrəsi</span>
-                    <label style="width: 50%; float: left;" class="col-sm-2" data-name="numberDocument"></label>
-                </p>
-                <p>
-                    <span style="width: 50%; float: left;" class="col-sm-2">Verilmə tarixi</span>
-                    <label style="width: 50%; float: left;" class="col-sm-2" data-name="issueData"></label>
-                </p>
-                <p>
-                    <span style="width: 50%; float: left;" class="col-sm-2">Bitmə tarixi</span>
-                    <label style="width: 50%; float: left;" class="col-sm-2" data-name="endData"></label>
-                </p>-->
 
 
                 <h2>Son Hərəkət</h2>
@@ -563,14 +524,7 @@
         }
 
         Hsis.Proxy.loadAbroadStudents();
-        /*// -------------------------
-                Hsis.Proxy.getAbroadStudentDetails(1047827, function (data) {
-                    // $('body').find('.print-preview').html(
-                    Hsis.Service.parseQuestionnaireView(data)
-                    // );
-                    $('.survey').removeClass('open');
-                });
-        // ----------------------------*/
+        
         $('#edu_levels').select2({
             placeholder: Hsis.dictionary[Hsis.lang]["edu_level"],
             language: {
@@ -670,7 +624,6 @@
         });
 
         Hsis.Proxy.getStructureListByFilter(0, 0, function (data) {
-            // console.log(data.data)
             if (data) {
                 var html = '';
                 var uni = data.universityList;
@@ -698,29 +651,17 @@
                 if (facultyCount <= 1) {
                     html = '';
                     $('#org_faculty_filter').attr('disabled', 'disabled')
-                    // $.each(faculty, function(i, v){
-                    //     html += '<option value = "'+v.id+'">'+v.name[Hsis.lang]+'</option>'
-                    // })
                     $('#org_faculty_filter').html(html)
                 } else {
                     html = '<option value = "0">Fakültə</option>'
-                    // $.each(faculty, function(i, v){
-                    //     html += '<option value = "'+v.id+'">'+v.name[Hsis.lang]+'</option>'
-                    // })
                     $('#org_faculty_filter').html(html)
                 }
                 if (specCount <= 1) {
                     html = '';
                     $('#org_spec_filter').attr('disabled', 'disabled')
-                    // $.each(spec, function(i, v){
-                    //     html += '<option value = "'+v.id+'">'+v.name[Hsis.lang]+'</option>'
-                    // })
                     $('#org_spec_filter').html(html)
                 } else {
                     html = '<option value = "0">İxtisas</option>'
-                    // $.each(spec, function(i, v){
-                    //     html += '<option value = "'+v.id+'">'+v.name[Hsis.lang]+'</option>'
-                    // })
                     $('#org_spec_filter').html(html)
                 }
 
