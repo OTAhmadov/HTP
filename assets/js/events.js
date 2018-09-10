@@ -2497,7 +2497,7 @@ $(function () {
                         if (data) {
                             Hsis.Proxy.getStudentDetails(id, function (result) {
                                 if (result.image && result.image.path) {
-                                    $('body #student_list tbody tr[data-id="' + id + '"]').attr('data-image', result.image.path)
+                                    $('body #student_list tbody tr[data-id="' + id + '"]').attr('data-image', result.image.path);
                                     $('.main-content-upd #studentphoto').attr('src', Hsis.urls.HSIS + 'students/image/' + result.image.path + '?token=' + Hsis.token + '&size=50x50&' + Math.random());
                                     $('.main-content-upd #studentphoto').on('error', function (e) {
                                         $(this).attr('src', 'assets/img/guest.png');

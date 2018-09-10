@@ -19,7 +19,7 @@ $(".addonJs").append(s);*/
 
 var cropForm = new FormData();
 var Hsis = {
-    // token: '2cde0868bb6548969d6004a9f7ff91e2817e17d95d4146d6b08fe5b8e530d98d',
+    // token: '14047a326b884c338fb8818c618fe9e260292736318e468c840d9983cc800f30',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -43,15 +43,15 @@ var Hsis = {
         FOREIGN_UNIVERSITY: 86
     },
     urls: {
-       ROS: "http://192.168.1.78:8082/ROS/",
-       AdminRest: 'http://192.168.1.78:8082/AdministrationRest/',
-       HSIS: "http://192.168.1.78:8082/UnibookHsisRest/",
-       HTP: "http://192.168.1.78:8082/HTPRest/",
-       REPORT: 'http://192.168.1.78:8082/ReportingRest/',
-       EMS: 'http://192.168.1.78:8082/UnibookEMS/',
-       COMMUNICATION: 'http://192.168.1.78:8082/CommunicationRest/',
-       NOTIFICATION: 'http://192.168.1.78:8082/NotificationSystem/greeting.html?token=',
-       SOCKET: 'http://192.168.1.78:8082/SocketRest'
+       ROS: "http://192.168.1.8:8082/ROS/",
+       AdminRest: 'http://192.168.1.8:8082/AdministrationRest/',
+       HSIS: "http://192.168.1.8:8082/UnibookHsisRest/",
+       HTP: "http://192.168.1.8:8082/HTPRest/",
+       REPORT: 'http://192.168.1.8:8082/ReportingRest/',
+       EMS: 'http://192.168.1.8:8082/UnibookEMS/',
+       COMMUNICATION: 'http://192.168.1.8:8082/CommunicationRest/',
+       NOTIFICATION: 'http://192.168.1.8:8082/NotificationSystem/greeting.html?token=',
+       SOCKET: 'http://192.168.1.8:8082/SocketRest'
 
       /*  ROS: "http://192.168.100.78:8080/ROS/",
         AdminRest: 'http://atis.edu.az/AdministrationRest/',
@@ -6683,8 +6683,8 @@ var Hsis = {
                 $.each(data.studentList, function (i, v) {
                     html += '<tr data-id = "' + v.pelcId + '">' +
                         '<td>' + (++count) + '</td>' +
-                        '<td style="white-space: pre-line;">' + v.curOrgId.value[Hsis.lang] + '</td>' +
                         '<td>' + v.firstName + ' ' + v.lastName + ' ' + v.middleName + '</td>' +
+                        '<td style="white-space: pre-line;">' + v.curOrgId.value[Hsis.lang] + '</td>' +
                         '<td><div>' +
                         '<input name="studentsId" type="checkbox" value="' + v.pelcId + '">' +
                         '</div></td>' +
