@@ -14,7 +14,7 @@
     "student.card_number":                  "Номер студенческого билета",
     "structure":                            "Структура",
     "student.advanced_search":              "Расширенный поиск студента",
-     "education_line":                      "Линия образования",
+     "education_line":                      "Тип стипендии",
      "education_type":                      "Тип образования",
      "edu_pay_type":                        "Тип оплаты",
      "edu_lang":                            "Язык обучения",

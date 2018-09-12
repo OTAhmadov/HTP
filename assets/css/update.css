@@ -974,7 +974,7 @@ i.jstree-icon.jstree-ocl {
 }
 .search-scroll h3.panel-title{
     font: bold 14px/24px 'HelveticaNeue',sans-serif;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     text-align: left;
     color: #333333;
     margin: 0 0 11px;
@@ -990,8 +990,9 @@ i.jstree-icon.jstree-ocl {
     border-radius: 4px;
     background-color: #ffffff;
     border: solid 1px #a8b7c7;
-    font: 12px/14px 'HelveticaNeue',sans-serif;
+    /*font: 12px/14px 'HelveticaNeue',sans-serif;*/
     text-align: left;
+    /*text-transform: uppercase;*/
     color: #16325c;
     margin: 0;
     width: 100%;
@@ -2708,4 +2709,60 @@ ul.nav-tabs{
 .addNewSpeciality{
     float: right !important;
     font-size: 20px !important;
+}
+
+.new-scroll::-webkit-scrollbar,
+.te .panel-white .panel-body::-webkit-scrollbar {
+    width: 2px;
+}
+
+.new-scroll::-webkit-scrollbar-track,
+.te .panel-white .panel-body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.new-scroll::-webkit-scrollbar-thumb,
+.te .panel-white .panel-body::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}
+
+
+.new-scroll{
+    height: calc(100vh - 155px) !important;
+    overflow-y: auto;
+}
+
+
+.new-note-scroll::-webkit-scrollbar{
+    width: 1px;
+}
+.new-note-scroll::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+.new-note-scroll::-webkit-scrollbar-thumb{
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}
+
+/*label#note{
+    overflow-x: auto;
+}
+
+
+
+label#note::-webkit-scrollbar{
+}
+label#note::-webkit-scrollbar-track{
+}
+label#note-webkit-scrollbar-thumb{
+}*/
+
+
+@media (max-height: 650px){
+    .te .panel-white .panel-body{
+        height: calc(100vh - 202px);
+        overflow-y: auto;
+    }
+
 }

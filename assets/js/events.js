@@ -3454,8 +3454,8 @@ $(function () {
 
             if (e.keyCode == 13) {
                 var keyword = $('#abroad_student_search').val();
-
-                if (keyword.trim().length > 0) { /*length en azi 2 simvol olmalidir. 0 test olaraqdan qoyulub*/
+                if (keyword.trim().length > 0) {
+                    /*length en azi 2 simvol olmalidir. 0 test olaraqdan qoyulub*/
                     $('.btn-load-more').removeAttr('data-page');
                     $('.abroad_student-search-form input[name="keyword"]').val(keyword);
                     var queryparams = $('.main-content-upd .abroad_student-search-form').serialize();
@@ -10571,20 +10571,21 @@ $(function () {
 
     });*/
 
-
+    //Module 1000114 Telebeler
 
     $('body').on('click', '#abroad_student_list th.asc', function () {
         var dataSort = $(this).attr('data-sort');
+         var keyword = $('#abroad_student_search').val();
         $(this).removeClass('asc').addClass('desc');
         $('body').find('.table th i').css('display', 'none');
         $(this).find('i').css('display', 'inline-block');
         /*var params = $('.student-search-form').serialize();*/
-        var page =1;
+        var page = 1;
         var button = $('body').find('[data-table="abroad_students"]');
 //        if(button && button.attr('data-page')){
             page = button.find('li.active a').text();
 //        }
-        Hsis.Proxy.loadAbroadStudents(page,'orderColumn=' + dataSort + '&orderType=desc');
+        Hsis.Proxy.loadAbroadStudents(page,'orderColumn=' + dataSort + '&orderType=desc&keyword='+keyword);
     });
 
     $('body').on('click', '#abroad_student_list th.desc', function () {
@@ -10598,6 +10599,12 @@ $(function () {
         page = button.find('li.active a').text();
         Hsis.Proxy.loadAbroadStudents(page, 'orderColumn=' + dataSort + '&orderType=asc');
     });
+
+
+
+
+
+
     $('body').on('click', '#abroad_structure_table th.asc', function () {
         var dataSort = $(this).attr('data-sort');
         $(this).removeClass('asc').addClass('desc');
@@ -10698,7 +10705,7 @@ $(".centerloader").on("load",function() {
 // }
 
 
-function getFileType(type) {
+/*function getFileType(type) {
     var fileType = '';
     switch (type) {
         case 'pdf':
@@ -10721,6 +10728,22 @@ function getFileType(type) {
             break;
     }
     return fileType;
+
+}*/
+
+function getUrl(id, type) {
+    var url = '';
+    switch (type) {
+        case 'pdf':
+            url = 'https://drive.google.com/viewerng/viewer?embedded=true&url='+Hsis.urls.HSIS + 'students/file/' + id + '?token=' + Hsis.token;
+            console.log(url);
+            break;
+
+        default:
+            url = Hsis.urls.HSIS + 'students/file/' + id + '?token=' + Hsis.token;
+            break;
+    };
+    return url;
 
 }
 

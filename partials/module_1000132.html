@@ -27,7 +27,7 @@
 
 <div class="row ">
     <div class="col-md-12">
-        <div class="panel panel-white table-scroll">
+        <div class="panel panel-white table-scroll new-scroll">
             <div class="table-responsive" style="overflow-y: hidden">
                 <table id="abroad-structure-address" class="table table-celled table-hover long-last-td">
                     <thead>
@@ -147,7 +147,7 @@
             console.error(err);
         }
 
-        $('body').find('.table-scroll').slimScroll();
+        // $('body').find('.table-scroll').slimScroll();
         $('body').find('.search-select').select2();
         $('body').on('click', '.close-student-search', function () {
             $('body').find('.new-upd').css('right', '-100%');

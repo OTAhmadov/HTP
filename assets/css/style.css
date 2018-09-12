@@ -1096,7 +1096,7 @@
     height: 100vh !important;
 }
 .slimScrollDiv, .mod-con{
-    height: calc(100vh - 220px) !important;
+    /*height: calc(100vh - 220px) !important;*/
 }
 
 .brand-slogan {

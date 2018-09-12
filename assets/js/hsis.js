@@ -2,7 +2,7 @@
 
 var cropForm = new FormData();
 var Hsis = {
-    // token: '14047a326b884c338fb8818c618fe9e260292736318e468c840d9983cc800f30',
+    // token: '066ce8fb8de9461ca5a2708c05394341a959582a199f431f8ec88f8993facb0a',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -1030,8 +1030,8 @@ var Hsis = {
         getPersonInfoByPinCode: function (pinCode, callback) {
             var data;
             $.ajax({
-               url: Hsis.urls.HSIS + 'students/getInfoByPinCode?token=' + Hsis.token + '&pinCode=' + pinCode,
-                // url: "http://atis.edu.az/IAMASRest/getInfoByPinCode?pinCode=" + pinCode,
+               // url: Hsis.urls.HSIS + 'students/getInfoByPinCode?token=' + Hsis.token + '&pinCode=' + pinCode,
+                url: "http://atis.edu.az/IAMASRest/getInfoByPinCode?pinCode=" + pinCode,
                 type: 'POST',
                 success: function (result) {
                     if (result) {
@@ -1059,7 +1059,7 @@ var Hsis = {
         loadAbroadStudents: function (page, queryParams, callback, before, order) {
 
             $.ajax({
-                url: Hsis.urls.HTP + 'students/abroad?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : '') + (order ? order : '') + '&pageSize=20',
+                url: Hsis.urls.HTP + 'students/abroad?token=' + Hsis.token + (queryParams ? '&' + queryParams : '') + (page ? '&page=' + page : '') + (order ? order : '') + '&pageSize=20' ,
                 type: 'GET',
                 beforeSend: function () {
                     if (before) {
@@ -5146,13 +5146,13 @@ var Hsis = {
                                 var type = j.path.split(".")[j.path.split(".").length - 1];
                                 html += '<div class="user-doc-file" data-file-id = "' + j.id + '" data-file-path = "' + j.path + '">' +
                                     '<div class="doc-delete">✖</div>' +
-                                    '<img data-type = "'+getFileType(type)+'" src="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
+                                    '<img data-type = "'+getUrl(type)+'" src="' + getUrl(j.id, type) + '" alt="" width="50" height="50">' +
                                     '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?fileType=1&token=' + Hsis.token + '" download = "' + j.originalName + '"><img src="assets/img/download.svg" width="20" height="20"></a></div>' +
                                     '</div>';
                             });
                             html += '</div>';
                         }
-
+                        //   src="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?token=' + Hsis.token + '"
                         html += '</div>';
 
                     });
@@ -5662,9 +5662,12 @@ var Hsis = {
                 src: result.image.fullPath
             });*/
 
-            if (result.addresses.length > 0) {
+            if (result.addresses.length && result.addresses.fullAddress.length > 0) {
+                $.each(result.addresses.fullAddress, function (v) {
+                   html += '<label data-name="' + v.id + '" >' + v.value[Hsis.lang] +'</label>'
+                });
                 $('body [data-name="birth-place"]').html(result.addresses.fullAddress[Hsis.lang]);
-                $('body [data-name="permanent_address"]').html(result.addresses[0].type.value[Hsis.lang]);
+                $('body [data-name="permanent_address"]').html(result.addresses.type.value[Hsis.lang]);
             } else {
                 $('body [data-name="birth-place"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
                 $('body [data-name="permanent_address"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
