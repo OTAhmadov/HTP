@@ -2,7 +2,7 @@
 
 var cropForm = new FormData();
 var Hsis = {
-    // token: '066ce8fb8de9461ca5a2708c05394341a959582a199f431f8ec88f8993facb0a',
+    // token: '3a7f6d13b9ec46919a2aab3b2a84aa3d71295fc11008464f98c3f0fa4e9a201f',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -5663,28 +5663,34 @@ var Hsis = {
             });*/
 
             if (result.addresses.length && result.addresses.fullAddress.length > 0) {
-                $.each(result.addresses.fullAddress, function (v) {
-                   html += '<label data-name="' + v.id + '" >' + v.value[Hsis.lang] +'</label>'
+                html ='';
+                $.each(result.addresses, function (i, v) {
+                    html += '<tr>'+
+                        '<td>'+v.name+'</td>'+
+                        '<td>'+v.fullAddress+'</td>'+
+                        '<td>'+v.type.value[Hsis.lang]+'</td>'+
+                        '</tr>'
                 });
-                $('body [data-name="birth-place"]').html(result.addresses.fullAddress[Hsis.lang]);
-                $('body [data-name="permanent_address"]').html(result.addresses.type.value[Hsis.lang]);
+                $('body .document_address tbody').html(html)
             } else {
-                $('body [data-name="birth-place"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-                $('body [data-name="permanent_address"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+                $('body .document_address tbody').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
             }
 
+
             if (result.documents.length > 0) {
-                $('body [data-name="typeDocument"]').html(result.documents[0].type.value[Hsis.lang]);
-                $('body [data-name="seriesDocument"]').html(result.documents[0].serial);
-                $('body [data-name="numberDocument"]').html(result.documents[0].startDate);
-                $('body [data-name="issueData"]').html(result.documents[0].number);
-                $('body [data-name="endData"]').html(result.documents[0].endDate);
+                html ='';
+                $.each(result.documents, function (i, v) {
+                   html += '<tr>'+
+                            '<td>'+v.type.value[Hsis.lang]+'</td>'+
+                            '<td>'+v.serial+' / ' + v.number +'</td>'+
+                            '<td>'+v.startDate+'</td>'+
+                            '<td>'+v.endDate+'</td>'+
+                            '</tr>'
+                });
+                $('body .document_list tbody').html(html)
             } else {
-                $('body [data-name="typeDocument"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-                $('body [data-name="seriesDocument"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-                $('body [data-name="numberDocument"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-                $('body [data-name="issueData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-                $('body [data-name="endData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+                $('body .document_list tbody').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
+                // $('body [data-name="endData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
             if(result.citizenship.length > 0){
@@ -5724,31 +5730,53 @@ var Hsis = {
             }
 
 
-            if(result.relations.length > 0){
-                $('body [data-name="family-member"]').html(result.relations[0].type.value[Hsis.lang]);
-                $('body [data-name="family-member-name"]').html(result.relations[0].fullName);
-                $('body [data-name="family-member-number"]').html(result.relations[0].contactNumber);
-            }else{
-                $('body [data-name="family-member"]').html('<div style="display: inline-table; width: 33%" class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-                $('body [data-name="family-member-name"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-                $('body [data-name="family-member-number"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            if (result.relations.length > 0) {
+                html ='';
+                $.each(result.relations, function (i, v) {
+                    html += '<tr>'+
+                        '<td>'+v.type.value[Hsis.lang]+'</td>'+
+                        '<td>'+v.fullName+'</td>'+
+                        '<td>'+v.contactNumber+'</td>'+
+                        '</tr>'
+                });
+                $('body .document_family tbody').html(html)
+            } else {
+                $('body .document_family tbody').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
+                // $('body [data-name="endData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
-            if(result.registrationDates.length > 0){
-                $('body [data-name="RegistrationDate"]').html(result.registrationDates[0].date);
-                $('body [data-name="RegistrationNote"]').html(result.registrationDates[0].note);
-            }else{
-                $('body [data-name="RegistrationDate"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-                $('body [data-name="RegistrationNote"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+
+
+            if (result.registrationDates.length > 0) {
+                html ='';
+                $.each(result.registrationDates, function (i, v) {
+                    html += '<tr>'+
+                        '<td>'+v.date+'</td>'+
+                        '<td>'+v.note+'</td>'+
+                        '</tr>'
+                });
+                $('body .document_registration tbody').html(html)
+            } else {
+                $('body .document_registration tbody').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
+                // $('body [data-name="endData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
-            if(result.achievements.length > 0){
-                $('body [data-name="accomplishmentType"]').html(result.achievements[0].type.value[Hsis.lang]);
-                $('body [data-name="accomplishmentNote"]').html(result.achievements[0].note);
-            }else{
-                $('body [data-name="accomplishmentType"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-                $('body [data-name="accomplishmentNote"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+
+
+            if (result.achievements.length > 0) {
+                html ='';
+                $.each(result.achievements, function (i, v) {
+                    html += '<tr>'+
+                        '<td>'+v.type.value[Hsis.lang]+'</td>'+
+                        '<td>'+v.note+'</td>'+
+                        '</tr>'
+                });
+                $('body .document_achievements tbody').html(html)
+            } else {
+                $('body .document_achievements tbody').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
+                // $('body [data-name="endData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
+
 
             if(result.countryName.length > 0){
                 $('body [data-name="countryName"]').html(result.countryName);
@@ -5836,7 +5864,7 @@ var Hsis = {
             }
 
 
-            if(result.pelcAction.length > 0){
+            /*if(result.pelcAction.length > 0){
                 $('body [data-name="eduLifeCycleByOrg"]').html(result.eduLifeCycleByOrgs[0].name[Hsis.lang]);
                 $('body [data-name="pelcActionActionType"]').html(result.pelcAction[0].actionType.value[Hsis.lang]);
                 $('body [data-name="pelcActionActionDate"]').html(result.pelcAction[0].actionDate);
@@ -5848,7 +5876,7 @@ var Hsis = {
                 $('body [data-name="pelcActionActionDate"]').html('<div style="width: 15%; display: inline-table class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
                 $('body [data-name="pelcActionEndActionType"]').html('<div style="width: 15%; display: inline-table class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
                 $('body [data-name="pelcActionEndActionDate"]').html('<div style="width: 15%; display: inline-table class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-            }
+            }*/
 
 
             /*if(result.message.length > 0){

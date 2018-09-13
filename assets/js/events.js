@@ -10649,11 +10649,11 @@ $(function () {
         $(".loader").fadeIn();
         var type = $(this).attr('data-type');
         var path = $(this).attr('src');
-        var html = '<embed src="'+path+'" type="'+type+'" class="centerloader"/>';
+        var html = '<embed src="'+path+'" type="'+type+'" />';
         $('body .open-file-modal .modal-body').html(html);
         $('body .open-file-modal').modal('show');
     })
-
+// class="centerloader"
 
 
     $('#main-div').on('click', '#operation_1001448', function () {
@@ -10676,28 +10676,11 @@ $(function () {
     });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
 
-$(".centerloader").on("load",function() {
+/*$(".centerloader").on("load",function() {
         $(".loader").fadeOut();
-});
+});*/
 
 // function openFile(){
 //     $('.open-file-modal').find('.modal-body iframe').attr('src','https://docs.google.com/viewer?url=http://192.168.1.78:8082/UnibookHsisRest/students/file/1000896?fileType=1&token=de31591681f84891b3dbd90d468dbff780d6d2299b714c579333eb2e0a93a774&embedded=true');
