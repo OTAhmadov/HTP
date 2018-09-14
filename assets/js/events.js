@@ -5206,7 +5206,7 @@ $(function () {
                                     
                                     $('.student-relationships-div .panel-body').html(Hsis.Service.parseViewStudentRelationShip(details.data.relations));
                                     if (type == "furlough") {
-                                        console.log(details.data.pelcAction);
+//                                        console.log(details.data.pelcAction);
                                         var pelcAction = $.grep(details.data.pelcAction, function (pelc) {
                                             return pelc.id == details.data.pelcId;
                                         });
@@ -8631,9 +8631,10 @@ $(function () {
     $('#main-div').on('click', '.get-iamas-photo', function () {
         var pincode = $('body #pincode').val();
         cropForm = new FormData();
+        
         Hsis.Proxy.getPersonInfoByPinCode(pincode, function (iamasdata) {
             $('body .input-file-con .new-img-con').fadeIn(1)
-            if (iamasdata && iamasdata.image.file !== null) {
+            if (iamasdata && iamasdata.image && iamasdata.image.file !== null) {
                 $('body .input-file-con .new-img-con img').attr('src', "data:image/png;base64," + iamasdata.image.file);
                 $('body .input-file-con .new-img-con img').on('error', function (e) {
                     $(this).attr('src', 'assets/img/guest.png');
