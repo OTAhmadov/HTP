@@ -123,9 +123,9 @@
                                 <label data-i18n="pincode" for="firstname">Pin code</label>
 
                                 <div class="prepend-icon">
-                                    <label id="pincode" class="left-padding" for="firstname"></label>
-                                    <!--<input data-i18n="pincode" common-required type="text" class="form-control" id="pincode" placeholder="Pin code" data-required>-->
-                                    <!--<i class="fa fa-lock circular"></i>-->
+                                    <label class="left-padding" for="firstname"></label>
+                                    <input type="hidden" value="" id=operation_1001362"pincode">
+
                                 </div>
                             </div>
                         </div>
@@ -147,6 +147,7 @@
                     <a data-toggle="tab" href="#tab2" class="  second-tab">
                         <span data-i18n="academic_info" class="panel-body" style="padding: 0">Academic info</span>
                     </a>
+
                 </li>
             </ul>
         </div>
@@ -350,8 +351,15 @@
                         </div>
                     </div>
                 </div>
-
             </div>
+
+
+
+
+
+
+
+
         </div>
         <div id="tab2" class="tab-pane fade">
             <div class="second-info">
@@ -553,7 +561,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-sm-12">
                                             <div org-id class="form-group">
                                                 <label for="orgId">İxtisas</label>
                                                 <div class="prepend-icon data-progress-org-id" >
@@ -564,10 +572,10 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label data-i18n="note" for="action_date">Note</label>
-                                                <label class="left-padding note new-note-scroll" id="note" for="action_date"></label>
+                                                <textarea disabled class="left-padding note new-note-scroll" id="note" for="action_date"></textarea>
                                                 <!--<textarea id="note" class="form-control"></textarea>-->
                                             </div>
                                         </div>
@@ -585,8 +593,36 @@
                                                         <h3 data-i18n="no_information">No available information</h3>
                                                     </div>
                                                 </div>
+
+                                                <table class="table table-responsive-sm binding-order">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Tipi</th>
+                                                        <th>Qeyd</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="orderRelatedDocuments">
+                                        <table class="table-responsive-sm">
+                                            <thead>
+                                            <tr>
+                                                <th>Sənədin növü</th>
+                                                <th>Hərəkət növü</th>
+                                                <th>Sənədin seriyası</th>
+                                                <th>Sənədin sömrəsi</th>
+                                                <th>Verilmə tarixi</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>

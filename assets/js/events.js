@@ -1083,7 +1083,6 @@ $(function () {
                 });
                 return false;
             }
-
             var id = $('.main-content-upd #buttons_div').attr('data-id');
             var status = $(this).attr('data-status');
             if (status == 1000341) {
@@ -1094,12 +1093,9 @@ $(function () {
                 localStorage.setItem('personId', id)
             }
             window.open(window.location.href, '_blank');
-
-
         } catch (err) {
             console.error(err);
         }
-
     });
 
 
@@ -1984,6 +1980,7 @@ $(function () {
                         if (data.documents.length > 0) {
                             $('.add-doc-block #personal_doc').html(Hsis.Service.parseViewStudentDocument(data.documents, personal));
                         }
+
                         $('.activity_name #acad_doc_add').html(Hsis.Service.parseEditStudentDocument(data.pelcDocuments, academic));
                         $('#past_edu_doc').html(Hsis.Service.parseEditStudentDocument(data.schoolDocuments, school));
 
@@ -8630,10 +8627,11 @@ $(function () {
 
     $('#main-div').on('click', '.get-iamas-photo', function () {
         var pincode = $('body #pincode').val();
+        console.log(pincode);
         cropForm = new FormData();
         
         Hsis.Proxy.getPersonInfoByPinCode(pincode, function (iamasdata) {
-            $('body .input-file-con .new-img-con').fadeIn(1)
+            $('body .input-file-con .new-img-con').fadeIn(1);
             if (iamasdata && iamasdata.image && iamasdata.image.file !== null) {
                 $('body .input-file-con .new-img-con img').attr('src', "data:image/png;base64," + iamasdata.image.file);
                 $('body .input-file-con .new-img-con img').on('error', function (e) {
@@ -9640,7 +9638,6 @@ $(function () {
                         $('#main-div').attr('data-pelc-id', data.pelcId);
 
                         Hsis.Service.parseEditStudentAddress(data);
-                        console.log()
 
                         if (data.contacts.length > 0) {
                             $('.contact-info .panel-body').html(Hsis.Service.parseEditStudentContact(data));
