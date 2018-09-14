@@ -32,19 +32,20 @@
 }
 header.header-upd{
     height: 50px;
-    background-color: #338bf8;
+    background-color: #bdaf82;
 }
 .logo-upd{
     display: inline-block;
     /*padding: 19px 0 0 0;*/
-    padding: 16px 0 0 0;
+    /*padding: 16px 0 0 0;*/
 }
 .logo-upd img{
     height: 21px;
 }
 .profile-photo{
-    float: right;
-
+    position: absolute;
+    right: -49%;
+    top: 0;
 }
 .content-upper-header .main-img {
     display: block;
@@ -114,15 +115,15 @@ main.main-upd{
 }
 .main-content-upd{
     height: calc(100vh - 70px);
-    padding-top: 10px;
+    padding-top: 5px;
 }
 .col-sm-3 + .slimScrollDiv, .content-part{
     height: calc(100vh - 70px) !important;
 }
 .content-part{
-    width: calc(100% - 280px) !important;
+    /*width: calc(100% - 280px) !important;*/
     padding-left: 0;
-    padding-right: 10px;
+    padding-right: 5px;
 }
 .app-list{
     float: right;
@@ -178,16 +179,17 @@ main.main-upd{
 }
 .module-list{
     list-style: none;
-    display: block;
+    display: inline-block;
     margin: 0;	
     padding: 0;	
     height: 100% !important;
 }
 .module-list li{
-    display: block;
+    display: inline-block;
     list-style: none;
-    padding: 0 0 0 29px;
+    /*padding: 0 0 0 29px;*/
     height: 50px;
+    margin-right: 40px;
     cursor: pointer;
     position: relative;
 }
@@ -196,24 +198,24 @@ main.main-upd{
     width: 100%;
     height: 100%;
     font: 14px/50px 'HelveticaNeue', sans-serif;
-    text-align: left;
-    color: #333333;
-    padding-left: 36px;
+    /*text-align: left;*/
+    color: #fff;
+    /*padding-left: 36px;*/
 }
 .module-list li a:hover, .module-list li a:focus{
     text-decoration: none;
 }
 .module-list li.active a{
     font-weight: bold;
-    color: #4b74ff;
-    text-decoration: none;
+    color: #fff;
+    /*text-decoration: underline;*/
 }
 .module-list li.active:before{
     position: absolute;
     content: '';
     width: 3px;
     height: 50px;
-    background-color: #4b74ff;
+    /*background-color: #4b74ff;*/
     top: 0;left: 0;
 }
 .module-list li a.icon-org{
@@ -290,9 +292,10 @@ main.main-upd{
     background: url('../img/upd-icons/icon-beynelxalqelaqeler-on.svg') left center no-repeat;
 }
 .module-list li.active{
-    background: #F1F2F5;
+    /*background: #F1F2F5;*/
     height: auto;
 }
+
 .module-list li.active p{
     margin: 0 0 13px;
     font : 12px/14px 'HelveticaNeue',sans-serif; 
@@ -384,7 +387,7 @@ main.main-upd{
     padding: 17px 30px 18px;
     display: inline-block;
     width: 100%;
-    margin-bottom: 7px;
+    margin-bottom: 4px;
 }
 .con-head-left{
     float: left;
@@ -420,11 +423,11 @@ main.main-upd{
 .reg.dropdown-toggle{
     height: 34px;
     border-radius: 24px;
-    border: solid 1px #338bf8 !important;
+    border: solid 1px #bdaf82 !important;
     padding: 0 12px 0 32px;
     text-align: center;
     font: 14px/32px 'HelveticaNeue',sans-serif;
-    color: #338bf8 !important;
+    color: #bdaf82 !important;
     background: none !important;
     width: auto;
     margin-left: 30px;
@@ -442,8 +445,8 @@ main.main-upd{
 .clear_search_button, .clear_search_button_foreign_student{
     height: 32px;
     border-radius: 24px;
-    background-color: #338bf8 !important;
-    border: solid 1px #338bf8 !important;
+    background-color: #bdaf82 !important;
+    border: solid 1px #bdaf82 !important;
     padding: 0 12px 0 32px;
     position: relative;
     margin-left: 32px;
@@ -1096,7 +1099,7 @@ i.jstree-icon.jstree-ocl {
 
 .data.filtered .slimScrollDiv {
     /*height: calc(100vh - 240px) !important;*/
-    height: calc(100vh - 160px) !important;
+    height: calc(100vh - 155px) !important;
 }
 
 .top.filteredTes .slimScrollDiv {
@@ -2001,8 +2004,8 @@ form.student-search-form + div.filters-block div.btn-group .form-control + .sele
 button.filter{
     height: 34px;
     border-radius: 24px;
-    background-color: #338bf8 !important;
-    border: solid 1px #338bf8 !important;
+    background-color: #bdaf82 !important;
+    border: solid 1px #bdaf82 !important;
     padding: 0 35px 0 35px;
     position: relative;
     margin-left: 32px;
@@ -2557,7 +2560,7 @@ ul.nav-tabs{
 }
 .pagination-top{
     width: 100%;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
 }
 .pagination{
     float: right;
@@ -2729,7 +2732,7 @@ ul.nav-tabs{
 
 
 .new-scroll{
-    height: calc(100vh - 155px) !important;
+    height: calc(100vh - 150px) !important;
     overflow-y: auto;
 }
 
@@ -2744,6 +2747,76 @@ ul.nav-tabs{
     background-color: darkgrey;
     outline: 1px solid slategrey;
 }
+
+.new-note-scroll{
+    height: 100px;
+    width: 100%;
+    overflow-y: auto;
+}
+.content-upper-header{
+    text-align: center;
+}
+.logo-upd{
+    font-size: 20px;
+    text-decoration: none;
+    list-style: none;
+    color: #fff;
+    line-height: 50px;
+}
+.logo-upd:hover{
+    list-style: none;
+    text-decoration: none;
+    color: #fff;
+}
+
+div.footer{
+    height: 50px;
+    position: fixed;
+    width: 100%;
+    bottom: -28px;
+    z-index: -1;
+}
+
+
+.not-printed{
+    padding-left: 10px !important;
+}
+
+.footer >  div.text-center{
+    background: #8b7c4c;
+}
+.footer >  div.text-center img{
+    width: 70px;
+    margin-top: 8px;
+}
+.content-upper-header{
+    height: 50px !important;
+}
+
+.orderRelatedDocuments{
+    margin-top: 30px;
+}
+
+.orderRelatedDocuments > table{
+    border: 1px solid #ccc;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.orderRelatedDocuments > table thead tr th{
+    font-size: 14px;
+}
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover{
+    background-color: #bdaf82 !important;
+    border-color: #bdaf82 !important;
+}
+
 
 /*label#note{
     overflow-x: auto;

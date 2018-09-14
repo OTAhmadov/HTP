@@ -16347,7 +16347,7 @@ tr.shown td.details-control:before {
     background-color: #fefefe
 }
 .pagination {
-    margin: 20px 0;
+    margin: -15px 0;
     border-radius: 2px
 }
 .pagination>li>a,
@@ -16357,7 +16357,7 @@ tr.shown td.details-control:before {
     color: #212121;
     font-size: 11px;
     line-height: 1.42857143;
-    padding: 8px 14px
+    padding: 5px 10px
 }
 .pagination>li:first-child>a,
 .pagination>li:first-child>span {
@@ -20254,7 +20254,7 @@ a:focus {
     color: white !important;
 }
 
-.footer .col-xs-12 {
+/*.footer .col-xs-12 {
     position: fixed;
     right: 0;
     bottom: 0;
@@ -20265,7 +20265,7 @@ a:focus {
     align-items: center;
     justify-content: center;
     z-index: -1;
-}
+}*/
 
 
 td:last-child span {
