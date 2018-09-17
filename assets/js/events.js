@@ -63,7 +63,7 @@ $(function () {
             cancelButton: Hsis.dictionary[Hsis.lang]['close'],
             title: Hsis.dictionary[Hsis.lang]['warning']
         });
-    }, 1000)
+    }, 1000);
 
 
 
@@ -8962,7 +8962,7 @@ $(function () {
     $('body').on('click', '.add-new-achievement', function () {
         var type = $(this).attr('data-type');
         $('#main-div .add-archievement-submit').attr('data-type', type);
-        $('#main-div #archievement_note').val('')
+        $('#main-div #archievement_note').val('');
         $('#main-div #archievement_type').val(0);
         $('#main-div .add-archievement-modal').modal("show");
     })
@@ -9089,7 +9089,7 @@ $(function () {
 
                 $('#main-div .archievement-panel .blank-panel').hide();
                 $('#main-div .archievement-panel').prepend(html);
-                $('#main-div #archievement_note').val('')
+                $('#main-div #archievement_note').val('');
                 $('#main-div #archievement_type').val(0);
             } else if (type === 'edit') {
 
@@ -9120,7 +9120,7 @@ $(function () {
 
                         $('#main-div .archievement-panel .blank-panel').hide();
                         $('#main-div .archievement-panel').prepend(html);
-                        $('#main-div #archievement_note').val('')
+                        $('#main-div #archievement_note').val('');
                         $('#main-div #archievement_type').val(0);
                     }
                 })
@@ -10410,7 +10410,7 @@ $(function () {
         e.stopPropagation();
         $(this).parents('label').find('input').val('')
         $(this).parents('span').html('');    
-    })
+    });
     
     $('#main-div').on('click', '#confirmAcceptedAbroadStudent', function (e) {
 
@@ -10589,6 +10589,8 @@ $(function () {
 
     $('body').on('click', '#abroad_student_list th.desc', function () {
         var dataSort = $(this).attr('data-sort');
+        var keyword = $('#abroad_student_search').val();
+
         $(this).removeClass('desc').addClass('asc');
         $('body').find('.table th i').css('display', 'none');
         $(this).find('i').css('display', 'inline-block');
@@ -10596,7 +10598,7 @@ $(function () {
         var button = $('body').find('[data-table="abroad_students"]');
         var page =1;
         page = button.find('li.active a').text();
-        Hsis.Proxy.loadAbroadStudents(page, 'orderColumn=' + dataSort + '&orderType=asc');
+        Hsis.Proxy.loadAbroadStudents(page, 'orderColumn=' + dataSort + '&orderType=asc&keyword='+keyword);
     });
 
 
@@ -10648,10 +10650,10 @@ $(function () {
         $(".loader").fadeIn();
         var type = $(this).attr('data-type');
         var path = $(this).attr('src');
-        var html = '<embed src="'+path+'" type="'+type+'" />';
-        $('body .open-file-modal .modal-body').html(html);
+     // var html = '<embed src="'+path+'" type="'+type+'">';
+     //  $('body .open-file-modal .modal-body').html(html);
         $('body .open-file-modal').modal('show');
-    })
+    });
 // class="centerloader"
 
 
@@ -10673,6 +10675,17 @@ $(function () {
             console.error(err);
         }
     });
+
+
+    $('body').on('click','.addNewSpeciality', function(){
+        var type = $(this).attr('data-type');
+
+
+    });
+
+
+
+
 
 
 });
@@ -10718,11 +10731,19 @@ function getUrl(id, type) {
     switch (type) {
         case 'pdf':
             url = 'https://drive.google.com/viewerng/viewer?embedded=true&url='+Hsis.urls.HSIS + 'students/file/' + id + '?token=' + Hsis.token;
-            console.log(url);
+            // console.log(url);
+             var html = '<embed src="'+url+'" type="'+type+'">';
+            $('#img').html(html);
+            break;
+        case 'docx':
+            url = 'https://docs.google.com/viewer?url='+Hsis.urls.HSIS + 'students/file/' + id + '?token=' + Hsis.token;
+             var html = '<embed src="'+url+'" type="'+type+'">';
+             $('#img').html(html);
             break;
 
         default:
-            url = Hsis.urls.HSIS + 'students/file/' + id + '?token=' + Hsis.token;
+            url= "http://192.168.1.8:8082/UnibookHsisRest/students/file/1000901?token=0b575f79978f4f9b99754ba90201fc2634561f6d7aa94fafac2bab324ab46dae";
+             $('#img').html('<img src="'+url+'">');
             break;
     };
     return url;

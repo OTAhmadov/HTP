@@ -20867,8 +20867,8 @@ textarea {
 .save-button {
     display: inline-block;
     position: absolute;
-    top: 9px;
-    right: 14px;
+    top: 0px;
+    right: 84px;
 }
 
 .for-align table {
