@@ -2,7 +2,7 @@
 
 var cropForm = new FormData();
 var Hsis = {
-    // token: '801b830d84bf4ecfbfb9ba75dbe8b71a864e31aa1a2744f19cd250e2abe3cf0a',
+    // token: '0b575f79978f4f9b99754ba90201fc2634561f6d7aa94fafac2bab324ab46dae',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -5141,12 +5141,14 @@ var Hsis = {
                             '</div>';
 
                         if (v.files.length > 0) {
+
+                            console.log(v.files);
                             html += '<div class = "student-doc-file-div">';
                             $.each(v.files, function (k, j) {
                                 var type = j.path.split(".")[j.path.split(".").length - 1];
                                 html += '<div class="user-doc-file" data-file-id = "' + j.id + '" data-file-path = "' + j.path + '">' +
                                     '<div class="doc-delete">✖</div>' +
-                                    '<img data-type = "'+getUrl(type)+'" src="' + getUrl(j.id, type) + '" alt="" width="50" height="50">' +
+                                    '<img data-type = "'+getUrl('',type)+'" src="' + getUrl(j.id, type) + '" alt="" width="50" height="50">' +
                                     '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?fileType=1&token=' + Hsis.token + '" download = "' + j.originalName + '"><img src="assets/img/download.svg" width="20" height="20"></a></div>' +
                                     '</div>';
                             });
@@ -5198,12 +5200,13 @@ var Hsis = {
                                 var type = j.path.split(".")[j.path.split(".").length - 1];
                                 console.log(type);
                                 html += '<div class="user-doc-file">' +
-                                    '<img  data-type = "'+getFileType(type)+'" src="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
+                                    '<img  data-type = "'+getUrl(type)+'" src="' + getUrl(j.id, type) + '"     alt="" width="50" height="50">' +
                                     '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?fileType=1&token=' + Hsis.token + '" target="_blank"><img src="assets/img/download.svg" width="20" height="20"></a></div>' +
                                     '</div>';
                             });
                             html += '</div>';
                         }
+                        // src="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?token=' + Hsis.token + '"
 
                         html += '</div>';
                     });

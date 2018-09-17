@@ -575,7 +575,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label data-i18n="note" for="action_date">Note</label>
-                                                <textarea disabled class="left-padding note new-note-scroll" id="note" for="action_date"></textarea>
+                                                <textarea style="max-height: 80px; overflow-y: scroll; width: 100%;" disabled id="note" for="action_date"></textarea>
                                                 <!--<textarea id="note" class="form-control"></textarea>-->
                                             </div>
                                         </div>
@@ -734,7 +734,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div id="img" class="modal-body">
                     <!--<object data="http://192.168.1.78:8082/UnibookHsisRest/students/file/1000896?fileType=1&token=de31591681f84891b3dbd90d468dbff780d6d2299b714c579333eb2e0a93a774" type="application/pdf">-->
                         <!--<iframe frameborder="0" scrolling="no"></iframe>-->
                     <!--</object>-->
@@ -744,7 +744,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
                 </div>
             </div>
         </div>
