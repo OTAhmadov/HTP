@@ -2,7 +2,7 @@
 
 var cropForm = new FormData();
 var Hsis = {
-    // token: '801b830d84bf4ecfbfb9ba75dbe8b71a864e31aa1a2744f19cd250e2abe3cf0a',
+    token: '2ff58211903e403b95fe610f49b07d25ca39dd12ec8c45d2b560d74b094665be',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -29,7 +29,8 @@ var Hsis = {
        ROS: "http://192.168.1.8:8082/ROS/",
        AdminRest: 'http://192.168.1.8:8082/AdministrationRest/',
        HSIS: "http://192.168.1.8:8082/UnibookHsisRest/",
-       HTP: "http://192.168.1.8:8082/HTPRest/",
+//       HTP: "http://192.168.1.8:8082/HTPRest/",
+       HTP: "http://localhost:8080/HTPRest/",
        REPORT: 'http://192.168.1.8:8082/ReportingRest/',
        EMS: 'http://192.168.1.8:8082/UnibookEMS/',
        COMMUNICATION: 'http://192.168.1.8:8082/CommunicationRest/',
@@ -5218,6 +5219,60 @@ var Hsis = {
             return html;
 
         },
+        parseStudentOrder: function (data, doctype) {
+            try {
+
+                var html = '';
+                if (data) {
+                    $.each(data, function (i, v) {
+                        html += '<div class="col-md-12 for-align doc-item" doc-type="' + doctype + '">' +
+                            '<table class="table-block col-md-12">' +
+                            '<tr>' +
+                            '<td>' + Hsis.dictionary[Hsis.lang]['doc_type'] + '</td>' +
+                            '<td>' + Hsis.dictionary[Hsis.lang]['serial_number'] + '</td>' +
+                            '<td>' + Hsis.dictionary[Hsis.lang]['doc_number'] + '</td>' +
+                            '<td>' + Hsis.dictionary[Hsis.lang]['issue_date'] + '</td>' +
+                            '<td>' + Hsis.dictionary[Hsis.lang]['end_date'] + '</td>' + '<td></td>' +
+                            '</tr>' +
+                            '<tr>' +
+                            '<td class="add-doc-type">' + v.type.value[Hsis.lang] + '</td>' +
+                            '<td class="add-doc-serial">' + v.serial + '</td>' +
+                            '<td class="add-doc-number">' + v.number + '</td>' +
+                            '<td class="add-doc-date">' + (v.startDate ? v.startDate : "") + '</td>' +
+                            '<td class="add-doc-end-date">' + (v.endDate ? v.endDate : "") + '</td>' +
+                            '</tr>' +
+                            '</table>';
+
+
+                        if (v.files.length > 0) {
+                            html += '<div class = "student-doc-file-div">';
+                            $.each(v.files, function (k, j) {
+                                if(j.path && j.path.length > 0) {
+                                    var type = j.path.split(".")[j.path.split(".").length - 1];
+                                    console.log(type);
+                                    html += '<div class="user-doc-file">' +
+                                    '<img  data-type = "'+getFileType(type)+'" src="' + Hsis.urls.HTP + 'order/file/' + v.id + '?token=' + Hsis.token + '" alt="" width="50" height="50">' +
+                                    '<div class="upload-img"><a href="' + Hsis.urls.HTP + 'order/file/' + v.id + '?fileType=1&token=' + Hsis.token + '" target="_blank"><img src="assets/img/download.svg" width="20" height="20"></a></div>' +
+                                    '</div>';
+                                }
+                                
+                            });
+                            html += '</div>';
+                        }
+
+                        html += '</div>';
+                    });
+                } else {
+                    html += '<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>';
+                }
+
+            } catch (err) {
+                console.error(err);
+            }
+
+            return html;
+
+        },
         parseEditStudentContact: function (data) {
             try {
                 if (data) {
@@ -6275,6 +6330,9 @@ var Hsis = {
 
                         if (data.documents.length > 0) {
                             $('.add-doc-block .panel-body').html(Hsis.Service.parseViewStudentDocument(data.documents, personal));
+                        }
+                        if (data.orderDocuments.length > 0) {
+                            $('body #order_doc_add').html(Hsis.Service.parseStudentOrder(data.orderDocuments, personal));
                         }
 
                         if (data.pelcDocuments.length > 0) {
