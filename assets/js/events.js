@@ -9356,7 +9356,8 @@ $(function () {
                         } else {
                             var pinCode = $("#pincode").val();
                             Hsis.Proxy.getPersonInfoByPinCode(data.pinCode, function (data) {
-                                $('body .input-file-con .new-img-con img').attr('src', data.image.file);
+                                if(data && data.image)
+                                    $('body .input-file-con .new-img-con img').attr('src', data.image.file);
                             });
 
                         }
