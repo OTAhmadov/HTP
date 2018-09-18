@@ -287,9 +287,10 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label data-i18n="pincode" for="firstname">Pin code</label>
+                    <label data-i18n="pincode" for="firstname"></label>
                     <div class="prepend-icon">
-                        <label class="form-control" id="pincode"></label>
+                        <!--<label class="form-control" id="pincode">Pin code</label>-->
+                        <input data-i18n="pincode" common-required type="text" class="form-control" id="pincode" placeholder="Pin code" data-required>
                         <!--<i class="fa fa-lock circular"></i>-->
                     </div>
                 </div>
@@ -742,7 +743,7 @@
                                                                class="form-control second-info-date datepicker"
                                                                data-date-format="dd/mm/yyyy" placeholder="Date"
                                                                data-required>
-                                                        <i class="fa fa-calendar"></i>
+                                                        <i style="padding-top: 10px;" class="fa fa-calendar"></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -752,7 +753,7 @@
                                                     <div class="prepend-icon">
                                                         <input academic-required id="edu-period" type="number"
                                                                class="form-control" data-required>
-                                                        <i class="fa fa-institution"></i>
+                                                        <i style="padding-top: 10px;" class="fa fa-institution"></i>
                                                     </div>
                                                 </div>
                                             </div>

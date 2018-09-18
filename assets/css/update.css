@@ -189,7 +189,7 @@ main.main-upd{
     list-style: none;
     /*padding: 0 0 0 29px;*/
     height: 50px;
-    margin-right: 40px;
+    margin-right: 20px;
     cursor: pointer;
     position: relative;
 }
@@ -977,7 +977,7 @@ i.jstree-icon.jstree-ocl {
 }
 .search-scroll h3.panel-title{
     font: bold 14px/24px 'HelveticaNeue',sans-serif;
-    text-transform: lowercase;
+    text-transform: capitalize;
     text-align: left;
     color: #333333;
     margin: 0 0 11px;
@@ -987,7 +987,7 @@ i.jstree-icon.jstree-ocl {
     text-align: left;
     color: #54698d;
     vertical-align: middle;
-}operation_1001346
+}
 .search-scroll input{
     height: 32px;
     border-radius: 4px;
@@ -2869,6 +2869,81 @@ div.footer{
     width: 100%;
     padding-left: 37px;
 }
+.definition-list dd[data-note]{
+    max-height: 170px;
+    overflow-y: auto;
+}
+
+
+.definition-list dd[data-note]::-webkit-scrollbar{
+    width: 2px;
+}
+
+.definition-list dd[data-note]::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.definition-list dd[data-note]::-webkit-scrollbar-thumb{
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}
+
+
+div.wrap{
+    height: calc(100vh - 100px);
+    overflow-y: auto;
+    padding: 10px;
+}
+
+div.wrap::-webkit-scrollbar{
+    width: 2px;
+}
+div.wrap::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+div.wrap::-webkit-scrollbar-thumb{
+    background-color: #cccccc;
+    outline: 1px solid #cccccc;
+}
+
+
+
+
+div.wrap h1{
+    font-size: 24px;
+    font-weight: 600;
+}
+.report-cover{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    box-shadow: 0 0 10px 0 #ccc;
+    border: 1px solid rgba(162, 167, 176, 0.61);
+    border-radius: 5px;
+}
+.report ul{
+    margin-bottom: 0;
+    padding: 3px 0 3px 0;
+}
+.report ul li{
+    display: inline-block;
+    list-style: none;
+    border-right: 1px solid #cccccc;
+}
+.report ul li a{
+    text-decoration: none;
+}
+.report ul li a img{
+    height: 55px;
+    width: 70px;
+}
+
+
+
+
+
+
 
 /*label#note{
     overflow-x: auto;

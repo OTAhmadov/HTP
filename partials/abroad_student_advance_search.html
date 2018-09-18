@@ -47,7 +47,7 @@
                                     <label data-i18n="birthdate" for="exampleInputEmail1">Birth date</label>
                                     <input type="text" class="form-control datepicker" data-date-format="dd/mm/yyyy" name="birthdate"/>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <!--<div class="form-group col-md-6">
                                     <label data-i18n="age_interval" for="exampleInputEmail1">Yaş intervalı</label>
                                     <div class="row">
                                         <div class="col-md-6">
@@ -57,19 +57,19 @@
                                             <input class="form-control form-inline end-age" name="endAge" />
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="form-group col-md-6">
                                     <label data-i18n="marital_status" for="exampleInputEmail1">Marital status</label>
                                     <select class="form-control marital-status no-padding" name="maritalStatusId"></select>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <!--<div class="form-group col-md-6">
                                     <label data-i18n="military_service" for="exampleInputEmail1">Hərbi mükəlləfiyyəti</label>
                                     <select class="form-control military-service no-padding" name="militaryServiceId"></select>
-                                </div>
-                                <div class="form-group col-md-6">
+                                </div>-->
+                                <!--<div class="form-group col-md-6">
                                     <label data-i18n="temporary_address" for="citizenship"></label>
                                     <button class="adres-modal-btn " data-modal-type="temporaryAddressId"></button>
-                                </div>
+                                </div>-->
                                 <div class="form-group col-md-6">
                                     <label data-i18n="permanent_address" for="citizenship"></label>
                                     <button class="adres-modal-btn " data-modal-type="permanentAddressId"></button>
@@ -98,32 +98,47 @@
                                              <div class="">
                                                  <div class="form-group col-md-6">
                                                      <label data-i18n="" for="exampleInputEmail1">ATM ünvanı</label>
-                                                     <button class="adres-modal-btn " data-modal-type="atmCountryId"></button>
+                                                     <button style="margin-top: 0;" class="adres-modal-btn " data-modal-type="atmCountryId"></button>
                                                  </div>
                                                  <div class="form-group col-md-6">
                                                      <label data-i18n="atm"></label>
                                                      <select   class="form-control university no-padding" name="orgId" id="atm_id">
                                                          <option data-i18n="select" value="0"></option>
                                                      </select>
-                                                     
                                                  </div>
+
+                                                 <div data-university class="col-md-6">
+                                                     <div class="form-group">
+                                                         <label data-i18n="education_line" for="">Edu line</label>
+                                                         <div class="prepend-icon">
+                                                             <select id="past_edu_line" class="form-control" name="pEL" >
+                                                                 <option data-i18n="select" value="0"></option>
+                                                             </select>
+                                                             <i class="fa fa-institution"></i>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+
+
+
+
                                                  
-                                                 <div class="form-group col-md-6">
+                                                 <!--<div class="form-group col-md-6">
                                                      <div class="form-group-for-select  structure-name-filter">
                                                          <label>Nailiyyət</label>
                                                          <select id="achievement_type" name="achievementId"  class="form-control no-padding">
                            
                                                          </select>
                                                      </div>
-                                                 </div>
-                                                 <div class="form-group col-md-6">
+                                                 </div>-->
+                                                 <!--<div class="form-group col-md-6">
                                                      <div class="form-group-for-select  structure-name-filter">
                                                          <label>İxtisas İstiqaməti</label>
                                                          <select id="spec_direction" name="specDirectionId"  class="form-control no-padding">
                            
                                                          </select>
                                                      </div>
-                                                 </div>
+                                                 </div>-->
                                                  <div class="form-group col-md-6">
                                                      <div class="form-group-for-select  structure-name-filter">
                                                          <label>İxtisas</label>
@@ -150,7 +165,7 @@
                                                      <label for="exampleInputEmail1">Status</label>
                                                      <select class="form-control abroad-status no-padding" name="abroadStatusId"></select>
                                                  </div>
-                                                 <div class="form-group col-md-6">
+                                                 <!--<div class="form-group col-md-6">
                                                      <label data-i18n="score" class = "action-date-label" for="exampleInputEmail1"></label>
                                                      <div class="row">
                                                          <div class="col-md-6">
@@ -160,7 +175,7 @@
                                                              <input  class="form-control  "  name="maxScore" />
                                                          </div>
                                                      </div>
-                                                 </div>
+                                                 </div>-->
                                                  <div class="form-group col-md-6">
                                                      <label class = "action-date-label" for="exampleInputEmail1">Qeydiyyat tarixi üzrə</label>
                                                      <div class="row">
@@ -213,11 +228,11 @@
 
         <input class="hidden search-student" name="searchAttr" />
         
-        <input class="hidden " name="permanentAddressId" />
-        <input class="hidden " name="temporaryAddressId" />
-        <input class="hidden " name="birthPlaceId" />
+        <input class="hidden" name="permanentAddressId" />
+        <input class="hidden" name="temporaryAddressId" />
+        <input class="hidden" name="birthPlaceId" />
         <!--<input class="hidden " name="orgId" />-->
-        <input class="hidden " name="atmCountryId" />
+        <input class="hidden" name="atmCountryId" />
         <input type="hidden" name="tempOrgId">
         <input type="hidden" name="tempAtmCountyName">
         <input type="hidden" name="globalTtemporaryAddressId">
@@ -245,20 +260,20 @@
         </div>
         <div class="form-group">
             <div class="form-group-for-select structure-name-filter">
-                <label data-i18n="administrative_division"></label>
+                <label data-i18n="city_and_district"></label>
                 <select class="form-control no-padding" id="advanced-search-district">
 
                 </select>
             </div>
         </div>
-        <div class="form-group">
+        <!--<div class="form-group">
             <div class="form-group-for-select structure-name-filter">
-                <label data-i18n="city_and_district"></label>
+                &lt;!&ndash;<label data-i18n="city_and_district"></label>&ndash;&gt;
                 <select  class="form-control no-padding" id="advanced-search-street">
 
                 </select>
             </div>
-        </div>
+        </div>-->
         <input type="hidden" id="modal-adres-input">
       </div>
       <div class="modal-footer">
@@ -275,7 +290,6 @@
 
 
 <script>
-
     $(function () {
         try {
             Hsis.i18n(Hsis.lang);
@@ -334,6 +348,14 @@
             Hsis.Proxy.loadDictionariesByTypeId('1000017', 0, function (eduForm) {
                 var html = Hsis.Service.parseDictionaryForSelect(eduForm);
                 $('#main-div #education_form').html(html);
+            });
+
+
+            Hsis.Proxy.loadDictionariesByTypeId('1000032', 0, function (eduLine) {
+                var html = Hsis.Service.parseDictionaryForSelect(eduLine);
+//            $('#main-div #edu_line').html(html);
+                $('#main-div #past_edu_line').html(html);
+                $('#main-div #edit_uni_action_edu_line').html(html);
             });
 
             // Hsis.Proxy.loadDictionariesByTypeId('1000017', 0, function (eduForm) {
@@ -751,18 +773,18 @@
             var name = $(this).attr('data-modal-type');
             $('#adres-change-modal').modal('show');
             $('body').find('.adreses-modal-submit').attr('data-adres-type', name);
-            $('#adres-change-modal select').html('')
+            $('#adres-change-modal select').html('');
             Hsis.Proxy.loadAdressTypes('1000051', function (country) {
                 var html = Hsis.Service.parseDictionaryForSelect(country);
                 $('#main-div #advanced-search-city').html(html);
             });
-
             return false
         });
 
         $('body').on('change', '#advanced-search-city', function(){
             var id = $(this).val();
-            Hsis.Proxy.loadAdressTypes(id, function (country) {
+            console.log(id);
+            Hsis.Proxy.loadAdressTypes(1004499, function (country) {
                 var html = Hsis.Service.parseDictionaryForSelect(country);
                 $('#main-div #advanced-search-district').html(html);
             });
@@ -849,24 +871,22 @@
             
         });
 
-        $('#action_start_date, #action_end_date, #edu_start_year_search, #edu_end_year_search').on('change', function() {
+        $('#action_start_date, #action_end_date, #edu_start_year_search, #edu_end_year_search, #past_edu_line').on('change', function() {
             var orgId = $('body').find('#atm_id').val();
             var startTypeId = $('body').find('#action_start_date').val();
             var endTypeId = $('body').find('#action_end_date').val();
             var startEduYearId = $('body').find('#edu_start_year_search').val();
             var endEduYearId = $('body').find('#edu_end_year_search').val();
-            
+            var past_edu_line = $('body').find('#past_edu_line').val();
             if(startTypeId > 0){
-                Hsis.Proxy.getOrderAdvancedSearch(startTypeId, orgId, startEduYearId ,function(data) {
+                Hsis.Proxy.getOrderAdvancedSearch(startTypeId, orgId, startEduYearId, past_edu_line ,function(data) {
                     if(data && data.data) {
                         var html = '';
-                        
                         html = '<option value = "0" data-i18n="student.order">Əmr</option>'
                         $.each(data.data, function(i, v){
                             html += '<option value = "'+v.id+'">'+v.serial + '/' + v.number +'</option>'
-                        })
+                        });
                         $('#start_order').html(html)
-
                     }
                 })
             }
@@ -879,14 +899,12 @@
                         html = '<option value = "0" data-i18n="student.order">Əmr</option>'
                         $.each(data.data, function(i, v){
                             html += '<option value = "'+v.id+'">'+v.serial + '/' + v.number +'</option>'
-                        })
+                        });
                         $('#start_order').html(html)
 
                     }
                 })
             }
-
-
             
         });
 

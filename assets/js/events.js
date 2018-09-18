@@ -73,7 +73,7 @@ $(function () {
 
     Hsis.Proxy.getProfile();
 
-    Hsis.Proxy.loadApplications();
+    // Hsis.Proxy.loadApplications();
 
     $('body .iframe-tab-1').attr('src', Hsis.urls.NOTIFICATION  + Hsis.token);
 
@@ -1092,7 +1092,7 @@ $(function () {
                 localStorage.setItem('button', 'operation_1001362');
                 localStorage.setItem('personId', id)
             }
-            window.open(window.location.href, '_blank');
+            window.open(window.location.href, '_self');
         } catch (err) {
             console.error(err);
         }
@@ -8626,6 +8626,7 @@ $(function () {
     }
 
     $('#main-div').on('click', '.get-iamas-photo', function () {
+        // var pincode = $('body #pincode').text();
         var pincode = $('body #pincode').val();
         console.log(pincode);
         cropForm = new FormData();
@@ -8640,7 +8641,6 @@ $(function () {
             } else {
                 $('body .input-file-con .new-img-con img').attr('src', 'assets/img/guest.png');
             }
-
 
         });
     });
@@ -9376,7 +9376,7 @@ $(function () {
                         $('#firstname').text(data.firstName);
                         $('#lastname').text(data.lastName);
                         $('#middlename').text(data.middleName);
-                        $('#pincode').text(data.pinCode);
+                        $('#pincode').val(data.pinCode);
                         $('#gender').text(data.gender.value[Hsis.lang]);
                         $('#marital_status').text(data.maritalStatus.value[Hsis.lang] ? data.maritalStatus.value[Hsis.lang] : Hsis.dictionary[Hsis.lang]['no_information']);
                         $('#military_status').text(data.militaryService.value[Hsis.lang] ? data.militaryService.value[Hsis.lang] : Hsis.dictionary[Hsis.lang]['no_information']);
@@ -10109,7 +10109,7 @@ $(function () {
     // });
 
 
-    var width = window.innerWidth;
+    /*var width = window.innerWidth;
     if(width > 1500) {
         $('.app-list').show();
     } else {
@@ -10126,7 +10126,7 @@ $(function () {
         $("body").on("click",function() {
             $('.app-list').hide();
         });
-    }
+    }*/
     
     $('.main-content-upd').on('click', '#operation_1001419', function () {
 
@@ -10661,8 +10661,8 @@ $(function () {
         $(".loader").fadeIn();
         var type = $(this).attr('data-type');
         var path = $(this).attr('src');
-     // var html = '<embed src="'+path+'" type="'+type+'">';
-     //  $('body .open-file-modal .modal-body').html(html);
+        var html = '<embed src="'+path+'" type="'+type+'">';
+      $('body .open-file-modal .modal-body').html(html);
         $('body .open-file-modal').modal('show');
     });
 // class="centerloader"
@@ -10768,20 +10768,20 @@ function getUrl(id, type) {
         case 'pdf':
             url = 'https://drive.google.com/viewerng/viewer?embedded=true&url='+Hsis.urls.HSIS + 'students/file/' + id + '?token=' + Hsis.token;
             // console.log(url);
-             var html = '<embed src="'+url+'" type="'+type+'">';
-            $('#img').html(html);
+            //  var html = '<embed src="'+url+'" type="'+type+'">';
+            // $('#img').html(html);
             break;
         case 'docx':
             url = 'https://docs.google.com/viewer?url='+Hsis.urls.HSIS + 'students/file/' + id + '?token=' + Hsis.token;
-             var html = '<embed src="'+url+'" type="'+type+'">';
-             $('#img').html(html);
+            //  var html = '<embed src="'+url+'" type="'+type+'">';
+            //  $('#img').html(html);
             break;
 
         default:
             url= "http://192.168.1.8:8082/UnibookHsisRest/students/file/1000901?token=0b575f79978f4f9b99754ba90201fc2634561f6d7aa94fafac2bab324ab46dae";
-             $('#img').html('<img src="'+url+'">');
+             // $('#img').html('<img src="'+url+'">');
             break;
-    };
+    }
     return url;
 
 }

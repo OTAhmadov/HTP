@@ -5142,14 +5142,13 @@ var Hsis = {
                             '</div>';
 
                         if (v.files.length > 0) {
-
-                            console.log(v.files);
                             html += '<div class = "student-doc-file-div">';
                             $.each(v.files, function (k, j) {
                                 var type = j.path.split(".")[j.path.split(".").length - 1];
+                                console.log(type);
                                 html += '<div class="user-doc-file" data-file-id = "' + j.id + '" data-file-path = "' + j.path + '">' +
                                     '<div class="doc-delete">✖</div>' +
-                                    '<img data-type = "'+getUrl('',type)+'" src="' + getUrl(j.id, type) + '" alt="" width="50" height="50">' +
+                                    '<img data-type = "'+getUrl(type)+'" src="' + getUrl(j.id, type) + '" alt="" width="50" height="50">' +
                                     '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?fileType=1&token=' + Hsis.token + '" download = "' + j.originalName + '"><img src="assets/img/download.svg" width="20" height="20"></a></div>' +
                                     '</div>';
                             });
@@ -5196,12 +5195,13 @@ var Hsis = {
 
 
                         if (v.files.length > 0) {
+                            console.log(v.files);
                             html += '<div class = "student-doc-file-div">';
                             $.each(v.files, function (k, j) {
                                 var type = j.path.split(".")[j.path.split(".").length - 1];
                                 console.log(type);
                                 html += '<div class="user-doc-file">' +
-                                    '<img  data-type = "'+getUrl(type)+'" src="' + getUrl(j.id, type) + '"     alt="" width="50" height="50">' +
+                                    '<img  data-type = "'+getUrl(type)+'" src="' + getUrl(j.id, type) + '" alt="" width="50" height="50">' +
                                     '<div class="upload-img"><a href="' + Hsis.urls.HSIS + 'students/file/' + j.id + '?fileType=1&token=' + Hsis.token + '" target="_blank"><img src="assets/img/download.svg" width="20" height="20"></a></div>' +
                                     '</div>';
                             });
@@ -6297,7 +6297,8 @@ var Hsis = {
                         $('body #firstname').text(data.firstName);
                         $('body #lastname').text(data.lastName);
                         $('body #middlename').text(data.middleName);
-                        $('body #pincode').val(data.pinCode);
+                        $('body input#pincode').val(data.pinCode);
+                        // $('body #pincode').text(data.pinCode);
                         $('body #pincode').prev("label").text(data.pinCode);
 
                         if (data.contacts.length > 0) {
