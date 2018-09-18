@@ -9136,6 +9136,14 @@ $(function () {
         try {
             var allValid = true;
             var iamasCheck = $(this).attr('data-iamas');
+
+            if($('#main-div #speciality').val() == 0 && $('#main-div #specialityName').val().trim().length == 0 ) {
+
+                $.notify('Ixtisas secilmeyib', {
+                    type: 'danger'
+                });
+                return false;
+            }
             if(Hsis.Validation.validateRequiredFields('data-required')) {
                 var student = {
                     iamasCheck:iamasCheck,
@@ -9157,6 +9165,8 @@ $(function () {
                     registrationDate: [],
                     token: Hsis.token
                 };
+
+
 
 
                 var index = 1;
@@ -9265,7 +9275,8 @@ $(function () {
                 var edu = {
                     actionTypeId: 1000260,
                     actionDate: $('#action_date').val().trim(),
-                    specId: $('#main-div #speciality').val(),
+                    specId: $('#main-div #speciality').val() > 0 ? $('#main-div #speciality').val() : 0,
+                    specName: $('#main-div #specialityName').val().trim().length > 0 ? $('#main-div #specialityName').val().trim() : "",
                     note: $('#note').val(),
                     eduLineId: $('#edu_line').find('option:selected').val(),
                     eduLangId: $('#edu_lang').find('option:selected').val(),
@@ -10678,7 +10689,32 @@ $(function () {
 
 
     $('body').on('click','.addNewSpeciality', function(){
-        var type = $(this).attr('data-type');
+
+        $(this).parents('.spec_div1').addClass('hidden')
+
+        $('body .spec_div2').removeClass('hidden')
+
+    });
+
+    $('body').on('click','.removeNewSpeciality', function(){
+
+
+        $(this).parents('.spec_div2').addClass('hidden')
+
+        $('body .spec_div1').removeClass('hidden')
+
+
+    });
+    $('body').on('keyup','#specialityName', function(){
+
+
+        var count = $(this).val().trim().length
+
+        if(count > 0) {
+            $('body .removeNewSpeciality').addClass('hidden');
+        } else {
+            $('body .removeNewSpeciality').removeClass('hidden');
+        }
 
 
     });

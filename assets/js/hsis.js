@@ -2,7 +2,7 @@
 
 var cropForm = new FormData();
 var Hsis = {
-    token: '0',
+    // token: '721f178197ee44b593ef096d517194a2109b0cdb4c8246a886e6240ceb091893',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -29,8 +29,8 @@ var Hsis = {
        ROS: "http://192.168.1.8:8082/ROS/",
        AdminRest: 'http://192.168.1.8:8082/AdministrationRest/',
        HSIS: "http://192.168.1.8:8082/UnibookHsisRest/",
-//       HTP: "http://192.168.1.8:8082/HTPRest/",
-       HTP: "http://localhost:8080/HTPRest/",
+      HTP: "http://192.168.1.8:8082/HTPRest/",
+//        HTP: "http://localhost:8080/HTPRest/",
        REPORT: 'http://192.168.1.8:8082/ReportingRest/',
        EMS: 'http://192.168.1.8:8082/UnibookEMS/',
        COMMUNICATION: 'http://192.168.1.8:8082/CommunicationRest/',
@@ -6338,7 +6338,7 @@ var Hsis = {
                             $('body #order_doc_add').html(Hsis.Service.parseStudentOrder(data.orderDocuments, personal));
                         }
 
-                        if (data.pelcDocuments.length > 0) {
+                        if (data.pelcDocuments && data.pelcDocuments.length > 0) {
                             $('.activity_name #acad_doc_add').html(Hsis.Service.parseViewStudentDocument(data.pelcDocuments, academic));
                         } else {
                             $('#acad_doc_add').html('<div class="blank-panel"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
