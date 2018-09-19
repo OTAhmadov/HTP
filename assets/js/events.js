@@ -10673,6 +10673,21 @@ $(function () {
 
     })
 
+    $('#main-div').on('click', '.abroad_report', function (e) {
+        try {
+            e.preventDefault();
+            var type = $(this).attr('data-type');
+
+            var format = $(this).attr('data-format');
+
+
+            window.open(Hsis.urls.REPORT + 'reports/abroad/'+ type + '/' + format + '?token=' + Hsis.token, '_blank');
+
+        } catch (err) {
+            console.error(err);
+        }
+    });
+
     $('#main-div').on('click', '.a-export', function () {
         try {
             var type = $(this).attr('alt');
@@ -10718,10 +10733,6 @@ $(function () {
 
 
     });
-
-
-
-
 
 
 });

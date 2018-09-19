@@ -26,7 +26,9 @@
      "edu_end_year":                        "Год окончания",
      "birthdate":                           "Дата рождения",
      "marital_status":                      "Семейное положение",
-     "orphan_degree":                       "Сирота",
+     "uni":                                 "Униберситет",
+
+ "orphan_degree":                       "Сирота",
      "military_service":                    "Военный статус",
      "permanent_address":                   "Адрес регистрации",
      "temporary_address":                   "Адрес проживания",
