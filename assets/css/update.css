@@ -987,6 +987,7 @@ i.jstree-icon.jstree-ocl {
     text-align: left;
     color: #54698d;
     vertical-align: middle;
+    text-transform: capitalize;
 }
 .search-scroll input{
     height: 32px;
@@ -2959,7 +2960,7 @@ label#note-webkit-scrollbar-thumb{
 }*/
 
 
-@media (max-height: 650px){
+@media (max-height: 768px){
     .te .panel-white .panel-body{
         height: calc(100vh - 202px);
         overflow-y: auto;
