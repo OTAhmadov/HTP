@@ -2,7 +2,7 @@
 
 var cropForm = new FormData();
 var Hsis = {
-    // token: '3bc937503f9d4950a6438a26fade59cf1b571ca7fa664b84bfe2637e484ff6fb',
+    // token: '7a9d44da530c4ea9b624722965750fe917f8a078e5a14673be76c4234099f41e',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -11,6 +11,7 @@ var Hsis = {
     node: [],
     structureId: '',
     subModuleId: [],
+    tempDataId: '',
     personId: 0,
     button: '',
     top: 0,
@@ -26,16 +27,15 @@ var Hsis = {
         FOREIGN_UNIVERSITY: 86
     },
     urls: {
-       ROS: "http://192.168.1.8:8082/ROS/",
-       AdminRest: 'http://192.168.1.8:8082/AdministrationRest/',
-       HSIS: "http://192.168.1.8:8082/UnibookHsisRest/",
-      HTP: "http://192.168.1.8:8082/HTPRest/",
-//        HTP: "http://localhost:8080/HTPRest/",
-       REPORT: 'http://192.168.1.8:8082/ReportingRest/',
-       EMS: 'http://192.168.1.8:8082/UnibookEMS/',
-       COMMUNICATION: 'http://192.168.1.8:8082/CommunicationRest/',
-       NOTIFICATION: 'http://192.168.1.8:8082/NotificationSystem/greeting.html?token=',
-       SOCKET: 'http://192.168.1.8:8082/SocketRest'
+        ROS: "http://192.168.1.8:8082/ROS/",
+        AdminRest: 'http://192.168.1.8:8082/AdministrationRest/',
+        HSIS: "http://192.168.1.8:8082/UnibookHsisRest/",
+        HTP: "http://192.168.1.8:8082/HTPRest/",
+        REPORT: 'http://192.168.1.8:8082/ReportingRest/',
+        EMS: 'http://192.168.1.8:8082/UnibookEMS/',
+        COMMUNICATION: 'http://192.168.1.8:8082/CommunicationRest/',
+        NOTIFICATION: 'http://192.168.1.8:8082/NotificationSystem/greeting.html?token=',
+        SOCKET: 'http://192.168.1.8:8082/SocketRest'
 
       /*  ROS: "http://192.168.100.78:8080/ROS/",
         AdminRest: 'http://atis.edu.az/AdministrationRest/',
@@ -4634,7 +4634,6 @@ var Hsis = {
                 },
             });
         },
-
         loadAbroadAddress: function (type, parent, callback) {
             $.ajax({
                 url: Hsis.urls.AdminRest + 'settings/address/abroad?token=' + Hsis.token,
@@ -4664,12 +4663,11 @@ var Hsis = {
             });
 
         },
-
         //uncomment
         getAbroadOrgByAbroadAddr: function (id, callback) {
 
             $.ajax({
-                url: Hsis.urls.HSIS + 'structures/address/abroad/' + id + '?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'structures/address/abroad/' + id + '?token=' + Hsis.token,
                 type: 'GET',
                 success: function (result) {
                     if (result) {
@@ -4691,7 +4689,6 @@ var Hsis = {
                 }
             })
         },
-
         getUnreadNotification: function (callback) {
             $.ajax({
                 url: Hsis.urls.COMMUNICATION + 'notification/unread/count?token=' + Hsis.token,
@@ -4723,6 +4720,122 @@ var Hsis = {
                 }
             });
         },
+
+
+        //New istifageciler module HTP de Get
+        loadUsers: function (page, params, callback) {
+            $.ajax({
+                url: Hsis.urls.AdminRest + 'users?token=' + Hsis.token + (page ? '&page=' + page : ''),
+                type: 'GET',
+                data: params,
+                success: function (data) {
+                    try {
+                        if (data) {
+                            switch (data.code) {
+                                case Hsis.statusCodes.OK:
+                                    Hsis.Service.parseUsers(data, page);
+                                    if (callback)
+                                        callback(data.data);
+                                    break;
+
+                                case Hsis.statusCodes.ERROR:
+                                    $.notify(Hsis.dictionary[Hsis.lang]['error'], {
+                                        type: 'danger'
+                                    });
+                                    break;
+
+                                case Hsis.statusCodes.UNAUTHORIZED:
+
+                                    window.location = Hsis.urls.ROS + 'unauthorized';
+                                    break;
+                            }
+                        }
+                    }
+                    catch (err) {
+                        console.error(err);
+                    }
+                }
+
+            });
+        },
+        removeUser: function (userId, callback) {
+            var code = {};
+            $.ajax({
+                url: Hsis.urls.AdminRest + 'users/' + userId + '/remove?token=' + Hsis.token,
+                type: 'POST',
+                success: function (data) {
+                    if (data) {
+                        switch (data.code) {
+                            case Hsis.statusCodes.ERROR:
+                                if (data.message) {
+                                    $.notify(data.message[Hsis.lang], {
+                                        type: 'danger'
+                                    });
+                                }
+                                else {
+                                    $.notify(Hsis.dictionary[Hsis.lang]['error'], {
+                                        type: 'danger'
+                                    });
+                                }
+                                break;
+                            case Hsis.statusCodes.OK:
+                                code = data;
+                                break;
+
+                            case Hsis.statusCodes.UNAUTHORIZED:
+
+                                window.location = Hsis.urls.ROS + 'unauthorized';
+                                break;
+                        }
+                    }
+
+                },
+                complete: function () {
+                    callback(code);
+                }
+            });
+            return code;
+        },
+        blockUser: function (userId, block, callback) {
+            var code = {};
+            $.ajax({
+                url: Hsis.urls.AdminRest + 'users/' + userId + (block == 'false' ? '/block' : '/unblock') + '?token=' + Hsis.token,
+                type: 'POST',
+                success: function (data) {
+                    if (data) {
+                        switch (data.code) {
+                            case Hsis.statusCodes.ERROR:
+                                if (data.message) {
+                                    $.notify(data.message[Hsis.lang], {
+                                        type: 'danger'
+                                    });
+                                }
+                                else {
+                                    $.notify(Hsis.dictionary[Hsis.lang]['error'], {
+                                        type: 'danger'
+                                    });
+                                }
+                                break;
+                            case Hsis.statusCodes.OK:
+                                code = data;
+                                break;
+
+                            case Hsis.statusCodes.UNAUTHORIZED:
+
+                                window.location = Hsis.urls.ROS + 'unauthorized';
+                                break;
+                        }
+                    }
+                },
+                complete: function () {
+                    callback(code);
+                }
+            });
+            return code;
+        },
+
+
+
     },
     Service: {
         parseApplications: function (applications) {
@@ -4973,6 +5086,7 @@ var Hsis = {
                     innerButton.find('ul').html(html);
                     return innerButton.html();
                 }
+
 
             }
             return html;
@@ -6300,6 +6414,8 @@ var Hsis = {
                         $('body input#pincode').val(data.pinCode);
                         // $('body #pincode').text(data.pinCode);
                         $('body #pincode').prev("label").text(data.pinCode);
+                        $('.get-iamas-photo').trigger('click');
+
 
                         if (data.contacts.length > 0) {
                             setTimeout(function () {
@@ -6968,7 +7084,52 @@ var Hsis = {
                 $('#main-div #students_with_diplom tbody').html(html);
             }
 
-        }
+        },
+
+    //    New Istifadeciler modulu HTP-de
+        parseUsers: function (data, append) {
+            var html = '';
+            if (data.data && data.data.userList) {
+                var count;
+
+                if (append) {
+                    count = $('#htpUsers tbody tr').length;
+                }
+                else {
+                    count = 0;
+                }
+                $.each(data.data.userList, function (i, v) {
+                    html += '<tr data-image-id="' + v.image.id + '" data-is-blocked="' + v.account.blocked + '" data-id="' + v.account.id + '">' +
+                        '<td>' + (++count) + '</td>' +
+                        '<td style="white-space:pre-line;">' + v.orgName.value[Hsis.lang] + '</td>' +
+                        '<td>' + v.account.username + '</td>' +
+                        '<td>' + v.name + ' ' + v.surname + ' ' + v.patronymic + '</td>' +
+                        '<td>' + v.account.role.value[Hsis.lang] + '</td>' +
+                        '<td style="white-space:pre-line;">' + v.account.lastAction.updateDate + '</td>' +
+                        '<td><div class="' + (v.sessionActive ? "online" : "offline") + ' status"></div><span>' + (v.sessionActive ? Hsis.dictionary[Hsis.lang]['online'] : Hsis.dictionary[Hsis.lang]['offline']) + '</span></td>' +
+                        '<td><div class="' + (v.account.blocked ? "offline" : "online") + ' status"></div><span>' + (v.account.blocked ? Hsis.dictionary[Hsis.lang]['blocked'] : Hsis.dictionary[Hsis.lang]['unblocked']) + '</span></td>' +
+                        '<td>' + Hsis.Service.parseOperations(Hsis.operationList, '2') + '</td>' +
+                        '</tr>';
+                });
+
+                $('#main-div #user_count').text(data.data.count)
+            }
+
+            if ($('#main-div #load_more_div').children().length == 0) {
+                $('#main-div #load_more_div').html('<button  data-table="users" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]["load.more"] + '</button>');
+            }
+
+            if (append) {
+                $('#htpUsers tbody').html(html);
+            }
+            else {
+                $('#htpUsers tbody').html(html);
+            }
+
+
+        },
+
+
     },
     Validation: {
         validateEmail: function (email) {

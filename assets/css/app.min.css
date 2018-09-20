@@ -4772,7 +4772,7 @@ hr {
     color: #fff
 }
 .btn-default:hover {
-    background-color: #212121;
+    background-color: #b7b7b7;
     color: #fff
 }
 .btn-default:active,
@@ -4921,7 +4921,7 @@ fieldset[disabled] .btn-default:hover {
     color: #fff
 }
 .open>.dropdown-toggle.btn-default {
-    background-color: #212121;
+    /*background-color: #212121;*/
     color: #fff
 }
 fieldset[disabled] .btn-primary,
@@ -20203,10 +20203,10 @@ td .operations:active {
     top: 4px;
 }
 
-.select-bar .form-group .btn-group {
+/*.select-bar .form-group .btn-group {
     margin-right: 2px;
     top: 3.5px;
-}
+}*/
 
 a:focus {
     outline: none;
@@ -20840,7 +20840,7 @@ textarea {
 }
 
 .content-filters .tree-modal-container {
-    display: inline;
+    display: inline-block;
 }
 
 .buttons-row {
