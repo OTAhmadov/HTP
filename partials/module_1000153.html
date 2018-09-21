@@ -1,11 +1,11 @@
 
 <div class="col-xs-12 content-filters">
-    <div class="col-xs-9 select-bar">
+    <div class="col-xs-6 select-bar">
         <div class="form-group">
             <div class="form-group tree-modal-container">
-                <button  type="button" class="btn btn-default tree-modal btb-group"><span data-i18n="structure">Structures</span>
+<!--                <button  type="button" class="btn btn-default tree-modal btb-group"><span data-i18n="structure">Structures</span>
                     <i class="fa fa-angle-down"></i>
-                </button>
+                </button>-->
 
                 <div class="modal-content hidden">
                     <div class="modal-header header-primary">
@@ -16,7 +16,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="search-bar">
-                                    <div class="prepend-icon">
+                                    <div class="">
                                         <input data-i18n="search" class="form-control input-sm tree-search" type="search" placeholder="Search">
                                         <i class="fa fa-search"></i>
                                     </div>
@@ -33,27 +33,22 @@
                 </div>
             </div>
 
-            <div class="btn-group">
+<!--            <div class="btn-group">
                 <button  type="button" class="btn btn-default dropdown-toggle usersGroup" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-ellipsis-horizontal"></i><span data-i18n="users.user.groups" id="userGroupName">İstifadəçi qrupları</span> <i class="fa fa-angle-down"></i>
                 </button>
                 <ul id="userGroup" class="dropdown-menu">
 
                 </ul>
-            </div>
+            </div>-->
 
 
         </div>
     </div>
-    <div class="col-xs-2 search-bar">
-        <div class="prepend-icon">
-            <input data-i18n ="search" id="userSearch" class="form-control input-sm m-l-10 userSearch" placeholder="Search" type="search">
-            <i class="fa fa-search m-l-10"></i>
-        </div>
-    </div>
-    <div class="col-xs-1 button-bar">
+    <div class="col-xs-6 search-bar">
+        <div class="button-bar">
         <div id="buttons_div" class="btn-group dropdown-func">
-            <div class="btn btn-default reg dropdown-toggle cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div style="position: relative; top: 3px; z-index: 99999999" class="btn btn-default reg dropdown-toggle cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Ümumi əməliyyatlar
             </div>
             <ul class="dropdown-menu plus special">
@@ -61,6 +56,12 @@
             </ul>
         </div>
     </div>
+        <div style="position: relative" class="">
+            <input style="padding-left: 25px; border-radius: 15px;" data-i18n ="search" id="userSearch" class="form-control input-sm m-l-10 userSearch" placeholder="Search" type="search">
+            <i style="position: absolute; top: 5px; left: 4px;" class="fa fa-search m-l-10"></i>
+        </div>
+    </div>
+    
 
     <form class="user-search-form">
         <input type="hidden" name="roleId" />

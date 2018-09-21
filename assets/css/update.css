@@ -44,7 +44,7 @@ header.header-upd{
 }
 .profile-photo{
     position: absolute;
-    right: -49%;
+    right: -9%;
     top: 0;
 }
 .content-upper-header .main-img {
@@ -189,7 +189,7 @@ main.main-upd{
     list-style: none;
     /*padding: 0 0 0 29px;*/
     height: 50px;
-    margin-right: 10px;
+    margin-right: 15px;
     cursor: pointer;
     position: relative;
 }
