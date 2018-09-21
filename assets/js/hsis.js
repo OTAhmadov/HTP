@@ -2,7 +2,7 @@
 
 var cropForm = new FormData();
 var Hsis = {
-    // token: '6472ca72faa54fb7a81efa0bfec4b2cf679bb4e2211d43a9ab86873ccdcd2236',
+     token: 'e9ac07f51e594d3d99e6d25140c958f7c5994851a71d40e6bc36a4a335e4c798',
     lang: 'az',
     appId: 1000017,
     currModule: '',
