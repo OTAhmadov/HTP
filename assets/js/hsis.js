@@ -10,7 +10,7 @@ var Hsis = {
     array: [],
     node: [],
     structureId: '',
-    subModuleId: [],
+    subModuleId: [],  
     tempDataId: '',
     personId: 0,
     button: '',
