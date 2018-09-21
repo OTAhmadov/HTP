@@ -5792,26 +5792,18 @@ $(function () {
 
         return false
     })
-
     $('body').on('click', '#search-abroad-student-form', function () {
 
 
-        $('body').find('input[name="tempOrgId"]').val($('body').find('#atm_id').val())
-
+        $('body').find('input[name="tempOrgId"]').val($('body').find('#atm_id').val());
         $('#main-div .search-student').val("1");
         var formSearch = $('#main-div .abroad-student-advanced-search-form').serialize();
         var form = $('#main-div .abroad-student-advanced-search-form').serializeArray();
         sessionStorage.setItem('abroadStudentSearch', JSON.stringify(form));
-
-
         Hsis.tempData.form = formSearch + '&subModuleId=' + Hsis.subModuleId;
-
-
         Hsis.Proxy.loadAbroadStudents('', Hsis.tempData.form, function () {
             $('.advanced-upd').css('right', '-100%');
         });
-
-
         return false
     })
 
@@ -9981,6 +9973,7 @@ $(function () {
 
 
     $('body').on('keypress', '#search_without_order', function (e) {
+        e.preventDefault();
         try {
             if (e.keyCode == 13) {
                 var keyword = $('#search_without_order').val();

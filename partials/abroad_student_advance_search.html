@@ -400,10 +400,17 @@
                 $('#main-div .abroad-status').html(html);
             });
 
+
+           /* Hsis.Proxy.loadDictionariesByTypeId('1000002', 1000700, function (eduLevel) {
+                var html = Hsis.Service.parseDictionaryForSelect(eduLevel);
+                $('#main-div .abroad-edu-level').html(html);
+            });*/
             Hsis.Proxy.loadDictionariesByTypeId('1000002', 1000700, function (eduLevel) {
                 var html = Hsis.Service.parseDictionaryForSelect(eduLevel);
                 $('#main-div .abroad-edu-level').html(html);
             });
+
+
             Hsis.Proxy.loadDictionariesByTypeId('1000032', 0, function (eduLine) {
                 try {
                     var html = Hsis.Service.parseDictionaryForSelect(eduLine);
@@ -870,6 +877,7 @@
         });
 
         $('#action_start_date, #action_end_date, #edu_start_year_search, #edu_end_year_search, #past_edu_line').on('change', function () {
+            // var abroadEduLlevel = $('body').find('.abroad-edu-level').val();
             var orgId = $('body').find('#atm_id').val();
             var startTypeId = $('body').find('#action_start_date').val();
             var endTypeId = $('body').find('#action_end_date').val();
@@ -877,7 +885,7 @@
             var endEduYearId = $('body').find('#edu_end_year_search').val();
             var past_edu_line = $('body').find('#past_edu_line').val();
             if (startTypeId > 0) {
-                Hsis.Proxy.getOrderAdvancedSearch(startTypeId, orgId, startEduYearId, past_edu_line, function (data) {
+                Hsis.Proxy.getOrderAdvancedSearch(startTypeId, orgId, startEduYearId, past_edu_line,  function (data) {
                     if (data && data.data) {
                         var html = '';
                         html = '<option value = "0" data-i18n="student.order">Əmr</option>'

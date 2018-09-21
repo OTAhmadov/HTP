@@ -4777,7 +4777,7 @@ hr {
 }
 .btn-default:active,
 .btn-default:focus {
-    background-color: #212121;
+    background-color: transparent;
     color: #fff
 }
 .btn-default:disabled,
@@ -19910,7 +19910,8 @@ a.fc-more:hover {
 
 
 .dropdown-menu.plus {
-    left: -104px;
+    /*left: -104px;*/
+    left: 7px;
     background-color: #eaeaea !important;
     border: 1px solid rgba(0,0,0, .2)
 }
@@ -20311,23 +20312,18 @@ td .blocked {
     margin-left: 15px;
     display: inline-block;
 }
-
 .header-brand img {
     position: relative;
     top: 5px;
 }
-
-
 /*#buttons_div .dropdown-menu {
     left: -150px !important;
 }*/
 
 .operations + .dropdown-menu {
-    left: -24px !important;
+    left: -88px !important;
     top: 25px !important;
 }
-
-
 
 #operation-table td {
     text-align: left;

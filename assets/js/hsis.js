@@ -2,7 +2,7 @@
 
 var cropForm = new FormData();
 var Hsis = {
-    // token: '7a9d44da530c4ea9b624722965750fe917f8a078e5a14673be76c4234099f41e',
+    // token: '6472ca72faa54fb7a81efa0bfec4b2cf679bb4e2211d43a9ab86873ccdcd2236',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -1280,7 +1280,7 @@ var Hsis = {
                                 });
                         }
                     }
-                    ;
+
                 },
                 complete: function () {
                     $('#main-div .btn-dictionary').removeAttr('disabled');
