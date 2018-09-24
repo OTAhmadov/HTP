@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="assets/default/style.css">
 <link rel="stylesheet" href="assets/css/jquery-ui.css">
 <div id="userForm" class="">
-    <div class="col-lg-6 col-lg-offset-3">
+    <div class="col-sm-12">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 data-i18n="users.form" class="panel-title">User Form</h3>
@@ -84,31 +84,11 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group tree-modal-container">
-                    <button data-i18n="structure" id="orgId" type="button" class="btn btn-default tree-modal btn-block">Structures</button>
-                    <div class="modal-content hidden">
-                        <div class="modal-header header-primary">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 data-i18n="structure"  class="modal-title" id="gridSystemModalLabel">Tree</h4>
-                        </div>
-                        <div class="modal-body" style="overflow-x: auto; max-height: 400px;">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="col-xs-12 search-bar">
-                                        <div class="prepend-padding">
-                                            <input data-i18n="search" class="form-control input-sm tree-search" type="search" placeholder="Search">
-                                            <i class="fa fa-search"></i>
-                                        </div>
-                                    </div>
-                                    <div id="tree" >
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer flex-img">
-                            <button  data-i18n="buttons.ok" id="getOrgId" type="button" class="btn btn-primary">OK</button>
-                        </div>
+                <div class="form-group">
+                    <div class="">
+                        <select class="form-control" id="orgId" disabled="disabled">
+                            <option selected="selected" value="1000001">Təhsil Naziliyi</option>
+                        </select>
                     </div>
                 </div>
                 <div data-i18n="users.personal.information" class="form-heading">
@@ -176,7 +156,7 @@
                         <button id="confirm" type="submit" class="btn btn-primary btn-block">Register</button>
                     </div>
                     <div class="col-lg-6 cancel-button">
-                        <button data-i18n="buttons.back" id="back" class="btn btn-danger btn-block">Back</button>
+                        <button data-i18n="buttons.back" id="backPrevoiusPage" class="btn btn-danger btn-block">Back</button>
                     </div>
                 </div>
 
@@ -192,6 +172,14 @@
 
     $(function (e) {
 
+
+        $('#backPrevoiusPage').click(function () {
+            window.location.hash = "İstifadəçilər";
+            window.location.reload();
+            return false;
+        })
+
+
         if (Hsis.operationList == "edit") {
             $('input[type="password"]').removeAttr('data-required');
             $('#confirm').attr('disabled', 'disabled');
@@ -199,30 +187,32 @@
             $('#confirm').attr('disabled', 'disabled');
         }
 
+
+
         Hsis.i18n();
         $('.datepicker').datepicker();
         $('.progress-backdrop').removeClass('hidden');
-        /*Hsis.Proxy.loadRoles(function (roles) {
+        Hsis.Proxy.loadRoles(function (roles) {
             $('.datepicker').datepicker();
             var html = '';
             if (roles) {
                 $.each(roles.data, function (i, v) {
-                    html += '<option value="' + v.id + '">' + v.value[Sec.lang] + '</option>';
+                    html += '<option value="' + v.id + '">' + v.value[Hsis.lang] + '</option>';
                 });
                 $('#roleId').html(html);
             }
 
-        });*/
+        });
 
         Hsis.Proxy.loadDictionariesByTypeId('1000003', 0, function (gender) {
             var html = '';
             if (gender) {
-                $.each(gender.data, function (i, v) {
+
+                $.each(gender, function (i, v) {
                     html += '<option value="' + v.id + '">' + v.value[Hsis.lang] + '</option>';
                 });
                 $('#genderId').html(html);
             }
-
         });
 
         if (Hsis.operationList !== "register") {
@@ -285,8 +275,6 @@
         }
 
 
-
-
         $('#confirm').on('click', function (e) {
 
             try {
@@ -311,17 +299,18 @@
                 user.roleId = $('#roleId').val();
                 user.genderId = $('#genderId').val();
                 user.birthdate = $('#birthdate').val();
-                user.orgId = $('#orgId').attr('data-id');
+                user.orgId = $('#orgId').find('option:selected').val();
+                console.log(user.orgId);
                 user.token = Hsis.token;
 
                 if (Hsis.Validation.validateRequiredFields('data-required')) {
 
-                    if (!$('#orgId').attr('data-id')) {
+                    /*if (!$('#orgId').find(option:selected)) {
                         $.notify(Hsis.dictionary[Hsis.lang]['select_structure'], {
                             type: 'warning'
                         });
                         return false;
-                    }
+                    }*/
                     if (Hsis.operationList == 'edit') {
                         if ($('#password').val() != $('#passwordConfirmation').val()) {
                             $.notify(Hsis.dictionary[Hsis.lang]['wrong_password'], {
@@ -450,11 +439,13 @@
 
         });
 
-        $('#back').on('click', function (e) {
+
+
+       /* $('#back').on('click', function (e) {
             $('body').removeClass('operation-edit');
             $('body').find('.sidebar').fadeIn(0);
             $('.module-item[data-id="' + Hsis.currModule + '"]').click();
-        });
+        });*/
 
         $('[data-i18n]').each(function () {
             var attr = $(this).attr('data-i18n');

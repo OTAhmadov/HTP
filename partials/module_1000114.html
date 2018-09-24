@@ -336,11 +336,46 @@
 <div class="survey">
     <div class="row print-preview">
         <div class="col-sm-12">
-            <h1 style="text-align: center" class="">Tələbə Anketi</h1>
+            <h1 style="text-align: center" class="">"Hökümətlərarası Təqaüd Programları" Məluçat Sistemi</h1>
+            <h4 style="text-align: center">ANKET</h4>
+            <span>Şəxsi iş nömrəsi</span>
+            <label data-name="abroadNumber"></label>
+            <span>Status</span>
+
+            <label data-name="abroadStatus"></label>
             <h2 style="text-align: center" class="text-center"></h2>
 
             <div style="position: relative;" class="survey-content">
-                <img style="width: 150px; height: 150px;" class="image" data-name="image">
+
+
+                <h1 class="private-info">1. Şəxsi məlumatlar</h1>
+                <table class="table document_list">
+                    <thead>
+                    <tr>
+                        <th>Tipi</th>
+                        <th>Seriya/nomre</th>
+                        <th>verilme tarixi</th>
+                        <th>Bitme tarixi</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <!--<p style="margin: 0;">Qeydiyyat tarixi</p>-->
+                <table class="table document_registration">
+                    <thead>
+                    <tr>
+                        <th>Tarix</th>
+                        <th>Qeyd</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+
+                <img style="width: 150px; height: 150px; position: absolute; right: 10%;" class="image" data-name="image">
                 <p class="row">
                     <span style="width: 50%; float: left;">Adı</span>
                     <label style="width: 50%; float: left;" data-name="name"></label>
@@ -355,6 +390,34 @@
                     <label style="width: 50%; float: left;" class="col-sm-6" data-name="father-name"></label>
                 </p>
                 <p class="row">
+                    <span style="width: 50%; float: left;" class="col-sm-6">Doğum tarixi</span>
+                    <label style="width: 50%; float: left;" class="col-sm-6" data-name="birthday"></label>
+                </p>
+                <p class="row">
+                    <span class="col-sm-6"> Doğuldugu yer</span>
+                    <label class="col-sm-6" data-name="birth-place"></label>
+                </p>
+                <p class="row">
+                    <span class="col-sm-6">Qeydiyyat ünvanı</span>
+                    <label class="col-sm-6" data-name="permanent_address"></label>
+                </p>
+
+
+
+
+                <p class="row">
+                    <span class="col-sm-6">Faktiki yaşayıs ünvanı</span>
+                    <label class="col-sm-6" data-name="currentAddress"></label>
+                </p>
+                <p class="row">
+                    <span style="width: 50%; float: left;" class="col-sm-6">Ailə vəziyyəti</span>
+                    <label style="width: 50%; float: left;" class="col-sm-6" data-name="family-status"></label>
+                </p>
+                <p class="row">
+                    <span style="width: 50%; float: left;" class="col-sm-6">Cinsi</span>
+                    <label style="width: 50%; float: left;" class="col-sm-6" data-name="gender"></label>
+                </p>
+                <p class="row">
                     <span style="width: 50%; float: left;" class="col-sm-6">Finkod</span>
                     <label style="width: 50%; float: left;" class="col-sm-6" data-name="pinCode"></label>
                 </p>
@@ -363,68 +426,58 @@
                     <label style="width: 50%; float: left;" class="col-sm-6" data-name="citizen"></label>
                 </p>
                 <p class="row">
-                    <span style="width: 50%; float: left;" class="col-sm-6">Cinsi</span>
-                    <label style="width: 50%; float: left;" class="col-sm-6" data-name="gender"></label>
-                </p>
-                <p class="row">
-                    <span style="width: 50%; float: left;" class="col-sm-6">Ailə vəziyyəti</span>
-                    <label style="width: 50%; float: left;" class="col-sm-6" data-name="family-status"></label>
-                </p>
-                <p class="row">
-                    <span style="width: 50%; float: left;" class="col-sm-6">Doğum tarixi</span>
-                    <label style="width: 50%; float: left;" class="col-sm-6" data-name="birthday"></label>
-                </p>
-
-                <p class="row">
                     <span style="width: 50%; float: left;" class="col-sm-6">Hərbi mükəlləfiyyəti</span>
                     <label style="width: 50%; float: left;" class="col-sm-6" data-name="military"></label>
                 </p>
 
-                <p class="row">
-                    <span style="width: 50%; float: left;" class="col-sm-6"> Doğuldugu yer</span>
-                    <label style="width: 50%; float: left;" class="col-sm-6" data-name="birth-place"></label>
-                </p>
-                <p class="row">
-                    <span style="width: 50%; float: left;" class="col-sm-6">Qeydiyyat ünvanı</span>
-                    <label style="width: 50%; float: left;" class="col-sm-6" data-name="permanent_address"></label>
-                </p>
+                <hr></hr>
+                <h2>Valideynlər haqqında</h2>
+                <table class="table document_family">
+                    <thead>
+                    <tr>
+                        <th>Qohumluq əlaqəsi</th>
+                        <th>Adı</th>
+                        <th>Əlaqə</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                <p class="row">
-                    <span class="col-sm-6">Faktiki yaşayıs ünvanı</span>
-                    <label class="col-sm-6" data-name="currentAddress"></label>
-                </p>
+                    </tbody>
+                </table>
 
 
-                <h2>Son Hərəkət</h2>
+                <h2 class="current-study">2. Hazırda təhsil aldığı universitet və ixtisas</h2>
                 <p class="row">
+                    <span style="width: 50%; float: left;">Qəbul forması</span>
+                    <label style="width: 50%; float: left;" data-name="eduLineId"></label>
                     <span style="width: 50%; float: left;">Ölkə</span>
                     <label style="width: 50%; float: left;" data-name="countryName"></label>
                     <span style="width: 50%; float: left;">Şəhər</span>
                     <label style="width: 50%; float: left;" data-name="cityName"></label>
                     <span style="width: 50%; float: left;">Universitet</span>
                     <label style="width: 50%; float: left;" data-name="atmName"></label>
-                    <span style="width: 50%; float: left;">Qəbul forması</span>
-                    <label style="width: 50%; float: left;" data-name="eduLineId"></label>
-                    <span style="width: 50%; font-weight: bold; float: left;">Şəxsi iş nömrəsi</span>
-                    <label style="width: 50%; float: left;" data-name="abroadNumber"></label>
-                    <span style="width: 50%; font-weight: bold; float: left;">Status</span>
-                    <label style="width: 50%; float: left;" data-name="abroadStatus"></label>
-                    <span style="width: 50%; font-weight: bold; float: left;">Dərslərin başlama tarixi</span>
-                    <label style="width: 50%; float: left;" data-name="actionDate"></label>
-                    <span style="width: 50%; font-weight: bold;  float: left;">Gözlənilən məzun olma tarixi</span>
-                    <label style="width: 50%; float: left;" data-name="graduateDate"></label>
-                    <span style="width: 50%; font-weight: bold; float: left;">Təhsil müddəti</span>
-                    <label style="width: 50%; float: left;" data-name="eduPeriod"></label>
-                    <span style="width: 50%; font-weight: bold; float: left;">Təhsil aldığı dil</span>
-                    <label style="width: 50%; float: left;" data-name="eduLangId"></label>
-                    <span style="width: 50%;font-weight: bold;  float: left;">Təhsil səviyyəsi</span>
-                    <label style="width: 50%; float: left;" data-name="eduLevel"></label>
                     <span style="width: 50%; font-weight: bold; float: left;">Ixtisas Istiqaməti</span>
                     <label style="width: 50%; float: left;" data-name="specDirection"></label>
                     <span style="width: 50%; font-weight: bold; float: left;">İxtisas</span>
                     <label style="width: 50%; float: left;" data-name="spec"></label>
+                    <span style="width: 50%;font-weight: bold;  float: left;">Təhsil səviyyəsi</span>
+                    <label style="width: 50%; float: left;" data-name="eduLevel"></label>
+                    <span style="width: 50%; font-weight: bold; float: left;">Təhsil müddəti</span>
+                    <label style="width: 50%; float: left;" data-name="eduPeriod"></label>
+                    <span style="width: 50%; font-weight: bold; float: left;">Dərslərin başlama tarixi</span>
+                    <label style="width: 50%; float: left;" data-name="actionDate"></label>
+                    <span style="width: 50%; font-weight: bold;  float: left;">Gözlənilən məzun olma tarixi</span>
+                    <label style="width: 50%; float: left;" data-name="graduateDate"></label>
+                    <span style="width: 50%; font-weight: bold; float: left;">Təhsil aldığı dil</span>
+                    <label style="width: 50%; float: left;" data-name="eduLangId"></label>
                     <span style="width: 50%; font-weight: bold; float: left;">Qeyd</span>
                     <label style="width: 50%; float: left;" data-name="message"></label>
+
+
+
+
+
+
                 </p>
                 <div style="clear: both"></div>
 
@@ -461,22 +514,11 @@
                 </table>
 
 
-                <h2 style="margin: 0;">Qeydiyyat tarixi</h2>
-                <table class="table document_registration">
-                    <thead>
-                    <tr>
-                        <th>Tarix</th>
-                        <th>Qeyd</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
 
 
 
-                <h2>Tələbənin ünvanı</h2>
+
+                <!--<h2>Tələbənin ünvanı</h2>
                 <table class="table document_address">
                     <thead>
                     <tr>
@@ -488,35 +530,13 @@
                     <tbody>
 
                     </tbody>
-                </table>
+                </table>-->
 
-                <h2>Ailə üzvləri</h2>
-                <table class="table document_family">
-                    <thead>
-                    <tr>
-                        <th>Qohumluq əlaqəsi</th>
-                        <th>Adı</th>
-                        <th>Əlaqə</th>
-                    </tr>
-                    </thead>
-                    <tbody>
 
-                    </tbody>
-                </table>
-                <h2>Sənədlər</h2>
-                <table class="table document_list">
-                    <thead>
-                    <tr>
-                        <th>Tipi</th>
-                        <th>Seriya/nomre</th>
-                        <th>verilme tarixi</th>
-                        <th>Bitme tarixi</th>
-                    </tr>
-                    </thead>
-                    <tbody>
 
-                    </tbody>
-                </table>
+                <!--<h2>Sənədlər</h2>-->
+
+
 
 
 
@@ -546,6 +566,18 @@
                         margin: 0;
                         font-weight: normal;
                     }
+                    h1.private-info, h2.current-study{
+                        font-size: 24px;
+                        border: 1px solid;
+                        background: #efefef;
+                        padding: 5px;
+                    }
+                    .document_list, .document_family,.document_registration{
+                        width: 100%;
+                        text-align: left;
+                    }
+
+
                 </style>
             </div>
         </div>

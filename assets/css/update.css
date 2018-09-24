@@ -115,7 +115,7 @@ main.main-upd{
 }
 .main-content-upd{
     height: calc(100vh - 70px);
-    padding-top: 5px;
+    /*padding-top: 5px;*/
 }
 .col-sm-3 + .slimScrollDiv, .content-part{
     height: calc(100vh - 70px) !important;
@@ -2676,7 +2676,8 @@ ul.nav-tabs{
     margin: 0;
 }
 .current > a {
-    background: #0072ff !important;
+    background: #bdaf82 !important;
+    color: #fff;
 }
 
 .open-file-modal .modal-content{
@@ -2872,21 +2873,21 @@ div.footer{
     width: 100%;
     padding-left: 37px;
 }
-.definition-list dd[data-note]{
-    max-height: 170px;
+.definition-list{
+    height: calc(100vh - 347px);
     overflow-y: auto;
 }
 
 
-.definition-list dd[data-note]::-webkit-scrollbar{
+.definition-list::-webkit-scrollbar{
     width: 2px;
 }
 
-.definition-list dd[data-note]::-webkit-scrollbar-track{
+.definition-list::-webkit-scrollbar-track{
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
 
-.definition-list dd[data-note]::-webkit-scrollbar-thumb{
+.definition-list::-webkit-scrollbar-thumb{
     background-color: darkgrey;
     outline: 1px solid slategrey;
 }
@@ -3044,6 +3045,9 @@ div.wrap h1{
 
 .m-l-10{
     margin-top: 5px;
+}
+.content-filters{
+    padding-bottom: 5px;
 }
 
 @media (max-height: 768px){

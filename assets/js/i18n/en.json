@@ -113,6 +113,12 @@
      "work_info":                                                   "Work information",
      "documents":                                                   "Documents",
      "academic_type":                                               "Academic type",
+     "blocked":                                                     "Bloked",
+     "unblocked":                                                   "Active",
+     "online":                                                      "Online",
+     "offline":                                                     "Offline",
+     "users.add":                                                   "Add",
+     "users.edit":                                                  "edit",
      "current_status":                                              "Current status",
      "active":                                                      "Active",
      "inactive":                                                    "inactive",
@@ -262,12 +268,27 @@
     "structure_sector":                                             "Structure",
     "passport_number":                                              "Passport number",
     "myi_num":                                                      "MYİ №",
-    "foreign_university":                                           "Xarici Ali Təhsil Müəssisəsi",
-    "foreign_university":                                           "Foreign University",
+
     "select_uni_or_foreign_uni":                                    "Select university or foreign university",
     "structure_type":                                               "Structure type",
     "univer/spec":                                                  "University/Speciality",
-    "current_students":                                             "Current students"
+    "current_students":                                             "Current students",
+  "users.table.userName":                 "Username",
+  "users.table.orgName":                  "Organization name",
+
+  "parents":                              "Parents",
+  "fill_code":                            "Please, fill code",
+  "fill_dictionary_name":                            "Please, fill dictionary name!",
+  "fill_user_group_name":                            "Please fill user group name",
+  "details":                            "Details",
+
+  "update_date":                        "Update date",
+  "block_user":                          "Are you sure to block selected user?",
+  "unblock_user":                        "Are you sure to activate selected user?",
+  "sign_up":                             "Sign up",
+  "users.user.last_action":              "Last action",
+  "users.user.last_action_date":               "Last action date"
+
 
     
     

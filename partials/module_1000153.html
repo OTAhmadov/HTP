@@ -75,8 +75,7 @@
             <div class="panel-heading">
                 <h3  class="panel-title">
                     <!--Users<p id="user_count"></p>-->
-
-                    <span data-i18n = "users" >Users</span>
+                    <span data-i18n = "users">Users</span>
                     :
                     <span id="user_count"></span>
                 </h3>
@@ -85,7 +84,7 @@
                 <table id="htpUsers" class="table table-celled table-hover">
                     <thead>
                     <tr>
-                        <th >№</th>
+                        <th>№</th>
                         <th data-i18n="users.table.orgName">orgName</th>
                         <th data-i18n="users.table.userName">istifadəçi</th>
                         <th data-i18n="users.table.fullname">fullname</th>
@@ -116,11 +115,19 @@
 
                                     </tbody>
                                 </table>-->
-                <div class="space-for-footer">
+                <div class="not-printed space-for-footer">
+                    <nav aria-label="..." class="pagination-top">
+                        <ul class="pagination custom-pagination" data-table="htpUsers">
+
+                        </ul>
+                    </nav>
+                </div>
+
+                <<!--div class="space-for-footer">
                     <div id="load_more_div" class="col-sm-12 flex-input">
                         <button data-i18n="load.more" data-table="users" class="btn loading-margins btn-load-more">Load more</button>
                     </div>
-                </div>
+                </div>-->
 
             </div>
         </div>

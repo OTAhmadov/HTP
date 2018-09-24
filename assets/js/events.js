@@ -5793,8 +5793,6 @@ $(function () {
         return false
     })
     $('body').on('click', '#search-abroad-student-form', function () {
-
-
         $('body').find('input[name="tempOrgId"]').val($('body').find('#atm_id').val());
         $('#main-div .search-student').val("1");
         var formSearch = $('#main-div .abroad-student-advanced-search-form').serialize();
@@ -10834,9 +10832,22 @@ $(function () {
     });
 
 
+    $('.content-part').on('click', '.table tr', function (e) {
+        try {
+            Hsis.tempDataId = $(this).attr("data-id");
+        }
+        catch (err) {
+            console.error(err);
+        }
+    });
+
+
     $('.content-part').on('click', '#operation_1001467', function () {
+
+
         try {
             if (!Hsis.tempDataId) {
+                
                 $.notify("Please select data!", {
                     type: 'warning'
                 });
@@ -10845,6 +10856,7 @@ $(function () {
 
 
             var block = $(this).parents('tr').attr('data-is-blocked');
+            console.log(block);
             var string = block == "true" ? 'unblock' : 'block';
             $.confirm({
                 title: Hsis.dictionary[Hsis.lang]['warning'],
@@ -10872,6 +10884,25 @@ $(function () {
     });
 
 
+
+
+
+    $('.content-part').on('click', '#operation_1001469', function (e) {
+        try {
+            Hsis.operationList = 'add';
+            $('.content-part').load('partials/user_modal.html', function () {
+                $('body').find('.sidebar').fadeOut(0);
+                $('#confirm').html(Hsis.dictionary[Hsis.lang]["users.add"]);
+            });
+        }
+        catch (err) {
+            console.error(err);
+        }
+    });
+
+
+    //deactive session
+
     $('.content-part').on('click', '#operation_1001468', function () {
         try {
             if (!Hsis.tempDataId) {
@@ -10888,7 +10919,7 @@ $(function () {
                     Hsis.Proxy.deactivateSession(Hsis.tempDataId, function (code) {
                         if (code) {
                             if (code.code === Hsis.statusCodes.OK) {
-                                $.notify(Hsis.dictionary[Hsis.lang]['success'], {
+                                $.notify(Sec.dictionary[Hsis.lang]['success'], {
                                     type: 'success'
                                 });
                                 Hsis.Proxy.loadUsers();
@@ -10898,6 +10929,9 @@ $(function () {
                 },
                 theme: 'black'
             });
+
+
+
         }
         catch (err) {
             console.error(err);

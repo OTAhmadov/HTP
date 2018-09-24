@@ -2,7 +2,7 @@
 
 var cropForm = new FormData();
 var Hsis = {
-     token: 'e9ac07f51e594d3d99e6d25140c958f7c5994851a71d40e6bc36a4a335e4c798',
+     // token: 'efe1fcf16b254286943121b764225d5b5bf2c5870e024ff4a5f7615f0f8d4ec7',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -91,7 +91,6 @@ var Hsis = {
         }
 
     },
-
 
     initLanguageCookie: function (name) {
         var ca = document.cookie.split(';');
@@ -4725,7 +4724,7 @@ var Hsis = {
         //New istifageciler module HTP de Get
         loadUsers: function (page, params, callback) {
             $.ajax({
-                url: Hsis.urls.AdminRest + 'users?token=' + Hsis.token + (page ? '&page=' + page : ''),
+                url: Hsis.urls.HTP + 'users?token=' + Hsis.token + (page ? '&page=' + page : '') + "&pageSize=25",
                 type: 'GET',
                 data: params,
                 success: function (data) {
@@ -4758,6 +4757,83 @@ var Hsis = {
 
             });
         },
+        editUser: function (formData, callback) {
+            var code = {};
+            $.ajax({
+                url: Hsis.urls.AdminRest + "users/" + Hsis.tempDataId + "/edit",
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data) {
+
+                        switch (data.code) {
+                            case Hsis.statusCodes.ERROR:
+                                if (data.message) {
+                                    $.notify(data.message[Hsis.lang], {
+                                        type: 'danger'
+                                    });
+                                }
+                                else {
+                                    $.notify(Hsis.dictionary[Hsis.lang]['error'], {
+                                        type: 'danger'
+                                    });
+                                }
+                                break;
+                            case Hsis.statusCodes.DUPLICATE_DATA:
+                                $.notify("İstifadəçi adı artıq mövcuddur!", {
+                                    type: 'danger'
+                                });
+
+                                break;
+                            case Hsis.statusCodes.OK:
+                                code = data;
+                                break;
+
+                            case Hsis.statusCodes.UNAUTHORIZED:
+                                window.location = Hsis.urls.ROS + 'unauthorized';
+                                break;
+                        }
+                    }
+                },
+                complete: function () {
+                    callback(code);
+                }
+            })
+
+        },
+
+        registretedUser: function (data, callback) {
+            $.ajax({
+                url: Hsis.urls.AdminRest + 'users/registreted?token=' + Hsis.token,
+                type: 'POST',
+                data: data,
+                success: function (data) {
+                    if (data) {
+                        switch (data.code) {
+                            case Hsis.statusCodes.ERROR:
+                                $.notify(Hsis.dictionary[Hsis.lang]['error'], {
+                                    type: 'danger'
+                                });
+                                break;
+
+                            case Hsis.statusCodes.OK:
+                                callback(data);
+                                break;
+
+                            case Hsis.statusCodes.UNAUTHORIZED:
+                                window.location = Hsis.urls.ROS + 'unauthorized';
+                                break;
+
+                        }
+                    }
+
+                }
+            });
+        },
+
+
         removeUser: function (userId, callback) {
             var code = {};
             $.ajax({
@@ -4797,6 +4873,7 @@ var Hsis = {
             return code;
         },
         blockUser: function (userId, block, callback) {
+            console.log(userId);
             var code = {};
             $.ajax({
                 url: Hsis.urls.AdminRest + 'users/' + userId + (block == 'false' ? '/block' : '/unblock') + '?token=' + Hsis.token,
@@ -4833,6 +4910,151 @@ var Hsis = {
             });
             return code;
         },
+
+        deactivateSession: function (userId, callback) {
+            var code = {};
+            $.ajax({
+                url: Hsis.urls.AdminRest + 'users/' + userId + '/invalidatesession?token=' + Hsis.token,
+                type: 'POST',
+                success: function (data) {
+                    if (data) {
+                        switch (data.code) {
+                            case Hsis.statusCodes.OK:
+                                code = data;
+                                break;
+
+                            case Hsis.statusCodes.ERROR:
+                                $.notify(Hsis.dictionary[Hsis.lang]['error'], {
+                                    type: 'danger'
+                                });
+                                break;
+
+                            case Hsis.statusCodes.UNAUTHORIZED:
+
+                                window.location = Hsis.urls.ROS + 'unauthorized';
+                                break;
+                        }
+                    }
+                },
+                complete: function () {
+                    callback(code);
+                }
+            })
+        },
+        loadRoles: function (callback) {
+            var roles = {};
+
+            $.ajax({
+                url: Hsis.urls.AdminRest + 'users/roles?token=' + Hsis.token,
+                type: 'GET',
+                success: function (data) {
+                    try {
+                        if (data) {
+                            switch (data.code) {
+                                case Hsis.statusCodes.OK:
+                                    roles = data;
+                                    break;
+
+                                case Hsis.statusCodes.ERROR:
+                                    $.notify(Sec.dictionary[Hsis.lang]['error'], {
+                                        type: 'danger'
+                                    });
+                                    break;
+
+                                case Hsis.statusCodes.UNAUTHORIZED:
+
+                                    window.location = Hsis.urls.ROS + 'unauthorized';
+                                    break;
+                            }
+                        }
+                    }
+                    catch (err) {
+                        console.error(err);
+                    }
+                },
+                complete: function () {
+                    callback(roles);
+                }
+            });
+        },
+        getUserById: function (id, callback) {
+            var user = {};
+            $.ajax({
+                url: Hsis.urls.HTP + '/users/' + id + '?token=' + Hsis.token,
+                type: 'GET',
+                success: function (data) {
+                    if (data) {
+                        switch (data.code) {
+                            case Hsis.statusCodes.ERROR:
+                                $.notify(Hsis.dictionary[Hsis.lang]['error'], {
+                                    type: 'danger'
+                                });
+                                break;
+
+                            case Hsis.statusCodes.OK:
+                                user = data;
+                                break;
+
+                            case Hsis.statusCodes.UNAUTHORIZED:
+
+                                window.location = Hsis.urls.ROS + 'unauthorized';
+                                break;
+                        }
+                    }
+                },
+                complete: function () {
+                    callback(user);
+                    $('#confirm').removeAttr('disabled');
+                }
+            })
+        },
+        addUser: function (formData, callback) {
+            var code = {};
+            $.ajax({
+                url: Hsis.urls.HTP + 'users/add',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data) {
+
+                        switch (data.code) {
+                            case Hsis.statusCodes.ERROR:
+                                if (data.message) {
+                                    $.notify(data.message[Hsis.lang], {
+                                        type: 'danger'
+                                    });
+                                }
+                                else {
+                                    $.notify(Hsis.dictionary[Hsis.lang]['error'], {
+                                        type: 'danger'
+                                    });
+                                }
+                                break;
+                            case Hsis.statusCodes.DUPLICATE_DATA:
+                                $.notify("İstifadəçi adı artıq mövcuddur!", {
+                                    type: 'danger'
+                                });
+                                break;
+                            case Hsis.statusCodes.OK:
+                                code = data;
+                                break;
+
+                            case Hsis.statusCodes.UNAUTHORIZED:
+                                window.location = Hsis.urls.ROS + 'unauthorized';
+                                break;
+                        }
+                    }
+                },
+                complete: function () {
+                    cropForm = new FormData();
+                    callback(code);
+                }
+            });
+        },
+
+
 
 
 
@@ -5826,15 +6048,13 @@ var Hsis = {
                 } else {
                     $('body [data-name = "image"]').attr('src', 'assets/img/guest.png');
                 }
-
-
             });
 
            /* $('').attr({
                 src: result.image.fullPath
             });*/
 
-            if (result.addresses.length && result.addresses.fullAddress.length > 0) {
+            /*if (result.addresses.length && result.addresses.fullAddress.length > 0) {
                 html ='';
                 $.each(result.addresses, function (i, v) {
                     html += '<tr>'+
@@ -5846,7 +6066,7 @@ var Hsis = {
                 $('body .document_address tbody').html(html)
             } else {
                 $('body .document_address tbody').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
-            }
+            }*/
 
 
             if (result.documents.length > 0) {
@@ -6545,6 +6765,61 @@ var Hsis = {
             }
         },
 
+        //    New Istifadeciler modulu HTP-de
+        parseUsers: function (data, page) {
+            console.log(page);
+            var html = '';
+            if (data.data && data.data.userList) {
+                var count;
+
+                if (page) {
+                    count = ($('#htpUsers tbody tr').length * page) - $('#htpUsers tbody tr').length;
+                }
+                else {
+                    count = 0;
+                }
+                $.each(data.data.userList, function (i, v) {
+                    html += '<tr data-image-id="' + v.image.id + '" data-is-blocked="' + v.account.blocked + '" data-id="' + v.account.id + '">' +
+                        '<td>' + (++count) + '</td>' +
+                        '<td style="white-space:pre-line;">' + v.orgName.value[Hsis.lang] + '</td>' +
+                        '<td>' + v.account.username + '</td>' +
+                        '<td>' + v.name + ' ' + v.surname + ' ' + v.patronymic + '</td>' +
+                        '<td>' + v.account.role.value[Hsis.lang] + '</td>' +
+                        '<td style="white-space:pre-line;">' + v.account.lastAction.updateDate + '</td>' +
+                        '<td><div class="' + (v.sessionActive ? "online" : "offline") + ' status"></div><span>' + (v.sessionActive ? Hsis.dictionary[Hsis.lang]['online'] : Hsis.dictionary[Hsis.lang]['offline']) + '</span></td>' +
+                        '<td><div class="' + (v.account.blocked ? "offline" : "online") + ' status"></div><span>' + (v.account.blocked ? Hsis.dictionary[Hsis.lang]['blocked'] : Hsis.dictionary[Hsis.lang]['unblocked']) + '</span></td>' +
+                        '<td>' + Hsis.Service.parseOperations(Hsis.operationList, '2') + '</td>' +
+                        '</tr>';
+                });
+
+                $('#main-div #user_count').text(data.data.count);
+                var paginationCount = Math.ceil(data.data.count / 25);
+                $(".custom-pagination").empty();
+                for (var tt = 0; tt < paginationCount; tt++) {
+                    var nmm = tt + 1;
+                    if (!page) page = 1;
+                    if (page === nmm) {
+                        $(".custom-pagination").append('<li class="page-item active"><a class="page-link" href="#">' + nmm + '</a></li>');
+                    } else {
+                        $(".custom-pagination").append('<li class="page-item"><a class="page-link" href="#">' + nmm + '</a></li>');
+                    }
+                }
+                pagination(paginationCount, page - 1);
+
+            }
+            if (page) {
+                $('#htpUsers tbody').html(html);
+            }
+            else {
+                $('#htpUsers tbody').html(html);
+            }
+
+
+        },
+
+
+
+
         operation_1000058: function () { // teacher view
             $('#main-div').load('partials/teacher_view.html', function () {
                 Hsis.Proxy.getTeacherDetails(localStorage.personId, function (data) {
@@ -7086,48 +7361,7 @@ var Hsis = {
 
         },
 
-    //    New Istifadeciler modulu HTP-de
-        parseUsers: function (data, append) {
-            var html = '';
-            if (data.data && data.data.userList) {
-                var count;
 
-                if (append) {
-                    count = $('#htpUsers tbody tr').length;
-                }
-                else {
-                    count = 0;
-                }
-                $.each(data.data.userList, function (i, v) {
-                    html += '<tr data-image-id="' + v.image.id + '" data-is-blocked="' + v.account.blocked + '" data-id="' + v.account.id + '">' +
-                        '<td>' + (++count) + '</td>' +
-                        '<td style="white-space:pre-line;">' + v.orgName.value[Hsis.lang] + '</td>' +
-                        '<td>' + v.account.username + '</td>' +
-                        '<td>' + v.name + ' ' + v.surname + ' ' + v.patronymic + '</td>' +
-                        '<td>' + v.account.role.value[Hsis.lang] + '</td>' +
-                        '<td style="white-space:pre-line;">' + v.account.lastAction.updateDate + '</td>' +
-                        '<td><div class="' + (v.sessionActive ? "online" : "offline") + ' status"></div><span>' + (v.sessionActive ? Hsis.dictionary[Hsis.lang]['online'] : Hsis.dictionary[Hsis.lang]['offline']) + '</span></td>' +
-                        '<td><div class="' + (v.account.blocked ? "offline" : "online") + ' status"></div><span>' + (v.account.blocked ? Hsis.dictionary[Hsis.lang]['blocked'] : Hsis.dictionary[Hsis.lang]['unblocked']) + '</span></td>' +
-                        '<td>' + Hsis.Service.parseOperations(Hsis.operationList, '2') + '</td>' +
-                        '</tr>';
-                });
-
-                $('#main-div #user_count').text(data.data.count)
-            }
-
-            if ($('#main-div #load_more_div').children().length == 0) {
-                $('#main-div #load_more_div').html('<button  data-table="users" class="btn loading-margins btn-load-more">' + Hsis.dictionary[Hsis.lang]["load.more"] + '</button>');
-            }
-
-            if (append) {
-                $('#htpUsers tbody').html(html);
-            }
-            else {
-                $('#htpUsers tbody').html(html);
-            }
-
-
-        },
 
 
     },
