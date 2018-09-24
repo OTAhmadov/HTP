@@ -2,7 +2,7 @@
 
 var cropForm = new FormData();
 var Hsis = {
-      token: 'efe1fcf16b254286943121b764225d5b5bf2c5870e024ff4a5f7615f0f8d4ec7',
+    // token: 'efe1fcf16b254286943121b764225d5b5bf2c5870e024ff4a5f7615f0f8d4ec7',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -5053,6 +5053,39 @@ var Hsis = {
                 }
             });
         },
+        getUnregistretedUsersList: function (page, type, orgId, callback, keyword) {
+            alert('dsds');
+            $.ajax({
+                url: Hsis.urls.AdminRest + 'users/unregistreted?token=' + Hsis.token + (page ? '&page=' + page : '') + (keyword ? '&keyword=' + keyword : ''),
+                type: 'GET',
+                data: {
+                    type: type,
+                    orgId: orgId
+
+                },
+                success: function (data) {
+                    if (data) {
+                        switch (data.code) {
+                            case Hsis.statusCodes.ERROR:
+                                $.notify(Hsis.dictionary[Hsis.lang]['error'], {
+                                    type: 'danger'
+                                });
+                                break;
+
+                            case Hsis.statusCodes.OK:
+                                callback(data);
+                                break;
+
+                            case Hsis.statusCodes.UNAUTHORIZED:
+                                window.location = Hsis.urls.ROS + 'unauthorized';
+                                break;
+
+                        }
+                    }
+
+                }
+            });
+        },
 
 
 
@@ -5467,7 +5500,7 @@ var Hsis = {
                             '<td class="add-doc-date">' + v.startDate + '</td>' +
                             '<td class="add-doc-end-date">' + v.endDate + '</td>' + '</tr>' +
                             '</table>' +
-                            '<label><p>' + Hsis.dictionary[Hsis.lang]['choose_files'] + '</p><input type="file" multiple class="add-doc-file" data-doc-id = "' + v.id + '"/></label>' +
+                            '<label><p><span>Zehmet olmasa pdf formatinda </span>' + Hsis.dictionary[Hsis.lang]['choose_files'] + '</p><input type="file" multiple class="add-doc-file" data-doc-id = "' + v.id + '"/></label>' +
                             '<div class="operations-button">' +
                             '<div class="operations dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span></div>' +
                             '<ul class="dropdown-menu">' +
@@ -7357,6 +7390,43 @@ var Hsis = {
                 $('#main-div #students_with_diplom tbody').append(html);
             } else {
                 $('#main-div #students_with_diplom tbody').html(html);
+            }
+
+        },
+
+
+        parseUnregisteredUsers: function (data, type, page) {
+            var html = '';
+            var count;
+
+            if (page) {
+                count = $('.content-part #unregistered-users-table tbody tr').length;
+            }
+            else {
+                count = 0;
+            }
+            $.each(data, function (i, v) {
+                html += '<tr>' +
+                    '<td>' + (++count) + '</td>' +
+                    '<td>' + v.name + ' ' + v.surname + ' ' + v.patronymic + '</td>' +
+                    '<td>' + v.gender.value[Hsis.lang] + '</td>' +
+                    '<td>' + v.birthdate + '</td>' +
+                    '<td>' +
+                    '<div class="operations dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                    '<span class="glyphicon glyphicon-list"></span>' +
+                    '</div>' +
+                    '<ul class="dropdown-menu ">' +
+                    '<li><a id="registered-user-a" data-type = "' + type + '"data-org-id = "' + v.orgId + '" data-pin = "' + v.pin + '" data-id = "' + v.id + '" data-fname="' + v.name + '" data-lname="' + v.surname + '" data-mname="' + v.patronymic + '" data-birthdate = "' + v.birthdate + '" data-gender = "' + v.gender.id + '" href="#" >' + Hsis.dictionary[Hsis.lang]["sign_up"] + '</a></li>' +
+                    '</ul>' +
+                    '</td>' +
+                    '</tr>';
+            });
+
+            if (page) {
+                $('.content-part').find('#unregistered-users-table tbody').html(html);
+            }
+            else {
+                $('.content-part').find('#unregistered-users-table tbody').html(html);
             }
 
         },

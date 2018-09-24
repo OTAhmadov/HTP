@@ -4815,7 +4815,7 @@ $(function () {
                     '</tr>' +
                     '</tbody>' +
                     '</table>' +
-                    '<label><p>' + Hsis.dictionary[Hsis.lang]['choose_files'] + ':</p><span></span><input type="file" multiple class="new-add-doc-file"/></label>' + '<div class="operations-button">' +
+                    '<label><p>'+ Hsis.dictionary[Hsis.lang]['choose_files'] + ':</p><span></span><input type="file" multiple class="new-add-doc-file"/></label>' + '<div class="operations-button">' +
                     '<div class="operations dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span></div>' +
                     '<ul class="dropdown-menu">' +
                     '<li><a href="#" class="edit add-doc-edit">' + Hsis.dictionary[Hsis.lang]['edit'] + '</a></li>' +
@@ -10104,6 +10104,59 @@ $(function () {
     });
 
 
+
+    $('.content-part').on('keypress', '#userSearch', function (e) {
+        try {
+            if (e.keyCode == 13) {
+                var keyword = $('#userSearch').val();
+                var type = $('.user-search-form input[name="type"]').val();
+                var orgId = $('.user-search-form input[name="orgId"]').val();
+                var tableName = $('#main-div .row-table table').attr('id');
+
+                if (keyword.trim().length > 2) {
+                    $('.content-body .user-search-form input[name="keyword"]').val(keyword);
+                    var params = $('.content-body .user-search-form').serialize();
+                    if(tableName === 'unregistered-users-table') {
+                        Hsis.Proxy.getUnregistretedUsersList('', type, orgId, function (data) {
+                            if (data) {
+                                if (data.code == Hsis.statusCodes.OK) {
+                                    Hsis.Service.parseUnregisteredUsers(data.data, type, '');
+
+                                }
+                            }
+                        }, keyword)
+                    }
+
+                    else if(tableName === 'users-table')
+                        Hsis.Proxy.loadUsers('',params);
+                }
+                else if (keyword.trim().length == 0) {
+                    if(tableName === 'users-table')
+                        Hsis.Proxy.loadUsers();
+                    else if(tableName === 'unregistered-users-table') {
+                        Hsis.Proxy.getUnregistretedUsersList('', type, orgId, function (data) {
+                            if (data) {
+                                if (data.code == Hsis.statusCodes.OK) {
+                                    Hsis.Service.parseUnregisteredUsers(data.data, type, '');
+
+                                }
+                            }
+                        }, '');
+                    }
+                }
+            }
+
+        }
+        catch (err) {
+            console.error(err);
+        }
+    });
+
+
+
+
+
+
     $(".main-img").on("click", function () {
         $('.user-info').toggleClass("helloWorld");
     });
@@ -10700,15 +10753,15 @@ $(function () {
         $(".loader").fadeIn();
         var type = $(this).attr('data-type');
         var path = $(this).attr('src');
-//        var html = '<embed src="'+type+'" width="500" height="375" type="application/pdf">';
-var html = '<iframe src="http://docs.google.com/gview?url="'+type+'"&embedded=true" height="500px"frameborder="0"></iframe>'
-//var html = ' <iframe class="page-icon preview-pane" frameborder="0" height="352" width="396" src="'+type+'"></iframe>'
+//      var html = '<embed src="'+type+'" width="500" height="375" type="application/pdf">';
+        var html = '<iframe src="http://docs.google.com/gview?url='+type+'&embedded=true"></iframe>';
+// var html = ' <iframe class="page-icon preview-pane" frameborder="0" height="352" width="396" src="'+type+'"></iframe>'
       $('body .open-file-modal .modal-body').html(html);
         $('body .open-file-modal').modal('show');
     });
 // class="centerloader"
 
-
+    // height="500px"frameborder="0"
     $('#main-div').on('click', '#operation_1001448', function () {
         $('#main-div #exportModal').modal();
 

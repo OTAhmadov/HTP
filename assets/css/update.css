@@ -662,9 +662,12 @@ td .dropdown-menu{
 .module-list li{
     overflow: hidden; 
 }
-.slimScrollDiv, .mod-con {
-    /*height: calc(100vh - 55px) !important;*/
+.slimScrollDiv {
+    height: calc(100vh - 55px) !important;
+}
+.mod-con{
     height: calc(100vh - 205px) !important;
+
 }
 .info .panel-heading{
     height: 41px;
@@ -3049,7 +3052,9 @@ div.wrap h1{
 .content-filters{
     padding-bottom: 5px;
 }
-
+.custom-pagination li.current a{
+    color: #fff;
+}
 @media (max-height: 768px){
     .te .panel-white .panel-body{
         height: calc(100vh - 202px);
