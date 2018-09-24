@@ -10700,7 +10700,9 @@ $(function () {
         $(".loader").fadeIn();
         var type = $(this).attr('data-type');
         var path = $(this).attr('src');
-        var html = '<embed src="'+path+'" type="'+type+'">';
+//        var html = '<embed src="'+type+'" width="500" height="375" type="application/pdf">';
+var html = '<iframe src="http://docs.google.com/gview?url="'+type+'"&embedded=true" height="500px"frameborder="0"></iframe>'
+//var html = ' <iframe class="page-icon preview-pane" frameborder="0" height="352" width="396" src="'+type+'"></iframe>'
       $('body .open-file-modal .modal-body').html(html);
         $('body .open-file-modal').modal('show');
     });
