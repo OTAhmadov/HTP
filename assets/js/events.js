@@ -10847,7 +10847,7 @@ $(function () {
 
         try {
             if (!Hsis.tempDataId) {
-                
+
                 $.notify("Please select data!", {
                     type: 'warning'
                 });
@@ -10903,6 +10903,16 @@ $(function () {
 
     //deactive session
 
+    $('.content-part').on('click', '.table tr', function (e) {
+        try {
+            Hsis.tempDataId = $(this).attr("data-id");
+        }
+        catch (err) {
+            console.error(err);
+        }
+    });
+
+
     $('.content-part').on('click', '#operation_1001468', function () {
         try {
             if (!Hsis.tempDataId) {
@@ -10919,7 +10929,7 @@ $(function () {
                     Hsis.Proxy.deactivateSession(Hsis.tempDataId, function (code) {
                         if (code) {
                             if (code.code === Hsis.statusCodes.OK) {
-                                $.notify(Sec.dictionary[Hsis.lang]['success'], {
+                                $.notify(Hsis.dictionary[Hsis.lang]['success'], {
                                     type: 'success'
                                 });
                                 Hsis.Proxy.loadUsers();
