@@ -28,6 +28,9 @@ var Hsis = {
     },
     urls: {
         ROS: "http://192.168.1.8:8082/ROS/",
+
+
+
         AdminRest: 'http://192.168.1.8:8082/AdministrationRest/',
         HSIS: "http://192.168.1.8:8082/UnibookHsisRest/",
         HTP: "http://192.168.1.8:8082/HTPRest/",
