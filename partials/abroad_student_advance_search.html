@@ -113,7 +113,7 @@
                                         <div class="form-group">
                                             <label data-i18n="education_line" for="">Edu line</label>
                                             <div class="prepend-icon">
-                                                <select id="past_edu_line" class="form-control" name="pEL">
+                                                <select id="edu_line" class="form-control" name="pEL">
                                                     <option data-i18n="select" value="0"></option>
                                                 </select>
                                                 <i class="fa fa-institution"></i>
@@ -357,10 +357,10 @@
             });
 
 
-            Hsis.Proxy.loadDictionariesByTypeId('1000032', 0, function (eduLine) {
+            Hsis.Proxy.loadDictionariesByTypeId('1000094', 0, function (eduLine) {
                 var html = Hsis.Service.parseDictionaryForSelect(eduLine);
-//            $('#main-div #edu_line').html(html);
-                $('#main-div #past_edu_line').html(html);
+                $('#main-div #edu_line').html(html);
+                // $('#main-div #past_edu_line').html(html);
                 $('#main-div #edit_uni_action_edu_line').html(html);
             });
 
@@ -462,7 +462,7 @@
             Hsis.Proxy.loadDictionariesByTypeId('1000027', 0, function (eduLang) {
                 var html = Hsis.Service.parseDictionaryForSelect(eduLang);
                 $('#main-div .edu-lang').html(html);
-                $('#main-div .edu-lang').find('option[value="1000025"]').prop('selected', true);
+                $('#main-div .edu-lang').find('option[value="0"]').prop('selected', true);
             });
 
             Hsis.Proxy.loadDictionariesByTypeId('1000028', 0, function (eduPaytype) {
@@ -779,35 +779,80 @@
             console.error(err);
         }
 
-
         $('body').on('click', '.adres-modal-btn', function () {
             var name = $(this).attr('data-modal-type');
             $('#adres-change-modal').modal('show');
             $('body').find('.adreses-modal-submit').attr('data-adres-type', name);
             $('#adres-change-modal select').html('');
-            Hsis.Proxy.loadAdressTypes('1000051', function (country) {
+
+            Hsis.Proxy.loadAbroadAddress('1000323', '', function (country) {
                 var html = Hsis.Service.parseDictionaryForSelect(country);
                 $('#main-div #advanced-search-city').html(html);
             });
             return false
         });
 
+
+
+
+
+
+
+
+
+
+
+
         $('body').on('change', '#advanced-search-city', function () {
             var id = $(this).val();
-            console.log(id);
-            Hsis.Proxy.loadAdressTypes(1004499, function (country) {
+            Hsis.Proxy.loadAbroadAddress('1000324', '', function (country) {
                 var html = Hsis.Service.parseDictionaryForSelect(country);
                 $('#main-div #advanced-search-district').html(html);
             });
         });
 
-        $('body').on('change', '#advanced-search-district', function () {
+
+        $('#main-div').on('change', '#advanced-search-district', function () {
             var id = $(this).val();
-            Hsis.Proxy.loadAdressTypes(id, function (country) {
-                var html = Hsis.Service.parseDictionaryForSelect(country);
-                $('#main-div #advanced-search-street').html(html);
-            });
+            var cityId = $('#advanced-search-district').val();
+            if (id > 0) {
+                Hsis.Proxy.getAbroadOrgByAbroadAddr(id, function (data) {
+                    if (data) {
+                        var html = '';
+                        html = '<option value = "0">' + Hsis.dictionary[Hsis.lang]["select"] + '</option>'
+                        $.each(data, function (i, v) {
+                            html += '<option value = "' + v.id + '">' + v.value[Hsis.lang] + '</option>'
+                        });
+                        $('#atm_id').html(html)
+                    }
+                })
+            } else {
+                Hsis.Proxy.getAbroadOrgByAbroadAddr(cityId, function (data) {
+                    if (data) {
+                        var html = '';
+                        html = '<option value = "0">' + Hsis.dictionary[Hsis.lang]["select"] + '</option>'
+                        $.each(data, function (i, v) {
+                            html += '<option value = "' + v.id + '">' + v.value[Hsis.lang] + '</option>'
+                        });
+                        $('#atm_id').html(html)
+
+                    }
+                })
+            }
         });
+
+
+
+
+
+
+        // $('body').on('change', '#advanced-search-district', function () {
+        //     var id = $(this).val();
+        //     Hsis.Proxy.loadAbroadAddress('1000120', '', function (country) {
+        //         var html = Hsis.Service.parseDictionaryForSelect(country);
+        //         $('#main-div #advanced-search-street').html(html);
+        //     });
+        // });
 
 
         $('#atm_id').on('change', function () {
@@ -829,7 +874,8 @@
                     html = '<option value = "0">Fakültə</option>'
                     $.each(faculty, function (i, v) {
                         html += '<option value = "' + v.id + '">' + v.name[Hsis.lang] + '</option>'
-                    })
+                    });
+
                     $('#advanced_faculty').html(html)
 
                     var spec = data.data.specialityList;
@@ -841,7 +887,7 @@
                     $('#org_name_select_advanced').html(specHtml);
 
                 }
-            })
+            });
 
             if (startTypeId > 0) {
                 Hsis.Proxy.getOrderAdvancedSearch(startTypeId, id, startEduYearId, function (data) {
@@ -876,16 +922,21 @@
 
         });
 
-        $('#action_start_date, #action_end_date, #edu_start_year_search, #edu_end_year_search, #past_edu_line').on('change', function () {
+
+
+
+
+
+        $('#action_start_date, #action_end_date, #edu_start_year_search, #edu_end_year_search, #edu_line').on('change', function () {
             // var abroadEduLlevel = $('body').find('.abroad-edu-level').val();
             var orgId = $('body').find('#atm_id').val();
             var startTypeId = $('body').find('#action_start_date').val();
             var endTypeId = $('body').find('#action_end_date').val();
             var startEduYearId = $('body').find('#edu_start_year_search').val();
             var endEduYearId = $('body').find('#edu_end_year_search').val();
-            var past_edu_line = $('body').find('#past_edu_line').val();
+            var edu_line = $('body').find('#edu_line').val();
             if (startTypeId > 0) {
-                Hsis.Proxy.getOrderAdvancedSearch(startTypeId, orgId, startEduYearId, past_edu_line,  function (data) {
+                Hsis.Proxy.getOrderAdvancedSearch(startTypeId, orgId, startEduYearId, edu_line,  function (data) {
                     if (data && data.data) {
                         var html = '';
                         html = '<option value = "0" data-i18n="student.order">Əmr</option>'
@@ -981,6 +1032,8 @@
 
     });
 </script>
+
+
 
 
 

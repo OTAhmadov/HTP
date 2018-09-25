@@ -2,7 +2,7 @@
 
 var cropForm = new FormData();
 var Hsis = {
-    // token: 'efe1fcf16b254286943121b764225d5b5bf2c5870e024ff4a5f7615f0f8d4ec7',
+    // token: '25615d25b88f4d2492bcaf337f6f724270280a95fd5f467c8833d5ff9efc96c3',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -1053,6 +1053,8 @@ var Hsis = {
                         }
                     }
                 }
+            }).done(function () {
+
             });
         },
 
@@ -1442,14 +1444,14 @@ var Hsis = {
         loadAdressTypes: function (parentId, callback) {
             var result = {};
             $.ajax({
-                url: Hsis.urls.AdminRest + 'settings/address/parentId/' + parentId + '?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'settings/address/parentId/' + parentId + '?token=' + Hsis.token,
                 type: 'GET',
                 success: function (data) {
                     try {
                         if (data) {
                             switch (data.code) {
                                 case Hsis.statusCodes.OK:
-                                    callback(data.data)
+                                    callback(data.data);
                                     break;
 
                                 case Hsis.statusCodes.ERROR:
@@ -5054,7 +5056,6 @@ var Hsis = {
             });
         },
         getUnregistretedUsersList: function (page, type, orgId, callback, keyword) {
-            alert('dsds');
             $.ajax({
                 url: Hsis.urls.AdminRest + 'users/unregistreted?token=' + Hsis.token + (page ? '&page=' + page : '') + (keyword ? '&keyword=' + keyword : ''),
                 type: 'GET',
@@ -6072,16 +6073,7 @@ var Hsis = {
             $('body [data-name="father-name"]').html(result.middleName);
             $('body [data-name="pinCode"]').html(result.pinCode);
 
-            Hsis.Proxy.getPersonInfoByPinCode(result.pinCode, function (iamasdata) {
-                if (iamasdata && iamasdata.image.file !== null) {
-                    $('body [data-name = "image"]').attr('src', "data:image/png;base64," + iamasdata.image.file);
-                    $('body [data-name = "image"]').on('error', function (e) {
-                        $(this).attr('src', 'assets/img/guest.png');
-                    });
-                } else {
-                    $('body [data-name = "image"]').attr('src', 'assets/img/guest.png');
-                }
-            });
+
 
            /* $('').attr({
                 src: result.image.fullPath
@@ -6287,6 +6279,38 @@ var Hsis = {
             }else{
                 $('body [data-name="eduLifeCycleByOrg"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
+
+
+
+            if (result.pelcAction.length > 0) {
+                html ='';
+                $.each(result.pelcAction, function (i, v) {
+                    html += '<tr>'+
+                        '<td>'+v.org.value[Hsis.lang]+'</td>'+
+                        '<td>'+v.actionType.value[Hsis.lang]+'</td>'+
+                        '<td>'+v.actionDate+'</td>'+
+                        '<td>'+v.endActionType.value[Hsis.lang]+'</td>'+
+                        '<td>'+v.endActionDate+'</td>'+
+                        '</tr>'
+                });
+                $('body .finish_schools tbody').html(html)
+            } else {
+                $('body .finish_schools tbody').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
+                // $('body [data-name="endData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             /*if(result.pelcAction.length > 0){

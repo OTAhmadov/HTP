@@ -2582,7 +2582,6 @@ $(function () {
     })
 
     $('body').on('click', '#get_birth_place_edit', function () {
-        alert('1');
         try {
             var addrTreeId = $('#birth_place_tree_edit').find('li[aria-selected="true"]').attr('id') ? $('#birth_place_tree_edit').find('li[aria-selected="true"]').attr('id') : $('#birth_place_edit').attr('data-addresstree-id');
             var addrTypeId = $('#birth_place_edit').attr('data-address-type-id');
@@ -2609,7 +2608,6 @@ $(function () {
                 });*/
             } else {
                 Hsis.Proxy.editStudentAddress(address, function (code) {
-                    alert('4');
                     if (code == Hsis.statusCodes.OK) {
                         var text = $('#main-div #birth_place_edit').attr('data-node-text');
                         var id = $('#main-div').attr('data-id');
@@ -8484,8 +8482,9 @@ $(function () {
 
             $('body').find('input[name="' + name + '"]').val(id);
 
+            // getStructureListByAdress
             if (id > 0) {
-                Hsis.Proxy.getStructureListByAdress(id, function (data) {
+                Hsis.Proxy.getAbroadOrgByAbroadAddr(id, function (data) {
                     if (data && data.data) {
                         var html = '';
 
@@ -9405,12 +9404,12 @@ $(function () {
                         Hsis.Proxy.loadDictionariesByTypeId('1000016', 1000398, function (eduLevel) {
                                 var html = Hsis.Service.parseDictionaryForSelect(eduLevel);
                                     $('#main-div #abroad_edu_level').html(html);
-                                     $('#main-div #abroad_edu_level').val(data.eduLevel.id);
-
-
+                                    $('#main-div #abroad_edu_level').val(data.eduLevel.id);
                             });
                         Hsis.Proxy.loadDictionariesByTypeId('1000094', 0, function (eduLine) {
                             var html = Hsis.Service.parseDictionaryForSelect(eduLine);
+                            alert('ssssss');
+                            console.log(html);
                             $('#main-div #edu_line').html(html);
                             $('#main-div #edu_line').val(data.eduLineId.id);
                         });
@@ -9716,11 +9715,18 @@ $(function () {
        var id = $('#buttons_div').attr('data-id');
        Hsis.Proxy.getAbroadStudentDetails(id, function (data){
            Hsis.Service.parseQuestionnaireView(data);
-           var html = $('.survey').html();
-           openWin(html);
-           // $('.survey').addClass('open');
+           Hsis.Proxy.getPersonInfoByPinCode(data.pinCode, function (iamasdata) {
+               if (iamasdata && iamasdata.image.file !== null) {
+                   $('body [data-name = "image"]').attr('src', "data:image/png;base64," + iamasdata.image.file);
+                   $('body [data-name = "image"]').on('error', function (e) {
+                       $(this).attr('src', 'assets/img/guest.png');
+                   });
+               } else {
+                   $('body [data-name = "image"]').attr('src', 'assets/img/guest.png');
+               }
+               openWin($('.survey').html());
+           });
 
-           // window.open('partial/module_1000114/div.survey', '_blank');
        });
    });
 
@@ -9777,7 +9783,7 @@ $(function () {
                     if (data) {
                         Hsis.Proxy.getAbroadStudentDetails(id, function (result) {
                             if (result.image && result.image.path) {
-                                $('body #student_list tbody tr[data-id="' + id + '"]').attr('data-image', result.image.path)
+                                $('body #student_list tbody tr[data-id="' + id + '"]').attr('data-image', result.image.path);
                                 $('.main-content-upd #studentphoto').attr('src', Hsis.urls.HSIS + 'students/image/' + result.image.path + '?token=' + Hsis.token + '&size=50x50&' + Math.random());
                                 $('.main-content-upd #studentphoto').on('error', function (e) {
                                     $(this).attr('src', 'assets/img/guest.png');
@@ -10107,6 +10113,7 @@ $(function () {
 
     $('.content-part').on('keypress', '#userSearch', function (e) {
         try {
+
             if (e.keyCode == 13) {
                 var keyword = $('#userSearch').val();
                 var type = $('.user-search-form input[name="type"]').val();
@@ -10114,9 +10121,10 @@ $(function () {
                 var tableName = $('#main-div .row-table table').attr('id');
 
                 if (keyword.trim().length > 2) {
-                    $('.content-body .user-search-form input[name="keyword"]').val(keyword);
-                    var params = $('.content-body .user-search-form').serialize();
-                    if(tableName === 'unregistered-users-table') {
+
+                    $('.content-part .user-search-form input[name="keyword"]').val(keyword);
+                    var params = $('.content-part .user-search-form').serialize();
+                    // if(tableName === 'unregistered-users-table') {
                         Hsis.Proxy.getUnregistretedUsersList('', type, orgId, function (data) {
                             if (data) {
                                 if (data.code == Hsis.statusCodes.OK) {
@@ -10124,11 +10132,11 @@ $(function () {
 
                                 }
                             }
-                        }, keyword)
-                    }
+                        }, keyword);
+                    // }
 
-                    else if(tableName === 'users-table')
-                        Hsis.Proxy.loadUsers('',params);
+                    /*else if(tableName === 'users-table')
+                        Hsis.Proxy.loadUsers('',params);*/
                 }
                 else if (keyword.trim().length == 0) {
                     if(tableName === 'users-table')
@@ -10755,7 +10763,10 @@ $(function () {
         var path = $(this).attr('src');
 //      var html = '<embed src="'+type+'" width="500" height="375" type="application/pdf">';
         var html = '<iframe src="http://docs.google.com/gview?url='+type+'&embedded=true"></iframe>';
-// var html = ' <iframe class="page-icon preview-pane" frameborder="0" height="352" width="396" src="'+type+'"></iframe>'
+        // var html = ' <iframe class="page-icon preview-pane" frameborder="0" height="352" width="396" src="'+type+'"></iframe>'
+
+        // var html= '<object data="http://docs.google.com/gview?url='+type+'&embedded=true">  height="500px"> </object> '
+
       $('body .open-file-modal .modal-body').html(html);
         $('body .open-file-modal').modal('show');
     });
