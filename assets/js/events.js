@@ -9328,13 +9328,13 @@ $(function () {
 
     $('body').on('click', '#operation_1001346', function () {
         try {
-
+/*
             if (!$('#buttons_div').attr('data-id')) {
                 $.notify(Hsis.dictionary[Hsis.lang]['select_information'], {
                     type: 'warning'
                 });
                 return false;
-            }
+            }*/
 
             var id = $('.main-content-upd #buttons_div').attr('data-id');
             $('.add-new .search-scroll').load('partials/abroad_student_edit.html', function () {
@@ -9408,8 +9408,6 @@ $(function () {
                             });
                         Hsis.Proxy.loadDictionariesByTypeId('1000094', 0, function (eduLine) {
                             var html = Hsis.Service.parseDictionaryForSelect(eduLine);
-                            alert('ssssss');
-                            console.log(html);
                             $('#main-div #edu_line').html(html);
                             $('#main-div #edu_line').val(data.eduLineId.id);
                         });
@@ -10762,10 +10760,8 @@ $(function () {
         var type = $(this).attr('data-type');
         var path = $(this).attr('src');
 //      var html = '<embed src="'+type+'" width="500" height="375" type="application/pdf">';
-        var html = '<iframe src="http://docs.google.com/gview?url='+type+'&embedded=true"></iframe>';
+        var html = '<embed src="'+type+'" type="application/x-google-chrome-pdf"/>';
         // var html = ' <iframe class="page-icon preview-pane" frameborder="0" height="352" width="396" src="'+type+'"></iframe>'
-
-        // var html= '<object data="http://docs.google.com/gview?url='+type+'&embedded=true">  height="500px"> </object> '
 
       $('body .open-file-modal .modal-body').html(html);
         $('body .open-file-modal').modal('show');

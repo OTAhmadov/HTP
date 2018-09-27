@@ -4608,7 +4608,7 @@ hr {
     /*display: inline-block;*/
     font-size: 14px;
     font-weight: 500;
-    text-transform: uppercase
+    /*text-transform: uppercase*/
 }
 .panel-heading .panel-tools {
     height: 36px;
@@ -20776,6 +20776,7 @@ textarea {
 .table-block th, .table-block td {
     padding: 0 !important;
     text-align: center;
+    text-transform: capitalize;
     vertical-align: center;
 }
 

@@ -2,7 +2,7 @@
 
 var cropForm = new FormData();
 var Hsis = {
-    // token: '25615d25b88f4d2492bcaf337f6f724270280a95fd5f467c8833d5ff9efc96c3',
+    token: '2a21855c203946849fb739a21525df1e238a317d3f5e4014b6eb365ff4ff6219',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -53,7 +53,8 @@ var Hsis = {
         OK: 'OK',
         UNAUTHORIZED: 'UNAUTHORIZED',
         ERROR: 'ERROR',
-        INVALID_PARAMS: 'INVALID_PARAMS'
+        INVALID_PARAMS: 'INVALID_PARAMS',
+        DUPLICATE_DATA: 'DUPLICATE_DATA'
     },
     REGEX: {
         email: /\S+@\S+\.\S+/,
@@ -1040,9 +1041,9 @@ var Hsis = {
                     if (result) {
                         switch (result.code) {
                             case Hsis.statusCodes.ERROR:
-                                $.notify(Hsis.dictionary[Hsis.lang]['error'], {
-                                    type: 'danger'
-                                });
+                                // $.notify(Hsis.dictionary[Hsis.lang]['error'], {
+                                //     type: 'danger'
+                                // });
                                 callback(result.data);
                                 break;
 
@@ -1444,7 +1445,7 @@ var Hsis = {
 
             });
         },
-        loadAdressTypes: function (parentId, callback) {
+       loadAdressTypes: function (parentId, callback) {
             var result = {};
             $.ajax({
                 url: Hsis.urls.HTP + 'settings/address/parentId/' + parentId + '?token=' + Hsis.token,
@@ -3189,7 +3190,6 @@ var Hsis = {
 
         },
         getStudentInfoByTQDK: function (pincode, callback) {
-
             $.ajax({
                 url: Hsis.urls.HSIS + 'students/pincode/' + pincode + '/tqdkDetails?token=' + Hsis.token,
                 type: 'GET',
@@ -4985,7 +4985,7 @@ var Hsis = {
         getUserById: function (id, callback) {
             var user = {};
             $.ajax({
-                url: Hsis.urls.HTP + '/users/' + id + '?token=' + Hsis.token,
+                url: Hsis.urls.AdminRest + '/users/' + id + '?token=' + Hsis.token,
                 type: 'GET',
                 success: function (data) {
                     if (data) {
@@ -5226,13 +5226,13 @@ var Hsis = {
                     $('.app-con a[data-id="' + Hsis.appId + '"]').parent('li').addClass('active');
                     $('[data-toggle="tooltip"]').tooltip();
 
-                    var moduleListItems = $('body').find('.app-con li');
+                    /*var moduleListItems = $('body').find('.app-con li');
                     console.log(moduleListItems)
                     if (moduleListItems.length > 5) {
                         $('body').find('div.app-list, .hide-menu').addClass('less-menu')
                     } else {
                         $('body').find('div.app-list, .hide-menu').removeClass('less-menu')
-                    }
+                    }*/
                 })
 
             }
@@ -5504,7 +5504,7 @@ var Hsis = {
                             '<td class="add-doc-date">' + v.startDate + '</td>' +
                             '<td class="add-doc-end-date">' + v.endDate + '</td>' + '</tr>' +
                             '</table>' +
-                            '<label><p><span>Zehmet olmasa pdf formatinda </span>' + Hsis.dictionary[Hsis.lang]['choose_files'] + '</p><input type="file" multiple class="add-doc-file" data-doc-id = "' + v.id + '"/></label>' +
+                            '<label><p><span>Zəhmət olmasa pdf formatında </span>' + Hsis.dictionary[Hsis.lang]['choose_files'] + '</p><input type="file" multiple class="add-doc-file" data-doc-id = "' + v.id + '"/></label>' +
                             '<div class="operations-button">' +
                             '<div class="operations dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span></div>' +
                             '<ul class="dropdown-menu">' +
@@ -5544,7 +5544,6 @@ var Hsis = {
         },
         parseViewStudentDocument: function (data, doctype) {
             try {
-
                 var html = '';
                 if (data) {
                     $.each(data, function (i, v) {
@@ -6078,6 +6077,29 @@ var Hsis = {
 
 
 
+            if (result.addresses.length > 0) {
+                html ='';
+                $.each(result.addresses, function (i, v) {
+                    html += '<ul style="padding-left: 0; margin-top: 0; margin-bottom: 2px;">'+
+                        '<li style="list-style: none"><span style="margin-right: 45%;">Sənədin Tipi:</span>'+v.type.value[Hsis.lang]+'</li>'+
+                        '<li style="list-style: none"><span style="margin-right: 45%;">Seriya/nömrə:</span>'+v.serial+' / ' + v.number +'</li>'+
+                        /*'<li>Verilmə tarixi:'+v.startDate+'</li>'+
+                        '<li>Bitmə tarixi:'+v.endDate+'</li>'+*/
+                        '</ul>'
+                });
+                $('body .document_list ').html(html)
+            } else {
+                $('body .document_list ').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
+                // $('body [data-name="endData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+
+
+
+
+
+
+
            /* $('').attr({
                 src: result.image.fullPath
             });*/
@@ -6100,20 +6122,41 @@ var Hsis = {
             if (result.documents.length > 0) {
                 html ='';
                 $.each(result.documents, function (i, v) {
-                   html += '<tr>'+
-                            '<td>'+v.type.value[Hsis.lang]+'</td>'+
-                            '<td>'+v.serial+' / ' + v.number +'</td>'+
-                            '<td>'+v.startDate+'</td>'+
-                            '<td>'+v.endDate+'</td>'+
-                            '</tr>'
+                   html += '<ul style="padding-left: 0; margin-top: 0; margin-bottom: 2px;">'+
+                            '<li style="list-style: none"><span style="margin-right: 45%;">Sənədin Tipi:</span>'+v.type.value[Hsis.lang]+'</li>'+
+                            '<li style="list-style: none"><span style="margin-right: 45%;">Seriya/nömrə:</span>'+v.serial+' / ' + v.number +'</li>'+
+                            /*'<li>Verilmə tarixi:'+v.startDate+'</li>'+
+                            '<li>Bitmə tarixi:'+v.endDate+'</li>'+*/
+                            '</ul>'
                 });
-                $('body .document_list tbody').html(html)
+                $('body .document_list ').html(html)
             } else {
-                $('body .document_list tbody').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
+                $('body .document_list ').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
                 // $('body [data-name="endData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
-            if(result.citizenship.length > 0){
+            if (result.orderDocuments.length > 0) {
+                html ='';
+                $.each(result.orderDocuments, function (i, v) {
+                    html += '<ul style="padding-left: 0; margin-top: 0; margin-bottom: 2px;">'+
+                        '<li style="list-style: none;"><span style="margin-right: 45%;">Əmrin Tipi:</span>'+v.type.value[Hsis.lang]+'</li>'+
+                        '<li style="list-style: none;"><span style="margin-right: 45%;">Seriya / nömrə:</span>'+v.serial+' / ' + v.number +'</li>'+
+                        '<li style="list-style: none;"><span style="margin-right: 45%;">Verilmə tarixi:</span>'+v.startDate+'</li>'+
+                        '<li style="list-style: none;"><span style="margin-right: 45%;">Bitmə tarixi:</span>'+v.endDate+'</li>'+
+                        '</ul>'
+                });
+                $('body .document_order ').html(html)
+            } else {
+                $('body .document_order ').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
+                // $('body [data-name="endData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
+            }
+
+
+
+
+
+
+            if(result.citizenship.value !== 0){
                 $('body [data-name="citizen"]').html(result.citizenship.value[Hsis.lang]);
             }else{
                 $('body [data-name="citizen"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
@@ -6125,13 +6168,13 @@ var Hsis = {
                 $('body [data-name="status"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
-            if(result.gender.length > 0){
+            if(result.gender.value !== 0){
                 $('body [data-name="gender"]').html(result.gender.value[Hsis.lang]);
             }else{
                 $('body [data-name="gender"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
-            if(result.maritalStatus.length > 0){
+            if(result.maritalStatus.value !== 0){
                 $('body [data-name="family-status"]').html(result.maritalStatus.value[Hsis.lang]);
             }else{
                 $('body [data-name="family-status"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
@@ -6143,7 +6186,7 @@ var Hsis = {
                 $('body [data-name="birthday"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
-            if(result.militaryService.length > 0){
+            if(result.militaryService.value !== 0){
                 $('body [data-name="military"]').html(result.militaryService.value[Hsis.lang]);
             }else{
                 $('body [data-name="military"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
@@ -6153,15 +6196,15 @@ var Hsis = {
             if (result.relations.length > 0) {
                 html ='';
                 $.each(result.relations, function (i, v) {
-                    html += '<tr>'+
-                        '<td>'+v.type.value[Hsis.lang]+'</td>'+
-                        '<td>'+v.fullName+'</td>'+
-                        '<td>'+v.contactNumber+'</td>'+
-                        '</tr>'
+                    html += '<ul style="padding-left: 0; margin-top: 2px; margin-bottom: 2px;">'+
+                        '<li style="list-style: none;">Qohumluq əlaqəsi:'+v.type.value[Hsis.lang]+'</li>'+
+                        '<li style="list-style: none;">Adı:'+v.fullName+'</li>'+
+                        '<li style="list-style: none;">Əlaqə:'+v.contactNumber+'</li>'+
+                        '</ul>'
                 });
-                $('body .document_family tbody').html(html)
+                $('body .document_family').html(html)
             } else {
-                $('body .document_family tbody').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
+                $('body .document_family').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
                 // $('body [data-name="endData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
@@ -6228,7 +6271,7 @@ var Hsis = {
                 $('body [data-name="abroadNumber"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
-            if(result.abroadStatus.length){
+            if(result.abroadStatus.value !== 0){
                 $('body [data-name="abroadStatus"]').html(result.abroadStatus.value[Hsis.lang]);
             }else{
                 $('body [data-name="abroadStatus"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
@@ -6246,31 +6289,31 @@ var Hsis = {
                 $('body [data-name="graduateDate"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
-            if(result.eduPeriod.length > 0){
+            if(result.eduPeriod.value !== 0){
                 $('body [data-name="eduPeriod"]').html(result.eduPeriod);
             }else{
                 $('body [data-name="eduPeriod"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
-            if(result.eduLangId.length > 0){
+            if(result.eduLangId.value !== 0){
                 $('body [data-name="eduLangId"]').html(result.eduLangId.value[Hsis.lang]);
             }else{
                 $('body [data-name="eduLangId"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
-            if(result.eduLevel.length > 0){
+            if(result.eduLevel.value !== 0){
                 $('body [data-name="eduLevel"]').html(result.eduLevel.value[Hsis.lang]);
             }else{
                 $('body [data-name="eduLevel"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
-            if(result.specDicrection.length > 0){
+            if(result.specDicrection.value !== 0){
                 $('body [data-name="specDirection"]').html(result.specDicrection.value[Hsis.lang]);
             }else{
                 $('body [data-name="specDirection"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
-            if(result.spec.length > 0){
+            if(result.spec.value !== 0){
                 $('body [data-name="spec"]').html(result.spec.value[Hsis.lang]);
             }else{
                 $('body [data-name="spec"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
@@ -6285,20 +6328,22 @@ var Hsis = {
 
 
 
+
+
             if (result.pelcAction.length > 0) {
                 html ='';
                 $.each(result.pelcAction, function (i, v) {
-                    html += '<tr>'+
-                        '<td>'+v.org.value[Hsis.lang]+'</td>'+
-                        '<td>'+v.actionType.value[Hsis.lang]+'</td>'+
-                        '<td>'+v.actionDate+'</td>'+
-                        '<td>'+v.endActionType.value[Hsis.lang]+'</td>'+
-                        '<td>'+v.endActionDate+'</td>'+
-                        '</tr>'
+                    html += '<ul style="padding-left: 0; margin-top: 0; margin-bottom: 2px;">'+
+                        '<li style="list-style: none;"><span style="margin-right: 45%;">Ali Təhsil müəssisəsi:</span>'+v.org.value[Hsis.lang]+'</li>'+
+                        '<li style="list-style: none;"><span style="margin-right: 45%;">Başlama hərəkəti: </span>'+v.actionType.value[Hsis.lang]+'</li>'+
+                        '<li style="list-style: none;"><span style="margin-right: 45%;">Başlama tarixi: </span>'+v.actionDate+'</li>'+
+                        '<li style="list-style: none;"><span style="margin-right: 45%;">Bitmə hərəkəti: </span>'+v.endActionType.value[Hsis.lang]+'</li>'+
+                        '<li style="list-style: none;"><span style="margin-right: 45%;">Bitmə tarixi:</span>'+v.endActionDate+'</li>'+
+                        '</ul>'
                 });
-                $('body .finish_schools tbody').html(html)
+                $('body .finish_schools').html(html)
             } else {
-                $('body .finish_schools tbody').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
+                $('body .finish_schools').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
                 // $('body [data-name="endData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
@@ -6749,13 +6794,20 @@ var Hsis = {
                         $('#main-div .erase-student-action').parent('li').remove();
 
                         $('#main-div #edu_line').text(data.eduLineId.value[Hsis.lang]);
-                        $('#main-div #edu_lang').text(data.eduLangId.value[Hsis.lang]);
+                        $('#main-div #edu_lang1').html(data.eduLangId.value[Hsis.lang]);
+                        // alert(data.eduLangId.value[Hsis.lang])
+
+
+
                         $('#main-div #abroad_edu_level').text(data.eduLevel.value[Hsis.lang]);
                         $('#main-div #action_date').text(data.actionDate);
                         $('#main-div #private_work_number').text(data.abroadNumber);
                         $('#main-div #graduate_date').text(data.graduateDate);
                         $('#main-div #edu-period').text(data.eduPeriod);
-                        $('#main-div #status').text(data.abroadStatus.value[Hsis.lang]);
+
+
+
+
 
 
                         $('#main-div #speciality').text(data.specDicrection.value[Hsis.lang]);
@@ -6827,7 +6879,6 @@ var Hsis = {
 
         //    New Istifadeciler modulu HTP-de
         parseUsers: function (data, page) {
-            console.log(page);
             var html = '';
             if (data.data && data.data.userList) {
                 var count;

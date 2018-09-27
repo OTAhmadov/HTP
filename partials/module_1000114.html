@@ -219,10 +219,8 @@
                         <dd data-lastname></dd>
                         <dt><span data-i18n="name">Name</span>:</dt>
                         <dd data-firstname></dd>
-
                         <dt><span data-i18n="middlename">Name</span>:</dt>
                         <dd data-father-name></dd>
-
                         <dt><span data-i18n="country">Ölkə</span>:</dt>
                         <dd data-country></dd>
                         <dt><span>Universitet</span>:</dt>
@@ -332,41 +330,62 @@
     <div class="search-scroll"></div>
 </div>
 
-<div class="loading">
-    <img src='/assets/img/upd-icons/gifff.gif' height="50px" width="50px" alt="">
-</div>
-
 <div class="survey">
     <div class="row print-preview">
         <div class="col-sm-12">
-            <h1 style="text-align: center" class="">"Hökümətlərarası Təqaüd Programları" Məluçat Sistemi</h1>
+            <h1 style="text-align: center" class="">"Hökumətlərarası Təqaüd Proqramları" Məlumat Sistemi</h1>
             <h4 style="text-align: center">ANKET</h4>
+
             <span>Şəxsi iş nömrəsi</span>
             <label data-name="abroadNumber"></label>
+
             <span>Status</span>
-
             <label data-name="abroadStatus"></label>
-            <h2 style="text-align: center" class="text-center"></h2>
 
+
+            <h2 style="text-align: center" class="text-center"></h2>
             <div style="position: relative;" class="survey-content">
 
 
                 <h1 class="private-info">1. Şəxsi məlumatlar</h1>
-                <table class="table document_list">
-                    <thead>
+                <div class="table document_list">
+                   <!-- <thead>
                     <tr>
-                        <th>Tipi</th>
-                        <th>Seriya/nomre</th>
-                        <th>verilme tarixi</th>
-                        <th>Bitme tarixi</th>
+                        <th>Sənədin Tipi</th>
+                        <th>Seriya/nömrə</th>
+                        <th>Verilmə tarixi</th>
+                        <th>Bitmə tarixi</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    </tbody>
-                </table>
+                    </tbody>-->
+                </div>
+
+
+
+
+                <div class="table document_order">
+                    <!--<thead>
+                    <tr>
+                        <th>Əmrin Tipi</th>
+                        <th>Seriya/nömrə</th>
+                        <th>Verilmə tarixi</th>
+                        <th>Bitmə tarixi</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>-->
+                </div>
+
+
+
+
+
+
                 <!--<p style="margin: 0;">Qeydiyyat tarixi</p>-->
-                <table class="table document_registration">
+                <!--<table class="table document_registration">
                     <thead>
                     <tr>
                         <th>Tarix</th>
@@ -376,9 +395,9 @@
                     <tbody>
 
                     </tbody>
-                </table>
+                </table>-->
 
-                <img style="width: 150px; height: 150px; position: absolute; right: 10%;" class="image" data-name="image">
+                <img style="width: 150px; height: 150px; position: absolute; right: 10%; top: 70px;" class="image" data-name="image">
                 <p class="row">
                     <span style="width: 50%; float: left;">Adı</span>
                     <label style="width: 50%; float: left;" data-name="name"></label>
@@ -433,10 +452,10 @@
                     <label style="width: 50%; float: left;" class="col-sm-6" data-name="military"></label>
                 </p>
 
-                <hr></hr>
+
                 <h2>Valideynlər haqqında</h2>
-                <table class="table document_family">
-                    <thead>
+                <div class="table document_family">
+                    <!--<thead>
                     <tr>
                         <th>Qohumluq əlaqəsi</th>
                         <th>Adı</th>
@@ -445,9 +464,8 @@
                     </thead>
                     <tbody>
 
-                    </tbody>
-                </table>
-
+                    </tbody>-->
+                </div>
 
                 <h2 class="current-study">2. Hazırda təhsil aldığı universitet və ixtisas</h2>
                 <p class="row">
@@ -459,7 +477,7 @@
                     <label style="width: 50%; float: left;" data-name="cityName"></label>
                     <span style="width: 50%; float: left;">Universitet</span>
                     <label style="width: 50%; float: left;" data-name="atmName"></label>
-                    <span style="width: 50%; font-weight: bold; float: left;">Ixtisas Istiqaməti</span>
+                    <span style="width: 50%; font-weight: bold; float: left;">İxtisas İstiqaməti</span>
                     <label style="width: 50%; float: left;" data-name="specDirection"></label>
                     <span style="width: 50%; font-weight: bold; float: left;">İxtisas</span>
                     <label style="width: 50%; float: left;" data-name="spec"></label>
@@ -475,45 +493,14 @@
                     <label style="width: 50%; float: left;" data-name="eduLangId"></label>
                     <span style="width: 50%; font-weight: bold; float: left;">Qeyd</span>
                     <label style="width: 50%; float: left;" data-name="message"></label>
-
-
-
-
-
-
                 </p>
                 <div style="clear: both"></div>
 
-
-                <!--<h2 style="text-align: center">Tələbənin hərəhəti</h2>
-                <p class="row">
-                    <span style="width: 18%; display: inline-table;">Ali təhsil müəssisəsi</span>
-                    <span style="width: 18%; display: inline-table;">Başlama hərəkəti</span>
-                    <span style="width: 18%; display: inline-table;">Başlama tarixi</span>
-                    <span style="width: 18%; display: inline-table;">Bitmə hərəkəti</span>
-                    <span style="width: 18%; display: inline-table;">Bitmə tarixi</span>
-                </p>
-                <p class="row">
-                    <label data-name="eduLifeCycleByOrg" style="width: 18%; display: inline-table;"></label>
-                    <label data-name="pelcActionActionType" style="width: 18%; display: inline-table;"></label>
-                    <label data-name="pelcActionActionDate" style="width: 18%; display: inline-table;"></label>
-                    <label data-name="pelcActionEndActionType" style="width: 18%; display: inline-table;"></label>
-                    <label data-name="pelcActionEndActionDate" style="width: 18%; display: inline-table;"></label>
-                </p>-->
-
                 <h2 class="current-study">3. Akademik göstəricilər</h2>
-                <!--<span style="width: 50%; font-weight: bold; float: left;">Orta təhsil</span>
-                <label style="width: 50%; float: left;" data-name="secondarySchool"></label>
-                <span style="width: 50%; font-weight: bold; float: left;">Bitirdiyi orta təhsil müəssisəsi(ölkə/şəhər)</span>
-                <label style="width: 50%; float: left;" data-name="secondarySchoolCity"></label>
-                <span style="width: 50%; font-weight: bold; float: left;">Orta təhsil müəssisəsinin adı</span>
-                <label style="width: 50%; float: left;" data-name="secondarySchoolCityName"></label>
-                <span style="width: 50%; font-weight: bold; float: left;">Məzuniyyət ili</span>
-                <label style="width: 50%; float: left;" data-name="graduatedYear"></label>
-                <p>Bitirdiyi ali təhsil müəssisəsi</p>-->
 
-                <table class="table finish_schools">
-                    <thead>
+
+                <div class="table finish_schools">
+                    <!--<thead>
                     <tr>
                         <th>Ali Təhsil müəssisəsi</th>
                         <th>Başlama hərəkəti</th>
@@ -524,8 +511,8 @@
                     </thead>
                     <tbody>
 
-                    </tbody>
-                </table>
+                    </tbody>-->
+                </div>
 
 
 
@@ -608,7 +595,10 @@
                         background: #efefef;
                         padding: 5px;
                     }
-                    .document_list, .document_family,.document_registration,.finish_schools{
+                    .document_list,
+                    .document_family,
+                    .finish_schools,
+                    .document_order{
                         width: 100%;
                         text-align: left;
                     }
