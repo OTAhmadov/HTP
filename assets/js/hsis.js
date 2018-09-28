@@ -195,6 +195,18 @@ var Hsis = {
                 }
             });
         },
+        getFileByte: function (callback) {
+            $.ajax({
+                url: 'http://192.168.1.8:8082/UnibookHsisRest/students/file/1000906?token=0b575f79978f4f9b99754ba90201fc2634561f6d7aa94fafac2bab324ab46dae',
+                type: 'GET',
+//                headers: {
+//                    'Token': Hsis.token
+//                },
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        },
         getAcademicGroupForSelect: function (params, callback) {
             $.ajax({
                 url: Hsis.urls.HSIS + 'groups/select?token=' + Hsis.token + (params ? '&' + params : ''),
@@ -1739,7 +1751,7 @@ var Hsis = {
         editCommonInfoAbroadStudent: function (formData, callback) {
             var id = $('#main-div').attr('data-id');
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/abroad/' + id + '/commonInfo/edit?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'students/abroad/' + id + '/commonInfo/edit?token=' + Hsis.token,
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -1990,7 +2002,7 @@ var Hsis = {
         editStudentAcademicInfo: function (academicInfo, callback) {
             var id = $('#main-div').attr('data-id');
             $.ajax({
-                url: Hsis.urls.HSIS + 'students/' + id + '/academicInfo/edit?token=' + Hsis.token,
+                url: Hsis.urls.HTP + 'students/' + id + '/academicInfo/edit?token=' + Hsis.token,
                 type: 'POST',
                 data: academicInfo,
                 beforeSend: function (xhr) {
