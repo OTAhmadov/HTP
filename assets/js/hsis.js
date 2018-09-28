@@ -2,7 +2,7 @@
 
 var cropForm = new FormData();
 var Hsis = {
-    token: '2a21855c203946849fb739a21525df1e238a317d3f5e4014b6eb365ff4ff6219',
+    // token: '3cc8a8ef651a4076a7545ce3fea22bd84cd49d219ee14745987c78c893b88249',
     lang: 'az',
     appId: 1000017,
     currModule: '',
@@ -1448,6 +1448,39 @@ var Hsis = {
        loadAdressTypes: function (parentId, callback) {
             var result = {};
             $.ajax({
+                url: Hsis.urls.AdminRest + 'settings/address/parentId/' + parentId + '?token=' + Hsis.token,
+                type: 'GET',
+                success: function (data) {
+                    try {
+                        if (data) {
+                            switch (data.code) {
+                                case Hsis.statusCodes.OK:
+                                    callback(data.data);
+                                    break;
+
+                                case Hsis.statusCodes.ERROR:
+                                    $.notify(Hsis.dictionary[Hsis.lang]['error'], {
+                                        type: 'danger'
+                                    });
+                                    break;
+
+                                case Hsis.statusCodes.UNAUTHORIZED:
+
+                                    window.location = Hsis.urls.ROS + 'unauthorized';
+                                    break;
+                            }
+                        }
+                    } catch (err) {
+                        console.error(err);
+                    }
+                }
+
+            });
+        },
+///
+        loadAbroadAdressTypes: function (parentId, callback) {
+            var result = {};
+            $.ajax({
                 url: Hsis.urls.HTP + 'settings/address/parentId/' + parentId + '?token=' + Hsis.token,
                 type: 'GET',
                 success: function (data) {
@@ -1477,6 +1510,7 @@ var Hsis = {
 
             });
         },
+
         getStudentListByOrgId: function (params, callback) {
             var data = {};
             $.ajax({
@@ -4729,9 +4763,9 @@ var Hsis = {
         //New istifageciler module HTP de Get
         loadUsers: function (page, params, callback) {
             $.ajax({
-                url: Hsis.urls.HTP + 'users?token=' + Hsis.token + (page ? '&page=' + page : '') + "&pageSize=25",
+                url: Hsis.urls.HTP + 'users?token=' + Hsis.token +(params ? '&' + params : '')+ (page ? '&page=' + page : '') + "&pageSize=25",
                 type: 'GET',
-                data: params,
+                //data: params,
                 success: function (data) {
                     try {
                         if (data) {
@@ -5428,9 +5462,7 @@ var Hsis = {
                                 $('#permanent_address_edit').attr('data-address-name', v.name);
                                 $('#permanent_address_edit').removeAttr('data-id').attr('data-id', v.id);
                                 $('#main-div #permanent_street_edit').val(v.name);
-
                                 break;
-
                             case 1000198:
 
                                 $('#temporary_address_edit').text(v.fullAddress[Hsis.lang] + ', ' + v.name);
@@ -6078,45 +6110,18 @@ var Hsis = {
 
 
             if (result.addresses.length > 0) {
-                html ='';
+                html ='<ul style="padding-left: 0; margin-top: 0; margin-bottom: 2px;">';
                 $.each(result.addresses, function (i, v) {
-                    html += '<ul style="padding-left: 0; margin-top: 0; margin-bottom: 2px;">'+
-                        '<li style="list-style: none"><span style="margin-right: 45%;">Sənədin Tipi:</span>'+v.type.value[Hsis.lang]+'</li>'+
-                        '<li style="list-style: none"><span style="margin-right: 45%;">Seriya/nömrə:</span>'+v.serial+' / ' + v.number +'</li>'+
-                        /*'<li>Verilmə tarixi:'+v.startDate+'</li>'+
-                        '<li>Bitmə tarixi:'+v.endDate+'</li>'+*/
-                        '</ul>'
+                    html += '<li style="list-style: none"><span style="margin-right: 43%;">'+v.type.value[Hsis.lang]+v.fullAddress[Hsis.lang]+':</span></li>';
                 });
-                $('body .document_list ').html(html)
+                html+=  '</ul>';
+                $('body .fullAddress ').html(html)
             } else {
-                $('body .document_list ').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
+                $('body .fullAddress ').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
                 // $('body [data-name="endData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
 
-
-
-
-
-
-
-           /* $('').attr({
-                src: result.image.fullPath
-            });*/
-
-            /*if (result.addresses.length && result.addresses.fullAddress.length > 0) {
-                html ='';
-                $.each(result.addresses, function (i, v) {
-                    html += '<tr>'+
-                        '<td>'+v.name+'</td>'+
-                        '<td>'+v.fullAddress+'</td>'+
-                        '<td>'+v.type.value[Hsis.lang]+'</td>'+
-                        '</tr>'
-                });
-                $('body .document_address tbody').html(html)
-            } else {
-                $('body .document_address tbody').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
-            }*/
 
 
             if (result.documents.length > 0) {
@@ -6132,23 +6137,21 @@ var Hsis = {
                 $('body .document_list ').html(html)
             } else {
                 $('body .document_list ').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
-                // $('body [data-name="endData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
             if (result.orderDocuments.length > 0) {
                 html ='';
                 $.each(result.orderDocuments, function (i, v) {
                     html += '<ul style="padding-left: 0; margin-top: 0; margin-bottom: 2px;">'+
-                        '<li style="list-style: none;"><span style="margin-right: 45%;">Əmrin Tipi:</span>'+v.type.value[Hsis.lang]+'</li>'+
-                        '<li style="list-style: none;"><span style="margin-right: 45%;">Seriya / nömrə:</span>'+v.serial+' / ' + v.number +'</li>'+
-                        '<li style="list-style: none;"><span style="margin-right: 45%;">Verilmə tarixi:</span>'+v.startDate+'</li>'+
-                        '<li style="list-style: none;"><span style="margin-right: 45%;">Bitmə tarixi:</span>'+v.endDate+'</li>'+
+                        '<li class="order-document" style="list-style: none;"><span style="margin-right: 45%;">Əmrin Tipi:</span>'+v.type.value[Hsis.lang]+'</li>'+
+                        '<li class="order-document" style="list-style: none;"><span style="margin-right: 45%;">Seriya / nömrə:</span>'+v.serial+' / ' + v.number +'</li>'+
+                        '<li class="order-document" style="list-style: none;"><span style="margin-right: 45%;">Verilmə tarixi:</span>'+v.startDate+'</li>'+
+                        '<li class="order-document" style="list-style: none;"><span style="margin-right: 45%;">Bitmə tarixi:</span>'+v.endDate+'</li>'+
                         '</ul>'
                 });
                 $('body .document_order ').html(html)
             } else {
                 $('body .document_order ').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
-                // $('body [data-name="endData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
 
@@ -6197,9 +6200,9 @@ var Hsis = {
                 html ='';
                 $.each(result.relations, function (i, v) {
                     html += '<ul style="padding-left: 0; margin-top: 2px; margin-bottom: 2px;">'+
-                        '<li style="list-style: none;">Qohumluq əlaqəsi:'+v.type.value[Hsis.lang]+'</li>'+
-                        '<li style="list-style: none;">Adı:'+v.fullName+'</li>'+
-                        '<li style="list-style: none;">Əlaqə:'+v.contactNumber+'</li>'+
+                        '<li style="list-style: none;"><span style="margin-right: 43%;">Qohumluq əlaqəsi:</span>'+v.type.value[Hsis.lang]+'</li>'+
+                        '<li style="list-style: none;"><span style="margin-right: 48%;">Adı:</span>'+v.fullName+'</li>'+
+                        '<li style="list-style: none;"><span style="margin-right: 48%;">Əlaqə:</span>'+v.contactNumber+'</li>'+
                         '</ul>'
                 });
                 $('body .document_family').html(html)
@@ -6226,7 +6229,7 @@ var Hsis = {
 
 
 
-            if (result.achievements.length > 0) {
+          /*  if (result.achievements.length > 0) {
                 html ='';
                 $.each(result.achievements, function (i, v) {
                     html += '<tr>'+
@@ -6238,7 +6241,7 @@ var Hsis = {
             } else {
                 $('body .document_achievements tbody').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
                 // $('body [data-name="endData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-            }
+            }*/
 
 
             if(result.countryName.length > 0){
@@ -6326,16 +6329,12 @@ var Hsis = {
                 $('body [data-name="eduLifeCycleByOrg"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
 
-
-
-
-
             if (result.pelcAction.length > 0) {
                 html ='';
                 $.each(result.pelcAction, function (i, v) {
                     html += '<ul style="padding-left: 0; margin-top: 0; margin-bottom: 2px;">'+
-                        '<li style="list-style: none;"><span style="margin-right: 45%;">Ali Təhsil müəssisəsi:</span>'+v.org.value[Hsis.lang]+'</li>'+
-                        '<li style="list-style: none;"><span style="margin-right: 45%;">Başlama hərəkəti: </span>'+v.actionType.value[Hsis.lang]+'</li>'+
+                        '<li style="list-style: none;"><span style="margin-right: 43%;">Ali Təhsil müəssisəsi:</span>'+v.org.value[Hsis.lang]+'</li>'+
+                        '<li style="list-style: none;"><span style="margin-right: 43%;">Başlama hərəkəti: </span>'+v.actionType.value[Hsis.lang]+'</li>'+
                         '<li style="list-style: none;"><span style="margin-right: 45%;">Başlama tarixi: </span>'+v.actionDate+'</li>'+
                         '<li style="list-style: none;"><span style="margin-right: 45%;">Bitmə hərəkəti: </span>'+v.endActionType.value[Hsis.lang]+'</li>'+
                         '<li style="list-style: none;"><span style="margin-right: 45%;">Bitmə tarixi:</span>'+v.endActionDate+'</li>'+
@@ -6344,45 +6343,7 @@ var Hsis = {
                 $('body .finish_schools').html(html)
             } else {
                 $('body .finish_schools').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>')
-                // $('body [data-name="endData"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            /*if(result.pelcAction.length > 0){
-                $('body [data-name="eduLifeCycleByOrg"]').html(result.eduLifeCycleByOrgs[0].name[Hsis.lang]);
-                $('body [data-name="pelcActionActionType"]').html(result.pelcAction[0].actionType.value[Hsis.lang]);
-                $('body [data-name="pelcActionActionDate"]').html(result.pelcAction[0].actionDate);
-                $('body [data-name="pelcActionEndActionType"]').html(result.pelcAction[0].endActionType.value[Hsis.lang]);
-                $('body [data-name="pelcActionEndActionDate"]').html(result.pelcAction[0].endActionDate);
-            }else{
-                $('body [data-name="eduLifeCycleByOrg"]').html('<div style="width: 15%; display: inline-table" class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-                $('body [data-name="pelcActionActionType"]').html('<div style="width: 15%; display: inline-table" class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-                $('body [data-name="pelcActionActionDate"]').html('<div style="width: 15%; display: inline-table class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-                $('body [data-name="pelcActionEndActionType"]').html('<div style="width: 15%; display: inline-table class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-                $('body [data-name="pelcActionEndActionDate"]').html('<div style="width: 15%; display: inline-table class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-            }*/
-
-
-            /*if(result.message.length > 0){
-                $('[data-name="message"]').html(result.message);
-            }else{
-                $('body [data-name="message"]').html('<div class="blank-panel survey-view"><h3>' + Hsis.dictionary[Hsis.lang]['no_information'] + '</h3></div>');
-            }*/
-
-
         },
         parseScholarshipPlan: function (plan) {
             if (plan) {
@@ -6794,8 +6755,13 @@ var Hsis = {
                         $('#main-div .erase-student-action').parent('li').remove();
 
                         $('#main-div #edu_line').text(data.eduLineId.value[Hsis.lang]);
+
                         $('#main-div #edu_lang1').html(data.eduLangId.value[Hsis.lang]);
-                        // alert(data.eduLangId.value[Hsis.lang])
+
+
+
+
+
 
 
 

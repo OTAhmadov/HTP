@@ -6,10 +6,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="modal-pdf col-md-4">
-                        <a class="export" data-value="pdf" href="#"><img class="a-export" src="assets/img/pdf-icon.png"  width="150" height="150" alt="pdf"></a>
+                        <a class="export" data-value="pdf" href="#"><img class="a-export" src="assets/img/pdf-icon.png"
+                                                                         width="150" height="150" alt="pdf"></a>
                     </div>
                     <div class="modal-excel col-md-4">
-                        <a class="export" data-value="xls" href="#"><img class="a-export"  src="assets/img/excel-icon.png" width="150"
+                        <a class="export" data-value="xls" href="#"><img class="a-export"
+                                                                         src="assets/img/excel-icon.png" width="150"
                                                                          height="150" alt="xls"></a>
                     </div>
                     <div class="modal-html col-md-4">
@@ -167,7 +169,7 @@
                 <table id="abroad_student_list" class="table table-celled table-hover">
                     <thead>
                     <tr>
-                        
+
                         <th>№</th>
                         <th data-sort="abroad_number" class="asc new-filter"><span>Şəxsi iş nömrəsi</span></th>
                         <th data-sort="lname" class="asc new-filter"><span data-i18n="fullname">Name </span><i
@@ -346,265 +348,136 @@
             <h2 style="text-align: center" class="text-center"></h2>
             <div style="position: relative;" class="survey-content">
 
+            <h1 class="private-info">1. Şəxsi məlumatlar</h1>
 
-                <h1 class="private-info">1. Şəxsi məlumatlar</h1>
-                <div class="table document_list">
-                   <!-- <thead>
-                    <tr>
-                        <th>Sənədin Tipi</th>
-                        <th>Seriya/nömrə</th>
-                        <th>Verilmə tarixi</th>
-                        <th>Bitmə tarixi</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+             <div class="wrapPersonalInfo">
+                 <div class="table document_list"></div>
+                 <div class="table document_order"></div>
+                 <img style="width: 150px; height: 150px; position: absolute; right: 10%; top: 70px;" class="image" data-name="image">
+                 <p class="row">
+                     <span style="width: 50%; float: left;">Adı</span>
+                     <label style="width: 50%; float: left;" data-name="name"></label>
+                 </p>
+                 <p class="row">
+                     <span style="width: 50%; float: left;">Soyadı</span>
+                     <label style="width: 50%; float: left;" data-name="surname"></label>
+                 </p>
 
-                    </tbody>-->
-                </div>
+                 <p class="row">
+                     <span style="width: 50%; float: left;" class="col-sm-6"> Ata adı</span>
+                     <label style="width: 50%; float: left;" class="col-sm-6" data-name="father-name"></label>
+                 </p>
+                 <p class="row">
+                     <span style="width: 50%; float: left;" class="col-sm-6">Doğum tarixi</span>
+                     <label style="width: 50%; float: left;" class="col-sm-6" data-name="birthday"></label>
+                 </p>
+                 <div class="row fullAddress"></div>
+                 <p class="row">
+                     <span style="width: 50%; float: left;" class="col-sm-6">Ailə vəziyyəti</span>
+                     <label style="width: 50%; float: left;" class="col-sm-6" data-name="family-status"></label>
+                 </p>
+                 <p class="row">
+                     <span style="width: 50%; float: left;" class="col-sm-6">Cinsi</span>
+                     <label style="width: 50%; float: left;" class="col-sm-6" data-name="gender"></label>
+                 </p>
+                 <p class="row">
+                     <span style="width: 50%; float: left;" class="col-sm-6">Finkod</span>
+                     <label style="width: 50%; float: left;" class="col-sm-6" data-name="pinCode"></label>
+                 </p>
+                 <p class="row">
+                     <span style="width: 50%; float: left;" class="col-sm-6">Vətəndaşlığı</span>
+                     <label style="width: 50%; float: left;" class="col-sm-6" data-name="citizen"></label>
+                 </p>
+                 <p class="row">
+                     <span style="width: 50%; float: left;" class="col-sm-6">Hərbi mükəlləfiyyəti</span>
+                     <label style="width: 50%; float: left;" class="col-sm-6" data-name="military"></label>
+                 </p>
+                 <h2>Valideynlər haqqında</h2>
+                 <div class="table document_family"></div>
+                 <div style="clear: both;"></div>
+             </div>
 
+            <h2 class="current-study">2. Hazırda təhsil aldığı universitet və ixtisas</h2>
+            <p class="row">
+                <span style="width: 50%; float: left;">Qəbul forması</span>
+                <label style="width: 50%; float: left;" data-name="eduLineId"></label>
+                <span style="width: 50%; float: left;">Ölkə</span>
+                <label style="width: 50%; float: left;" data-name="countryName"></label>
+                <span style="width: 50%; float: left;">Şəhər</span>
+                <label style="width: 50%; float: left;" data-name="cityName"></label>
+                <span style="width: 50%; float: left;">Universitet</span>
+                <label style="width: 50%; float: left;" data-name="atmName"></label>
+                <span style="width: 50%; font-weight: bold; float: left;">İxtisas İstiqaməti</span>
+                <label style="width: 50%; float: left;" data-name="specDirection"></label>
+                <span style="width: 50%; font-weight: bold; float: left;">İxtisas</span>
+                <label style="width: 50%; float: left;" data-name="spec"></label>
+                <span style="width: 50%;font-weight: bold;  float: left;">Təhsil səviyyəsi</span>
+                <label style="width: 50%; float: left;" data-name="eduLevel"></label>
+                <span style="width: 50%; font-weight: bold; float: left;">Təhsil müddəti</span>
+                <label style="width: 50%; float: left;" data-name="eduPeriod"></label>
+                <span style="width: 50%; font-weight: bold; float: left;">Dərslərin başlama tarixi</span>
+                <label style="width: 50%; float: left;" data-name="actionDate"></label>
+                <span style="width: 50%; font-weight: bold;  float: left;">Gözlənilən məzun olma tarixi</span>
+                <label style="width: 50%; float: left;" data-name="graduateDate"></label>
+                <span style="width: 50%; font-weight: bold; float: left;">Təhsil aldığı dil</span>
+                <label style="width: 50%; float: left;" data-name="eduLangId"></label>
+                <span style="width: 50%; font-weight: bold; float: left;">Qeyd</span>
+                <label style="width: 50%; float: left;" data-name="message"></label>
+            </p>
+            <div style="clear: both"></div>
+            <h2 class="current-study">3. Akademik göstəricilər</h2>
+            <div class="table finish_schools"></div>
+            <h2>Nailiyyətlər</h2>
+            <!--<table class="table document_achievements">
+                <thead>
+                <tr>
+                    <th>Tipi</th>
+                    <th>Qeyd</th>
+                </tr>
+                </thead>
+                <tbody>
 
+                </tbody>
+            </table>-->
+            <style>
+                .survey-content p span {
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+                .survey-content p,
+                .survey-content h3,
+                .survey-content h2 {
+                    margin: 0;
+                    margin-bottom: 5px;
+                }
 
+                p.about-family h6 {
+                    margin: 0;
+                    font-size: 20px;
+                    font-weight: bold;
+                    margin-bottom: 5px;
+                }
 
-                <div class="table document_order">
-                    <!--<thead>
-                    <tr>
-                        <th>Əmrin Tipi</th>
-                        <th>Seriya/nömrə</th>
-                        <th>Verilmə tarixi</th>
-                        <th>Bitmə tarixi</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                div.survey-view h3 {
+                    margin: 0;
+                    font-weight: normal;
+                }
 
-                    </tbody>-->
-                </div>
+                h1.private-info, h2.current-study {
+                    font-size: 24px;
+                    border: 1px solid;
+                    background: #efefef;
+                    padding: 5px;
+                }
 
-
-
-
-
-
-                <!--<p style="margin: 0;">Qeydiyyat tarixi</p>-->
-                <!--<table class="table document_registration">
-                    <thead>
-                    <tr>
-                        <th>Tarix</th>
-                        <th>Qeyd</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>-->
-
-                <img style="width: 150px; height: 150px; position: absolute; right: 10%; top: 70px;" class="image" data-name="image">
-                <p class="row">
-                    <span style="width: 50%; float: left;">Adı</span>
-                    <label style="width: 50%; float: left;" data-name="name"></label>
-                </p>
-                <p class="row">
-                    <span style="width: 50%; float: left;">Soyadı</span>
-                    <label style="width: 50%; float: left;" data-name="surname"></label>
-                </p>
-
-                <p class="row">
-                    <span style="width: 50%; float: left;" class="col-sm-6"> Ata adı</span>
-                    <label style="width: 50%; float: left;" class="col-sm-6" data-name="father-name"></label>
-                </p>
-                <p class="row">
-                    <span style="width: 50%; float: left;" class="col-sm-6">Doğum tarixi</span>
-                    <label style="width: 50%; float: left;" class="col-sm-6" data-name="birthday"></label>
-                </p>
-                <p class="row">
-                    <span class="col-sm-6"> Doğuldugu yer</span>
-                    <label class="col-sm-6" data-name="birth-place"></label>
-                </p>
-                <p class="row">
-                    <span class="col-sm-6">Qeydiyyat ünvanı</span>
-                    <label class="col-sm-6" data-name="permanent_address"></label>
-                </p>
-
-
-
-
-                <p class="row">
-                    <span class="col-sm-6">Faktiki yaşayıs ünvanı</span>
-                    <label class="col-sm-6" data-name="currentAddress"></label>
-                </p>
-                <p class="row">
-                    <span style="width: 50%; float: left;" class="col-sm-6">Ailə vəziyyəti</span>
-                    <label style="width: 50%; float: left;" class="col-sm-6" data-name="family-status"></label>
-                </p>
-                <p class="row">
-                    <span style="width: 50%; float: left;" class="col-sm-6">Cinsi</span>
-                    <label style="width: 50%; float: left;" class="col-sm-6" data-name="gender"></label>
-                </p>
-                <p class="row">
-                    <span style="width: 50%; float: left;" class="col-sm-6">Finkod</span>
-                    <label style="width: 50%; float: left;" class="col-sm-6" data-name="pinCode"></label>
-                </p>
-                <p class="row">
-                    <span style="width: 50%; float: left;" class="col-sm-6">Vətəndaşlığı</span>
-                    <label style="width: 50%; float: left;" class="col-sm-6" data-name="citizen"></label>
-                </p>
-                <p class="row">
-                    <span style="width: 50%; float: left;" class="col-sm-6">Hərbi mükəlləfiyyəti</span>
-                    <label style="width: 50%; float: left;" class="col-sm-6" data-name="military"></label>
-                </p>
-
-
-                <h2>Valideynlər haqqında</h2>
-                <div class="table document_family">
-                    <!--<thead>
-                    <tr>
-                        <th>Qohumluq əlaqəsi</th>
-                        <th>Adı</th>
-                        <th>Əlaqə</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>-->
-                </div>
-
-                <h2 class="current-study">2. Hazırda təhsil aldığı universitet və ixtisas</h2>
-                <p class="row">
-                    <span style="width: 50%; float: left;">Qəbul forması</span>
-                    <label style="width: 50%; float: left;" data-name="eduLineId"></label>
-                    <span style="width: 50%; float: left;">Ölkə</span>
-                    <label style="width: 50%; float: left;" data-name="countryName"></label>
-                    <span style="width: 50%; float: left;">Şəhər</span>
-                    <label style="width: 50%; float: left;" data-name="cityName"></label>
-                    <span style="width: 50%; float: left;">Universitet</span>
-                    <label style="width: 50%; float: left;" data-name="atmName"></label>
-                    <span style="width: 50%; font-weight: bold; float: left;">İxtisas İstiqaməti</span>
-                    <label style="width: 50%; float: left;" data-name="specDirection"></label>
-                    <span style="width: 50%; font-weight: bold; float: left;">İxtisas</span>
-                    <label style="width: 50%; float: left;" data-name="spec"></label>
-                    <span style="width: 50%;font-weight: bold;  float: left;">Təhsil səviyyəsi</span>
-                    <label style="width: 50%; float: left;" data-name="eduLevel"></label>
-                    <span style="width: 50%; font-weight: bold; float: left;">Təhsil müddəti</span>
-                    <label style="width: 50%; float: left;" data-name="eduPeriod"></label>
-                    <span style="width: 50%; font-weight: bold; float: left;">Dərslərin başlama tarixi</span>
-                    <label style="width: 50%; float: left;" data-name="actionDate"></label>
-                    <span style="width: 50%; font-weight: bold;  float: left;">Gözlənilən məzun olma tarixi</span>
-                    <label style="width: 50%; float: left;" data-name="graduateDate"></label>
-                    <span style="width: 50%; font-weight: bold; float: left;">Təhsil aldığı dil</span>
-                    <label style="width: 50%; float: left;" data-name="eduLangId"></label>
-                    <span style="width: 50%; font-weight: bold; float: left;">Qeyd</span>
-                    <label style="width: 50%; float: left;" data-name="message"></label>
-                </p>
-                <div style="clear: both"></div>
-
-                <h2 class="current-study">3. Akademik göstəricilər</h2>
-
-
-                <div class="table finish_schools">
-                    <!--<thead>
-                    <tr>
-                        <th>Ali Təhsil müəssisəsi</th>
-                        <th>Başlama hərəkəti</th>
-                        <th>Başlama tarixi</th>
-                        <th>Bitmə hərəkəti</th>
-                        <th>Bitmə tarixi</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>-->
-                </div>
-
-
-
-
-
-
-
-
-
-
-                <h2>Nailiyyətlər</h2>
-                <table class="table document_achievements">
-                    <thead>
-                    <tr>
-                        <th>Tipi</th>
-                        <th>Qeyd</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-
-
-
-
-
-
-                <!--<h2>Tələbənin ünvanı</h2>
-                <table class="table document_address">
-                    <thead>
-                    <tr>
-                        <th>Adı</th>
-                        <th>Tam Ünvanı</th>
-                        <th>Daimi yaşayış ünvanı</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>-->
-
-
-
-                <!--<h2>Sənədlər</h2>-->
-
-
-
-
-
-
-
-                <style>
-                    .survey-content p span{
-                        font-size: 16px;
-                        font-weight: bold;
-                    }
-
-                    .survey-content p,
-                    .survey-content h3,
-                    .survey-content h2 {
-                        margin: 0;
-                        margin-bottom: 5px;
-                    }
-
-                    p.about-family h6 {
-                        margin: 0;
-                        font-size: 20px;
-                        font-weight: bold;
-                        margin-bottom: 5px;
-                    }
-
-                    div.survey-view h3 {
-                        margin: 0;
-                        font-weight: normal;
-                    }
-                    h1.private-info, h2.current-study{
-                        font-size: 24px;
-                        border: 1px solid;
-                        background: #efefef;
-                        padding: 5px;
-                    }
-                    .document_list,
-                    .document_family,
-                    .finish_schools,
-                    .document_order{
-                        width: 100%;
-                        text-align: left;
-                    }
-
-
-                </style>
+                .document_list,
+                .document_family,
+                .finish_schools,
+                .document_order {
+                    width: 100%;
+                    text-align: left;
+                }
+            </style>
             </div>
         </div>
     </div>
@@ -626,7 +499,7 @@
         }
 
         Hsis.Proxy.loadAbroadStudents();
-        
+
         $('#edu_levels').select2({
             placeholder: Hsis.dictionary[Hsis.lang]["edu_level"],
             language: {

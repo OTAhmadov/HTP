@@ -2863,7 +2863,6 @@ $(function () {
         var moduleType = $('#main-div').attr('data-type');
         var parent = $obj.parents('.panel-body').first();
         try {
-
             $.confirm({
                 content: Hsis.dictionary[Hsis.lang]['delete_info'],
                 confirm: function () {
@@ -2947,7 +2946,7 @@ $(function () {
         } catch (err) {
             console.error(err);
         }
-    })
+    });
 
     $('#main-div').on('change', '.add-doc-file', function (e) {
         var docId = $(this).attr('data-doc-id');
@@ -2963,7 +2962,7 @@ $(function () {
             if (moduleType === 'E') {
                 Hsis.Proxy.addTeacherFiles(docId, formData, function (data) {
                     if (data.code = Hsis.statusCodes.OK) {
-                        var id = $('#main-div').attr('data-id')
+                        var id = $('#main-div').attr('data-id');
                         Hsis.Proxy.getTeacherDetails(id, function (data) {
                             var html = '';
                             var personal = 'personal';
@@ -8452,6 +8451,7 @@ $(function () {
 
 
 
+
         var id = (!streetId || streetId == 0) ? ((!districtId || districtId == 0) ? cityId : districtId) : streetId;
 
         $('body').find('input[name="' + name + '"]').val(id);
@@ -8484,7 +8484,7 @@ $(function () {
 
             // getStructureListByAdress
             if (id > 0) {
-                Hsis.Proxy.getAbroadOrgByAbroadAddr(id, function (data) {
+                Hsis.Proxy.getStructureListByAdress(id, function (data) {
                     if (data && data.data) {
                         var html = '';
 
@@ -9658,13 +9658,8 @@ $(function () {
 
                     }else if(data.iamasCheck == 1){
 
-
-
                         $('body .input-file-con .new-img-con').fadeIn(1);
                         $('body .input-file-con .new-img-con img').attr('src', Hsis.urls.HSIS + 'students/image/' + (data.image.path ? data.image.path : '') + '?token=' + Hsis.token + '&size=200x200&' + Math.random());
-
-
-
 
                         $('#firstname').val(data.firstName).attr('disabled', 'disabled');
                         $('#lastname').val(data.lastName).attr('disabled', 'disabled');
@@ -9679,22 +9674,6 @@ $(function () {
                         $('.edit-abroad-common-info').css('display', 'none');
                         $('.get-iamas-photo').trigger('click');
 
-
-
-
-                        /* $('#firstname').attr('disabled', 'disabled');
-                         $('#lastname').attr('disabled', 'disabled');
-                         $('#middlename').attr('disabled', 'disabled');
-                         $('#pincode').attr('disabled', 'disabled');
-                         $('#gender').attr('disabled', 'disabled');
-                         $('#marital_status').attr('disabled', 'disabled');
-                         $('#military_status').attr('disabled', 'disabled');
-                         $('.date-birthdate').attr('disabled', 'disabled');*/
-
-                        // if (data.documents.length > 0) {
-                        //     $('.add-doc-block .panel-body').html(Hsis.Service.parseEditStudentDocument(data.documents, personal));
-                        // }
-                        // $('.student-relationships-div .panel-body').html(Hsis.Service.parseStudentRelationShip(data.relations));
                     }
 
                 });
@@ -9974,11 +9953,11 @@ $(function () {
     });
 
 
-    $('body').on('keypress', '#search_without_order', function (e) {
+    $('body').on('keypress', '#search_without_order_htp', function (e) {
         e.preventDefault();
         try {
             if (e.keyCode == 13) {
-                var keyword = $('#search_without_order').val();
+                var keyword = $('#search_without_order_htp').val();
                 var orgId = $('body').find('#student_list_without').attr('org-id');
                 var parentId = $('body').find('#student_list_without').attr('type-parent-id');
                 var orderTypeId = $('body').find('#student_list_without').attr('type-id');
@@ -10114,15 +10093,16 @@ $(function () {
 
             if (e.keyCode == 13) {
                 var keyword = $('#userSearch').val();
-                var type = $('.user-search-form input[name="type"]').val();
-                var orgId = $('.user-search-form input[name="orgId"]').val();
-                var tableName = $('#main-div .row-table table').attr('id');
+
+               //var type = $('.user-search-form input[name="type"]').val();
+               // var orgId = $('.user-search-form input[name="orgId"]').val();
+              //  var tableName = $('#main-div .row-table table').attr('id');
 
                 if (keyword.trim().length > 2) {
-
-                    $('.content-part .user-search-form input[name="keyword"]').val(keyword);
-                    var params = $('.content-part .user-search-form').serialize();
-                    // if(tableName === 'unregistered-users-table') {
+                   // $('.content-part .user-search-form input[name="keyword"]').val();
+                    Hsis.Proxy.loadUsers('','keyword='+keyword);
+                  //  var params = $('.content-part .user-search-form').serialize();
+/*                     if(tableName === 'unregistered-users-table') {
                         Hsis.Proxy.getUnregistretedUsersList('', type, orgId, function (data) {
                             if (data) {
                                 if (data.code == Hsis.statusCodes.OK) {
@@ -10130,25 +10110,15 @@ $(function () {
 
                                 }
                             }
-                        }, keyword);
-                    // }
-
-                    /*else if(tableName === 'users-table')
+                        }, keyword)
+                    }
+                        else if(tableName === 'users-table')
                         Hsis.Proxy.loadUsers('',params);*/
+
                 }
                 else if (keyword.trim().length == 0) {
-                    if(tableName === 'users-table')
-                        Hsis.Proxy.loadUsers();
-                    else if(tableName === 'unregistered-users-table') {
-                        Hsis.Proxy.getUnregistretedUsersList('', type, orgId, function (data) {
-                            if (data) {
-                                if (data.code == Hsis.statusCodes.OK) {
-                                    Hsis.Service.parseUnregisteredUsers(data.data, type, '');
+                    Hsis.Proxy.loadUsers();
 
-                                }
-                            }
-                        }, '');
-                    }
                 }
             }
 

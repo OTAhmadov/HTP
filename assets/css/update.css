@@ -3071,5 +3071,10 @@ div.wrap h1{
         height: calc(100vh - 190px);
         overflow-y: auto;
     }
+}
+@media print {
+    li.order-document{
+        max-width: 80%;
+    }
 
 }
