@@ -137,7 +137,7 @@
                         <div class="form-group">
                             <div class="prepend-padding">
                                 <input data-i18n="users.birthdate" data-required id="birthdate" type="text"  data-date-format="dd/mm/yyyy" class="form-control datepicker" placeholder="Birthdate">
-                                <i style="top: 10px;" class="fa fa-calendar"></i>
+                                <i style="top: 0px;" class="fa fa-calendar"></i>
                             </div>
                         </div>
                     </div>
@@ -168,11 +168,7 @@
 
 <script type="text/javascript">
 
-
-
     $(function (e) {
-
-
         $('#backPrevoiusPage').click(function () {
             window.location.hash = "İstifadəçilər";
             window.location.reload();
@@ -220,7 +216,8 @@
                 Hsis.Service.parseOrgTree(tree);
 
                 if (Hsis.operationList == "edit") {
-                    var orgId = $('#orgId');
+                    var orgId = $('#orgId').val();
+                    console.log(orgId);
                     Hsis.Proxy.getUserById(Hsis.tempDataId, function (user) {
                         if (user) {
                             if (user.code === Hsis.statusCodes.OK) {
@@ -247,7 +244,7 @@
                                     }
                                 }
 
-                                orgId.attr('data-id', data.orgId);
+                                /*orgId.attr('data-id', data.orgId);
                                 setTimeout(function () {
                                     $.each(Hsis.array, function (i, v) {
                                         if (orgId.attr('data-id') == v.id) {
@@ -256,7 +253,7 @@
                                         }
                                     });
 
-                                }, 200);
+                                }, 200);*/
 
 
                             }

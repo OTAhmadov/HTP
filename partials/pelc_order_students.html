@@ -30,12 +30,12 @@
 
                                 </select>
                             </div>
-                            <div class="btn-group" style="width: 120px">
-                                <select class="form-control " id="org_spec_level_filter-2-with" >
+                            <div class="btn-group">
+                                <select style="width: 135px;" class="form-control" id="org_spec_level_filter-2-with" >
                                     <option value="0">Ixtisaslar</option>
                                 </select>
                             </div>
-                            <div class="btn-group " style="width: 120px">
+                            <div class="btn-group " style="width: 140px">
                                 <input type="text" class="form-control new-search" id="" >
                                 <img style='position: absolute; top:9px; left:9px' src="/AdministrationSystem/assets/img/upd/grey-search.svg" alt="">
                             </div>
@@ -82,7 +82,7 @@
 
         Hsis.Proxy.loadDictionariesByTypeId('1000016', 1000398, function (eduLevel) {
             if(eduLevel) {
-             var html = '<option value="0">Filter ixtisas səviyyəsi</option>'; 
+             var html = '<option value="0">Təhsil səviyyəsi</option>';
                 $.each(eduLevel, function (i, v) {
                      html += '<option value="'+ v.id +'">' + v.value[Hsis.lang] + '';
                 });
@@ -93,7 +93,7 @@
         
         Hsis.Proxy.loadDictionariesByTypeId('1000092', 0, function (eduLevel) {
             if (eduLevel) {
-                var html = '<option value="0">İxtisas səviyyəsi</option>';
+                var html = '<option value="0">İxtisas</option>';
                 $.each(eduLevel, function (i, v) {
                     html += '<option value="' + v.id + '">' + v.value[Hsis.lang] + '';
                 });
